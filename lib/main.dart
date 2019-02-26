@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:smart_park/screens/login_screent.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginScreen(),
+//      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
