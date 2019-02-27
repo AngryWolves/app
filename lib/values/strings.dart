@@ -14,5 +14,7 @@ const forget_password_same_error_text = '两次密码输入不一致，请检查
 
 const forget_next_mobile_hint = '请输入登录手机号';
 const forget_next_check_code_hint = '验证码';
+const forget_next_get_code_text = '获取验证码';
+const forget_next_again_get_code_text = '重新获取';
 const forget_check_next_text = '下一步';
 const forget_check_error_code_text = '请输入验证码';
