@@ -18,6 +18,9 @@ class _SmartParkAppState extends State<SmartParkApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white, brightness: Brightness.light),
       routes: {
         HomePage.sName: (_) => HomePage(),
       },

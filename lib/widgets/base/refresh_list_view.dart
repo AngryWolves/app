@@ -4,16 +4,19 @@ import 'package:flutter/material.dart';
 /// [D] type of list data
 ///
 abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
+
+  final GlobalKey<RefreshIndicatorState> _refreshKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  final ScrollController _scrollController = ScrollController();
+
   List<D> _data;
 
   int _curPage = 1;
 
   bool _isLoading = false;
 
-  final GlobalKey<RefreshIndicatorState> _refreshKey =
-      GlobalKey<RefreshIndicatorState>();
-
-  final ScrollController _scrollController = ScrollController();
+  Widget _head;
 
   @override
   void didChangeDependencies() {
@@ -42,6 +45,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
+    _head = buildHead();
     return RefreshIndicator(
       key: _refreshKey,
       onRefresh: _handleRefresh,
@@ -50,10 +54,17 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
           itemCount: _getListCount(),
           controller: _scrollController,
           itemBuilder: (context, index) {
+            var curIndex = index;
+            if (_head != null) {
+              curIndex -= 1;
+              if (index == 0) {
+                return _head;
+              }
+            }
             if (_dataIsEmpty()) {
               return buildEmptyView();
             }
-            return buildItem(_data[index]);
+            return buildItem(_data[curIndex]);
           }),
     );
   }
@@ -64,13 +75,20 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
   @protected
   Future<List<D>> requestData(int page);
 
+  @protected
+  Widget buildHead() => null;
+
   Widget buildEmptyView() => Container();
 
   int _getListCount() {
-    if (_dataIsEmpty()) {
-      return 1;
+    var multiCount = 0;
+    if (_head != null) {
+      multiCount = 1;
     }
-    return _data.length;
+    if (_dataIsEmpty()) {
+      return 1 + multiCount;
+    }
+    return _data.length + multiCount;
   }
 
   bool _dataIsEmpty() => _data == null || _data.isEmpty;
