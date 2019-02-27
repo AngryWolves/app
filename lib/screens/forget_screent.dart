@@ -1,34 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-@immutable
 class ForgetScreen extends StatefulWidget {
-  String mobile;
+  ForgetScreen(this.mobile);
 
-  ForgetScreen(String mobile) {
-    this.mobile = mobile;
-  }
+  final String mobile;
 
   @override
   State<StatefulWidget> createState() {
-    return _ForgetScreenState(mobile);
+    return _ForgetScreenState();
   }
 }
 
 class _ForgetScreenState extends State<ForgetScreen> {
-  String mobile;
-
-  _ForgetScreenState(String mobile) {
-    this.mobile = mobile;
-  }
+  final _forgetPasswordTextController = TextEditingController();
+  final _forgetCheckPasswordTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
-    TextEditingController controller = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -50,132 +46,55 @@ class _ForgetScreenState extends State<ForgetScreen> {
                       left: ScreenUtil().setWidth(15),
                       right: ScreenUtil().setWidth(15),
                       top: ScreenUtil().setHeight(31)),
-                  height: ScreenUtil().setHeight(49),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.only(top: ScreenUtil().setHeight(22)),
-                        hintText: forget_new_password_hint,
-                        hintStyle: TextStyle(
-                            color: ColorRes.COLOR_LOGIN_HINT,
-                            fontSize: ScreenUtil().setSp(15))),
-                    onChanged: (text) {
-                      //内容改变的回调
-//                    print('change');
-                    },
-                    onSubmitted: (text) {
-                      //内容提交(按回车)的回调
-//                    print('submit');
-                    },
-                    controller: TextEditingController(text: controller.text),
-                    keyboardType: TextInputType.text,
-                    //键盘类型
-                    textInputAction: TextInputAction.next,
-                    //显示的文字内容为 下一步
-                    style: TextStyle(
-                        color: Color.fromRGBO(46, 49, 56, 1),
-                        fontSize: ScreenUtil().setSp(15)),
-                    maxLength: 11,
-                    //最大长度
-                    maxLines: 1,
-                    //最大行数
-                    autocorrect: false,
-                    //是否自动更正
-                    autofocus: false,
-                    //是否自动对焦
-                    obscureText: false,
-                    //是否是密码
-                    textAlign: TextAlign.left,
-                    //文本对齐方式
-                    inputFormatters: [
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ],
-                  ),
+                  height: ScreenUtil().setHeight(50),
+                  child: TextFieldWidget(
+                      forget_new_password_hint, _forgetPasswordTextController),
                 ),
                 Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
+                    margin: EdgeInsets.only(
+                        left: ScreenUtil().setWidth(15),
+                        right: ScreenUtil().setWidth(15)),
+                    height: ScreenUtil().setHeight(49),
+                    child: TextFieldWidget(forget_check_new_password_hint,
+                        _forgetCheckPasswordTextController)),
+                GestureDetector(
+                  onTap: () {
+                    InputManageUtil.shutdownInputKeyboard();
+                    String password = _forgetPasswordTextController.text;
+                    String checkPassword =
+                        _forgetCheckPasswordTextController.text;
+                    if (ObjectUtil.isEmptyString(password) ||
+                        ObjectUtil.isEmptyString(checkPassword)) {
+                      Fluttertoast.showToast(msg: forget_password_error_text);
+                      return;
+                    }
+                    if (password != checkPassword) {
+                      Fluttertoast.showToast(
+                          msg: forget_password_same_error_text);
+                      return;
+                    }
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(40),
+                        left: ScreenUtil().setWidth(15),
+                        right: ScreenUtil().setWidth(15),
+                        bottom: ScreenUtil().setHeight(25)),
+                    width: ScreenUtil().setWidth(345),
+                    height: ScreenUtil().setHeight(45),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        gradient: LinearGradient(colors: [
+                          Color.fromRGBO(95, 231, 243, 1.0),
+                          Color.fromRGBO(95, 195, 243, 1.0),
+                          Color.fromRGBO(95, 195, 243, 1.0)
+                        ], begin: Alignment.topLeft, end: Alignment.topRight)),
+                    child: Text(forget_check_text,
+                        style: TextStyle(
+                            color: ColorRes.WHITE,
+                            fontSize: ScreenUtil().setSp(16))),
                   ),
-                  height: ScreenUtil().setHeight(1),
-                  color: ColorRes.COLOR_LOGIN_BORDER_SIDE,
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      left: ScreenUtil().setWidth(15),
-                      right: ScreenUtil().setWidth(15)),
-                  height: ScreenUtil().setHeight(49),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.only(top: ScreenUtil().setHeight(22)),
-                        hintText: forget_check_new_password_hint,
-                        hintStyle: TextStyle(
-                            color: ColorRes.COLOR_LOGIN_HINT,
-                            fontSize: ScreenUtil().setSp(15))),
-                    onChanged: (text) {
-                      //内容改变的回调
-//                    print('change');
-                    },
-                    onSubmitted: (text) {
-                      //内容提交(按回车)的回调
-//                    print('submit');
-                    },
-                    controller: TextEditingController(text: controller.text),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                        color: Color.fromRGBO(46, 49, 56, 1),
-                        fontSize: ScreenUtil().setSp(15)),
-                    //键盘类型
-                    textInputAction: TextInputAction.next,
-                    //显示的文字内容为 下一步
-                    maxLength: 11,
-                    //最大长度
-                    maxLines: 1,
-                    //最大行数
-                    autocorrect: false,
-                    //是否自动更正
-                    autofocus: false,
-                    //是否自动对焦
-                    obscureText: true,
-                    //是否是密码
-                    textAlign: TextAlign.left,
-                    //文本对齐方式
-                    inputFormatters: [
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
-                  ),
-                  height: ScreenUtil().setHeight(1),
-                  color: ColorRes.COLOR_LOGIN_BORDER_SIDE,
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil().setHeight(40),
-                      left: ScreenUtil().setWidth(15),
-                      right: ScreenUtil().setWidth(15),
-                      bottom: ScreenUtil().setHeight(25)),
-                  width: ScreenUtil().setWidth(345),
-                  height: ScreenUtil().setHeight(45),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      gradient: LinearGradient(colors: [
-                        Color.fromRGBO(95, 231, 243, 1.0),
-                        Color.fromRGBO(95, 195, 243, 1.0),
-                        Color.fromRGBO(95, 195, 243, 1.0)
-                      ], begin: Alignment.topLeft, end: Alignment.topRight)),
-                  child: Text(forget_check_text,
-                      style: TextStyle(
-                          color: ColorRes.WHITE,
-                          fontSize: ScreenUtil().setSp(16))),
                 )
               ],
             ),
