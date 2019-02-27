@@ -71,3 +71,6 @@ flutter:
   # see https://flutter.io/custom-fonts/#from-packages
   assets:
     - images/icon_login@3x.png
+    - images/icon_id_card_positive@3x.png
+    - images/icon_id_card_back@3x.png
+    - images/icon_id_card_upload@3x.png

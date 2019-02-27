@@ -23,3 +23,9 @@ const registered_one_mobile_hint = '手机号';
 const registered_one_go_login_text = '已有账号？去登录';
 const registered_one_instructions_text = '第一步 验证手机（只需三步）';
 
+const registered_two_id_card_positive_text = '身份证人像面';
+const registered_two_id_card_back_text = '身份证国徽面';
+const registered_two_upload_text = '点击上传';
+const registered_two_check_next_text = '下一步';
+const registered_two_instructions_text = '第二步 验证身份（只需三步）';
+
