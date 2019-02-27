@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_park/screens/login_screent.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/screens/forget_screent.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: ForgetScreen('1877666'),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

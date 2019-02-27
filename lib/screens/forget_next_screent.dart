@@ -4,15 +4,27 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
+@immutable
+class ForgetNextScreen extends StatefulWidget {
+  String mobile;
+
+  ForgetNextScreen(String mobile) {
+    this.mobile = mobile;
+  }
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _LoginScreenState();
+    return _ForgetNextScreenState(mobile);
   }
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgetNextScreenState extends State<ForgetNextScreen> {
+  String mobile;
+
+  _ForgetNextScreenState(String mobile) {
+    this.mobile = mobile;
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
@@ -44,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: InputBorder.none,
                         contentPadding:
                             EdgeInsets.only(top: ScreenUtil().setHeight(22)),
-                        hintText: login_check_mobile_hint,
+                        hintText: forget_next_mobile_hint,
                         hintStyle: TextStyle(
                             color: ColorRes.COLOR_LOGIN_HINT,
                             fontSize: ScreenUtil().setSp(15))),
@@ -99,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: InputBorder.none,
                         contentPadding:
                             EdgeInsets.only(top: ScreenUtil().setHeight(22)),
-                        hintText: login_check_password_hint,
+                        hintText: forget_next_check_code_hint,
                         hintStyle: TextStyle(
                             color: ColorRes.COLOR_LOGIN_HINT,
                             fontSize: ScreenUtil().setSp(15))),
@@ -160,40 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         Color.fromRGBO(95, 195, 243, 1.0),
                         Color.fromRGBO(95, 195, 243, 1.0)
                       ], begin: Alignment.topLeft, end: Alignment.topRight)),
-                  child: Text(login_text,
+                  child: Text(forget_check_next_text,
                       style: TextStyle(
                           color: ColorRes.WHITE,
                           fontSize: ScreenUtil().setSp(16))),
-                ),
-                FlatButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: () {
-                    print("=按钮点击=");
-                  },
-                  child: Text(
-                    login_forget_password_text,
-                    style: TextStyle(
-                        color: Color.fromRGBO(37, 184, 247, 1),
-                        fontSize: ScreenUtil().setSp(14)),
-                  ),
-                ),
-                FlatButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  padding: EdgeInsets.only(
-                      top: ScreenUtil().setHeight(150),
-                      bottom: ScreenUtil().setHeight(46)),
-                  onPressed: () {
-                    print("=按钮点击=");
-                  },
-                  child: Text(
-                    login_registered_text,
-                    style: TextStyle(
-                        color: Color.fromRGBO(37, 184, 247, 1),
-                        fontSize: ScreenUtil().setSp(14)),
-                  ),
-                ),
+                )
               ],
             ),
           ),
