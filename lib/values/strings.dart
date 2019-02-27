@@ -18,3 +18,8 @@ const forget_next_get_code_text = '获取验证码';
 const forget_next_again_get_code_text = '重新获取';
 const forget_check_next_text = '下一步';
 const forget_check_error_code_text = '请输入验证码';
+
+const registered_one_mobile_hint = '手机号';
+const registered_one_go_login_text = '已有账号？去登录';
+const registered_one_instructions_text = '第一步 验证手机（只需三步）';
+
