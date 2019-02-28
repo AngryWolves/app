@@ -31,4 +31,4 @@ const registered_two_instructions_text = '第二步 验证身份（只需三步�
 const registered_two_upload_camera_text = '拍照';
 const registered_two_upload_photo_text = '从手机相册选择';
 const registered_two_upload_cancel_text = '取消';
-
+const registered_two_check_upload_error_text = '身份证不能为空,请先上传身份证';

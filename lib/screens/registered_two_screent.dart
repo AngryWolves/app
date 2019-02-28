@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
@@ -8,6 +9,7 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisteredTwoScreen extends StatefulWidget {
   @override
@@ -17,6 +19,10 @@ class RegisteredTwoScreen extends StatefulWidget {
 }
 
 class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
+  Future<File> _imageFilePositive;
+  Future<File> _imageFileBack;
+  bool isPositive = false;
+
   @override
   void dispose() {
     super.dispose();
@@ -60,48 +66,7 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                       Padding(
                         padding:
                             EdgeInsets.only(top: ScreenUtil().setHeight(8)),
-                        child: Stack(
-                          children: <Widget>[
-                            Image.asset(
-                              'images/icon_id_card_positive@3x.png',
-                              width: ScreenUtil().setWidth(167),
-                              height: ScreenUtil().setHeight(107),
-                              fit: BoxFit.fill,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _modalBottomSheetMenu(context);
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: ScreenUtil().setHeight(32),
-                                        left: ScreenUtil().setWidth(66)),
-                                    child: Image.asset(
-                                      'images/icon_id_card_upload@3x.png',
-                                      width: ScreenUtil().setWidth(34),
-                                      height: ScreenUtil().setHeight(34),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: ScreenUtil().setHeight(5),
-                                        left: ScreenUtil().setWidth(59)),
-                                    child: Text(
-                                      registered_two_upload_text,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(37, 184, 247, 1),
-                                          fontSize: ScreenUtil().setSp(12)),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                        child: _positiveViewImage(),
                       )
                     ],
                   ),
@@ -121,48 +86,7 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                       Padding(
                         padding:
                             EdgeInsets.only(top: ScreenUtil().setHeight(8)),
-                        child: Stack(
-                          children: <Widget>[
-                            Image.asset(
-                              'images/icon_id_card_back@3x.png',
-                              width: ScreenUtil().setWidth(167),
-                              height: ScreenUtil().setHeight(107),
-                              fit: BoxFit.fill,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _modalBottomSheetMenu(context);
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: ScreenUtil().setHeight(32),
-                                        left: ScreenUtil().setWidth(66)),
-                                    child: Image.asset(
-                                      'images/icon_id_card_upload@3x.png',
-                                      width: ScreenUtil().setWidth(34),
-                                      height: ScreenUtil().setHeight(34),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: ScreenUtil().setHeight(5),
-                                        left: ScreenUtil().setWidth(59)),
-                                    child: Text(
-                                      registered_two_upload_text,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(37, 184, 247, 1),
-                                          fontSize: ScreenUtil().setSp(12)),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                        child: _backViewImage(),
                       )
                     ],
                   ),
@@ -171,7 +95,13 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              if (_imageFileBack == null || _imageFilePositive == null) {
+                Fluttertoast.showToast(
+                    msg: registered_two_check_upload_error_text);
+                return;
+              }
+            },
             child: Container(
               margin: EdgeInsets.only(
                   top: ScreenUtil().setHeight(141),
@@ -204,65 +134,198 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
       ),
     );
   }
-}
 
-void _modalBottomSheetMenu(BuildContext context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (builder) {
-        return new Container(
-          height: ScreenUtil().setHeight(174),
-          color: Color.fromRGBO(240, 240, 240, 1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  print('update==== 相机');
-                },
-                child: Container(
-                  color: Colors.white,
+  void _modalBottomSheetMenu(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return new Container(
+            height: ScreenUtil().setHeight(174),
+            color: Color.fromRGBO(240, 240, 240, 1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    _onImageButtonPressed(ImageSource.camera);
+                    print('update==== 相机');
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    height: ScreenUtil().setHeight(55),
+                    alignment: Alignment.center,
+                    child: Text(
+                      registered_two_upload_camera_text,
+                      style: TextStyle(
+                          color: Color.fromRGBO(46, 49, 56, 1),
+                          fontSize: ScreenUtil().setSp(17)),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _onImageButtonPressed(ImageSource.gallery);
+                    print('update==== 相册');
+                  },
+                  child: Container(
+                    height: ScreenUtil().setHeight(55),
+                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(1)),
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    child: Text(
+                      registered_two_upload_photo_text,
+                      style: TextStyle(
+                          color: Color.fromRGBO(46, 49, 56, 1),
+                          fontSize: ScreenUtil().setSp(17)),
+                    ),
+                  ),
+                ),
+                Container(
                   height: ScreenUtil().setHeight(55),
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(8)),
                   alignment: Alignment.center,
                   child: Text(
-                    registered_two_upload_camera_text,
+                    registered_two_upload_cancel_text,
                     style: TextStyle(
                         color: Color.fromRGBO(46, 49, 56, 1),
                         fontSize: ScreenUtil().setSp(17)),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  print('update==== 相册');
-                },
-                child: Container(
-                  height: ScreenUtil().setHeight(55),
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(1)),
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                  child: Text(
-                    registered_two_upload_photo_text,
-                    style: TextStyle(
-                        color: Color.fromRGBO(46, 49, 56, 1),
-                        fontSize: ScreenUtil().setSp(17)),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _onImageButtonPressed(ImageSource source) {
+    setState(() {
+      Navigator.pop(context);
+      if (isPositive) {
+        _imageFilePositive = ImagePicker.pickImage(source: source);
+      } else {
+        _imageFileBack = ImagePicker.pickImage(source: source);
+      }
+    });
+  }
+
+  Widget _positiveViewImage() {
+    return FutureBuilder<File>(
+        future: _imageFilePositive,
+        builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
+            return Image.file(
+              snapshot.data,
+              width: ScreenUtil().setWidth(167),
+              height: ScreenUtil().setHeight(107),
+              fit: BoxFit.fill,
+            );
+          } else {
+            return Stack(
+              children: <Widget>[
+                Image.asset(
+                  'images/icon_id_card_positive@3x.png',
+                  width: ScreenUtil().setWidth(167),
+                  height: ScreenUtil().setHeight(107),
+                  fit: BoxFit.fill,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    isPositive = true;
+                    _modalBottomSheetMenu(context);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil().setHeight(32),
+                            left: ScreenUtil().setWidth(66)),
+                        child: Image.asset(
+                          'images/icon_id_card_upload@3x.png',
+                          width: ScreenUtil().setWidth(34),
+                          height: ScreenUtil().setHeight(34),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil().setHeight(5),
+                            left: ScreenUtil().setWidth(59)),
+                        child: Text(
+                          registered_two_upload_text,
+                          style: TextStyle(
+                              color: Color.fromRGBO(37, 184, 247, 1),
+                              fontSize: ScreenUtil().setSp(12)),
+                        ),
+                      )
+                    ],
                   ),
+                )
+              ],
+            );
+          }
+        });
+  }
+
+  Widget _backViewImage() {
+    return FutureBuilder<File>(
+        future: _imageFileBack,
+        builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
+            return Image.file(
+              snapshot.data,
+              width: ScreenUtil().setWidth(167),
+              height: ScreenUtil().setHeight(107),
+              fit: BoxFit.fill,
+            );
+          } else {
+            return Stack(
+              children: <Widget>[
+                Image.asset(
+                  'images/icon_id_card_back@3x.png',
+                  width: ScreenUtil().setWidth(167),
+                  height: ScreenUtil().setHeight(107),
+                  fit: BoxFit.fill,
                 ),
-              ),
-              Container(
-                height: ScreenUtil().setHeight(55),
-                color: Colors.white,
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(8)),
-                alignment: Alignment.center,
-                child: Text(
-                  registered_two_upload_cancel_text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(46, 49, 56, 1),
-                      fontSize: ScreenUtil().setSp(17)),
-                ),
-              ),
-            ],
-          ),
-        );
-      });
+                GestureDetector(
+                  onTap: () {
+                    isPositive = false;
+                    _modalBottomSheetMenu(context);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil().setHeight(32),
+                            left: ScreenUtil().setWidth(66)),
+                        child: Image.asset(
+                          'images/icon_id_card_upload@3x.png',
+                          width: ScreenUtil().setWidth(34),
+                          height: ScreenUtil().setHeight(34),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil().setHeight(5),
+                            left: ScreenUtil().setWidth(59)),
+                        child: Text(
+                          registered_two_upload_text,
+                          style: TextStyle(
+                              color: Color.fromRGBO(37, 184, 247, 1),
+                              fontSize: ScreenUtil().setSp(12)),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            );
+          }
+        });
+  }
+
+  Widget _positiveUploadView() {}
 }
