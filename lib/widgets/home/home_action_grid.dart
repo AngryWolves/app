@@ -14,7 +14,6 @@ const int HOME_ACTION_REPORT_ACTION = 0x007;
 const int HOME_ACTION_DECORATE = 0x008;
 
 class HomeActionGridView extends StatefulWidget {
-
   @override
   _HomeActionGridViewState createState() => _HomeActionGridViewState();
 }
@@ -43,6 +42,7 @@ class _HomeActionGridViewState extends State<HomeActionGridView> {
       color: Colors.white,
       height: ScreenUtil().setHeight(158),
       child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 4,
         childAspectRatio: 1.3,
         children: _choices.map((choice) {
@@ -61,8 +61,8 @@ class _HomeActionGridViewState extends State<HomeActionGridView> {
                   Text(
                     choice.title,
                     style: TextStyle(
-                            fontSize: ScreenUtil().setSp(13),
-                            color: ColorRes.GERY_TEXT),
+                        fontSize: ScreenUtil().setSp(13),
+                        color: ColorRes.GERY_TEXT),
                   )
                 ],
               ),
