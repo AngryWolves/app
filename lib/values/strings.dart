@@ -32,3 +32,11 @@ const registered_two_upload_camera_text = '拍照';
 const registered_two_upload_photo_text = '从手机相册选择';
 const registered_two_upload_cancel_text = '取消';
 const registered_two_check_upload_error_text = '身份证不能为空,请先上传身份证';
+
+const registered_third_password_hint = '请输入密码';
+const registered_third_check_password_hint = '请再次输入密码，确保俩次密码一致';
+const registered_third_name_hint = '请输入你的用户名';
+const registered_third_gender_hint = '请输入你的性别';
+const registered_third_ok_text = "完成";
+const registered_third_instructions_text = '第三步 完善信息（只需三步）';
+const registered_third_empty_error_text = '注册信息不允许为空，请检查你输入的内容';
