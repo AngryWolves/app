@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   @override
@@ -29,6 +30,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: buildCommonAppbar(),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
