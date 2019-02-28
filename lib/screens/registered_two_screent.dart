@@ -69,7 +69,9 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               fit: BoxFit.fill,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                _modalBottomSheetMenu(context);
+                              },
                               child: Column(
                                 children: <Widget>[
                                   Container(
@@ -128,7 +130,9 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               fit: BoxFit.fill,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                _modalBottomSheetMenu(context);
+                              },
                               child: Column(
                                 children: <Widget>[
                                   Container(
@@ -200,4 +204,65 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
       ),
     );
   }
+}
+
+void _modalBottomSheetMenu(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return new Container(
+          height: ScreenUtil().setHeight(174),
+          color: Color.fromRGBO(240, 240, 240, 1),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  print('update==== 相机');
+                },
+                child: Container(
+                  color: Colors.white,
+                  height: ScreenUtil().setHeight(55),
+                  alignment: Alignment.center,
+                  child: Text(
+                    registered_two_upload_camera_text,
+                    style: TextStyle(
+                        color: Color.fromRGBO(46, 49, 56, 1),
+                        fontSize: ScreenUtil().setSp(17)),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  print('update==== 相册');
+                },
+                child: Container(
+                  height: ScreenUtil().setHeight(55),
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(1)),
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  child: Text(
+                    registered_two_upload_photo_text,
+                    style: TextStyle(
+                        color: Color.fromRGBO(46, 49, 56, 1),
+                        fontSize: ScreenUtil().setSp(17)),
+                  ),
+                ),
+              ),
+              Container(
+                height: ScreenUtil().setHeight(55),
+                color: Colors.white,
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(8)),
+                alignment: Alignment.center,
+                child: Text(
+                  registered_two_upload_cancel_text,
+                  style: TextStyle(
+                      color: Color.fromRGBO(46, 49, 56, 1),
+                      fontSize: ScreenUtil().setSp(17)),
+                ),
+              ),
+            ],
+          ),
+        );
+      });
 }

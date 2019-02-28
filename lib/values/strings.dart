@@ -28,4 +28,7 @@ const registered_two_id_card_back_text = '身份证国徽面';
 const registered_two_upload_text = '点击上传';
 const registered_two_check_next_text = '下一步';
 const registered_two_instructions_text = '第二步 验证身份（只需三步）';
+const registered_two_upload_camera_text = '拍照';
+const registered_two_upload_photo_text = '从手机相册选择';
+const registered_two_upload_cancel_text = '取消';
 
