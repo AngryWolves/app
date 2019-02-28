@@ -8,3 +8,5 @@ const home_action_reserve_site = '场地预约';
 const home_action_report_active = '项目申报';
 const home_action_apply_decorate = '装修申请';
 const home_notice_item_title = '公告信息';
+
+const message_title = '站内信息';

@@ -6,6 +6,7 @@ Widget buildCommonAppBar(String title,
     Widget onMenu,
     onTrailing,
     String trailingText,
+    Brightness brightness = Brightness.light,
     Color color = Colors.white,
     Color titleColor = ColorRes.GERY_TEXT}) {
   var trailing;
@@ -17,6 +18,8 @@ Widget buildCommonAppBar(String title,
         }
       },
     );
+  } else {
+    trailing = Container();
   }
 
   var leading;
@@ -41,16 +44,16 @@ Widget buildCommonAppBar(String title,
   }
 
   return AppBar(
+    elevation: 1.0,
+    brightness: brightness,
     backgroundColor: color,
     title: Text(title,
-            style: TextStyle(
-              color: titleColor,
-              fontSize: 18.0,
-            )),
+        style: TextStyle(
+          color: titleColor,
+          fontSize: 18.0,
+        )),
     centerTitle: true,
     leading: leading,
-    actions: <Widget>[
-      trailing
-    ],
+    actions: <Widget>[trailing],
   );
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/event/home_action_event.dart';
+import 'package:smart_park/utils/navigator_util.dart';
 import 'package:smart_park/widgets/home/app_bar.dart';
 import 'package:smart_park/widgets/home/home_action_grid.dart';
 import 'package:smart_park/widgets/home/home_body.dart';
@@ -37,11 +38,15 @@ class _HomePageState extends State<HomePage> {
       _hasInit = true;
     }
     return Scaffold(
-      appBar: buildHomeAppBar(),
+      appBar: buildHomeAppBar(onTap: () {
+        NavigatorUtil.goMessagePage(context);
+      }),
       body: HomeBodyView(),
     );
   }
 
+
+  /// 主页功能项点击事件
   void _initActionTapListener() {
     _actionListener =
         Event.eventBus.on<HomeActionEvent>().listen((actionEvent) {
