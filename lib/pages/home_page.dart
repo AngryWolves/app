@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
       print('action type ::::${actionEvent.type}');
       switch (actionEvent.type) {
         case HOME_ACTION_BLUETOOTH:
+          NavigatorUtil.goBluetoothPage(context);
           break;
         case HOME_ACTION_PARKING:
           break;

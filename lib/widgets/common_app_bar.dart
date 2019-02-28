@@ -51,6 +51,7 @@ Widget buildCommonAppBar(String title,
         style: TextStyle(
           color: titleColor,
           fontSize: 18.0,
+          fontWeight: FontWeight.w600
         )),
     centerTitle: true,
     leading: leading,
