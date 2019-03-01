@@ -8,19 +8,17 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 
-class ForgetNextScreen extends StatefulWidget {
-  ForgetNextScreen(this.mobile);
-
-  final String mobile;
-
+class ForgetScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ForgetNextScreenState();
+    return _ForgetScreenState();
   }
 }
 
-class _ForgetNextScreenState extends State<ForgetNextScreen> {
+class _ForgetScreenState extends State<ForgetScreen> {
   final _forgetPhoneController = TextEditingController();
   final _forgetCodeController = TextEditingController();
   Timer _timer;
@@ -36,9 +34,12 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: buildCommonAppbar(forget_title_text, onLeadTop: () {
+          InputManageUtil.shutdownInputKeyboard();
+          Navigator.pop(context);
+        }),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
@@ -146,6 +147,10 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
                       Fluttertoast.showToast(msg: forget_check_error_code_text);
                       return;
                     }
+                    NavigatorUtil.goForgetNext(
+                        context,
+                        _forgetPhoneController.text,
+                        _forgetCodeController.text);
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -213,7 +218,7 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
           _countDownTime = 60;
           _isCountdown = false;
           _timer.cancel();
-          _timer=null;
+          _timer = null;
         }
       });
     });

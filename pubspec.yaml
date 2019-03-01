@@ -23,6 +23,7 @@ dependencies:
   common_utils: ^1.0.9
   fluttertoast: ^2.1.1
   image_picker: ^0.4.12
+  fluro: "^1.4.0"
 
 dev_dependencies:
   flutter_test:

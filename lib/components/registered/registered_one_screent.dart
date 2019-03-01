@@ -8,6 +8,8 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/router/navigator_util.dart';
 
 class RegisteredOneScreen extends StatefulWidget {
   @override
@@ -35,6 +37,10 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: buildCommonAppbar(registered_title_text, onLeadTop: () {
+          InputManageUtil.shutdownInputKeyboard();
+          Navigator.pop(context);
+        }),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
@@ -142,6 +148,7 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                       Fluttertoast.showToast(msg: forget_check_error_code_text);
                       return;
                     }
+                    NavigatorUtil.goRegisteredTwo(context, phone, code);
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -167,7 +174,7 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('去登录');
+                    NavigatorUtil.goLogin(context);
                   },
                   child: Text(
                     registered_one_go_login_text,
@@ -177,7 +184,7 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(156)),
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(92)),
                   child: Text(
                     registered_one_instructions_text,
                     style: TextStyle(

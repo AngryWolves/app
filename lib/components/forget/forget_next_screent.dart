@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
@@ -9,28 +6,32 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 
-class RegisteredThirdScreen extends StatefulWidget {
+class ForgetNextScreen extends StatefulWidget {
+  ForgetNextScreen({@required this.mobile, this.code});
+
+  final String mobile;
+  final String code;
+
   @override
   State<StatefulWidget> createState() {
-    return _RegisteredThirdScreenState();
+    return _ForgetNextScreenState();
   }
 }
 
-class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
-  final _registeredPasswordTextController = TextEditingController();
-  final _registeredCheckPasswordTextController = TextEditingController();
-  final _registeredUserNameTextController = TextEditingController();
-  final _registeredGenderTextController = TextEditingController();
+class _ForgetNextScreenState extends State<ForgetNextScreen> {
+  final _forgetPasswordTextController = TextEditingController();
+  final _forgetCheckPasswordTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: buildCommonAppbar(),
+        appBar: buildCommonAppbar(forget_title_text, onLeadTop: () {
+          InputManageUtil.shutdownInputKeyboard();
+          Navigator.pop(context);
+        }),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
@@ -51,47 +52,25 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       right: ScreenUtil().setWidth(15),
                       top: ScreenUtil().setHeight(31)),
                   height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_password_hint,
-                      _registeredPasswordTextController),
+                  child: TextFieldWidget(
+                      forget_new_password_hint, _forgetPasswordTextController),
                 ),
                 Container(
                     margin: EdgeInsets.only(
                         left: ScreenUtil().setWidth(15),
                         right: ScreenUtil().setWidth(15)),
                     height: ScreenUtil().setHeight(49),
-                    child: TextFieldWidget(registered_third_check_password_hint,
-                        _registeredCheckPasswordTextController)),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
-                  ),
-                  height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_name_hint,
-                      _registeredUserNameTextController),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
-                  ),
-                  height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_gender_hint,
-                      _registeredGenderTextController),
-                ),
+                    child: TextFieldWidget(forget_check_new_password_hint,
+                        _forgetCheckPasswordTextController)),
                 GestureDetector(
                   onTap: () {
-                    String password = _registeredPasswordTextController.text;
+                    InputManageUtil.shutdownInputKeyboard();
+                    String password = _forgetPasswordTextController.text;
                     String checkPassword =
-                        _registeredCheckPasswordTextController.text;
-                    String userName = _registeredUserNameTextController.text;
-                    String gender = _registeredGenderTextController.text;
+                        _forgetCheckPasswordTextController.text;
                     if (ObjectUtil.isEmptyString(password) ||
-                        ObjectUtil.isEmptyString(checkPassword) ||
-                        ObjectUtil.isEmptyString(userName) ||
-                        ObjectUtil.isEmptyString(gender)) {
-                      Fluttertoast.showToast(
-                          msg: registered_third_empty_error_text);
+                        ObjectUtil.isEmptyString(checkPassword)) {
+                      Fluttertoast.showToast(msg: forget_password_error_text);
                       return;
                     }
                     if (password != checkPassword) {
@@ -102,8 +81,10 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   },
                   child: Container(
                     margin: EdgeInsets.only(
-                        top: ScreenUtil().setHeight(117),
-                        bottom: ScreenUtil().setHeight(29)),
+                        top: ScreenUtil().setHeight(40),
+                        left: ScreenUtil().setWidth(15),
+                        right: ScreenUtil().setWidth(15),
+                        bottom: ScreenUtil().setHeight(25)),
                     width: ScreenUtil().setWidth(345),
                     height: ScreenUtil().setHeight(45),
                     alignment: Alignment.center,
@@ -114,19 +95,11 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                           Color.fromRGBO(95, 195, 243, 1.0),
                           Color.fromRGBO(95, 195, 243, 1.0)
                         ], begin: Alignment.topLeft, end: Alignment.topRight)),
-                    child: Text(registered_third_ok_text,
+                    child: Text(forget_check_text,
                         style: TextStyle(
                             color: ColorRes.WHITE,
-                            fontSize: ScreenUtil().setSp(16),
-                            decoration: TextDecoration.none)),
+                            fontSize: ScreenUtil().setSp(16))),
                   ),
-                ),
-                Text(
-                  registered_third_instructions_text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(153, 153, 153, 1),
-                      fontSize: ScreenUtil().setSp(12),
-                      decoration: TextDecoration.none),
                 )
               ],
             ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,6 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: buildCommonAppbar(forget_title_text, onLeadTop: () {
+          InputManageUtil.shutdownInputKeyboard();
+          Navigator.pop(context);
+        }),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
@@ -57,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _loginPasswordTextController)),
                 GestureDetector(
                   onTap: () {
+                    InputManageUtil.shutdownInputKeyboard();
                     String phone = _loginPhoneTextController.text;
                     String password = _loginPasswordTextController.text;
                     if (!RegexUtil.isMobileExact(phone)) {
@@ -95,6 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () {
+                    InputManageUtil.shutdownInputKeyboard();
+                    NavigatorUtil.goForget(context);
                     print('忘记密码点击');
                   },
                   child: Text(
@@ -108,9 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   padding: EdgeInsets.only(
-                      top: ScreenUtil().setHeight(150),
-                      bottom: ScreenUtil().setHeight(46)),
+                    top: ScreenUtil().setHeight(86),
+                  ),
                   onPressed: () {
+                    InputManageUtil.shutdownInputKeyboard();
+                    NavigatorUtil.goRegisteredOne(context);
                     print('注册点击');
                   },
                   child: Text(

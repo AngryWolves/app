@@ -4,10 +4,12 @@ import 'package:smart_park/values/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  TextFieldWidget(this.hint, this.textController, {this.isMobile = false});
+  TextFieldWidget(this.hint, this.textController,
+      {this.isMobile = false, this.maxLength = 11});
 
   final hint;
   final isMobile;
+  final maxLength;
   final TextEditingController textController;
 
   @override
@@ -45,7 +47,7 @@ class _TextFieldState extends State<TextFieldWidget> {
                   color: ColorRes.COLOR_LOGIN_HINT,
                   fontSize: ScreenUtil().setSp(15))),
           onChanged: (text) {
-            widget.textController.text=text;
+            widget.textController.text = text;
             //内容改变的回调
 //                    print('change');
           },
@@ -63,9 +65,12 @@ class _TextFieldState extends State<TextFieldWidget> {
           style: TextStyle(
               color: Color.fromRGBO(46, 49, 56, 1),
               fontSize: ScreenUtil().setSp(15)),
-          maxLength: 11,
-          //最大长度
+//          maxLength: 11,
+          //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
+          //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
+          inputFormatters: [LengthLimitingTextInputFormatter(11)],
           maxLines: 1,
+
           //最大行数
           autocorrect: false,
           //是否自动更正
