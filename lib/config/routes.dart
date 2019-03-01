@@ -25,21 +25,21 @@ class Routes {
     });
     router.define(root, handler: rootHandler);
     router.define(doLogin,
-        handler: loginHandler, transitionType: TransitionType.inFromLeft);
+        handler: loginHandler, transitionType: TransitionType.nativeModal);
     router.define(doOneForget,
         handler: forgetOneRouteHandler,
-        transitionType: TransitionType.inFromLeft);
+        transitionType: TransitionType.nativeModal);
     router.define(doNextForget,
         handler: forgetTwoRouteHandler,
-        transitionType: TransitionType.inFromLeft);
+        transitionType: TransitionType.nativeModal);
     router.define(doRegistered,
         handler: registeredOneRouteHandler,
-        transitionType: TransitionType.inFromLeft);
+        transitionType: TransitionType.nativeModal);
     router.define(doRegisteredTwo,
         handler: registeredTwoRouteHandler,
-        transitionType: TransitionType.inFromLeft);
+        transitionType: TransitionType.nativeModal);
     router.define(doRegisteredThird,
         handler: registeredThirdRouteHandler,
-        transitionType: TransitionType.inFromLeft);
+        transitionType: TransitionType.nativeModal);
   }
 }
