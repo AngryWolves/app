@@ -38,47 +38,51 @@ class _TextFieldState extends State<TextFieldWidget> {
     return Stack(
       alignment: Alignment.bottomLeft,
       children: <Widget>[
-        TextField(
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: ScreenUtil().setHeight(22)),
-              hintText: widget.hint,
-              hintStyle: TextStyle(
-                  color: ColorRes.COLOR_LOGIN_HINT,
-                  fontSize: ScreenUtil().setSp(15))),
-          onChanged: (text) {
-            widget.textController.text = text;
-            //内容改变的回调
+        Container(
+          padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(16)),
+          child: TextField(
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding:
+                    EdgeInsets.only(top: ScreenUtil().setHeight(22)),
+                hintText: widget.hint,
+                hintStyle: TextStyle(
+                    color: ColorRes.COLOR_LOGIN_HINT,
+                    fontSize: ScreenUtil().setSp(15))),
+            onChanged: (text) {
+              widget.textController.text = text;
+              //内容改变的回调
 //                    print('change');
-          },
-          onSubmitted: (text) {
-            //内容提交(按回车)的回调
+            },
+            onSubmitted: (text) {
+              //内容提交(按回车)的回调
 //                    print('submit');
-          },
-          controller: TextEditingController(text: widget.textController.text),
-          keyboardType: widget.isMobile
-              ? TextInputType.phone
-              : TextInputType.emailAddress,
-          //键盘类型
-          textInputAction: TextInputAction.none,
-          //显示的文字内容为 下一步
-          style: TextStyle(
-              color: Color.fromRGBO(46, 49, 56, 1),
-              fontSize: ScreenUtil().setSp(15)),
+            },
+            controller: TextEditingController(text: widget.textController.text),
+            keyboardType: widget.isMobile
+                ? TextInputType.phone
+                : TextInputType.emailAddress,
+            //键盘类型
+            textInputAction: TextInputAction.none,
+            //显示的文字内容为 下一步
+            style: TextStyle(
+                color: Color.fromRGBO(46, 49, 56, 1),
+                fontSize: ScreenUtil().setSp(15)),
 //          maxLength: 11,
-          //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
-          //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
-          inputFormatters: [LengthLimitingTextInputFormatter(11)],
-          maxLines: 1,
+            //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
+            //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
+            inputFormatters: [LengthLimitingTextInputFormatter(11)],
+            maxLines: 1,
 
-          //最大行数
-          autocorrect: false,
-          //是否自动更正
-          autofocus: false,
-          //是否自动对焦
-          obscureText: !widget.isMobile,
-          //是否是密码
-          textAlign: TextAlign.left,
+            //最大行数
+            autocorrect: false,
+            //是否自动更正
+            autofocus: false,
+            //是否自动对焦
+            obscureText: !widget.isMobile,
+            //是否是密码
+            textAlign: TextAlign.left,
+          ),
         ),
         Container(
 //          margin: EdgeInsets.only(

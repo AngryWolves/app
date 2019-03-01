@@ -39,7 +39,7 @@ class Routes {
         handler: registeredTwoRouteHandler,
         transitionType: TransitionType.inFromLeft);
     router.define(doRegisteredThird,
-        handler: registeredTwoRouteHandler,
+        handler: registeredThirdRouteHandler,
         transitionType: TransitionType.inFromLeft);
   }
 }

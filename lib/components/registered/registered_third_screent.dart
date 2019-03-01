@@ -109,7 +109,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   },
                   child: Container(
                     margin: EdgeInsets.only(
-                        top: ScreenUtil().setHeight(117),
+                        top: ScreenUtil().setHeight(53),
                         bottom: ScreenUtil().setHeight(29)),
                     width: ScreenUtil().setWidth(345),
                     height: ScreenUtil().setHeight(45),

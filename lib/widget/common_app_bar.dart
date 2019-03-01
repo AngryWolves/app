@@ -9,7 +9,7 @@ Widget buildCommonAppbar(String title,
     Color titleColor = Colors.white,
     onLeadTop}) {
   return PreferredSize(
-    preferredSize: Size.fromHeight(ScreenUtil().setHeight(64)), //设置AppBar高度
+    preferredSize: Size.fromHeight(ScreenUtil().setHeight(48)), //设置AppBar高度
     child: AppBar(
       backgroundColor: backgroundColor,
       leading: onLeadTop != null
