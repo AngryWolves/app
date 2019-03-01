@@ -53,15 +53,21 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
                       top: ScreenUtil().setHeight(31)),
                   height: ScreenUtil().setHeight(50),
                   child: TextFieldWidget(
-                      forget_new_password_hint, _forgetPasswordTextController),
+                    forget_new_password_hint,
+                    _forgetPasswordTextController,
+                    maxLength: 12,
+                  ),
                 ),
                 Container(
                     margin: EdgeInsets.only(
                         left: ScreenUtil().setWidth(15),
                         right: ScreenUtil().setWidth(15)),
                     height: ScreenUtil().setHeight(49),
-                    child: TextFieldWidget(forget_check_new_password_hint,
-                        _forgetCheckPasswordTextController)),
+                    child: TextFieldWidget(
+                      forget_check_new_password_hint,
+                      _forgetCheckPasswordTextController,
+                      maxLength: 12,
+                    )),
                 GestureDetector(
                   onTap: () {
                     InputManageUtil.shutdownInputKeyboard();

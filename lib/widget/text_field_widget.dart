@@ -71,7 +71,7 @@ class _TextFieldState extends State<TextFieldWidget> {
 //          maxLength: 11,
             //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
             //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
-            inputFormatters: [LengthLimitingTextInputFormatter(11)],
+            inputFormatters: [LengthLimitingTextInputFormatter(widget.maxLength)],
             maxLines: 1,
 
             //最大行数

@@ -9,7 +9,6 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
@@ -59,7 +58,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       top: ScreenUtil().setHeight(31)),
                   height: ScreenUtil().setHeight(50),
                   child: TextFieldWidget(registered_third_password_hint,
-                      _registeredPasswordTextController),
+                      _registeredPasswordTextController,maxLength: 12,),
                 ),
                 Container(
                     margin: EdgeInsets.only(
@@ -67,7 +66,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                         right: ScreenUtil().setWidth(15)),
                     height: ScreenUtil().setHeight(49),
                     child: TextFieldWidget(registered_third_check_password_hint,
-                        _registeredCheckPasswordTextController)),
+                        _registeredCheckPasswordTextController,maxLength: 12,)),
                 Container(
                   margin: EdgeInsets.only(
                     left: ScreenUtil().setWidth(15),
@@ -75,7 +74,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   ),
                   height: ScreenUtil().setHeight(50),
                   child: TextFieldWidget(registered_third_name_hint,
-                      _registeredUserNameTextController),
+                      _registeredUserNameTextController,maxLength: 15,),
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -84,7 +83,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   ),
                   height: ScreenUtil().setHeight(50),
                   child: TextFieldWidget(registered_third_gender_hint,
-                      _registeredGenderTextController),
+                      _registeredGenderTextController,maxLength: 1,),
                 ),
                 GestureDetector(
                   onTap: () {

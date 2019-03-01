@@ -10,6 +10,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:flutter/services.dart';
 
 class ForgetScreen extends StatefulWidget {
   @override
@@ -100,7 +101,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                         //键盘类型
                         textInputAction: TextInputAction.none,
                         //显示的文字内容为 下一步
-                        maxLength: 11,
+                        inputFormatters: [LengthLimitingTextInputFormatter(6)],
                         //最大长度
                         maxLines: 1,
                         //最大行数

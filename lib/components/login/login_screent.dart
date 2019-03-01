@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: buildCommonAppbar(forget_title_text, onLeadTop: () {
+        appBar: buildCommonAppbar(login_title_text, onLeadTop: () {
           InputManageUtil.shutdownInputKeyboard();
           Navigator.pop(context);
         }),
@@ -60,8 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         left: ScreenUtil().setWidth(15),
                         right: ScreenUtil().setWidth(15)),
                     height: ScreenUtil().setHeight(50),
-                    child: TextFieldWidget(login_check_password_hint,
-                        _loginPasswordTextController)),
+                    child: TextFieldWidget(
+                      login_check_password_hint,
+                      _loginPasswordTextController,
+                      maxLength: 12,
+                    )),
                 GestureDetector(
                   onTap: () {
                     InputManageUtil.shutdownInputKeyboard();
