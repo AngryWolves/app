@@ -17,3 +17,9 @@ const bluetooth_dialog_opening_done = '开门成功，记得随手关门';
 const bluetooth_dialog_opening_error = '开门失败，请重试';
 const bluetooth_dialog_cancel = '取消';
 const bluetooth_dialog_ok = '确定';
+
+const bind_license_enter_title = '绑定车牌';
+const bind_license_enter_number = '输入车牌号码';
+const bind_license_enter_number_detail = '请输入需要绑定的车牌号码';
+const bind_license_enter_number_hint = '输入车牌';
+const bind_license_ok = '确定';
