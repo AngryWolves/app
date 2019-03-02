@@ -51,4 +51,12 @@ class NavigatorUtil {
         context, Routes.doRegisteredThird + "?message=$mobile&code=$code",
         transition: transitionType);
   }
+  //注册 第三步
+  static void goPersona(
+      BuildContext context, String personalId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(
+        context, Routes.doPersonal + "?personalId=$personalId",
+        transition: transitionType);
+  }
 }
