@@ -10,3 +10,10 @@ const home_action_apply_decorate = '装修申请';
 const home_notice_item_title = '公告信息';
 
 const message_title = '站内信息';
+
+const bluetooth_dialog_opening_title = '正在开门';
+const bluetooth_dialog_opening = '正在为您打开门禁中...';
+const bluetooth_dialog_opening_done = '开门成功，记得随手关门';
+const bluetooth_dialog_opening_error = '开门失败，请重试';
+const bluetooth_dialog_cancel = '取消';
+const bluetooth_dialog_ok = '确定';

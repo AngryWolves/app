@@ -3,6 +3,7 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widgets/base/refresh_list_view.dart';
 import 'package:smart_park/widgets/bluetooth/bluetooth_control_key_item.dart';
+import 'package:smart_park/widgets/bluetooth/bluetooth_open_dialog.dart';
 import 'package:smart_park/widgets/common_app_bar.dart';
 
 class BluetoothControl extends StatelessWidget {
@@ -32,11 +33,17 @@ class _BluetoothControlListState
     extends RefreshListView<BluetoothControlList, String> {
   @override
   Widget buildItem(String data) {
-    return BluetoothKeyItem();
+    return BluetoothKeyItem(
+      onItemTap: _handleItemTap,
+    );
   }
 
   @override
   Future<List<String>> requestData(int page) async {
     return ['hhhh'];
+  }
+
+  void _handleItemTap() {
+    showDialog(context: context, builder: (ctx) => BlueToothOpenDialog());
   }
 }
