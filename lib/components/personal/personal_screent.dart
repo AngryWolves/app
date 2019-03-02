@@ -177,22 +177,56 @@ class _PersonalScreenState extends State<PersonalScreen> {
         child: ListView.builder(
             itemCount: objects.length,
             itemBuilder: (context, index) {
-              return Container(
-                height: ScreenUtil().setHeight(46),
-                child: Row(
-                  children: <Widget>[
-                    _buildItemIcon(objects[index]),
-                    _buildItemTitle(objects[index]),
-                    _buildItemBackIcon()
-                  ],
+              return GestureDetector(
+                onTap: (){
+                  print("===data==="+index.toString());
+                },
+                child: Container(
+                  height: ScreenUtil().setHeight(46),
+                  child: Row(
+                    children: <Widget>[
+                      _buildItemIcon(objects[index]),
+                      _buildItemTitle(objects[index]),
+                      _buildItemBackIcon()
+                    ],
+                  ),
                 ),
               );
-
+//              return _buildItemWidget(objects[index], index);
             }));
   }
 
+  Widget _buildItemListTile(dynamic obj, index) {
+    return Container(
+      height: ScreenUtil().setHeight(46),
+      child: ListTile(
+        leading: Image.asset(
+          obj.imagePath,
+          width: ScreenUtil().setWidth(15),
+          height: ScreenUtil().setHeight(16),
+          fit: BoxFit.fill,
+        ), //item 前置图标
+        title: Text(
+          obj.title,
+          maxLines: 1,
+          style: TextStyle(
+              color: Color.fromRGBO(46, 49, 56, 1),
+              fontSize: ScreenUtil().setSp(15)),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          color: Color.fromRGBO(177, 177, 179, 1),
+          size: 11.0,
+        ),
+        onTap: () {
+
+        },
+      ),
+    );
+  }
   Widget _buildItemIcon(dynamic obj) {
     return Container(
+      color: Colors.transparent,
       width: ScreenUtil().setWidth(27),
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(15)),
@@ -207,6 +241,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   Widget _buildItemTitle(dynamic obj) {
     return Container(
+      color: Colors.transparent,
       alignment: Alignment.centerLeft,
       child: Text(
         obj.title,
@@ -221,6 +256,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   Widget _buildItemBackIcon() {
     return Container(
+      color: Colors.transparent,
       width: ScreenUtil().setWidth(225),
       alignment: Alignment.centerRight,
       child: Icon(
