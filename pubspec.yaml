@@ -76,3 +76,10 @@ flutter:
     - images/icon_id_card_positive@3x.png
     - images/icon_id_card_back@3x.png
     - images/icon_id_card_upload@3x.png
+    - images/icon_ccecs.png
+    - images/icon_choose@3x.png
+    - images/icon_maintain@3x.png
+    - images/icon_password@3x.png
+    - images/icon_pay@3x.png
+    - images/icon_service@3x.png
+    - images/icon_report3x.png
