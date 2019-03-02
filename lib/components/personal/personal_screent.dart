@@ -25,10 +25,14 @@ class PersonalScreen extends StatefulWidget {
 
 class _PersonalScreenState extends State<PersonalScreen> {
   final List<String> items = ["我的报修", "我的缴费", "我的预约", "信息修改", "联系客服", "数据报表"];
-  final localJson = json.decode(JsonStrings.localPersonal);
 
   @override
   Widget build(BuildContext context) {
+    final localPersonalJson = json.decode(JsonStrings.localPersonal);
+    final localPersonalObjects =
+        localPersonalJson.map((o) => LocalPersonalData.fromJson(o));
+
+    final listOfLocalPersonalObjects = localPersonalObjects.toList();
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 236, 236, 1),
       appBar: buildCommonAppbar(personal_title_text, onLeadTop: () {
@@ -48,7 +52,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
               ],
             ),
           ),
-          _buildListWidget(items)
+          _buildListWidget(listOfLocalPersonalObjects)
         ],
       ),
     );
@@ -160,7 +164,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-  Widget _buildListWidget(List<String> items) {
+  Widget _buildListWidget(List<dynamic> objects) {
     return Container(
         height: ScreenUtil().setHeight(276),
         margin: EdgeInsets.only(
@@ -171,26 +175,29 @@ class _PersonalScreenState extends State<PersonalScreen> {
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(5.0))),
         child: ListView.builder(
-            itemCount: items.length,
+            itemCount: objects.length,
             itemBuilder: (context, index) {
               return Container(
                 height: ScreenUtil().setHeight(46),
                 child: Row(
-                  children: <Widget>[_buildItemIcon(), _buildItemTitle()],
+                  children: <Widget>[
+                    _buildItemIcon(objects[index]),
+                    _buildItemTitle(objects[index]),
+                    _buildItemBackIcon()
+                  ],
                 ),
               );
+
             }));
   }
 
-  Widget _buildItemIcon() {
+  Widget _buildItemIcon(dynamic obj) {
     return Container(
-      color: Colors.blue,
       width: ScreenUtil().setWidth(27),
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(
-          left: ScreenUtil().setWidth(15)),
+      margin: EdgeInsets.only(left: ScreenUtil().setWidth(15)),
       child: Image.asset(
-        'images/icon_choose@3x.png',
+        obj.imagePath,
         width: ScreenUtil().setWidth(15),
         height: ScreenUtil().setHeight(16),
         fit: BoxFit.fill,
@@ -198,17 +205,28 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-  Widget _buildItemTitle() {
+  Widget _buildItemTitle(dynamic obj) {
     return Container(
-      color: Colors.red,
       alignment: Alignment.centerLeft,
       child: Text(
-        '林先生',
+        obj.title,
         textAlign: TextAlign.left,
         maxLines: 1,
         style: TextStyle(
             color: Color.fromRGBO(46, 49, 56, 1),
-            fontSize: ScreenUtil().setSp(21)),
+            fontSize: ScreenUtil().setSp(15)),
+      ),
+    );
+  }
+
+  Widget _buildItemBackIcon() {
+    return Container(
+      width: ScreenUtil().setWidth(225),
+      alignment: Alignment.centerRight,
+      child: Icon(
+        Icons.arrow_forward_ios,
+        color: Color.fromRGBO(177, 177, 179, 1),
+        size: 11.0,
       ),
     );
   }
