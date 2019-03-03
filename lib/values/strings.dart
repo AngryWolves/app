@@ -63,3 +63,5 @@ const modify_upload_cancel_text = '取消';
 
 
 const repairs_title_text = '我的报修';
+
+const appointment_title_text = '我的预约';

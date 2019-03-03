@@ -73,4 +73,12 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doRepairs + "?userId=$userId",
         transition: transitionType);
   }
+
+  //我的预约
+  static void goAppointment(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(
+        context, Routes.doAppointment + "?userId=$userId",
+        transition: transitionType);
+  }
 }

@@ -20,6 +20,7 @@ class Routes {
   static String doRegisteredThird = "/registered/third";
   static String doPersonal = "/personal";
   static String doRepairs = "/personal/repairs";
+  static String doAppointment = "/personal/appointment";
   static String doModify = "/modify";
 
   static void configureRoutes(Router router) {
@@ -53,6 +54,9 @@ class Routes {
         transitionType: TransitionType.nativeModal);
     router.define(doRepairs,
         handler: repairsRouteHandler,
+        transitionType: TransitionType.nativeModal);
+    router.define(doAppointment,
+        handler: appointmentRouteHandler,
         transitionType: TransitionType.nativeModal);
   }
 }

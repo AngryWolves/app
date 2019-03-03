@@ -10,6 +10,7 @@ import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
+import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -67,11 +68,17 @@ var modifyRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-      return ModifyScreen(userId: null);
-    });
+  return ModifyScreen(userId: null);
+});
 var repairsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-      return PersonalRepairsScreen(userId: null);
-    });
+  return PersonalRepairsScreen(userId: null);
+});
+var appointmentRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+  return PersonalAppointmentScreen(userId: null);
+});

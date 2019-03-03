@@ -180,12 +180,27 @@ class _PersonalScreenState extends State<PersonalScreen> {
                     return;
                   }
                   switch (index) {
+                    //我的报修
                     case 0:
                       NavigatorUtil.goRepairs(context, '');
-                      return;
+                      break;
+                    //我的缴费
+                    case 1:
+                      break;
+                    //我的预约
+                    case 2:
+                      NavigatorUtil.goAppointment(context, "");
+                      break;
+                    //信息修改
                     case 3:
                       NavigatorUtil.goModify(context, "");
-                      return;
+                      break;
+                    //联系客服
+                    case 4:
+                      break;
+                    //数据报表
+                    case 5:
+                      break;
                   }
                 },
                 child: Container(
