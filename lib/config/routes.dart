@@ -19,6 +19,8 @@ class Routes {
   static String doRegisteredTwo = "/registered/two";
   static String doRegisteredThird = "/registered/third";
   static String doPersonal = "/personal";
+  static String doModify = "/modify";
+
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -44,6 +46,9 @@ class Routes {
         transitionType: TransitionType.nativeModal);
     router.define(doPersonal,
         handler: personalRouteHandler,
+        transitionType: TransitionType.nativeModal);
+    router.define(doModify,
+        handler: modifyRouteHandler,
         transitionType: TransitionType.nativeModal);
   }
 }

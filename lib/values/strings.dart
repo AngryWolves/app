@@ -44,6 +44,19 @@ const registered_third_ok_text = "完成";
 const registered_third_instructions_text = '第三步 完善信息（只需三步）';
 const registered_third_empty_error_text = '注册信息不允许为空，请检查你输入的内容';
 
-
 const personal_title_text = '个人中心';
 const personal_revise_text = '点击修改';
+
+const modify_title_text = "信息修改";
+const modify_icon_text = "头像";
+const modify_firm_tag_text = "企业认证信息";
+const modify_firm_text = "园区十佳优秀企业";
+const modify_change_password_tag_text = "修改密码";
+const modify_change_password_text = "去修改";
+const modify_firm_logo_tag_text = "企业LOGO";
+const modify_firm_logo_text = "去上传";
+const modify_power_tag_text = "人员权限";
+const modify_power_text = "去设置";
+const modify_upload_camera_text = '用相机拍摄';
+const modify_upload_photo_text = '去相册选择';
+const modify_upload_cancel_text = '取消';

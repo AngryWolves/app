@@ -51,12 +51,19 @@ class NavigatorUtil {
         context, Routes.doRegisteredThird + "?message=$mobile&code=$code",
         transition: transitionType);
   }
-  //注册 第三步
-  static void goPersona(
-      BuildContext context, String personalId) {
+
+  //个人中心
+  static void goPersona(BuildContext context, String personalId) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(
         context, Routes.doPersonal + "?personalId=$personalId",
+        transition: transitionType);
+  }
+
+  //个人信息修改
+  static void goModify(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doModify + "?userId=$userId",
         transition: transitionType);
   }
 }

@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/components/personal/data/local_personal_data.dart';
 import 'package:smart_park/values/json_strings.dart';
 
@@ -179,7 +180,13 @@ class _PersonalScreenState extends State<PersonalScreen> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: (){
-                  print("===data==="+index.toString());
+                  if(index==null){
+                    return;
+                  }
+                  switch(index){
+                    case 3:
+                      NavigatorUtil.goModify(context, "");
+                  }
                 },
                 child: Container(
                   height: ScreenUtil().setHeight(46),
