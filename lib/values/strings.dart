@@ -23,3 +23,10 @@ const bind_license_enter_number = '输入车牌号码';
 const bind_license_enter_number_detail = '请输入需要绑定的车牌号码';
 const bind_license_enter_number_hint = '输入车牌';
 const bind_license_ok = '确定';
+
+const parking_upload_license = '上传行驶证';
+const parking_bind_tip_title = '您尚未绑定车辆，绑定后可享受多项便利服务';
+const parking_bind_tip_detail = '上传行驶证正面即可绑定车辆，仅可绑定您本人名下的车辆\n请保证上传的行驶证号牌号码、所有人两栏的文字清晰可见';
+const parking_upload_dialog_photo = '拍照';
+const parking_upload_dialog_select = '从手机相册选择';
+const parking_upload_dialog_cancel = '取消';

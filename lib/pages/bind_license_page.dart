@@ -5,6 +5,7 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widgets/base/base_state.dart';
 import 'package:smart_park/widgets/common_app_bar.dart';
+import 'package:smart_park/widgets/common_gradient_button.dart';
 import 'package:smart_park/widgets/parking/enter_license.dart';
 import 'package:smart_park/widgets/parking/license_code_dialog.dart';
 
@@ -75,27 +76,10 @@ class _BindLicenceState extends BaseState<BindLicensePage> {
             onCodeSelectTap: _showSelectCodeDialog,
             code: _selectedCode,
           ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.center,
+          Container(
               margin: EdgeInsets.only(
                   top: ScreenUtil().setHeight(30), left: 15.0, right: 15.0),
-              height: ScreenUtil().setHeight(50),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                gradient: LinearGradient(colors: [
-                  ColorRes.BUTTON_START_COLOR,
-                  ColorRes.BUTTON_END_COLOR
-                ]),
-              ),
-              child: Text(
-                bind_license_ok,
-                style: TextStyle(
-                    color: Colors.white, fontSize: ScreenUtil().setSp(17)),
-              ),
-            ),
-          )
+              child: GradientButton(bind_license_ok, () {}))
         ],
       );
 

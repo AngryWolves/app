@@ -32,3 +32,5 @@ flutter:
 
   assets:
     - images/ic_bluetootn_control_succeed.png
+    - images/ic_bluetootn_control_error.png
+    - images/ic_unbind_license_tip.png

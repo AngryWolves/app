@@ -59,7 +59,8 @@ class _HomePageState extends State<HomePage> {
           NavigatorUtil.goBluetoothPage(context);
           break;
         case HOME_ACTION_PARKING:
-          NavigatorUtil.goBindLicensePage(context);
+//          NavigatorUtil.goBindLicensePage(context);
+          NavigatorUtil.goParingPage(context);
           break;
         case HOME_ACTION_REPAIR:
           break;
