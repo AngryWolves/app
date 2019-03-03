@@ -21,6 +21,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/widget/firm_dialog.dart';
 
 class ModifyScreen extends StatefulWidget {
   ModifyScreen({@required this.userId});
@@ -114,12 +115,46 @@ class _ModifyScreenState extends State<ModifyScreen> {
   Widget _buildContentWidget(tag, content, index) {
     return GestureDetector(
       onTap: () {
+        if (index == null) {
+          return;
+        }
+        switch (index) {
+          case 0:
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return StatefulBuilder(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          // 注意不是调用老页面的setState，而是要调用builder中的setState。
+                          //在这里为了区分，在构建builder的时候将setState方法命名为了state。
+                          state(() {});
+                        },
+                        child: new FirmDialog(
+                          state: state,
+                          onSureState: (String firm) {},
+                        ),
+                      );
+                    },
+                  );
+                });
+//            showDialog<Null>(
+//                context: context, //BuildContext对象
+//                barrierDismissible: true,
+//                builder: (BuildContext context) {
+//                  return new FirmDialog();
+//                });
+            break;
+        }
         print("头像点击");
       },
       child: Row(
         children: <Widget>[
           Expanded(
             child: Container(
+              color: Colors.transparent,
               height: ScreenUtil().setHeight(46),
               alignment: Alignment.centerLeft,
               child: Text(
