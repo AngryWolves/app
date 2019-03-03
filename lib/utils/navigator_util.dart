@@ -3,6 +3,7 @@ import 'package:smart_park/pages/bind_license_page.dart';
 import 'package:smart_park/pages/bluetooth_control_page.dart';
 import 'package:smart_park/pages/message_page.dart';
 import 'package:smart_park/pages/parking_page.dart';
+import 'package:smart_park/pages/upload_license_page.dart';
 
 class NavigatorUtil {
   ///
@@ -21,6 +22,14 @@ class NavigatorUtil {
   }
 
   ///
+  /// 智慧停车
+  ///
+  static goParkingPage(BuildContext context) {
+    Navigator.push(
+            context, MaterialPageRoute(builder: (_) => ParkingPage()));
+  }
+
+  ///
   /// 智慧停车 -- (绑定车牌)
   ///
   static goBindLicensePage(BuildContext context) {
@@ -31,7 +40,8 @@ class NavigatorUtil {
   ///
   /// 智慧停车 -- (上传行驶证)
   ///
-  static goParingPage(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => ParkingPage()));
+  static goUploadLicensePage(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => UploadLicensePage()));
   }
 }
