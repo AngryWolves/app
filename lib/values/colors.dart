@@ -12,4 +12,5 @@ class ColorRes {
   static const BIND_LICENSE_TITLE = const Color(0xFF333333);
   static const TEXT_FIELD_BORDER = const Color(0xFF979797);
   static const BLUE_TEXT = const Color(0xFF25B8F7);
+  static const PARKING_HISTORY_TIME = const Color(0xFF999999);
 }

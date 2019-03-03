@@ -5,6 +5,7 @@ import 'package:smart_park/widgets/base/refresh_list_view.dart';
 import 'package:smart_park/widgets/common_app_bar.dart';
 import 'package:smart_park/widgets/parking/has_no_bind_license_item.dart';
 import 'package:smart_park/widgets/parking/parking_head.dart';
+import 'package:smart_park/widgets/parking/parking_history_item.dart';
 
 class ParkingPage extends StatelessWidget {
   @override
@@ -28,14 +29,15 @@ class ParkingList extends StatefulWidget {
 }
 
 class _ParkingListState extends RefreshListView<ParkingList, String> {
+
   @override
   Widget buildItem(String data) {
-    return null;
+    return ParkingHistoryItem();
   }
 
   @override
   Future<List<String>> requestData(int page) async {
-    return [];
+    return ['ssss'];
   }
 
   @override
