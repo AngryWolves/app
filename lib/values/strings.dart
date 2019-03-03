@@ -60,3 +60,6 @@ const modify_power_text = "去设置";
 const modify_upload_camera_text = '用相机拍摄';
 const modify_upload_photo_text = '去相册选择';
 const modify_upload_cancel_text = '取消';
+
+
+const repairs_title_text = '我的报修';

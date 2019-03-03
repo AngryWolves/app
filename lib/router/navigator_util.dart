@@ -66,4 +66,11 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doModify + "?userId=$userId",
         transition: transitionType);
   }
+
+  //我的报修
+  static void goRepairs(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doRepairs + "?userId=$userId",
+        transition: transitionType);
+  }
 }

@@ -6,8 +6,6 @@ import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/components/personal/data/local_personal_data.dart';
@@ -25,8 +23,6 @@ class PersonalScreen extends StatefulWidget {
 }
 
 class _PersonalScreenState extends State<PersonalScreen> {
-  final List<String> items = ["我的报修", "我的缴费", "我的预约", "信息修改", "联系客服", "数据报表"];
-
   @override
   Widget build(BuildContext context) {
     final localPersonalJson = json.decode(JsonStrings.localPersonal);
@@ -179,13 +175,17 @@ class _PersonalScreenState extends State<PersonalScreen> {
             itemCount: objects.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: (){
-                  if(index==null){
+                onTap: () {
+                  if (index == null) {
                     return;
                   }
-                  switch(index){
+                  switch (index) {
+                    case 0:
+                      NavigatorUtil.goRepairs(context, '');
+                      return;
                     case 3:
                       NavigatorUtil.goModify(context, "");
+                      return;
                   }
                 },
                 child: Container(
@@ -225,12 +225,11 @@ class _PersonalScreenState extends State<PersonalScreen> {
           color: Color.fromRGBO(177, 177, 179, 1),
           size: 11.0,
         ),
-        onTap: () {
-
-        },
+        onTap: () {},
       ),
     );
   }
+
   Widget _buildItemIcon(dynamic obj) {
     return Container(
       color: Colors.transparent,
