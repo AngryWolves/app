@@ -36,7 +36,7 @@ class ModifyScreen extends StatefulWidget {
 
 class _ModifyScreenState extends State<ModifyScreen> {
   Future<File> _imageFile;
-
+  String firmText=modify_firm_text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +51,7 @@ class _ModifyScreenState extends State<ModifyScreen> {
         child: Column(
           children: <Widget>[
             _buildIconWidget(),
-            _buildContentWidget(modify_firm_tag_text, modify_firm_text, 0),
+            _buildContentWidget(modify_firm_tag_text, firmText, 0),
             _buildContentWidget(modify_change_password_tag_text,
                 modify_change_password_text, 1),
             _buildContentWidget(
@@ -121,22 +121,14 @@ class _ModifyScreenState extends State<ModifyScreen> {
         switch (index) {
           case 0:
             showDialog(
-                barrierDismissible: false,
+                barrierDismissible: true,
                 context: context,
                 builder: (context) {
-                  return StatefulBuilder(
-                    builder: (context, state) {
-                      return GestureDetector(
-                        onTap: () {
-                          // 注意不是调用老页面的setState，而是要调用builder中的setState。
-                          //在这里为了区分，在构建builder的时候将setState方法命名为了state。
-                          state(() {});
-                        },
-                        child: new FirmDialog(
-                          state: state,
-                          onSureState: (String firm) {},
-                        ),
-                      );
+                  return FirmDialog(
+                    onSureState: (String firm) {
+                      this.setState((){
+                        firmText=firm;
+                      });
                     },
                   );
                 });
