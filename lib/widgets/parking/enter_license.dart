@@ -5,6 +5,11 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
 class EnterLicenseView extends StatefulWidget {
+  EnterLicenseView({this.onCodeSelectTap, this.code}) : assert(code != null);
+
+  final onCodeSelectTap;
+  final String code;
+
   @override
   _EnterLicenseViewState createState() => _EnterLicenseViewState();
 }
@@ -51,13 +56,13 @@ class _EnterLicenseViewState extends State<EnterLicenseView> {
   }
 
   Widget _buildPrefix() => GestureDetector(
-        onTap: () {},
+        onTap: widget.onCodeSelectTap,
         child: Container(
           margin: const EdgeInsets.only(left: 12.0),
           child: Row(
             children: <Widget>[
               Text(
-                '京',
+                widget.code,
                 style: TextStyle(
                     color: ColorRes.BLUE_TEXT,
                     fontSize: ScreenUtil().setSp(18)),
