@@ -3,6 +3,7 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widgets/base/refresh_list_view.dart';
 import 'package:smart_park/widgets/common_app_bar.dart';
+import 'package:smart_park/widgets/parking/has_no_bind_license_item.dart';
 import 'package:smart_park/widgets/parking/parking_head.dart';
 
 class ParkingPage extends StatelessWidget {
@@ -33,8 +34,13 @@ class _ParkingListState extends RefreshListView<ParkingList, String> {
   }
 
   @override
-  Future<List<String>> requestData(int page) {
-    return null;
+  Future<List<String>> requestData(int page) async {
+    return [];
+  }
+
+  @override
+  Widget buildEmptyView() {
+    return HasBindLicenseItem();
   }
 
   @override

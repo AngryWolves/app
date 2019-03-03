@@ -44,3 +44,5 @@ const parking_has_no_vip_card_buy = '点击购买';
 const parking_has_no_vip_card_limit = '月卡持续至';
 const parking_has_no_vip_card_renewal_fee = '点击续费';
 const parking_history = '历史停车记录';
+const parking_unable_check_history = '您尚未绑定行驶证，无法查看历史记录';
+const parking_bind_license = '绑定行驶证';
