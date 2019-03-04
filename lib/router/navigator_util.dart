@@ -100,4 +100,29 @@ class NavigatorUtil {
   static void goHome(BuildContext context) {
     Application.router.navigateTo(context, Routes.doHome);
   }
+
+  /// 站内信息
+  static void goMessage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doMessage);
+  }
+
+  /// 蓝牙门禁
+  static void goBluetooth(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doBluetooth);
+  }
+
+  /// 智慧停车
+  static void goParking(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParking);
+  }
+
+  /// 智慧停车 -- (绑定车牌)
+  static void goBindLicense(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParkingBindLicense);
+  }
+
+  /// 智慧停车 -- (上传行驶证)
+  static void goUploadLicense(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParkingUploadLicense);
+  }
 }

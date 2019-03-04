@@ -1,11 +1,17 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_park/components/app/app_component.dart';
+import 'package:smart_park/components/bluetooth/bluetooth_control_page.dart';
 import 'package:smart_park/components/forget/forget_next_screent.dart';
 import 'package:smart_park/components/forget/forget_screent.dart';
+import 'package:smart_park/components/home/home_page.dart';
+import 'package:smart_park/components/home/message_page.dart';
 import 'package:smart_park/components/login/login_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
+import 'package:smart_park/components/parking/bind_license_page.dart';
+import 'package:smart_park/components/parking/parking_page.dart';
+import 'package:smart_park/components/parking/upload_license_page.dart';
 import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
 import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
@@ -13,7 +19,6 @@ import 'package:smart_park/components/personal/report/report_screent.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
-import 'package:smart_park/pages/home_page.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -98,4 +103,17 @@ var changePasswordRouteHandler = new Handler(
   return PersonalChangePasswordScreen();
 });
 
-var homeRouteHandle = Handler(handlerFunc: (context, params) => HomePage());
+var homeRouteHandle = Handler(handlerFunc: (_, params) => HomePage());
+
+var messageRouteHandle = Handler(handlerFunc: (_, params) => MessagePage());
+
+var bluetoothRouteHandle =
+    Handler(handlerFunc: (_, params) => BluetoothControl());
+
+var parkingRouteHandle = Handler(handlerFunc: (_, params) => ParkingPage());
+
+var bindLicenseRouteHandle =
+    Handler(handlerFunc: (_, params) => BindLicensePage());
+
+var uploadLicenseRouteHandle =
+    Handler(handlerFunc: (_, params) => UploadLicensePage());

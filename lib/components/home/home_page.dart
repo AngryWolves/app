@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/home/app_bar.dart';
+import 'package:smart_park/components/home/home_action_grid.dart';
+import 'package:smart_park/components/home/home_body.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/event/home_action_event.dart';
-import 'package:smart_park/utils/navigator_util.dart';
-import 'package:smart_park/widgets/home/app_bar.dart';
-import 'package:smart_park/widgets/home/home_action_grid.dart';
-import 'package:smart_park/widgets/home/home_body.dart';
+import 'package:smart_park/router/navigator_util.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     }
     return Scaffold(
       appBar: buildHomeAppBar(onTap: () {
-        NavigatorUtil.goMessagePage(context);
+        NavigatorUtil.goMessage(context);
       }),
       body: HomeBodyView(),
     );
@@ -53,11 +53,11 @@ class _HomePageState extends State<HomePage> {
       print('action type ::::${actionEvent.type}');
       switch (actionEvent.type) {
         case HOME_ACTION_BLUETOOTH:
-          NavigatorUtil.goBluetoothPage(context);
+          NavigatorUtil.goBluetooth(context);
           break;
         case HOME_ACTION_PARKING:
 //          NavigatorUtil.goBindLicensePage(context);
-          NavigatorUtil.goParkingPage(context);
+          NavigatorUtil.goParking(context);
           break;
         case HOME_ACTION_REPAIR:
           break;
