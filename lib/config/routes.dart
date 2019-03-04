@@ -24,6 +24,7 @@ class Routes {
   static String doReport="/personal/report";
   static String doModify = "/modify";
   static String doChangePassword = "/modify/changePassword";
+  static String doHome = "/home";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -65,6 +66,9 @@ class Routes {
         transitionType: TransitionType.nativeModal);
     router.define(doChangePassword,
         handler: changePasswordRouteHandler,
+        transitionType: TransitionType.nativeModal);
+    router.define(doHome,
+        handler: homeRouteHandle,
         transitionType: TransitionType.nativeModal);
   }
 }

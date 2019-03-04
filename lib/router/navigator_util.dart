@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/material.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
 
@@ -94,5 +94,10 @@ class NavigatorUtil {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(context, Routes.doReport + "?userId=$userId",
         transition: transitionType);
+  }
+
+  /// 首页
+  static void goHome(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doHome);
   }
 }

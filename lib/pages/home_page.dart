@@ -8,8 +8,6 @@ import 'package:smart_park/widgets/home/home_action_grid.dart';
 import 'package:smart_park/widgets/home/home_body.dart';
 
 class HomePage extends StatefulWidget {
-  static final sName = '/';
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -44,7 +42,6 @@ class _HomePageState extends State<HomePage> {
       body: HomeBodyView(),
     );
   }
-
 
   /// 主页功能项点击事件
   void _initActionTapListener() {

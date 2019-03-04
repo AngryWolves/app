@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/config/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:smart_park/config/application.dart';
-import 'package:smart_park/components/login/login_screent.dart';
+import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/router/navigator_util.dart';
 
 class AppComponent extends StatefulWidget {
   @override
@@ -19,19 +18,30 @@ class _AppComponentState extends State<AppComponent> {
     Application.router = router;
   }
 
+  bool _hasInit = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_hasInit) {
+      return;
+    }
+    _hasInit = true;
+
+    Future.delayed(Duration(seconds: 1)).then((value) {
+      // todo check login status
+      bool isLogin = false;
+      if (isLogin) {
+        NavigatorUtil.goLogin(context);
+      } else {
+        NavigatorUtil.goHome(context);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-//    ScreenUtil.instance = ScreenUtil(width: 375, height: 667)..init(context);
-    final app = MaterialApp(
-      title: 'Fluro',
-      debugShowCheckedModeBanner: false,
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      onGenerateRoute: Application.router.generator,
-      home: LoginScreen(),
-    );
-    print("initial route = ${app.initialRoute}");
-    return app;
+    // 开屏页
+    return Container();
   }
 }
