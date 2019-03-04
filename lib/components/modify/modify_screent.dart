@@ -36,7 +36,8 @@ class ModifyScreen extends StatefulWidget {
 
 class _ModifyScreenState extends State<ModifyScreen> {
   Future<File> _imageFile;
-  String firmText=modify_firm_text;
+  String firmText = modify_firm_text;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,18 +127,15 @@ class _ModifyScreenState extends State<ModifyScreen> {
                 builder: (context) {
                   return FirmDialog(
                     onSureState: (String firm) {
-                      this.setState((){
-                        firmText=firm;
+                      this.setState(() {
+                        firmText = firm;
                       });
                     },
                   );
                 });
-//            showDialog<Null>(
-//                context: context, //BuildContext对象
-//                barrierDismissible: true,
-//                builder: (BuildContext context) {
-//                  return new FirmDialog();
-//                });
+            break;
+          case 1:
+            NavigatorUtil.goChangePassword(context);
             break;
         }
         print("头像点击");
