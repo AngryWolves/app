@@ -67,6 +67,13 @@ class NavigatorUtil {
         transition: transitionType);
   }
 
+  //修改密码
+  static void goChangePassword(BuildContext context) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doChangePassword,
+        transition: transitionType);
+  }
+
   //我的报修
   static void goRepairs(BuildContext context, String userId) {
     TransitionType transitionType = TransitionType.nativeModal;

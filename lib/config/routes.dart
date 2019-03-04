@@ -22,6 +22,7 @@ class Routes {
   static String doRepairs = "/personal/repairs";
   static String doAppointment = "/personal/appointment";
   static String doModify = "/modify";
+  static String doChangePassword = "/modify/changePassword";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -57,6 +58,9 @@ class Routes {
         transitionType: TransitionType.nativeModal);
     router.define(doAppointment,
         handler: appointmentRouteHandler,
+        transitionType: TransitionType.nativeModal);
+    router.define(doChangePassword,
+        handler: changePasswordRouteHandler,
         transitionType: TransitionType.nativeModal);
   }
 }

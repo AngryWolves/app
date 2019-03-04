@@ -61,7 +61,11 @@ const modify_upload_camera_text = '用相机拍摄';
 const modify_upload_photo_text = '去相册选择';
 const modify_upload_cancel_text = '取消';
 
-
 const repairs_title_text = '我的报修';
 
 const appointment_title_text = '我的预约';
+
+const change_password_title_text = '修改密码';
+const change_password_tag_text = '设置密码';
+const change_password_hint = '请输入你要修改的密码';
+const change_password_check_text = '完成';
