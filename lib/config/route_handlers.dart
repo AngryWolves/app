@@ -16,6 +16,7 @@ import 'package:smart_park/components/personal/appointment/appointment_screent.d
 import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
 import 'package:smart_park/components/personal/report/report_screent.dart';
+import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
@@ -117,3 +118,6 @@ var bindLicenseRouteHandle =
 
 var uploadLicenseRouteHandle =
     Handler(handlerFunc: (_, params) => UploadLicensePage());
+
+var repairRouteHandle =
+    Handler(handlerFunc: (_, params) => PropertyRepairPage());

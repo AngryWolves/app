@@ -30,6 +30,7 @@ class Routes {
   static String doParking = "/home/parking";
   static String doParkingBindLicense = "/home/parking/bindLicense";
   static String doParkingUploadLicense = "/home/parking/uploadLicense";
+  static String doPropertyRepair = "/home/repair";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -89,6 +90,9 @@ class Routes {
         transitionType: TransitionType.native);
     router.define(doParkingUploadLicense,
         handler: uploadLicenseRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doPropertyRepair,
+        handler: repairRouteHandle,
         transitionType: TransitionType.native);
   }
 }

@@ -127,3 +127,11 @@ const parking_all_time = '共计  ';
 const parking_bill = '停车费';
 const parking_fee_amount = '- ¥ ';
 const parking_fee_text = '停车费';
+
+const repair_action_type = '报修类型';
+const repair_action_reserve_date = '预约日期';
+const repair_action_detail_date = '详细时间';
+const repair_action_select_please = '请选择';
+const repair_action_issue_desc = '请尽可能的详细描述您的报修内容';
+const repair_action_photo_hint = '附加照片';
+const repair_action_submit = '提交';

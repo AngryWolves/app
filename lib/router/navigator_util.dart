@@ -125,4 +125,7 @@ class NavigatorUtil {
   static void goUploadLicense(BuildContext context) {
     Application.router.navigateTo(context, Routes.doParkingUploadLicense);
   }
+
+  static void goRepairPage(BuildContext context) =>
+      Application.router.navigateTo(context, Routes.doPropertyRepair);
 }

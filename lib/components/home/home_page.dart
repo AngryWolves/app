@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
           NavigatorUtil.goParking(context);
           break;
         case HOME_ACTION_REPAIR:
+          NavigatorUtil.goRepairPage(context);
           break;
         case HOME_ACTION_MONITOR:
           break;

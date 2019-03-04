@@ -17,4 +17,5 @@ class ColorRes {
   static const TEXT_FIELD_BORDER = const Color(0xFF979797);
   static const BLUE_TEXT = const Color(0xFF25B8F7);
   static const PARKING_HISTORY_TIME = const Color(0xFF999999);
+  static const REPAIR_ISSUE_DETAIL_LIMIT = const Color(0xFFB3B3B3);
 }
