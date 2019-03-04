@@ -1,16 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
-import 'package:smart_park/components/personal/data/local_personal_data.dart';
-import 'package:smart_park/values/json_strings.dart';
-import 'package:smart_park/widgets/base/base_state.dart';
 
 //联系客服/
 class PersonalServiceScreen extends StatefulWidget {

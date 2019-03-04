@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widgets/common_stroke_button.dart';
+import 'package:smart_park/widget/common_stroke_button.dart';
 
 class HasBindLicenseItem extends StatelessWidget {
   @override

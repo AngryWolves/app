@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_park/widgets/base/refresh_list_view.dart';
-import 'package:smart_park/widgets/home/home_body_list_head.dart';
-import 'package:smart_park/widgets/home/home_list_notice_item.dart';
+import 'package:smart_park/components/home/home_body_list_head.dart';
+import 'package:smart_park/components/home/home_list_notice_item.dart';
+import 'package:smart_park/widget/base/refresh_list_view.dart';
 
 class HomeBodyView extends StatefulWidget {
   @override
