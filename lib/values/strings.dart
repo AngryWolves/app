@@ -75,6 +75,11 @@ const report_repair_current_text = '正在维修中';
 const report_repair_new_text = '本月新增报修';
 const report_repair_finish_text = '本月完成报修';
 
+const service_title_text = '联系客服';
+const service_floor_text = '楼层';
+const service_name_text = '层长姓名';
+const service_phone_text = '联系电话';
+
 const appointment_title_text = '我的预约';
 
 const change_password_title_text = '修改密码';

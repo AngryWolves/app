@@ -95,4 +95,11 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doReport + "?userId=$userId",
         transition: transitionType);
   }
+
+  //联系客服
+  static void goService(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doService + "?userId=$userId",
+        transition: transitionType);
+  }
 }

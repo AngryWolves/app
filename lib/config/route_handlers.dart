@@ -12,6 +12,7 @@ import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
 import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
 import 'package:smart_park/components/personal/report/report_screent.dart';
+import 'package:smart_park/components/personal/service/service_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 
 var rootHandler = new Handler(
@@ -88,8 +89,14 @@ var reportRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-      return PersonalReportScreen(userId: null);
-    });
+  return PersonalReportScreen(userId: null);
+});
+var serviceRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+  return PersonalServiceScreen(userId: null);
+});
 var changePasswordRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;

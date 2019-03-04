@@ -197,6 +197,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       break;
                     //联系客服
                     case 4:
+                      NavigatorUtil.goService(context, "");
                       break;
                     //数据报表
                     case 5:
