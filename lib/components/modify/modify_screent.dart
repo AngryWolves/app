@@ -21,6 +21,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/widget/firm_dialog.dart';
 
 class ModifyScreen extends StatefulWidget {
   ModifyScreen({@required this.userId});
@@ -35,7 +36,7 @@ class ModifyScreen extends StatefulWidget {
 
 class _ModifyScreenState extends State<ModifyScreen> {
   Future<File> _imageFile;
-
+  String firmText=modify_firm_text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,7 @@ class _ModifyScreenState extends State<ModifyScreen> {
         child: Column(
           children: <Widget>[
             _buildIconWidget(),
-            _buildContentWidget(modify_firm_tag_text, modify_firm_text, 0),
+            _buildContentWidget(modify_firm_tag_text, firmText, 0),
             _buildContentWidget(modify_change_password_tag_text,
                 modify_change_password_text, 1),
             _buildContentWidget(
@@ -114,12 +115,38 @@ class _ModifyScreenState extends State<ModifyScreen> {
   Widget _buildContentWidget(tag, content, index) {
     return GestureDetector(
       onTap: () {
+        if (index == null) {
+          return;
+        }
+        switch (index) {
+          case 0:
+            showDialog(
+                barrierDismissible: true,
+                context: context,
+                builder: (context) {
+                  return FirmDialog(
+                    onSureState: (String firm) {
+                      this.setState((){
+                        firmText=firm;
+                      });
+                    },
+                  );
+                });
+//            showDialog<Null>(
+//                context: context, //BuildContext对象
+//                barrierDismissible: true,
+//                builder: (BuildContext context) {
+//                  return new FirmDialog();
+//                });
+            break;
+        }
         print("头像点击");
       },
       child: Row(
         children: <Widget>[
           Expanded(
             child: Container(
+              color: Colors.transparent,
               height: ScreenUtil().setHeight(46),
               alignment: Alignment.centerLeft,
               child: Text(
