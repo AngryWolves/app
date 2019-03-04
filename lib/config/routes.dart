@@ -21,6 +21,7 @@ class Routes {
   static String doPersonal = "/personal";
   static String doRepairs = "/personal/repairs";
   static String doAppointment = "/personal/appointment";
+  static String doReport="/personal/report";
   static String doModify = "/modify";
   static String doChangePassword = "/modify/changePassword";
 
@@ -58,6 +59,9 @@ class Routes {
         transitionType: TransitionType.nativeModal);
     router.define(doAppointment,
         handler: appointmentRouteHandler,
+        transitionType: TransitionType.nativeModal);
+    router.define(doReport,
+        handler: reportRouteHandler,
         transitionType: TransitionType.nativeModal);
     router.define(doChangePassword,
         handler: changePasswordRouteHandler,

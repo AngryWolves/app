@@ -200,6 +200,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       break;
                     //数据报表
                     case 5:
+                      NavigatorUtil.goReport(context, "");
                       break;
                   }
                 },

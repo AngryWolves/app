@@ -88,4 +88,11 @@ class NavigatorUtil {
         context, Routes.doAppointment + "?userId=$userId",
         transition: transitionType);
   }
+
+  //我的数据报表
+  static void goReport(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doReport + "?userId=$userId",
+        transition: transitionType);
+  }
 }
