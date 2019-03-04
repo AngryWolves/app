@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_park/widgets/loading_dialog.dart';
+import 'package:smart_park/widget/loading_dialog.dart';
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
   bool _loadingIsShow = false;

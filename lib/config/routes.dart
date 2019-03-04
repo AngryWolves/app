@@ -25,6 +25,13 @@ class Routes {
   static String doService="/personal/service";
   static String doModify = "/modify";
   static String doChangePassword = "/modify/changePassword";
+  static String doHome = "/home";
+  static String doMessage = "/home/message";
+  static String doBluetooth = "/home/bluetooth";
+  static String doParking = "/home/parking";
+  static String doParkingBindLicense = "/home/parking/bindLicense";
+  static String doParkingUploadLicense = "/home/parking/uploadLicense";
+  static String doPropertyRepair = "/home/repair";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -70,5 +77,26 @@ class Routes {
     router.define(doChangePassword,
         handler: changePasswordRouteHandler,
         transitionType: TransitionType.nativeModal);
+    router.define(doHome,
+        handler: homeRouteHandle,
+        transitionType: TransitionType.nativeModal);
+    router.define(doMessage,
+        handler: messageRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doBluetooth,
+        handler: bluetoothRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doParking,
+        handler: parkingRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doParkingBindLicense,
+        handler: bindLicenseRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doParkingUploadLicense,
+        handler: uploadLicenseRouteHandle,
+        transitionType: TransitionType.native);
+    router.define(doPropertyRepair,
+        handler: repairRouteHandle,
+        transitionType: TransitionType.native);
   }
 }

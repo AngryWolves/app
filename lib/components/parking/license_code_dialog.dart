@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/pages/bind_license_page.dart';
+import 'package:smart_park/components/parking/bind_license_page.dart';
 import 'package:smart_park/values/colors.dart';
 
 class LicenseCodeDialog extends StatelessWidget {

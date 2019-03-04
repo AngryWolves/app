@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/parking/parking_my_car.dart';
+import 'package:smart_park/components/parking/vip_card.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widgets/parking/parking_my_car.dart';
-import 'package:smart_park/widgets/parking/vip_card.dart';
 
 class ParkingHead extends StatelessWidget {
   @override

@@ -102,4 +102,38 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doService + "?userId=$userId",
         transition: transitionType);
   }
+
+    /// 首页
+    static void goHome(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doHome);
+    }
+
+    /// 站内信息
+    static void goMessage(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doMessage);
+    }
+
+    /// 蓝牙门禁
+    static void goBluetooth(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doBluetooth);
+    }
+
+    /// 智慧停车
+    static void goParking(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doParking);
+    }
+
+    /// 智慧停车 -- (绑定车牌)
+    static void goBindLicense(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doParkingBindLicense);
+    }
+
+    /// 智慧停车 -- (上传行驶证)
+    static void goUploadLicense(BuildContext context) {
+        Application.router.navigateTo(context, Routes.doParkingUploadLicense);
+    }
+
+    /// 物业报修
+    static void goRepairPage(BuildContext context) =>
+            Application.router.navigateTo(context, Routes.doPropertyRepair);
 }

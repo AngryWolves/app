@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/parking/select_photo_dialog.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widgets/base/base_state.dart';
-import 'package:smart_park/widgets/common_app_bar.dart';
-import 'package:smart_park/widgets/common_gradient_button.dart';
-import 'package:smart_park/widgets/parking/select_photo_dialog.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/widget/common_gradient_button.dart';
 
 class UploadLicensePage extends StatefulWidget {
   @override
@@ -16,11 +16,7 @@ class _UploadLicensePageState extends BaseState<UploadLicensePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildCommonAppBar(home_action_parking,
-          onBack: onBack,
-          brightness: Brightness.dark,
-          color: ColorRes.BLACK_APP_BAR_BACKGROUND,
-          titleColor: Colors.white),
+      appBar: buildCommonAppbar(home_action_parking, onLeadTop: onBack),
       body: Container(
         padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 40.0),
         child: Column(

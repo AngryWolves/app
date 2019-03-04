@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smart_park/components/home/home_action_grid.dart';
+import 'package:smart_park/components/home/home_auto_slide.dart';
 import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/widgets/home/home_action_grid.dart';
-import 'package:smart_park/widgets/home/home_auto_slide.dart';
 
 class HomeBodyListHead extends StatefulWidget {
   @override
