@@ -64,6 +64,16 @@ const modify_upload_cancel_text = '取消';
 const repairs_title_text = '我的报修';
 
 const report_title_text = '数据报表';
+const report_year_title_text = '年度缴费信息';
+const report_year_depict_title_text = '（以下缴费内容均为：物业费、水电费、一卡通缴费）';
+const report_pay_count_text = '园区缴费收入合计';
+const report_no_pay_firm_count_text = '尚未缴费企业';
+const report_repair_situation_text = '报修状况';
+const report_repair_count_text = '当前报修数量';
+const report_repair_review_text = '报修审核中';
+const report_repair_current_text = '正在维修中';
+const report_repair_new_text = '本月新增报修';
+const report_repair_finish_text = '本月完成报修';
 
 const appointment_title_text = '我的预约';
 
