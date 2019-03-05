@@ -61,6 +61,9 @@ const modify_upload_camera_text = '用相机拍摄';
 const modify_upload_photo_text = '去相册选择';
 const modify_upload_cancel_text = '取消';
 
+const permissions_title_text = '人员权限';
+
+
 const repairs_title_text = '我的报修';
 
 const report_title_text = '数据报表';

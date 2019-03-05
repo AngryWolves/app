@@ -9,6 +9,7 @@ import 'package:smart_park/components/home/message_page.dart';
 import 'package:smart_park/components/login/login_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
+import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
 import 'package:smart_park/components/parking/parking_page.dart';
 import 'package:smart_park/components/parking/upload_license_page.dart';
@@ -73,9 +74,15 @@ var personalRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-  return PersonalScreen();
+  return ModifyPermissionsScreen(userId: null);
 });
 var modifyRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+  return ModifyScreen(userId: null);
+});
+var permissionsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;

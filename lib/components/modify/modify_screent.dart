@@ -137,6 +137,9 @@ class _ModifyScreenState extends State<ModifyScreen> {
           case 1:
             NavigatorUtil.goChangePassword(context);
             break;
+          case 3:
+            NavigatorUtil.goPermissions(context, "");
+            break;
         }
         print("头像点击");
       },

@@ -66,7 +66,12 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doModify + "?userId=$userId",
         transition: transitionType);
   }
-
+  //人员权限
+  static void goPermissions(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doPermissions + "?userId=$userId",
+        transition: transitionType);
+  }
   //修改密码
   static void goChangePassword(BuildContext context) {
     TransitionType transitionType = TransitionType.nativeModal;
