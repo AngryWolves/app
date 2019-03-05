@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/property_repair/select_repair_reserve_date.dart';
 import 'package:smart_park/components/property_repair/select_repair_type_dialog.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
+import 'package:smart_park/widget/common_transparent_bottom_dialog.dart';
 
 const REPAIR_ACTION_TYPE = 1;
 const REPAIR_ACTION_RESERVE_DATE = 2;
@@ -179,17 +181,24 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
       );
 
   void _handleActionTap(int action) {
+    var child;
     switch (action) {
       case REPAIR_ACTION_TYPE:
         // 保修类型
-        showDialog(context: context, builder: (_) => SelectRepairTypeDialog());
+        child = SelectRepairType();
         break;
       case REPAIR_ACTION_RESERVE_DATE:
         // 预约时间
+        child = SelectRepairReserveDate();
         break;
       case REPAIR_ACTION_DETAIL_DATE:
         // 详细时间
         break;
     }
+    showDialog(
+        context: context,
+        builder: (_) => CommonTransparentBottomDialog(
+              bottomBody: child,
+            ));
   }
 }

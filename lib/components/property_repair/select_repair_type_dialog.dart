@@ -5,45 +5,26 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
 
-class SelectRepairTypeDialog extends StatefulWidget {
+class SelectRepairType extends StatefulWidget {
   @override
-  _SelectRepairTypeDialogState createState() => _SelectRepairTypeDialogState();
+  _SelectRepairTypeState createState() => _SelectRepairTypeState();
 }
 
-class _SelectRepairTypeDialogState extends State<SelectRepairTypeDialog> {
+class _SelectRepairTypeState extends State<SelectRepairType> {
   final _typeList = ['弱电报修', '门禁报修', '空调灯具报修', '巡检保修'];
 
   int _curIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
+    return Column(
         children: <Widget>[
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          _buildBody()
+            _buildTitle(),
+            _buildTypePicker(),
+            _buildSelectAction()
         ],
-      ),
     );
   }
-
-  Widget _buildBody() => Column(
-        children: <Widget>[
-          _buildTitle(),
-          _buildTypePicker(),
-          _buildSelectAction()
-        ],
-      );
 
   Widget _buildSelectAction() => Container(
         color: ColorRes.COLOR_COMMON_APP_BAR_BACKGROUND,

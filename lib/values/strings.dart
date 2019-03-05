@@ -155,3 +155,4 @@ const repair_action_submit = '提交';
 const repair_action_select_type = '选择报修类型';
 const repair_action_has_selected_type = '已选报修类型：';
 const repair_action_select_ok = '确定';
+const repair_action_select_reserve_date = '选择预约日期';
