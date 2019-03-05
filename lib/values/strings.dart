@@ -152,3 +152,6 @@ const repair_action_select_please = '请选择';
 const repair_action_issue_desc = '请尽可能的详细描述您的报修内容';
 const repair_action_photo_hint = '附加照片';
 const repair_action_submit = '提交';
+const repair_action_select_type = '选择报修类型';
+const repair_action_has_selected_type = '已选报修类型：';
+const repair_action_select_ok = '确定';

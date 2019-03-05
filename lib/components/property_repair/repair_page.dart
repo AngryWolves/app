@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/property_repair/select_repair_type_dialog.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -138,7 +139,11 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
 
   /// 报修事件 item
   Widget _buildActionItem(String title, int action) => GestureDetector(
+        onTap: () {
+          _handleActionTap(action);
+        },
         child: Container(
+          color: Colors.transparent,
           height: ScreenUtil().setHeight(45),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,4 +177,19 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
           ),
         ),
       );
+
+  void _handleActionTap(int action) {
+    switch (action) {
+      case REPAIR_ACTION_TYPE:
+        // 保修类型
+        showDialog(context: context, builder: (_) => SelectRepairTypeDialog());
+        break;
+      case REPAIR_ACTION_RESERVE_DATE:
+        // 预约时间
+        break;
+      case REPAIR_ACTION_DETAIL_DATE:
+        // 详细时间
+        break;
+    }
+  }
 }

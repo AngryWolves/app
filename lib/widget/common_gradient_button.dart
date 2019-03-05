@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/values/colors.dart';
 
 class GradientButton extends StatelessWidget {
-  GradientButton(this.text, this.onTap);
+  GradientButton(this.text, this.onTap, {this.radius = 5.0});
 
   final String text;
   final onTap;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class GradientButton extends StatelessWidget {
         alignment: Alignment.center,
         height: ScreenUtil().setHeight(50),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(radius),
           gradient: LinearGradient(
               colors: [ColorRes.BUTTON_START_COLOR, ColorRes.BUTTON_END_COLOR]),
         ),
