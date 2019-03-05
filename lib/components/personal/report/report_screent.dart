@@ -23,10 +23,6 @@ class _PersonalReportScreenState extends BaseState<PersonalReportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 236, 236, 1),
-      appBar: buildCommonAppbar(report_title_text, onLeadTop: () {
-        InputManageUtil.shutdownInputKeyboard();
-        Navigator.pop(context);
-      }),
       body: Column(
         children: <Widget>[
           _buildTopWidget(),
@@ -60,7 +56,94 @@ class _PersonalReportScreenState extends BaseState<PersonalReportScreen> {
                 height: ScreenUtil().setHeight(190),
                 width: ScreenUtil().setWidth(375),
                 color: Colors.black,
-              ))
+              )),
+          Container(
+              height: ScreenUtil().setHeight(70),
+              width: ScreenUtil().setWidth(375),
+              child: Stack(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      color: Colors.transparent,
+                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(22)),
+                      height: ScreenUtil().setHeight(70),
+                      width: ScreenUtil().setWidth(48),
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 15.0,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(22)),
+                    height: ScreenUtil().setHeight(70),
+                    child: Center(
+                      child: Text(
+                        report_title_text,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenUtil().setSp(18)),
+                      ),
+                    ),
+                  )
+                ],
+              )),
+          Container(
+            margin: EdgeInsets.only(top: ScreenUtil().setHeight(70)),
+            height: ScreenUtil().setHeight(120),
+            alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  height: ScreenUtil().setHeight(120),
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "543",
+                        style: TextStyle(
+                            color: Color.fromRGBO(95, 195, 243, 1),
+                            fontSize: ScreenUtil().setSp(30)),
+                      ),
+                      Text(report_check_firm_text,
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: ScreenUtil().setSp(9)))
+                    ],
+                  ),
+                ),
+                Container(
+                  width: ScreenUtil().setWidth(1),
+                  height: ScreenUtil().setHeight(26),
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '2020',
+                      style: TextStyle(
+                          color: Color.fromRGBO(95, 195, 243, 1),
+                          fontSize: ScreenUtil().setSp(30)),
+                    ),
+                    Text(
+                      report_garden_text,
+                      style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontSize: ScreenUtil().setSp(9)),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

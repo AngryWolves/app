@@ -64,6 +64,8 @@ const modify_upload_cancel_text = '取消';
 const repairs_title_text = '我的报修';
 
 const report_title_text = '数据报表';
+const report_check_firm_text = '入驻企业(家)';
+const report_garden_text = '园区人数(人)';
 const report_year_title_text = '年度缴费信息';
 const report_year_depict_title_text = '（以下缴费内容均为：物业费、水电费、一卡通缴费）';
 const report_pay_count_text = '园区缴费收入合计';
