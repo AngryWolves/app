@@ -17,7 +17,7 @@ class FirmDialog extends StatefulWidget {
   FirmDialog({Key key, this.groupValue = 1, this.onSureState})
       : super(key: key);
   int groupValue;
-  Function onSureState;
+  final Function onSureState;
 
   @override
   State<StatefulWidget> createState() {
