@@ -5,6 +5,7 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/widget/common_gradient_button.dart';
 
 const REPAIR_ACTION_TYPE = 1;
 const REPAIR_ACTION_RESERVE_DATE = 2;
@@ -25,12 +26,69 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
       body: Container(
         color: ColorRes.APP_BACKGROUND,
         child: Column(
-          children: <Widget>[_buildRepairAction(), _buildIssueDesc()],
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  _buildRepairAction(),
+                  _buildIssueDesc(),
+                  _buildAppendPhoto()
+                ],
+              ),
+            ),
+            Container(
+              margin:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 40),
+              child: GradientButton(repair_action_submit, () {}),
+            )
+          ],
         ),
       ),
     );
   }
 
+  ///
+  /// 附加照片
+  ///
+  Widget _buildAppendPhoto() => Container(
+        margin: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
+        height: ScreenUtil().setHeight(107),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            _buildSelectPhotoItem(),
+            Container(
+              alignment: Alignment.centerRight,
+              child: Text('$repair_action_photo_hint (0/5)',
+                  style: TextStyle(
+                      color: ColorRes.REPAIR_ISSUE_DETAIL_LIMIT,
+                      fontSize: ScreenUtil().setSp(12))),
+            )
+          ],
+        ),
+      );
+
+  ///
+  /// 选择图片框
+  ///
+  Widget _buildSelectPhotoItem() {
+    return Row(
+      children: <Widget>[
+        GestureDetector(
+          child: Image.asset(
+            'images/ic_repair_append_photo.png',
+            width: ScreenUtil().setWidth(60),
+            height: ScreenUtil().setWidth(60),
+          ),
+        )
+      ],
+    );
+  }
+
+  ///
+  /// 报修内容描述
+  ///
   Widget _buildIssueDesc() => Container(
         padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.only(top: 10.0),
@@ -40,6 +98,7 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CupertinoTextField(
+              placeholder: repair_action_issue_desc,
               maxLength: 200,
               maxLines: 5,
               decoration: BoxDecoration(border: Border()),
@@ -47,7 +106,7 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
             Container(
               alignment: Alignment.centerRight,
               child: Text(
-                '($length/200',
+                '($length/200)',
                 style: TextStyle(
                     color: ColorRes.REPAIR_ISSUE_DETAIL_LIMIT,
                     fontSize: ScreenUtil().setSp(12)),
