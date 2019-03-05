@@ -62,7 +62,19 @@ const modify_upload_photo_text = '去相册选择';
 const modify_upload_cancel_text = '取消';
 
 const permissions_title_text = '人员权限';
-
+const permissions_modify_title_text = '修改命名';
+const permissions_firm_title_text = '公司权限';
+const permissions_firm_info1_text = '编辑公司信息';
+const permissions_firm_info2_text = '编辑权限';
+const permissions_firm_info3_text = '企业缴费';
+const permissions_firm_info4_text = '编辑门禁权限';
+const permissions_guard_title_text = '门禁权限';
+const permissions_guard_info1_text = '101-1';
+const permissions_guard_info2_text = '101-2';
+const permissions_guard_info3_text = '101-3';
+const permissions_guard_info4_text = '101-4';
+const permissions_cancel_text = '取消';
+const permissions_determine_text = '确定';
 
 const repairs_title_text = '我的报修';
 
