@@ -4,6 +4,7 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 //数据报表/
 class PersonalReportScreen extends StatefulWidget {
@@ -41,7 +42,27 @@ class _PersonalReportScreenState extends BaseState<PersonalReportScreen> {
   Widget _buildTopWidget() {
     return Container(
       height: ScreenUtil().setHeight(190),
-      color: Color.fromRGBO(0, 0, 0, 51),
+      color: Colors.white,
+      child: Stack(
+        children: <Widget>[
+          CachedNetworkImage(
+            imageUrl:
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551721293754&di=bb6ee09488026bb275f328db1bdf5906&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F5882b2b7d0a20cf44a7720f27d094b36acaf993c.jpg",
+            placeholder: (context, url) => new CircularProgressIndicator(),
+            errorWidget: (context, url, error) => new Icon(Icons.error),
+            height: ScreenUtil().setHeight(190),
+            width: ScreenUtil().setWidth(375),
+            fit: BoxFit.fill,
+          ),
+          Opacity(
+              opacity: 0.8,
+              child: Container(
+                height: ScreenUtil().setHeight(190),
+                width: ScreenUtil().setWidth(375),
+                color: Colors.black,
+              ))
+        ],
+      ),
     );
   }
 
