@@ -21,11 +21,12 @@ class Routes {
   static String doPersonal = "/personal";
   static String doRepairs = "/personal/repairs";
   static String doAppointment = "/personal/appointment";
-  static String doReport="/personal/report";
-  static String doService="/personal/service";
+  static String doReport = "/personal/report";
+  static String doService = "/personal/service";
   static String doModify = "/modify";
   static String doPermissions = "/modify/permissions";
   static String doChangePassword = "/modify/changePassword";
+  static String doChangePasswordOne = "/modify/changePassword/one";
   static String doHome = "/home";
   static String doMessage = "/home/message";
   static String doBluetooth = "/home/bluetooth";
@@ -81,26 +82,23 @@ class Routes {
     router.define(doChangePassword,
         handler: changePasswordRouteHandler,
         transitionType: TransitionType.nativeModal);
-    router.define(doHome,
-        handler: homeRouteHandle,
+    router.define(doChangePasswordOne,
+        handler: changePasswordOneRouteHandler,
         transitionType: TransitionType.nativeModal);
+    router.define(doHome,
+        handler: homeRouteHandle, transitionType: TransitionType.nativeModal);
     router.define(doMessage,
-        handler: messageRouteHandle,
-        transitionType: TransitionType.native);
+        handler: messageRouteHandle, transitionType: TransitionType.native);
     router.define(doBluetooth,
-        handler: bluetoothRouteHandle,
-        transitionType: TransitionType.native);
+        handler: bluetoothRouteHandle, transitionType: TransitionType.native);
     router.define(doParking,
-        handler: parkingRouteHandle,
-        transitionType: TransitionType.native);
+        handler: parkingRouteHandle, transitionType: TransitionType.native);
     router.define(doParkingBindLicense,
-        handler: bindLicenseRouteHandle,
-        transitionType: TransitionType.native);
+        handler: bindLicenseRouteHandle, transitionType: TransitionType.native);
     router.define(doParkingUploadLicense,
         handler: uploadLicenseRouteHandle,
         transitionType: TransitionType.native);
     router.define(doPropertyRepair,
-        handler: repairRouteHandle,
-        transitionType: TransitionType.native);
+        handler: repairRouteHandle, transitionType: TransitionType.native);
   }
 }

@@ -100,6 +100,12 @@ const service_phone_text = '联系电话';
 const appointment_title_text = '我的预约';
 
 const change_password_title_text = '修改密码';
+const change_password_code_text = '输入验证码';
+const change_password_mobile_country_text = '+86 ';
+const change_password_code_send_text = ' 已发送验证码 ';
+const change_password_code_again_send_text = ' 重新发送 ';
+const change_password_code_time_text = 's ';
+const change_password_code_check_text = '下一步';
 const change_password_tag_text = '设置密码';
 const change_password_hint = '请输入你要修改的密码';
 const change_password_check_text = '完成';

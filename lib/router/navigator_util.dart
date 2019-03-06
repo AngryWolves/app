@@ -66,12 +66,22 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doModify + "?userId=$userId",
         transition: transitionType);
   }
+
   //人员权限
   static void goPermissions(BuildContext context, String userId) {
     TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(context, Routes.doPermissions + "?userId=$userId",
+    Application.router.navigateTo(
+        context, Routes.doPermissions + "?userId=$userId",
         transition: transitionType);
   }
+
+  //修改密码(第一步获取code)
+  static void goChangePasswordOne(BuildContext context) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doChangePasswordOne,
+        transition: transitionType);
+  }
+
   //修改密码
   static void goChangePassword(BuildContext context) {
     TransitionType transitionType = TransitionType.nativeModal;
@@ -108,37 +118,37 @@ class NavigatorUtil {
         transition: transitionType);
   }
 
-    /// 首页
-    static void goHome(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doHome);
-    }
+  /// 首页
+  static void goHome(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doHome);
+  }
 
-    /// 站内信息
-    static void goMessage(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doMessage);
-    }
+  /// 站内信息
+  static void goMessage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doMessage);
+  }
 
-    /// 蓝牙门禁
-    static void goBluetooth(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doBluetooth);
-    }
+  /// 蓝牙门禁
+  static void goBluetooth(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doBluetooth);
+  }
 
-    /// 智慧停车
-    static void goParking(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doParking);
-    }
+  /// 智慧停车
+  static void goParking(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParking);
+  }
 
-    /// 智慧停车 -- (绑定车牌)
-    static void goBindLicense(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doParkingBindLicense);
-    }
+  /// 智慧停车 -- (绑定车牌)
+  static void goBindLicense(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParkingBindLicense);
+  }
 
-    /// 智慧停车 -- (上传行驶证)
-    static void goUploadLicense(BuildContext context) {
-        Application.router.navigateTo(context, Routes.doParkingUploadLicense);
-    }
+  /// 智慧停车 -- (上传行驶证)
+  static void goUploadLicense(BuildContext context) {
+    Application.router.navigateTo(context, Routes.doParkingUploadLicense);
+  }
 
-    /// 物业报修
-    static void goRepairPage(BuildContext context) =>
-            Application.router.navigateTo(context, Routes.doPropertyRepair);
+  /// 物业报修
+  static void goRepairPage(BuildContext context) =>
+      Application.router.navigateTo(context, Routes.doPropertyRepair);
 }

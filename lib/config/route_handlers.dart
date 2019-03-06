@@ -23,6 +23,7 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -118,7 +119,12 @@ var changePasswordRouteHandler = new Handler(
 //      String code = params["code"]?.first;
   return PersonalChangePasswordScreen();
 });
-
+var changePasswordOneRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+  return ModifyChangeCodePassword(mobile: mobile);
+});
 var homeRouteHandle = Handler(handlerFunc: (_, params) => HomePage());
 
 var messageRouteHandle = Handler(handlerFunc: (_, params) => MessagePage());
