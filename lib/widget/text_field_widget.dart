@@ -58,7 +58,11 @@ class _TextFieldState extends State<TextFieldWidget> {
               //内容提交(按回车)的回调
 //                    print('submit');
             },
-            controller: TextEditingController(text: widget.textController.text),
+            controller: TextEditingController.fromValue(TextEditingValue(
+                text: widget.textController.text,
+                selection: TextSelection.fromPosition(TextPosition(
+                    affinity: TextAffinity.downstream,
+                    offset: widget.textController.text.length)))),
             keyboardType: widget.isMobile
                 ? TextInputType.phone
                 : TextInputType.emailAddress,
@@ -71,7 +75,9 @@ class _TextFieldState extends State<TextFieldWidget> {
 //          maxLength: 11,
             //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
             //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
-            inputFormatters: [LengthLimitingTextInputFormatter(widget.maxLength)],
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(widget.maxLength)
+            ],
             maxLines: 1,
 
             //最大行数
