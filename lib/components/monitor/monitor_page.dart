@@ -38,7 +38,17 @@ class _MonitorPageState extends BaseState<MonitorPage>
                     style: TextStyle(color: ColorRes.GERY_TEXT, fontSize: 12.0),
                   ),
                 );
-              }).toList())
+              }).toList()),
+          Expanded(
+            child: TabBarView(
+                    controller: _tabController,
+                    children: _tabs.map((data) {
+                      return Container(
+                        color: ColorRes.APP_BACKGROUND,
+                        child: Text(data),
+                      );
+                    }).toList()),
+          )
         ],
       ),
     );

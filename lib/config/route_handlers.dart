@@ -7,23 +7,22 @@ import 'package:smart_park/components/forget/forget_screent.dart';
 import 'package:smart_park/components/home/home_page.dart';
 import 'package:smart_park/components/home/message_page.dart';
 import 'package:smart_park/components/login/login_screent.dart';
+import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
+import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
 import 'package:smart_park/components/parking/parking_page.dart';
 import 'package:smart_park/components/parking/upload_license_page.dart';
 import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
-import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
 import 'package:smart_park/components/personal/report/report_screent.dart';
 import 'package:smart_park/components/personal/service/service_screent.dart';
-import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
-import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -142,3 +141,5 @@ var uploadLicenseRouteHandle =
 
 var repairRouteHandle =
     Handler(handlerFunc: (_, params) => PropertyRepairPage());
+
+var monitorRouteHandle = Handler(handlerFunc: (_, params) => MonitorPage());
