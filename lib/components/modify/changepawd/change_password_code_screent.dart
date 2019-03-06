@@ -46,40 +46,40 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
   final FocusNode _focusNode3 = FocusNode();
   final TextEditingController _codeController4 = new TextEditingController();
   final FocusNode _focusNode4 = FocusNode();
-  bool autofocus1=false,autofocus2=false,autofocus3=false,autofocus4=false;
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
   bool _isNextEnable = false;
+
   @override
   void initState() {
     super.initState();
     _focusNode1.addListener(() {
-      print("=data==="+_focusNode1.hasFocus.toString());
-//      _focusNode1.unfocus();
       if (!_focusNode1.hasFocus) {
         // TextField has lost focus
+        setState(() {});
       }
     });
     _focusNode2.addListener(() {
-      print("=data==="+_focusNode1.hasFocus.toString());
       if (!_focusNode2.hasFocus) {
         // TextField has lost focus
+        setState(() {});
       }
     });
     _focusNode3.addListener(() {
-      print("=data==="+_focusNode1.hasFocus.toString());
       if (!_focusNode3.hasFocus) {
         // TextField has lost focus
+        setState(() {});
       }
     });
     _focusNode4.addListener(() {
-      print("=data==="+_focusNode1.hasFocus.toString());
       if (!_focusNode4.hasFocus) {
         // TextField has lost focus
+        setState(() {});
       }
     });
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -87,6 +87,10 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
     _codeController2?.dispose();
     _codeController3?.dispose();
     _codeController4?.dispose();
+    _focusNode1?.dispose();
+    _focusNode2?.dispose();
+    _focusNode3?.dispose();
+    _focusNode4?.dispose();
     _timer?.cancel();
   }
 
@@ -201,16 +205,17 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildEdWidget(_codeController1,_focusNode1,autofocus1),
-          _buildEdWidget(_codeController2,_focusNode2,autofocus2),
-          _buildEdWidget(_codeController3,_focusNode3,autofocus3),
-          _buildEdWidget(_codeController4,_focusNode4,autofocus4),
+          _buildEdWidget(_codeController1, _focusNode1, 0),
+          _buildEdWidget(_codeController2, _focusNode2, 1),
+          _buildEdWidget(_codeController3, _focusNode3, 2),
+          _buildEdWidget(_codeController4, _focusNode4, 3),
         ],
       ),
     );
   }
 
-  Widget _buildEdWidget(TextEditingController controller,FocusNode _focusNode,bool autofocus) {
+  Widget _buildEdWidget(
+      TextEditingController controller, FocusNode _focusNode, index) {
     return Container(
       //46, 49, 56, 1
       width: ScreenUtil().setWidth(50),
@@ -218,7 +223,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
       decoration: BoxDecoration(
         border: Border.all(
             width: 1.0,
-            color: ObjectUtil.isEmptyString(controller.text)
+            color: !_focusNode.hasFocus
                 ? Color.fromRGBO(46, 49, 56, 0.3)
                 : Color.fromRGBO(46, 49, 56, 1)),
         color: Colors.white,
@@ -235,11 +240,16 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         onChanged: (text) {
           controller.text = text;
           setState(() {
-            if(!ObjectUtil.isEmptyString(_codeController1.text)){
-              autofocus1=false;
-              autofocus2=true;
-              autofocus3=false;
-              autofocus4=false;
+            if (!ObjectUtil.isEmptyString(controller.text)) {
+              if (index == 0) {
+                FocusScope.of(context).requestFocus(_focusNode2);
+              } else if (index == 1) {
+                FocusScope.of(context).requestFocus(_focusNode3);
+              } else if (index == 2) {
+                FocusScope.of(context).requestFocus(_focusNode4);
+              } else if (index == 3) {
+//                FocusScope.of(context).requestFocus(_focusNode1);
+              }
             }
             if (!ObjectUtil.isEmptyString(_codeController1.text) &&
                 !ObjectUtil.isEmptyString(_codeController2.text) &&
@@ -256,7 +266,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         focusNode: _focusNode,
         onSubmitted: (text) {
           //内容提交(按回车)的回调
-//                    print('submit');
+          print('submit' + text);
         },
         controller: TextEditingController.fromValue(TextEditingValue(
             text: controller.text,
@@ -278,7 +288,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         //最大行数
         autocorrect: false,
         //是否自动更正
-        autofocus: _focusNode3.hasFocus,
+        autofocus: false,
         //是否自动对焦
         obscureText: false,
         //是否是密码
