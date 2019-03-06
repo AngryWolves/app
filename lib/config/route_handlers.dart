@@ -11,6 +11,7 @@ import 'package:smart_park/components/modify/changepawd/change_password_code_scr
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
+import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
 import 'package:smart_park/components/parking/parking_page.dart';
