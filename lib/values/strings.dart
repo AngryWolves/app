@@ -52,6 +52,7 @@ const modify_icon_text = "头像";
 const modify_firm_tag_text = "企业认证信息";
 const modify_firm_text = "园区十佳优秀企业";
 const modify_change_password_tag_text = "修改密码";
+const modify_change_mail_tag_text = "修改邮箱";
 const modify_change_password_text = "去修改";
 const modify_firm_logo_tag_text = "企业LOGO";
 const modify_firm_logo_text = "去上传";
@@ -109,6 +110,9 @@ const change_password_code_check_text = '下一步';
 const change_password_tag_text = '设置密码';
 const change_password_hint = '请输入你要修改的密码';
 const change_password_check_text = '完成';
+
+const change_mail_title_text = '修改邮箱';
+const change_mail_hint = '输入新的邮箱';
 
 const home_bar_title = '智慧园区';
 const home_action_bluetooth_control = '蓝牙门禁';

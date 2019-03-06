@@ -56,8 +56,10 @@ class _ModifyScreenState extends State<ModifyScreen> {
             _buildContentWidget(modify_change_password_tag_text,
                 modify_change_password_text, 1),
             _buildContentWidget(
-                modify_firm_logo_tag_text, modify_firm_logo_text, 2),
-            _buildContentWidget(modify_power_tag_text, modify_power_text, 3)
+                modify_change_mail_tag_text, modify_change_password_text, 2),
+            _buildContentWidget(
+                modify_firm_logo_tag_text, modify_firm_logo_text, 3),
+            _buildContentWidget(modify_power_tag_text, modify_power_text, 4)
           ],
         ),
       ),
@@ -135,10 +137,15 @@ class _ModifyScreenState extends State<ModifyScreen> {
                 });
             break;
           case 1:
-            NavigatorUtil.goChangePasswordOne(context,"18602987661");
+            NavigatorUtil.goChangePasswordOne(context, "18602987661");
+            break;
+          case 2:
+            NavigatorUtil.goChangeMail(context);
             break;
           case 3:
             NavigatorUtil.goPermissions(context, "");
+            break;
+          case 4:
             break;
         }
         print("头像点击");

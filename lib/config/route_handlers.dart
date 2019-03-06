@@ -11,6 +11,7 @@ import 'package:smart_park/components/modify/changepawd/change_password_code_scr
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
+import 'package:smart_park/components/modify/changemail/change_mail_screent.dart';
 import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
@@ -87,7 +88,7 @@ var permissionsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-  return ModifyScreen(userId: null);
+  return ModifyPermissionsScreen(userId: null);
 });
 var repairsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -118,6 +119,12 @@ var changePasswordRouteHandler = new Handler(
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
   return PersonalChangePasswordScreen();
+});
+var changeMailRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+  return ModifyChangeMailScreen();
 });
 var changePasswordOneRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {

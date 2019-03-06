@@ -89,6 +89,12 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doChangePassword,
         transition: transitionType);
   }
+//修改邮箱
+  static void goChangeMail(BuildContext context) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doChangeMail,
+        transition: transitionType);
+  }
 
   //我的报修
   static void goRepairs(BuildContext context, String userId) {
