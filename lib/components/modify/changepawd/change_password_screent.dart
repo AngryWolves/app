@@ -10,7 +10,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 
-//修改密码 70  60/
+//手机号修改密码第二步/
 class PersonalChangePasswordScreen extends StatefulWidget {
   PersonalChangePasswordScreen();
 

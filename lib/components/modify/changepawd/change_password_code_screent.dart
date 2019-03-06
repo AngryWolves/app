@@ -24,7 +24,7 @@ import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:flutter/services.dart';
 
-//修改密码第一步204, 204, 204, 1/
+//手机号修改密码第一步204, 204, 204, 1/
 
 class ModifyChangeCodePassword extends StatefulWidget {
   ModifyChangeCodePassword({@required this.mobile});
@@ -33,7 +33,7 @@ class ModifyChangeCodePassword extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return null;
+    return _ModifyChangeCodePassword();
   }
 }
 
@@ -46,6 +46,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
+  bool _isNextEnable = false;
 
   @override
   void dispose() {
@@ -75,7 +76,8 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
             children: <Widget>[
               _buildCodeTitleWidget(),
               _buildCodeSubTitleWidget(),
-              _buildEdParentWidget()
+              _buildEdParentWidget(),
+              _buildNextWidget()
             ],
           ),
         ),
@@ -179,10 +181,11 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
       //46, 49, 56, 1
       width: ScreenUtil().setWidth(50),
       height: ScreenUtil().setHeight(50),
-      decoration: ShapeDecoration(
-          color: Color.fromRGBO(46, 49, 56, 1),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+      decoration: new BoxDecoration(
+        border: Border.all(width: 1.0, color: Color.fromRGBO(46, 49, 56, 1)),
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
       alignment: Alignment.center,
       child: TextField(
         decoration: InputDecoration(
@@ -193,6 +196,16 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
                 fontSize: ScreenUtil().setSp(15))),
         onChanged: (text) {
           controller.text = text;
+          setState(() {
+            if (!ObjectUtil.isEmptyString(_codeController1.text) &&
+                !ObjectUtil.isEmptyString(_codeController2.text) &&
+                !ObjectUtil.isEmptyString(_codeController3.text) &&
+                !ObjectUtil.isEmptyString(_codeController4.text)) {
+              _isNextEnable = true;
+            } else {
+              _isNextEnable = false;
+            }
+          });
           //内容改变的回调
 //                    print('change');
         },
@@ -221,8 +234,50 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         //是否自动对焦
         obscureText: false,
         //是否是密码
-        textAlign: TextAlign.left,
+        textAlign: TextAlign.center,
       ),
     );
+  }
+
+  Widget _buildNextWidget() {
+    return GestureDetector(
+        onTap: () {
+          if (!_isNextEnable) {
+            return;
+          }
+          String code1 = _codeController1.text;
+          String code2 = _codeController2.text;
+          String code3 = _codeController3.text;
+          String code4 = _codeController4.text;
+          if (ObjectUtil.isEmptyString(code1) ||
+              ObjectUtil.isEmptyString(code2) ||
+              ObjectUtil.isEmptyString(code3) ||
+              ObjectUtil.isEmptyString(code4)) {
+            return;
+          }
+          NavigatorUtil.goChangePassword(context);
+          print("下一步点击");
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: ScreenUtil().setHeight(60)),
+          height: ScreenUtil().setHeight(45),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              gradient: _isNextEnable
+                  ? LinearGradient(colors: [
+                      Color.fromRGBO(95, 231, 243, 1.0),
+                      Color.fromRGBO(95, 195, 243, 1.0),
+                      Color.fromRGBO(95, 195, 243, 1.0)
+                    ], begin: Alignment.topLeft, end: Alignment.topRight)
+                  : LinearGradient(colors: [
+                      Color.fromRGBO(204, 204, 204, 1),
+                      Color.fromRGBO(204, 204, 204, 1),
+                      Color.fromRGBO(204, 204, 204, 1)
+                    ], begin: Alignment.topLeft, end: Alignment.topRight)),
+          child: Text(change_password_check_text,
+              style: TextStyle(
+                  color: ColorRes.WHITE, fontSize: ScreenUtil().setSp(16))),
+        ));
   }
 }

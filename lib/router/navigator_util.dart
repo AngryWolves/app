@@ -76,9 +76,10 @@ class NavigatorUtil {
   }
 
   //修改密码(第一步获取code)
-  static void goChangePasswordOne(BuildContext context) {
+  static void goChangePasswordOne(BuildContext context, String mobile) {
     TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(context, Routes.doChangePasswordOne,
+    Application.router.navigateTo(
+        context, Routes.doChangePasswordOne + "?mobile=$mobile",
         transition: transitionType);
   }
 
