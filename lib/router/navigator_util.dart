@@ -152,4 +152,8 @@ class NavigatorUtil {
   /// 物业报修
   static void goRepairPage(BuildContext context) =>
       Application.router.navigateTo(context, Routes.doPropertyRepair);
+
+  /// 摄像监控
+  static void goMonitorPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doMonitor);
 }
