@@ -135,7 +135,7 @@ class _ModifyScreenState extends State<ModifyScreen> {
                 });
             break;
           case 1:
-            NavigatorUtil.goChangePassword(context);
+            NavigatorUtil.goChangePasswordOne(context,"18602987661");
             break;
           case 3:
             NavigatorUtil.goPermissions(context, "");
