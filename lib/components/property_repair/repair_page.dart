@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/property_repair/reserve_succeed_dialog.dart';
 import 'package:smart_park/components/property_repair/select_repair_reserve_date.dart';
 import 'package:smart_park/components/property_repair/select_repair_type_dialog.dart';
 import 'package:smart_park/values/colors.dart';
@@ -42,12 +43,19 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
             Container(
               margin:
                   const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 40),
-              child: GradientButton(repair_action_submit, () {}),
+              child: GradientButton(repair_action_submit, _handleSubmitTap),
             )
           ],
         ),
       ),
     );
+  }
+
+  ///
+  /// 提交
+  ///
+  void _handleSubmitTap() {
+    showDialog(context: context, builder: (ctx) => ReserveSucceedDialog());
   }
 
   ///

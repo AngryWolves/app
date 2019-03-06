@@ -38,6 +38,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: buildHomeAppBar(onTap: () {
         NavigatorUtil.goMessage(context);
+      }, onPersonalTap: () {
+        NavigatorUtil.goPersona(context, '123');
       }),
       body: HomeBodyView(),
     );

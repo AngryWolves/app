@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
-Widget buildHomeAppBar({onTap}) => AppBar(
+Widget buildHomeAppBar({onTap, onPersonalTap}) => AppBar(
       brightness: Brightness.light,
       elevation: 0.0,
       title: Text(
@@ -12,6 +12,7 @@ Widget buildHomeAppBar({onTap}) => AppBar(
       ),
       backgroundColor: Colors.white,
       leading: GestureDetector(
+          onTap: onPersonalTap,
         child: Icon(
           Icons.account_circle,
           color: ColorRes.GERY_TEXT,
