@@ -75,7 +75,7 @@ var personalRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-  return ModifyPermissionsScreen(userId: null);
+  return PersonalScreen();
 });
 var modifyRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
