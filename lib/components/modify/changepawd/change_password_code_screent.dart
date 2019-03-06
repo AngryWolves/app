@@ -39,15 +39,47 @@ class ModifyChangeCodePassword extends StatefulWidget {
 
 class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
   final TextEditingController _codeController1 = new TextEditingController();
+  final FocusNode _focusNode1 = FocusNode();
   final TextEditingController _codeController2 = new TextEditingController();
+  final FocusNode _focusNode2 = FocusNode();
   final TextEditingController _codeController3 = new TextEditingController();
+  final FocusNode _focusNode3 = FocusNode();
   final TextEditingController _codeController4 = new TextEditingController();
-
+  final FocusNode _focusNode4 = FocusNode();
+  bool autofocus1=false,autofocus2=false,autofocus3=false,autofocus4=false;
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
   bool _isNextEnable = false;
-
+  @override
+  void initState() {
+    super.initState();
+    _focusNode1.addListener(() {
+      print("=data==="+_focusNode1.hasFocus.toString());
+//      _focusNode1.unfocus();
+      if (!_focusNode1.hasFocus) {
+        // TextField has lost focus
+      }
+    });
+    _focusNode2.addListener(() {
+      print("=data==="+_focusNode1.hasFocus.toString());
+      if (!_focusNode2.hasFocus) {
+        // TextField has lost focus
+      }
+    });
+    _focusNode3.addListener(() {
+      print("=data==="+_focusNode1.hasFocus.toString());
+      if (!_focusNode3.hasFocus) {
+        // TextField has lost focus
+      }
+    });
+    _focusNode4.addListener(() {
+      print("=data==="+_focusNode1.hasFocus.toString());
+      if (!_focusNode4.hasFocus) {
+        // TextField has lost focus
+      }
+    });
+  }
   @override
   void dispose() {
     super.dispose();
@@ -73,6 +105,8 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
               right: ScreenUtil().setWidth(30),
               top: ScreenUtil().setHeight(30)),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildCodeTitleWidget(),
               _buildCodeSubTitleWidget(),
@@ -165,24 +199,28 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
     return Container(
       height: ScreenUtil().setHeight(133),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildEdWidget(_codeController1),
-          _buildEdWidget(_codeController2),
-          _buildEdWidget(_codeController3),
-          _buildEdWidget(_codeController4),
+          _buildEdWidget(_codeController1,_focusNode1,autofocus1),
+          _buildEdWidget(_codeController2,_focusNode2,autofocus2),
+          _buildEdWidget(_codeController3,_focusNode3,autofocus3),
+          _buildEdWidget(_codeController4,_focusNode4,autofocus4),
         ],
       ),
     );
   }
 
-  Widget _buildEdWidget(TextEditingController controller) {
+  Widget _buildEdWidget(TextEditingController controller,FocusNode _focusNode,bool autofocus) {
     return Container(
       //46, 49, 56, 1
       width: ScreenUtil().setWidth(50),
       height: ScreenUtil().setHeight(50),
-      decoration: new BoxDecoration(
-        border: Border.all(width: 1.0, color: Color.fromRGBO(46, 49, 56, 1)),
+      decoration: BoxDecoration(
+        border: Border.all(
+            width: 1.0,
+            color: ObjectUtil.isEmptyString(controller.text)
+                ? Color.fromRGBO(46, 49, 56, 0.3)
+                : Color.fromRGBO(46, 49, 56, 1)),
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
@@ -197,6 +235,12 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         onChanged: (text) {
           controller.text = text;
           setState(() {
+            if(!ObjectUtil.isEmptyString(_codeController1.text)){
+              autofocus1=false;
+              autofocus2=true;
+              autofocus3=false;
+              autofocus4=false;
+            }
             if (!ObjectUtil.isEmptyString(_codeController1.text) &&
                 !ObjectUtil.isEmptyString(_codeController2.text) &&
                 !ObjectUtil.isEmptyString(_codeController3.text) &&
@@ -209,11 +253,16 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
           //内容改变的回调
 //                    print('change');
         },
+        focusNode: _focusNode,
         onSubmitted: (text) {
           //内容提交(按回车)的回调
 //                    print('submit');
         },
-        controller: TextEditingController(text: controller.text),
+        controller: TextEditingController.fromValue(TextEditingValue(
+            text: controller.text,
+            selection: TextSelection.fromPosition(TextPosition(
+                affinity: TextAffinity.downstream,
+                offset: controller.text.length)))),
         keyboardType: TextInputType.phone,
         //键盘类型
         textInputAction: TextInputAction.none,
@@ -226,11 +275,10 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
         inputFormatters: [LengthLimitingTextInputFormatter(1)],
         maxLines: 1,
-
         //最大行数
         autocorrect: false,
         //是否自动更正
-        autofocus: false,
+        autofocus: _focusNode3.hasFocus,
         //是否自动对焦
         obscureText: false,
         //是否是密码
@@ -275,7 +323,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
                       Color.fromRGBO(204, 204, 204, 1),
                       Color.fromRGBO(204, 204, 204, 1)
                     ], begin: Alignment.topLeft, end: Alignment.topRight)),
-          child: Text(change_password_check_text,
+          child: Text(change_password_code_check_text,
               style: TextStyle(
                   color: ColorRes.WHITE, fontSize: ScreenUtil().setSp(16))),
         ));
