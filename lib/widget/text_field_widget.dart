@@ -8,7 +8,7 @@ class TextFieldWidget extends StatefulWidget {
       {this.isMobile = false,
       this.maxLength = 11,
       this.lineColor = ColorRes.COLOR_LOGIN_BORDER_SIDE,
-      this.onChanged});
+      this.onChanged,this.obscureText=false});
 
   final hint;
   final isMobile;
@@ -16,7 +16,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextEditingController textController;
   final Color lineColor;
   final Function onChanged;
-
+  final bool obscureText;
   @override
   State<StatefulWidget> createState() {
     return _TextFieldState();
@@ -93,7 +93,7 @@ class _TextFieldState extends State<TextFieldWidget> {
             //是否自动更正
             autofocus: false,
             //是否自动对焦
-            obscureText: !widget.isMobile,
+            obscureText: widget.obscureText,
             //是否是密码
             textAlign: TextAlign.left,
           ),

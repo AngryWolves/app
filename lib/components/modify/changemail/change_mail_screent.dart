@@ -50,20 +50,27 @@ class _modifyChangeMailScreenState extends State<ModifyChangeMailScreen> {
                       fontSize: ScreenUtil().setSp(30)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(70)),
+                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(40)),
                   child: TextFieldWidget(
                     change_mail_hint,
                     _changePasswordTextController,
-                    isMobile: false,
+                    maxLength: 50,
+                    obscureText: false,
+                    lineColor: Color.fromRGBO(46, 49, 56, 1),
+                    onChanged: (text) {
+                      setState(() {
+                        _isCheckMail = RegexUtil.isEmail(text);
+                      });
+                    },
                   ),
                 ),
                 GestureDetector(
                     onTap: () {
-                      String password = _changePasswordTextController.text;
-                      if (ObjectUtil.isEmptyString(password)) {
+                      InputManageUtil.shutdownInputKeyboard();
+                      if (!_isCheckMail) {
                         return;
                       }
-                      _isCheckMail = true;
+                      String mail = _changePasswordTextController.text;
                       print("修改密码按钮点击");
                     },
                     child: Container(
