@@ -5,12 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatefulWidget {
   TextFieldWidget(this.hint, this.textController,
-      {this.isMobile = false, this.maxLength = 11});
+      {this.isMobile = false,
+      this.maxLength = 11,
+      this.lineColor = ColorRes.COLOR_LOGIN_BORDER_SIDE,
+      this.onChanged});
 
   final hint;
   final isMobile;
   final maxLength;
   final TextEditingController textController;
+  final Color lineColor;
+  final Function onChanged;
 
   @override
   State<StatefulWidget> createState() {
@@ -51,6 +56,9 @@ class _TextFieldState extends State<TextFieldWidget> {
                     fontSize: ScreenUtil().setSp(15))),
             onChanged: (text) {
               widget.textController.text = text;
+              if (widget.onChanged != null) {
+                widget.onChanged(text);
+              }
               //内容改变的回调
 //                    print('change');
             },
@@ -97,7 +105,7 @@ class _TextFieldState extends State<TextFieldWidget> {
 //          ),
 //          width: ScreenUtil().setWidth(375),
           height: ScreenUtil().setHeight(1),
-          color: ColorRes.COLOR_LOGIN_BORDER_SIDE,
+          color: widget.lineColor,
         ),
       ],
     );

@@ -23,6 +23,7 @@ class PersonalChangePasswordScreen extends StatefulWidget {
 class _PersonalChangePasswordScreenState
     extends State<PersonalChangePasswordScreen> {
   final _changePasswordTextController = TextEditingController();
+  bool checkLegal = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +51,32 @@ class _PersonalChangePasswordScreenState
                       fontSize: ScreenUtil().setSp(30)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(70)),
+                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(40)),
                   child: TextFieldWidget(
                     change_password_hint,
                     _changePasswordTextController,
                     isMobile: false,
+                    maxLength: 18,
+                    lineColor: Color.fromRGBO(46, 49, 56, 1),
+                    onChanged: (text) {
+                      setState(() {
+                        if (ObjectUtil.isEmptyString(text)) {
+                          checkLegal = false;
+                          return;
+                        }
+                        if (text.length < 8) {
+                          checkLegal = false;
+                          return;
+                        }
+                        checkLegal = true;
+                      });
+                    },
                   ),
                 ),
                 GestureDetector(
                     onTap: () {
-                      String password = _changePasswordTextController.text;
-                      if (ObjectUtil.isEmptyString(password)) {
+                      InputManageUtil.shutdownInputKeyboard();
+                      if (!checkLegal) {
                         return;
                       }
                       print("修改密码按钮点击");
@@ -71,14 +87,22 @@ class _PersonalChangePasswordScreenState
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          gradient: LinearGradient(
-                              colors: [
-                                Color.fromRGBO(95, 231, 243, 1.0),
-                                Color.fromRGBO(95, 195, 243, 1.0),
-                                Color.fromRGBO(95, 195, 243, 1.0)
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight)),
+                          gradient: checkLegal
+                              ? LinearGradient(
+                                  colors: [
+                                      Color.fromRGBO(95, 231, 243, 1.0),
+                                      Color.fromRGBO(95, 195, 243, 1.0),
+                                      Color.fromRGBO(95, 195, 243, 1.0)
+                                    ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.topRight)
+                              : LinearGradient(
+                                  colors: [
+                                      Color.fromRGBO(204, 204, 204, 1),
+                                      Color.fromRGBO(204, 204, 204, 1),
+                                    ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.topRight)),
                       child: Text(change_password_check_text,
                           style: TextStyle(
                               color: ColorRes.WHITE,
