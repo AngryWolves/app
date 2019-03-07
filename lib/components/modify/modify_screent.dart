@@ -99,9 +99,6 @@ class _ModifyScreenState extends State<ModifyScreen> {
                     width: ScreenUtil().setWidth(57),
                     height: ScreenUtil().setHeight(57),
                     margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(28.5))),
                     child: _positiveViewImage()),
                 Icon(
                   Icons.arrow_forward_ios,
@@ -123,21 +120,24 @@ class _ModifyScreenState extends State<ModifyScreen> {
         builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data != null) {
-            return Image.file(
+            return ClipOval(
+                child: Image.file(
               snapshot.data,
               width: ScreenUtil().setWidth(57),
               height: ScreenUtil().setHeight(57),
               fit: BoxFit.fill,
-            );
+            ));
           } else {
-            return CachedNetworkImage(
-              imageUrl:
-                  "http://img4.duitang.com/uploads/item/201512/13/20151213102616_rCiEx.thumb.700_0.jpeg",
-              placeholder: (context, url) => new CircularProgressIndicator(),
-              errorWidget: (context, url, error) => new Icon(Icons.error),
-              width: ScreenUtil().setWidth(57),
-              height: ScreenUtil().setHeight(57),
-              fit: BoxFit.cover,
+            return ClipOval(
+              child: CachedNetworkImage(
+                imageUrl:
+                    "http://img4.duitang.com/uploads/item/201512/13/20151213102616_rCiEx.thumb.700_0.jpeg",
+                placeholder: (context, url) => new CircularProgressIndicator(),
+                errorWidget: (context, url, error) => new Icon(Icons.error),
+                width: ScreenUtil().setWidth(57),
+                height: ScreenUtil().setHeight(57),
+                fit: BoxFit.cover,
+              ),
             );
           }
         });
