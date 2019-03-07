@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_park/components/bluetooth/bluetooth_control_key_item.dart';
 import 'package:smart_park/components/bluetooth/bluetooth_open_dialog.dart';
+import 'package:smart_park/components/bluetooth/expand_title_item.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
@@ -33,14 +33,12 @@ class _BluetoothControlListState
     extends RefreshListView<BluetoothControlList, String> {
   @override
   Widget buildItem(String data) {
-    return BluetoothKeyItem(
-      onItemTap: _handleItemTap,
-    );
+    return ExpandTitleItem();
   }
 
   @override
   Future<List<String>> requestData(int page) async {
-    return ['hhhh'];
+    return ['一号楼'];
   }
 
   void _handleItemTap() {
