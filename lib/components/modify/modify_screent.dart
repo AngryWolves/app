@@ -22,6 +22,8 @@ import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/widget/firm_dialog.dart';
+import 'package:smart_park/widget/modal_bottom_sheet_upload.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ModifyScreen extends StatefulWidget {
   ModifyScreen({@required this.userId});
@@ -94,13 +96,13 @@ class _ModifyScreenState extends State<ModifyScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Container(
-                  width: ScreenUtil().setWidth(57),
-                  height: ScreenUtil().setHeight(57),
-                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(28.5))),
-                ),
+                    width: ScreenUtil().setWidth(57),
+                    height: ScreenUtil().setHeight(57),
+                    margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(28.5))),
+                    child: _positiveViewImage()),
                 Icon(
                   Icons.arrow_forward_ios,
                   color: Color.fromRGBO(177, 177, 179, 1),
@@ -113,6 +115,32 @@ class _ModifyScreenState extends State<ModifyScreen> {
         ],
       ),
     );
+  }
+
+  Widget _positiveViewImage() {
+    return FutureBuilder<File>(
+        future: _imageFile,
+        builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
+            return Image.file(
+              snapshot.data,
+              width: ScreenUtil().setWidth(57),
+              height: ScreenUtil().setHeight(57),
+              fit: BoxFit.fill,
+            );
+          } else {
+            return CachedNetworkImage(
+              imageUrl:
+                  "http://img4.duitang.com/uploads/item/201512/13/20151213102616_rCiEx.thumb.700_0.jpeg",
+              placeholder: (context, url) => new CircularProgressIndicator(),
+              errorWidget: (context, url, error) => new Icon(Icons.error),
+              width: ScreenUtil().setWidth(57),
+              height: ScreenUtil().setHeight(57),
+              fit: BoxFit.cover,
+            );
+          }
+        });
   }
 
   Widget _buildContentWidget(tag, content, index) {
@@ -203,61 +231,15 @@ class _ModifyScreenState extends State<ModifyScreen> {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          return new Container(
-            height: ScreenUtil().setHeight(174),
-            color: Color.fromRGBO(240, 240, 240, 1),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    _onImageButtonPressed(ImageSource.camera);
-                    print('update==== 相册');
-                  },
-                  child: Container(
-                    color: Colors.white,
-                    height: ScreenUtil().setHeight(55),
-                    alignment: Alignment.center,
-                    child: Text(
-                      modify_upload_photo_text,
-                      style: TextStyle(
-                          color: Color.fromRGBO(46, 49, 56, 1),
-                          fontSize: ScreenUtil().setSp(17)),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _onImageButtonPressed(ImageSource.gallery);
-                    print('update==== 相机');
-                  },
-                  child: Container(
-                    height: ScreenUtil().setHeight(55),
-                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(1)),
-                    color: Colors.white,
-                    alignment: Alignment.center,
-                    child: Text(
-                      modify_upload_camera_text,
-                      style: TextStyle(
-                          color: Color.fromRGBO(46, 49, 56, 1),
-                          fontSize: ScreenUtil().setSp(17)),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: ScreenUtil().setHeight(55),
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(8)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    modify_upload_cancel_text,
-                    style: TextStyle(
-                        color: Color.fromRGBO(46, 49, 56, 1),
-                        fontSize: ScreenUtil().setSp(17)),
-                  ),
-                ),
-              ],
-            ),
+          return ModalBottomSheetUpload(
+            onPhotoUpload: () {
+              _onImageButtonPressed(ImageSource.gallery);
+              print('update==== 相册');
+            },
+            onCameraUpload: () {
+              _onImageButtonPressed(ImageSource.camera);
+              print('update==== 相机');
+            },
           );
         });
   }
