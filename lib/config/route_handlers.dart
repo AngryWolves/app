@@ -12,6 +12,7 @@ import 'package:smart_park/components/modify/changepawd/change_password_screent.
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
 import 'package:smart_park/components/modify/changemail/change_mail_screent.dart';
+import 'package:smart_park/components/payment/payment_page.dart';
 import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
@@ -158,3 +159,5 @@ var repairRouteHandle =
     Handler(handlerFunc: (_, params) => PropertyRepairPage());
 
 var monitorRouteHandle = Handler(handlerFunc: (_, params) => MonitorPage());
+
+var paymentRouteHandle = Handler(handlerFunc: (_, params) => PaymentPage());

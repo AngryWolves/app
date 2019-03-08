@@ -204,3 +204,9 @@ const repair_action_reserve_succeed_2 = '个人页面';
 const repair_action_reserve_succeed_3 = '我的报修';
 const repair_action_reserve_succeed_4 = '中查看预约记录';
 const repair_action_reserve_succeed_check = '去查看';
+
+const payment_need_pay = '需要缴费（元）';
+const payment_pay_now = '立刻支付';
+const payment_water_fee = '水费';
+const payment_property_fee = '物业费';
+const payment_ele_fee = '电费';

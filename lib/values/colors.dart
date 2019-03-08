@@ -12,6 +12,7 @@ class ColorRes {
   static const NOTICE_ITEM_DATA = const Color(0xFFBDBDBD);
   static const DIALOG_DIVIDER = const Color(0xFFF0F0F0);
   static const BUTTON_START_COLOR = const Color(0xFF5FE7F3);
+  static const BUTTON_MIDDLE_COLOR = const Color(0xFF5FC3F3);
   static const BUTTON_END_COLOR = const Color(0xFF4787D5);
   static const BIND_LICENSE_TITLE = const Color(0xFF333333);
   static const TEXT_FIELD_BORDER = const Color(0xFF979797);

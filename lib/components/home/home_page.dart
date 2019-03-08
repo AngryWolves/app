@@ -68,6 +68,7 @@ class _HomePageState extends State<HomePage> {
           NavigatorUtil.goMonitorPage(context);
           break;
         case HOME_ACTION_PAY:
+          NavigatorUtil.goPayment(context);
           break;
         case HOME_ACTION_RESERVE:
           break;

@@ -169,5 +169,9 @@ class NavigatorUtil {
 
   /// 摄像监控
   static void goMonitorPage(BuildContext context) =>
-      Application.router.navigateTo(context, Routes.doMonitor);
+          Application.router.navigateTo(context, Routes.doMonitor);
+
+  /// 加纳费用
+  static void goPayment(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doPayment);
 }
