@@ -127,11 +127,14 @@ const home_notice_item_title = '公告信息';
 
 const message_title = '站内信息';
 
-const pay_method_title='选择支付方式';
-const pay_alipay_title='支付宝支付';
-const pay_weixin_title='微信支付';
-const pay_union_title='公司支付';
-const pay_union_company_title='个人支付';
+const pay_method_title = '选择支付方式';
+const pay_alipay_title = '支付宝支付';
+const pay_weixin_title = '微信支付';
+const pay_union_title = '公司支付';
+const pay_union_company_title = '个人支付';
+const pay_immediate_title = '立刻支付';
+const pay_rmb_title = '¥';
+const pay_tag_title = "支付金额:";
 
 const bluetooth_dialog_opening_title = '正在开门';
 const bluetooth_dialog_opening = '正在为您打开门禁中...';
