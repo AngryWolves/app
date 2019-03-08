@@ -19,6 +19,7 @@ import 'package:smart_park/components/parking/parking_page.dart';
 import 'package:smart_park/components/parking/upload_license_page.dart';
 import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
+import 'package:smart_park/components/personal/pay/pay_screent.dart';
 import 'package:smart_park/components/personal/report/report_screent.dart';
 import 'package:smart_park/components/personal/service/service_screent.dart';
 import 'package:smart_park/components/property_repair/repair_page.dart';
@@ -96,6 +97,12 @@ var repairsRouteHandler = new Handler(
 //      String code = params["code"]?.first;
   return PersonalRepairsScreen(userId: null);
 });
+var payRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+      return PersonalPayScreen(userId: null);
+    });
 var appointmentRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;

@@ -89,17 +89,25 @@ class NavigatorUtil {
     Application.router.navigateTo(context, Routes.doChangePassword,
         transition: transitionType);
   }
+
 //修改邮箱
   static void goChangeMail(BuildContext context) {
     TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(context, Routes.doChangeMail,
-        transition: transitionType);
+    Application.router
+        .navigateTo(context, Routes.doChangeMail, transition: transitionType);
   }
 
   //我的报修
   static void goRepairs(BuildContext context, String userId) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(context, Routes.doRepairs + "?userId=$userId",
+        transition: transitionType);
+  }
+
+  //我的 缴纳费用
+  static void goPay(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doPay + "?userId=$userId",
         transition: transitionType);
   }
 
@@ -161,5 +169,5 @@ class NavigatorUtil {
 
   /// 摄像监控
   static void goMonitorPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doMonitor);
+      Application.router.navigateTo(context, Routes.doMonitor);
 }

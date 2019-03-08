@@ -135,6 +135,11 @@ const pay_union_company_title = '个人支付';
 const pay_immediate_title = '立刻支付';
 const pay_rmb_title = '¥';
 const pay_tag_title = "支付金额:";
+const pay_title="缴纳费用";
+const pay_water="水费";
+const pay_management="物业费";
+const pay_electricity="电费";
+const pay_need_tag_title="需要缴费（元）";
 
 const bluetooth_dialog_opening_title = '正在开门';
 const bluetooth_dialog_opening = '正在为您打开门禁中...';
