@@ -22,6 +22,7 @@ class _PaymentPageState extends BaseState<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
           _buildSliverAppBar(),
@@ -136,14 +137,58 @@ class _PaymentPageState extends BaseState<PaymentPage> {
         ),
       );
 
+  ///
+  /// 历史记录列表
+  ///
   Widget _buildSliverBody() {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
-      return Container(
-        color: Colors.white,
-        height: 30,
-        child: Text('this is the $index item'),
-      );
+      if (index == 0) {
+        return Container(
+          padding: EdgeInsets.only(left: 15.0),
+          alignment: Alignment.centerLeft,
+          height: ScreenUtil().setHeight(35),
+          color: ColorRes.APP_BACKGROUND,
+          child: Text(
+            payment_payment_history,
+          ),
+        );
+      }
+      return PaymentHistoryItem(text: '$index').buildItem;
     }, childCount: 30));
+  }
+}
+
+class PaymentHistoryItem {
+  PaymentHistoryItem({this.text});
+
+  final String text;
+
+  final TextStyle _titleStyle = TextStyle(color: ColorRes.GERY_TEXT);
+  final TextStyle _amountStyle =
+      TextStyle(color: ColorRes.REPAIR_SELECT_TYPE_TITLE, fontSize: ScreenUtil().setSp(18));
+
+  Widget get buildItem {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 15.0),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))
+      ),
+      height: ScreenUtil().setHeight(60),
+      child: ListTile(
+        leading: Image.asset(
+          'images/ic_payment_item_head.png',
+          width: ScreenUtil().setWidth(13),
+          height: ScreenUtil().setWidth(13),
+        ),
+        title: Text(
+          text,
+          style: _titleStyle,
+        ),
+        trailing: Text('- ¥ 4000.00', style:
+        _amountStyle,),
+      ),
+    );
   }
 }
