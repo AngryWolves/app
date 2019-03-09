@@ -78,6 +78,20 @@ const permissions_cancel_text = '取消';
 const permissions_determine_text = '确定';
 
 const repairs_title_text = '我的报修';
+const repairs_state_title = '当前状态：';
+const repairs_revoke_state_text = '已撤销';
+const repairs_stocking_state_text = '备货中...';
+const repairs_move_state_text = '运输中...';
+const repairs_finish_state_text = '已完成';
+const repairs_number_title = '工单编号：';
+const repairs_revoke_button_text = '撤销报修';
+const repairs_criteria_button_text = '提醒审核';
+const repairs_contact_button_text = '联系维修人员';
+const repairs_problem_button_text = '仍有问题';
+const repairs_feedback_criteria_title = "提醒审核";
+const repairs_feedback_criteria_content_title = "已向后台提交了本次审核的提醒，我们会尽快为您安排工作人员";
+const repairs_cancel_text = '取消';
+const repairs_determine_text = '确定';
 
 const report_title_text = '数据报表';
 const report_check_firm_text = '入驻企业(家)';
@@ -135,11 +149,11 @@ const pay_union_company_title = '个人支付';
 const pay_immediate_title = '立刻支付';
 const pay_rmb_title = '¥';
 const pay_tag_title = "支付金额:";
-const pay_title="缴纳费用";
-const pay_water="水费";
-const pay_management="物业费";
-const pay_electricity="电费";
-const pay_need_tag_title="需要缴费（元）";
+const pay_title = "缴纳费用";
+const pay_water = "水费";
+const pay_management = "物业费";
+const pay_electricity = "电费";
+const pay_need_tag_title = "需要缴费（元）";
 
 const bluetooth_dialog_opening_title = '正在开门';
 const bluetooth_dialog_opening = '正在为您打开门禁中...';
