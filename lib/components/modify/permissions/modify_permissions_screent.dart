@@ -7,6 +7,7 @@ import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
@@ -49,13 +50,14 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
         child: Column(
           children: <Widget>[
             _firmInfoWidget(),
-            Container(
-              height: ScreenUtil().setHeight(1),
-              color: Color.fromRGBO(240, 240, 240, 1),
-            ),
-            _buildPermissionsInfoWidget(),
-            _buildPermissionsInfoWidget(),
-            _buildPermissionsInfoWidget()
+//            Container(
+//              height: ScreenUtil().setHeight(1),
+//              color: Color.fromRGBO(240, 240, 240, 1),
+//            ),
+//            _buildPermissionsInfoWidget(),
+            _buildInfoWidget('总经理'),
+            _buildInfoWidget('财务'),
+            _buildInfoWidget('法务'),
           ],
         ),
       ),
@@ -83,6 +85,144 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildInfoWidget(title) {
+    return Container(
+      child: ConfigurableExpansionTile(
+        topBorderOn: true,
+        bottomBorderOn: false,
+        borderColorStart: const Color(0xFFF0F0F0),
+        borderColorEnd: const Color(0xFFF0F0F0),
+        animatedWidgetFollowingHeader: const Icon(
+          Icons.expand_more,
+          color: const Color(0xFF2E3138),
+        ),
+        headerExpanded: Flexible(
+            child: Container(
+                height: ScreenUtil().setHeight(45),
+//                decoration: BoxDecoration(
+//                    border: Border(
+//                        top: Divider.createBorderSide(context,
+//                            color: Color.fromRGBO(240, 240, 240, 1)),
+//                        bottom: Divider.createBorderSide(context,
+//                            color: Color.fromRGBO(240, 240, 240, 1)))),
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                          padding:
+                              EdgeInsets.only(left: ScreenUtil().setWidth(45)),
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                !ObjectUtil.isEmptyString(title) ? title : "",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(46, 49, 56, 1),
+                                    fontSize: ScreenUtil().setSp(15)),
+                              ),
+                              _buildInfoButtonWidget()
+                            ],
+                          )),
+                      flex: 1,
+                    ),
+                    Text(
+                      "收起",
+                      style: TextStyle(
+                          color: Color.fromRGBO(46, 49, 56, 1),
+                          fontSize: ScreenUtil().setSp(12)),
+                    )
+                  ],
+                ))),
+        header: Flexible(
+            child: Container(
+                height: ScreenUtil().setHeight(45),
+//                decoration: BoxDecoration(
+//                    border: Border(
+//                        top: Divider.createBorderSide(context,
+//                            color: Color.fromRGBO(240, 240, 240, 1)),
+//                        bottom: Divider.createBorderSide(context,
+//                            color: Color.fromRGBO(240, 240, 240, 1)))),
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                          padding:
+                              EdgeInsets.only(left: ScreenUtil().setWidth(45)),
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                !ObjectUtil.isEmptyString(title) ? title : "",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(46, 49, 56, 1),
+                                    fontSize: ScreenUtil().setSp(15)),
+                              ),
+                              _buildInfoButtonWidget()
+                            ],
+                          )),
+                      flex: 1,
+                    ),
+                    Text(
+                      "展开",
+                      style: TextStyle(
+                          color: Color.fromRGBO(46, 49, 56, 1),
+                          fontSize: ScreenUtil().setSp(12)),
+                    )
+                  ],
+                ))),
+        children: <Widget>[
+          Container(
+            height: ScreenUtil().setHeight(45),
+//            color: Colors.red,
+          ),
+          Container(
+            height: ScreenUtil().setHeight(45),
+//            color: Colors.amberAccent,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoButtonWidget() {
+    return GestureDetector(
+      onTap: () {
+        print("编辑按钮点击");
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+        width: ScreenUtil().setWidth(50),
+        height: ScreenUtil().setHeight(18),
+        decoration: BoxDecoration(
+            border:
+                Border.all(width: 1.0, color: Color.fromRGBO(37, 184, 247, 1)),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(3.0))),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(left: ScreenUtil().setWidth(5))),
+            Icon(
+              Icons.edit,
+              color: Color.fromRGBO(37, 184, 247, 1),
+              size: 12.0,
+            ),
+            Text(
+              "编辑",
+              style: TextStyle(
+                  color: Color.fromRGBO(37, 184, 247, 1),
+                  fontSize: ScreenUtil().setSp(12)),
+            )
+          ],
+        ),
       ),
     );
   }
