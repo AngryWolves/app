@@ -90,6 +90,10 @@ const repairs_contact_button_text = '联系维修人员';
 const repairs_problem_button_text = '仍有问题';
 const repairs_feedback_criteria_title = "提醒审核";
 const repairs_feedback_criteria_content_title = "已向后台提交了本次审核的提醒，我们会尽快为您安排工作人员";
+const repairs_feedback_revoke_title = "撤销报修";
+const repairs_feedback_revoke_content_title = "撤销后工单即会失效，是否继续当前操作？";
+const repairs_feedback_problem_title = "仍有问题";
+const repairs_feedback_problem_content_title = "已向后台提交了复核的要求，我们会尽快为您安排工作人员";
 const repairs_cancel_text = '取消';
 const repairs_determine_text = '确定';
 

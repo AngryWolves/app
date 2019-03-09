@@ -6,12 +6,22 @@ import 'package:common_utils/common_utils.dart';
 //反馈 dialog/
 class FeedBackDialog extends StatefulWidget {
   FeedBackDialog(
-      {Key key, this.title, this.subTitle, this.sureTitle, this.onSureState})
+      {Key key,
+      this.title,
+      this.subTitle,
+      this.sureTitle,
+      this.onSureState,
+      this.width = 240,
+      this.height = 149,
+      this.isShowCancel = true})
       : super(key: key);
   final String title;
   final String subTitle;
   final String sureTitle;
   final Function onSureState;
+  final int width;
+  final int height;
+  final bool isShowCancel;
 
   @override
   State<StatefulWidget> createState() {
@@ -35,8 +45,8 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
           child: Center(
             //保证控件居中效果
             child: SizedBox(
-              width: ScreenUtil().setWidth(240),
-              height: ScreenUtil().setHeight(192),
+              width: ScreenUtil().setWidth(widget.width),
+              height: ScreenUtil().setHeight(widget.height),
               child: Container(
                 decoration: ShapeDecoration(
                     color: Color.fromRGBO(255, 255, 255, 1),
@@ -48,17 +58,18 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
                   children: <Widget>[
                     _buildTitleWidget(widget.title),
                     _buildSubTitleWidget(widget.subTitle),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              top: Divider.createBorderSide(context,
-                                  color: Color.fromRGBO(240, 240, 240, 1)))),
-                      child: Row(
-                        children: <Widget>[
-                          _buildCancelWidget(widget.onSureState),
-                          _buildDetermineWidget(widget.onSureState)
-                        ],
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    top: Divider.createBorderSide(context,
+                                        color:
+                                            Color.fromRGBO(240, 240, 240, 1)))),
+                            child: _buildBottomWidget()),
                       ),
+                      flex: 1,
                     )
                   ],
                 ),
@@ -68,6 +79,33 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
         ),
       ),
     );
+  }
+
+  Widget _buildBottomWidget() {
+    return widget.isShowCancel
+        ? Row(
+            children: <Widget>[
+              _buildCancelWidget(widget.onSureState),
+              _buildDetermineWidget(widget.onSureState)
+            ],
+          )
+        : GestureDetector(
+            onTap: () {
+              print("确定按钮点击");
+              if (widget.onSureState != null) {}
+            },
+            child: Container(
+              height: ScreenUtil().setHeight(46),
+              alignment: Alignment.center,
+              child: Text(
+                repairs_determine_text,
+                style: TextStyle(
+                    color: Color.fromRGBO(37, 184, 247, 1),
+                    fontSize: ScreenUtil().setSp(15)),
+                maxLines: 1,
+              ),
+            ),
+          );
   }
 
   Widget _buildTitleWidget(title) {
@@ -87,10 +125,10 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
         ? null
         : Padding(
             padding: EdgeInsets.only(
-                top: ScreenUtil().setHeight(14),
-                left: ScreenUtil().setWidth(31),
-                right: ScreenUtil().setWidth(31),
-                bottom: ScreenUtil().setHeight(46)),
+              top: ScreenUtil().setHeight(14),
+              left: ScreenUtil().setWidth(31),
+              right: ScreenUtil().setWidth(31),
+            ),
             child: Text(
               subTitle,
               style: TextStyle(
@@ -124,13 +162,12 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
       ),
     );
   }
+
   Widget _buildDetermineWidget(onSureState) {
     return GestureDetector(
       onTap: () {
-        print("取消按钮点击");
-        if (onSureState != null) {
-          onSureState();
-        }
+        print("确定按钮点击");
+        if (widget.onSureState != null) {}
       },
       child: Container(
         width: ScreenUtil().setWidth(120),

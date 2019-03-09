@@ -227,6 +227,16 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
   Widget _buildStateRevokeWidget(obj) {
     return GestureDetector(
       onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return FeedBackDialog(
+                height: 149,
+                title: repairs_feedback_revoke_title,
+                subTitle: repairs_feedback_revoke_content_title,
+              );
+            });
         print('撤销报修Button点击');
       },
       child: Container(
@@ -260,6 +270,7 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
             context: context,
             builder: (context) {
               return FeedBackDialog(
+                height: 149,
                 title: repairs_feedback_criteria_title,
                 subTitle: repairs_feedback_criteria_content_title,
               );
@@ -322,6 +333,17 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
   Widget _buildStateProblemWidget(obj) {
     return GestureDetector(
       onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return FeedBackDialog(
+                height: 149,
+                isShowCancel: false,
+                title: repairs_feedback_problem_title,
+                subTitle: repairs_feedback_problem_content_title,
+              );
+            });
         print('仍有问题Button点击');
       },
       child: Container(
