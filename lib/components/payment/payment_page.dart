@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/payment/payment_bar_arc.dart';
+import 'package:smart_park/plugin/unionpay_plugin.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
+import 'package:smart_park/widget/modal_bottom_sheet_pay.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -22,6 +24,7 @@ class _PaymentPageState extends BaseState<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
           _buildSliverAppBar(),
@@ -76,7 +79,7 @@ class _PaymentPageState extends BaseState<PaymentPage> {
                         width: ScreenUtil().setWidth(108),
                         child: GradientButton(
                           payment_pay_now,
-                          () {},
+                          _handlePayNow,
                           radius: 18.0,
                           height: 35,
                         ),
@@ -136,14 +139,78 @@ class _PaymentPageState extends BaseState<PaymentPage> {
         ),
       );
 
+  ///
+  /// 历史记录列表
+  ///
   Widget _buildSliverBody() {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
-      return Container(
-        color: Colors.white,
-        height: 30,
-        child: Text('this is the $index item'),
-      );
+      if (index == 0) {
+        return Container(
+          padding: EdgeInsets.only(left: 15.0),
+          alignment: Alignment.centerLeft,
+          height: ScreenUtil().setHeight(35),
+          color: ColorRes.APP_BACKGROUND,
+          child: Text(
+            payment_payment_history,
+          ),
+        );
+      }
+      return PaymentHistoryItem(text: '$index').buildItem;
     }, childCount: 30));
+  }
+
+  void _handlePayNow() {
+    showDialog(
+        context: context,
+        builder: (ctx) => ModalBottomSheetPay(
+              '30',
+              onPayState: (int type) {
+//                print('tap sheet pay type ::: $type');
+                _payNow();
+              },
+            ));
+  }
+
+  void _payNow() async {
+    print('get native pay result :: before');
+    var result = await UnionPayPlugin().pay('30');
+    print('get native pay result :: $result');
+  }
+}
+
+class PaymentHistoryItem {
+  PaymentHistoryItem({this.text});
+
+  final String text;
+
+  final TextStyle _titleStyle = TextStyle(color: ColorRes.GERY_TEXT);
+  final TextStyle _amountStyle = TextStyle(
+      color: ColorRes.REPAIR_SELECT_TYPE_TITLE,
+      fontSize: ScreenUtil().setSp(18));
+
+  Widget get buildItem {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 15.0),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
+      height: ScreenUtil().setHeight(60),
+      child: ListTile(
+        leading: Image.asset(
+          'images/ic_payment_item_head.png',
+          width: ScreenUtil().setWidth(13),
+          height: ScreenUtil().setWidth(13),
+        ),
+        title: Text(
+          text,
+          style: _titleStyle,
+        ),
+        trailing: Text(
+          '- ¥ 4000.00',
+          style: _amountStyle,
+        ),
+      ),
+    );
   }
 }

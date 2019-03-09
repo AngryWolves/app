@@ -19,6 +19,11 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		EBDEBE83223393430080CA64 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDEBE82223393430080CA64 /* CFNetwork.framework */; };
+		EBDEBE852233934E0080CA64 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDEBE842233934E0080CA64 /* SystemConfiguration.framework */; };
+		EBDEBE87223393590080CA64 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDEBE86223393590080CA64 /* libz.tbd */; };
+		EBDEBE972233E9510080CA64 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDEBE962233E9500080CA64 /* libPaymentControl.a */; };
+		EBDEBE9B2233EF060080CA64 /* uppay.mm in Sources */ = {isa = PBXBuildFile; fileRef = EBDEBE9A2233EF060080CA64 /* uppay.mm */; };
 		F0D62612D6169765FADFC1AD /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E3C7373CF546A1850BE256 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +60,15 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBDEBE82223393430080CA64 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EBDEBE842233934E0080CA64 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EBDEBE86223393590080CA64 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		EBDEBE8822339A4E0080CA64 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPaymentControl.a; path = Runner/unionpay/libPaymentControl.a; sourceTree = "<group>"; };
+		EBDEBE962233E9500080CA64 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
+		EBDEBE982233E97F0080CA64 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
+		EBDEBE992233EB910080CA64 /* UPPayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPPayBridge.h; sourceTree = "<group>"; };
+		EBDEBE9A2233EF060080CA64 /* uppay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = uppay.mm; sourceTree = "<group>"; };
+		EBDEBE9C2233EFF80080CA64 /* uppay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uppay.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +77,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */,
+				EBDEBE972233E9510080CA64 /* libPaymentControl.a in Frameworks */,
 				3B80C3941E831B6300D905FE /* App.framework in Frameworks */,
 				F0D62612D6169765FADFC1AD /* Pods_Runner.framework in Frameworks */,
+				EBDEBE83223393430080CA64 /* CFNetwork.framework in Frameworks */,
+				EBDEBE852233934E0080CA64 /* SystemConfiguration.framework in Frameworks */,
+				EBDEBE87223393590080CA64 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +92,10 @@
 		5BBCEE5D470EB2434A96574F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBDEBE8822339A4E0080CA64 /* libPaymentControl.a */,
+				EBDEBE86223393590080CA64 /* libz.tbd */,
+				EBDEBE842233934E0080CA64 /* SystemConfiguration.framework */,
+				EBDEBE82223393430080CA64 /* CFNetwork.framework */,
 				19E3C7373CF546A1850BE256 /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -122,6 +144,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				EBDEBE7A223390900080CA64 /* unionpay */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -131,6 +154,9 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				EBDEBE992233EB910080CA64 /* UPPayBridge.h */,
+				EBDEBE9A2233EF060080CA64 /* uppay.mm */,
+				EBDEBE9C2233EFF80080CA64 /* uppay.h */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -140,6 +166,15 @@
 			children = (
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBDEBE7A223390900080CA64 /* unionpay */ = {
+			isa = PBXGroup;
+			children = (
+				EBDEBE982233E97F0080CA64 /* UPPaymentControl.h */,
+				EBDEBE962233E9500080CA64 /* libPaymentControl.a */,
+			);
+			path = unionpay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBDEBE9B2233EF060080CA64 /* uppay.mm in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
@@ -393,10 +429,30 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+					"$(PROJECT_DIR)/Runner/unionpay",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker\"",
+					"-framework",
+					"\"path_provider\"",
+					"-framework",
+					"\"shared_preferences\"",
+					"-framework",
+					"\"sqflite\"",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.smart.park.smartPark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -522,6 +578,25 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+					"$(PROJECT_DIR)/Runner/unionpay",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker\"",
+					"-framework",
+					"\"path_provider\"",
+					"-framework",
+					"\"shared_preferences\"",
+					"-framework",
+					"\"sqflite\"",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.smart.park.smartPark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -529,6 +604,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -551,12 +627,32 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+					"$(PROJECT_DIR)/Runner/unionpay",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"fluttertoast\"",
+					"-framework",
+					"\"image_picker\"",
+					"-framework",
+					"\"path_provider\"",
+					"-framework",
+					"\"shared_preferences\"",
+					"-framework",
+					"\"sqflite\"",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.smart.park.smartPark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -19,7 +19,7 @@ class ModalBottomSheetPay extends StatefulWidget {
   ModalBottomSheetPay(this.payCount,
       {Key key, this.onPayState})
       : super(key: key);
-  final Function onPayState;
+  final ValueChanged<int> onPayState;
   final String payCount;
   int _checkIndex = 0;
 
@@ -44,15 +44,23 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
           type: MaterialType.transparency, //透明类型
           child: GestureDetector(
             onTap: () {},
-            child: Container(
-              height: ScreenUtil().setHeight(323),
-              child: Column(
-                children: <Widget>[
-                  _buildPayMethodTitleWidget(),
-                  _buildListWidget(listOfLocalPayObjects),
-                  _buildBottomWidget()
-                ],
-              ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Container(),
+                ),
+                Container(
+                  color: Colors.white,
+                  height: ScreenUtil().setHeight(323),
+                  child: Column(
+                    children: <Widget>[
+                      _buildPayMethodTitleWidget(),
+                      _buildListWidget(listOfLocalPayObjects),
+                      _buildBottomWidget()
+                    ],
+                  ),
+                )
+              ],
             ),
           )),
     );
