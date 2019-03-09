@@ -5,6 +5,7 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
+import 'package:smart_park/widget/modal_bottom_sheet_pay.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -77,7 +78,7 @@ class _PaymentPageState extends BaseState<PaymentPage> {
                         width: ScreenUtil().setWidth(108),
                         child: GradientButton(
                           payment_pay_now,
-                          () {},
+                          _handlePayNow,
                           radius: 18.0,
                           height: 35,
                         ),
@@ -156,6 +157,13 @@ class _PaymentPageState extends BaseState<PaymentPage> {
       }
       return PaymentHistoryItem(text: '$index').buildItem;
     }, childCount: 30));
+  }
+
+  void _handlePayNow() {
+    showDialog(context: context,
+    builder: (ctx) => ModalBottomSheetPay('30', onPayState: () {
+
+    },));
   }
 }
 
