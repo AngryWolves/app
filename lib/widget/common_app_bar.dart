@@ -23,11 +23,16 @@ Widget buildCommonAppbar(
               onTap: () {
                 onLeadTop();
               },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: titleColor,
-                size: 15.0,
-              ),
+              child: Container(
+                width: ScreenUtil().setWidth(48),
+                height: ScreenUtil().setHeight(48),
+                color: Colors.transparent,
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: titleColor,
+                  size: 15.0,
+                ),
+              )
             )
           : null,
       title: !ObjectUtil.isEmptyString(title)
