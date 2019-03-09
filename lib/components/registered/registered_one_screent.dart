@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_park/config/routes.dart';
 
 class RegisteredOneScreen extends StatefulWidget {
   @override
@@ -175,7 +176,9 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    NavigatorUtil.goLogin(context);
+                    print("已有账户,去登录点击");
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.doLogin, (Route<dynamic> route) => false);
                   },
                   child: Text(
                     registered_one_go_login_text,
