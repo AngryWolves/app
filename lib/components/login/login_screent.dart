@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
@@ -28,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
         appBar: buildCommonAppbar(login_title_text, onLeadTop: () {
           InputManageUtil.shutdownInputKeyboard();
-          Navigator.pop(context);
+          SystemNavigator.pop();
         }),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
