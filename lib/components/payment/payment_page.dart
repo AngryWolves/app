@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/payment/payment_bar_arc.dart';
+import 'package:smart_park/plugin/unionpay_plugin.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -160,10 +161,21 @@ class _PaymentPageState extends BaseState<PaymentPage> {
   }
 
   void _handlePayNow() {
-    showDialog(context: context,
-    builder: (ctx) => ModalBottomSheetPay('30', onPayState: () {
+    showDialog(
+        context: context,
+        builder: (ctx) => ModalBottomSheetPay(
+              '30',
+              onPayState: (int type) {
+//                print('tap sheet pay type ::: $type');
+                _payNow();
+              },
+            ));
+  }
 
-    },));
+  void _payNow() async {
+    print('get native pay result :: before');
+    var result = await UnionPayPlugin().pay('30');
+    print('get native pay result :: $result');
   }
 }
 
@@ -173,16 +185,16 @@ class PaymentHistoryItem {
   final String text;
 
   final TextStyle _titleStyle = TextStyle(color: ColorRes.GERY_TEXT);
-  final TextStyle _amountStyle =
-      TextStyle(color: ColorRes.REPAIR_SELECT_TYPE_TITLE, fontSize: ScreenUtil().setSp(18));
+  final TextStyle _amountStyle = TextStyle(
+      color: ColorRes.REPAIR_SELECT_TYPE_TITLE,
+      fontSize: ScreenUtil().setSp(18));
 
   Widget get buildItem {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))
-      ),
+          border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
       height: ScreenUtil().setHeight(60),
       child: ListTile(
         leading: Image.asset(
@@ -194,8 +206,10 @@ class PaymentHistoryItem {
           text,
           style: _titleStyle,
         ),
-        trailing: Text('- ¥ 4000.00', style:
-        _amountStyle,),
+        trailing: Text(
+          '- ¥ 4000.00',
+          style: _amountStyle,
+        ),
       ),
     );
   }

@@ -19,7 +19,7 @@ class ModalBottomSheetPay extends StatefulWidget {
   ModalBottomSheetPay(this.payCount,
       {Key key, this.onPayState})
       : super(key: key);
-  final Function onPayState;
+  final ValueChanged<int> onPayState;
   final String payCount;
   int _checkIndex = 0;
 
