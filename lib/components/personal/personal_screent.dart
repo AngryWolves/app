@@ -186,6 +186,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       break;
                     //我的缴费
                     case 1:
+                      NavigatorUtil.goPayment(context);
                       break;
                     //我的预约
                     case 2:

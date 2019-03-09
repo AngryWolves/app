@@ -104,13 +104,6 @@ class NavigatorUtil {
         transition: transitionType);
   }
 
-  //我的 缴纳费用
-  static void goPay(BuildContext context, String userId) {
-    TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(context, Routes.doPay + "?userId=$userId",
-        transition: transitionType);
-  }
-
   //我的预约
   static void goAppointment(BuildContext context, String userId) {
     TransitionType transitionType = TransitionType.nativeModal;
