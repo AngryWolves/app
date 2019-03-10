@@ -9,5 +9,6 @@ class MainActivity: FlutterActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     GeneratedPluginRegistrant.registerWith(this)
+    UPPaymentPlugin.registerWith(registrarFor("com.smart.park.smartpark.uupayment"))
   }
 }

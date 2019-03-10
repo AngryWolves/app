@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/payment/payment_bar_arc.dart';
+import 'package:smart_park/http/http_client.dart';
 import 'package:smart_park/plugin/unionpay_plugin.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
@@ -174,8 +176,16 @@ class _PaymentPageState extends BaseState<PaymentPage> {
 
   void _payNow() async {
     print('get native pay result :: before');
-    var result = await UnionPayPlugin().pay('30');
-    print('get native pay result :: $result');
+
+    try {
+      var response = await Dio().get('http://101.231.204.84:8091/sim/getacptn');
+      print('response ::: $response');
+      var result = await UnionPayPlugin().pay(response?.data?.toString());
+      print('get native pay result :: $result');
+    } catch (e) {
+      print(e);
+    }
+
   }
 }
 

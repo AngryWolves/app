@@ -25,6 +25,7 @@ dependencies:
   configurable_expansion_tile: ^1.0.0
   flutter_localizations:
     sdk: flutter
+  dio: ^2.0.22
 
 
 dev_dependencies:
