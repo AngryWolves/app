@@ -56,8 +56,6 @@ class _PersonalDialogState extends State<PersonalDialog> {
           child: Center(
             child: Container(
               width: ScreenUtil().setWidth(240),
-//              height: ScreenUtil().setHeight(515),
-              //TODO
               height: ScreenUtil().setHeight(411),
               padding: EdgeInsets.only(
                   left: ScreenUtil().setWidth(15),
@@ -128,7 +126,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
 //                    print('submit');
         },
         controller: TextEditingController(text: nameController.text),
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.text,
         //键盘类型
         textInputAction: TextInputAction.none,
         //显示的文字内容为 下一步
@@ -199,6 +197,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildFilmItemInfo1Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -233,6 +232,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildFilmItemInfo2Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -267,6 +267,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildFilmItemInfo3Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -301,6 +302,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildFilmItemInfo4Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -335,6 +337,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildGuardItemInfo1Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -369,6 +372,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildGuardItemInfo2Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -403,6 +407,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildGuardItemInfo3Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -437,6 +442,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildGuardItemInfo4Widget(firmTitle) {
     return Container(
       height: ScreenUtil().setHeight(28),
@@ -471,6 +477,7 @@ class _PersonalDialogState extends State<PersonalDialog> {
       ),
     );
   }
+
   Widget _buildGuardTitleWidget() {
     return Text(
       permissions_guard_title_text,

@@ -22,7 +22,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:smart_park/widget/firm_dialog.dart';
+import 'package:smart_park/widget/personal_dialog.dart';
 
 class ModifyPermissionsScreen extends StatefulWidget {
   ModifyPermissionsScreen({@required this.userId});
@@ -50,14 +50,13 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
         child: Column(
           children: <Widget>[
             _firmInfoWidget(),
-//            Container(
-//              height: ScreenUtil().setHeight(1),
-//              color: Color.fromRGBO(240, 240, 240, 1),
-//            ),
-//            _buildPermissionsInfoWidget(),
             _buildInfoWidget('总经理'),
             _buildInfoWidget('财务'),
             _buildInfoWidget('法务'),
+            Container(
+              height: ScreenUtil().setHeight(1),
+              color: Color.fromRGBO(240, 240, 240, 1),
+            )
           ],
         ),
       ),
@@ -103,12 +102,6 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
         headerExpanded: Flexible(
             child: Container(
                 height: ScreenUtil().setHeight(45),
-//                decoration: BoxDecoration(
-//                    border: Border(
-//                        top: Divider.createBorderSide(context,
-//                            color: Color.fromRGBO(240, 240, 240, 1)),
-//                        bottom: Divider.createBorderSide(context,
-//                            color: Color.fromRGBO(240, 240, 240, 1)))),
                 alignment: Alignment.centerRight,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -132,7 +125,7 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
                       flex: 1,
                     ),
                     Text(
-                      "收起",
+                      permissions_pack_up_title_text,
                       style: TextStyle(
                           color: Color.fromRGBO(46, 49, 56, 1),
                           fontSize: ScreenUtil().setSp(12)),
@@ -142,12 +135,6 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
         header: Flexible(
             child: Container(
                 height: ScreenUtil().setHeight(45),
-//                decoration: BoxDecoration(
-//                    border: Border(
-//                        top: Divider.createBorderSide(context,
-//                            color: Color.fromRGBO(240, 240, 240, 1)),
-//                        bottom: Divider.createBorderSide(context,
-//                            color: Color.fromRGBO(240, 240, 240, 1)))),
                 alignment: Alignment.centerRight,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -171,7 +158,7 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
                       flex: 1,
                     ),
                     Text(
-                      "展开",
+                      permissions_spread_out_title_text,
                       style: TextStyle(
                           color: Color.fromRGBO(46, 49, 56, 1),
                           fontSize: ScreenUtil().setSp(12)),
@@ -179,14 +166,8 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
                   ],
                 ))),
         children: <Widget>[
-          Container(
-            height: ScreenUtil().setHeight(45),
-//            color: Colors.red,
-          ),
-          Container(
-            height: ScreenUtil().setHeight(45),
-//            color: Colors.amberAccent,
-          )
+          _buildItemWidget("张得三", 0),
+          _buildItemWidget("李得四", 1)
         ],
       ),
     );
@@ -195,6 +176,8 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
   Widget _buildInfoButtonWidget() {
     return GestureDetector(
       onTap: () {
+        showDialog(context: context, builder: (ctx) => PersonalDialog());
+
         print("编辑按钮点击");
       },
       child: Container(
@@ -227,38 +210,37 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
     );
   }
 
-  Widget _buildPermissionsInfoWidget() {
-    return ExpansionTile(
-      title: Text(
-        "总经理",
-        style: TextStyle(
-            color: Color.fromRGBO(46, 49, 56, 1),
-            fontSize: ScreenUtil().setSp(15)),
+  Widget _buildItemWidget(obj, index) {
+    return Container(
+      height:
+          index == 0 ? ScreenUtil().setHeight(47) : ScreenUtil().setHeight(46),
+      margin: EdgeInsets.only(left: ScreenUtil().setWidth(45)),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: index == 0
+                ? ScreenUtil().setHeight(1)
+                : ScreenUtil().setHeight(0),
+            color: Color.fromRGBO(240, 240, 240, 1),
+          ),
+          Container(
+            height: ScreenUtil().setHeight(45),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              !ObjectUtil.isEmptyString(obj) ? obj.toString() : "",
+              style: TextStyle(
+                  color: Color.fromRGBO(46, 49, 56, 1),
+                  fontSize: ScreenUtil().setSp(15)),
+            ),
+          ),
+          Container(
+            height: index == 0
+                ? ScreenUtil().setHeight(1)
+                : ScreenUtil().setHeight(0),
+            color: Color.fromRGBO(240, 240, 240, 1),
+          )
+        ],
       ),
-      children: <Widget>[
-        Container(
-          height: ScreenUtil().setHeight(70),
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(85)),
-          child: Text(
-            "张得三",
-            style: TextStyle(
-                color: Color.fromRGBO(46, 49, 56, 1),
-                fontSize: ScreenUtil().setSp(15)),
-          ),
-        ),
-        Container(
-          height: ScreenUtil().setHeight(70),
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(85)),
-          child: Text(
-            "李得四",
-            style: TextStyle(
-                color: Color.fromRGBO(46, 49, 56, 1),
-                fontSize: ScreenUtil().setSp(15)),
-          ),
-        )
-      ],
     );
   }
 }

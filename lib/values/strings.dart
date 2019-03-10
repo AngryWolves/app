@@ -63,6 +63,8 @@ const modify_upload_photo_text = '去相册选择';
 const modify_upload_cancel_text = '取消';
 
 const permissions_title_text = '人员权限';
+const permissions_pack_up_title_text = '收起';
+const permissions_spread_out_title_text = '展开';
 const permissions_modify_title_text = '修改命名';
 const permissions_firm_title_text = '公司权限';
 const permissions_firm_info1_text = '编辑公司信息';
