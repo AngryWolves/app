@@ -30,7 +30,7 @@ class _AppComponentState extends State<AppComponent> {
 
     Future.delayed(Duration(seconds: 1)).then((value) {
       // todo check login status
-      bool isLogin = true;
+      bool isLogin = false;
       if (isLogin) {
         NavigatorUtil.goLogin(context);
       } else {
