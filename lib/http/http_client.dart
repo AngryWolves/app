@@ -114,7 +114,7 @@ class HttpClient {
   /// headers, timeout time, base url,...
   Future<Options> _buildDefaultOptions() async {
     return RequestOptions(
-        baseUrl: Api.HOST,
+        baseUrl: Api.SMART_HOST,
         connectTimeout: CONNECTION_TIMEOUT,
         receiveTimeout: RECEIVE_TIMEOUT,
         headers: await _getDefaultHeaders());

@@ -1,11 +1,11 @@
 const login_title_text = '登录';
 const login_check_mobile_hint = '请输入已验证手机号码';
-const login_check_password_hint = '请输入密码';
+const login_check_password_hint = '输入6-18位数字或字母';
 const login_text = '登录';
 const login_forget_password_text = '忘记密码?';
 const login_registered_text = '还未注册？去注册';
 const login_mobile_error_text = '格式错误,请检查你输入的手机号';
-const login_password_error_text = '请输入密码,密码不能为空';
+const login_password_error_text = '请重新输入密码，长度6-18位数字或字母,';
 
 const forget_title_text = '忘记密码';
 const forget_new_password_hint = '请输入新密码';
