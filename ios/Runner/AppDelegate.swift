@@ -68,6 +68,6 @@ class AppDelegate: FlutterAppDelegate {
             }
             self.secondController?.dismiss(animated: true, completion: nil)
         }
-        return true
+        return TobiasPlugin.handleOpen(url)
     }
 }

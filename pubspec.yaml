@@ -26,6 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   dio: ^2.0.22
+  tobias: ^0.1.0
 
 
 dev_dependencies:
