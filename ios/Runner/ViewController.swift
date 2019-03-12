@@ -8,9 +8,20 @@
 
 import UIKit
 
-class ViewControlle: UIViewController {
+class ViewController: UIViewController {
     
-    fileprivate let scheme = "uppsmart"
+    init(tn: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.tn = tn
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var tn: String!
+    
+    fileprivate let scheme = "Runner"
     
     /**
      * 00 正式环境
@@ -18,18 +29,16 @@ class ViewControlle: UIViewController {
      */
     fileprivate let mode = "01"
     
-    func startPay(tn: String) -> Void {
-        UPPaymentControl.default().startPay(tn, fromScheme: self.scheme, mode: self.mode, viewController: self)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewController did load")
-        // Do any additional setup after loading the view.
+        startPay(tn: self.tn)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    private func startPay(tn: String) -> Void {
+        UPPaymentControl.default().startPay(tn, fromScheme: self.scheme, mode: self.mode, viewController: self)
     }
 }

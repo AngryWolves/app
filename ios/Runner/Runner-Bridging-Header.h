@@ -1,2 +1,2 @@
 #import "GeneratedPluginRegistrant.h"
-#import "UPPaymentControl.h"
+#import "UPPaymentControl.mm"

@@ -1,4 +1,4 @@
-package com.smart.park.smartpark
+package com.smart.smartpark
 
 import android.app.Activity
 import android.content.Intent
@@ -70,7 +70,7 @@ class UPPaymentPlugin(private val activity: FlutterActivity) : MethodChannel.Met
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
-        Log.i(UPPaymentPlugin.TAG, "onActivityResult")
+        Log.i(TAG, "onActivityResult")
         return requestCode.takeIf {
             it == REQUEST_CODE_START_PAY
         }?.let {

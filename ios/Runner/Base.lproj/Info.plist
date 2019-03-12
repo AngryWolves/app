@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>智慧园区</string>
 	<key>CFBundleExecutable</key>
-	<string>$(TARGET_NAME)</string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

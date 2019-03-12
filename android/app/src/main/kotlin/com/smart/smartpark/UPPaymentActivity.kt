@@ -1,17 +1,16 @@
-package com.smart.park.smartpark
+package com.smart.smartpark
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_IS_SUCCEED
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_MESSAGE
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_TN
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_CANCEL
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_RESULT_DATA
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_SIGN
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_SUCCESS
-import com.smart.park.smartpark.UPPaymentPlugin.Companion.UPPAY_MODEL
+import com.smart.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_IS_SUCCEED
+import com.smart.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_MESSAGE
+import com.smart.smartpark.UPPaymentPlugin.Companion.EXTRA_ARG_TN
+import com.smart.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_CANCEL
+import com.smart.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_RESULT_DATA
+import com.smart.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_SIGN
+import com.smart.smartpark.UPPaymentPlugin.Companion.PAY_STATUS_SUCCESS
+import com.smart.smartpark.UPPaymentPlugin.Companion.UPPAY_MODEL
 import com.unionpay.UPPayAssistEx
 
 /**

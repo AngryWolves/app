@@ -1,4 +1,4 @@
-package com.smart.park.smartpark
+package com.smart.smartpark
 
 import android.os.Bundle
 
