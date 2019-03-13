@@ -1,6 +1,12 @@
 import 'package:flutter/services.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
@@ -10,6 +16,12 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/data/user_data.dart';
+import 'package:smart_park/config/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,9 +31,11 @@ class LoginScreen extends StatefulWidget {
   }
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends BaseState<LoginScreen> {
   final _loginPhoneTextController = TextEditingController();
   final _loginPasswordTextController = TextEditingController();
+
+  UserDao _dao;
 
   @override
   Widget build(BuildContext context) {
@@ -65,21 +79,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextFieldWidget(
                       login_check_password_hint,
                       _loginPasswordTextController,
-                      maxLength: 12,
+                      isMobile: false,
+                      obscureText: true,
+                      maxLength: 18,
                     )),
                 GestureDetector(
                   onTap: () {
-                    InputManageUtil.shutdownInputKeyboard();
-                    String phone = _loginPhoneTextController.text;
-                    String password = _loginPasswordTextController.text;
-                    if (!RegexUtil.isMobileExact(phone)) {
-                      Fluttertoast.showToast(msg: login_mobile_error_text);
-                      return;
-                    }
-                    if (ObjectUtil.isEmptyString(password)) {
-                      Fluttertoast.showToast(msg: login_password_error_text);
-                      return;
-                    }
+                    _login(_loginPhoneTextController.text,
+                        _loginPasswordTextController.text);
                     print('登录点击');
                   },
                   child: Container(
@@ -141,5 +148,29 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ));
+  }
+
+  void _login(phone, password) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    if (ObjectUtil.isEmptyString(password) ||
+        password.length < 6 ||
+        password.length > 18) {
+      Fluttertoast.showToast(msg: login_password_error_text);
+      return;
+    }
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    showLoading();
+    LoginResponse model = await _dao.login(phone, password);
+    hideLoading();
+    UserData userData = model?.userData;
+    if (userData == null) {
+      return;
+    }
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        Routes.doHome, (Route<dynamic> route) => false);
   }
 }

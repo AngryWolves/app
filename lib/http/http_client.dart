@@ -77,7 +77,7 @@ class HttpClient {
             RequestOptions(data: data, headers: headers, method: METHOD_GET)));
   }
 
-  Future<Response> _sendRequest(String path, Options options,
+  Future<Response> _sendRequest(String path, RequestOptions options,
       {CancelToken cancelToken}) async {
     try {
       return await _dio.request(path,
@@ -87,37 +87,47 @@ class HttpClient {
     }
   }
 
-  Future<Options> _mergeOptions(RequestOptions newOptions) async {
+  Future<RequestOptions> _mergeOptions(RequestOptions newOptions) async {
     // default options
-    var oldOps = await _buildDefaultOptions();
+    var oldOps = await _buildDefaultOptions(newOptions);
     // append new options
-    if (newOptions != null) {
-      // append new Headers
-      var newHeaders = newOptions.headers;
-      if (newHeaders != null) {
-        oldOps.headers.addAll(newHeaders);
-      }
+//    if (newOptions != null) {
+//      // append new Headers
+//      var newHeaders = newOptions.headers;
+//      if (newHeaders != null) {
+//        oldOps.headers.addAll(newHeaders);
+//      }
 
       // merge options
-      oldOps = oldOps.merge(
-          connectTimeout: newOptions.connectTimeout,
-          receiveTimeout: newOptions.receiveTimeout,
-          data: newOptions.data,
-          extra: newOptions.extra,
-          contentType: newOptions.contentType,
-          method: newOptions.method);
-    }
+//      oldOps = oldOps.merge(
+//          connectTimeout: newOptions.connectTimeout,
+//          receiveTimeout: newOptions.receiveTimeout,
+//          data: newOptions.data,
+//          extra: newOptions.extra,
+//          contentType: newOptions.contentType,
+//          method: newOptions.method);
+//    }
+    oldOps.data=FormData.from(newOptions.data);
     return oldOps;
   }
 
   /// default options
   /// headers, timeout time, base url,...
-  Future<Options> _buildDefaultOptions() async {
-    return RequestOptions(
-        baseUrl: Api.HOST,
-        connectTimeout: CONNECTION_TIMEOUT,
-        receiveTimeout: RECEIVE_TIMEOUT,
-        headers: await _getDefaultHeaders());
+  Future<RequestOptions> _buildDefaultOptions(RequestOptions options) async {
+    options.baseUrl = Api.SMART_HOST;
+    options.connectTimeout = CONNECTION_TIMEOUT;
+    options.receiveTimeout = RECEIVE_TIMEOUT;
+    if (options.headers != null) {
+      options.headers.addAll(await _getDefaultHeaders());
+    } else {
+      options.headers = await _getDefaultHeaders();
+    }
+    return options;
+//    return RequestOptions(
+//        baseUrl: Api.SMART_HOST,
+//        connectTimeout: CONNECTION_TIMEOUT,
+//        receiveTimeout: RECEIVE_TIMEOUT,
+//        headers: await _getDefaultHeaders());
   }
 
   Future<Map<String, dynamic>> _getDefaultHeaders() async {
@@ -144,7 +154,7 @@ class HttpClient {
     return response;
   }
 
-  Options _onRequestInterceptor(RequestOptions options) {
+  RequestOptions _onRequestInterceptor(RequestOptions options) {
     print('''*********** onSend Request >>>>>>>>>>>>>>>>>>>>>> \n
       baseUrl : ${options.baseUrl}
       path : ${options.path}
