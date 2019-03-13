@@ -1,23 +1,20 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
-import 'package:smart_park/components/personal/data/local_personal_data.dart';
-import 'package:smart_park/values/json_strings.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:smart_park/data/local_pay_data.dart';
+import 'package:smart_park/plugin/unionpay_plugin.dart';
+import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/json_strings.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:tobias/tobias.dart' as tobias;
+import 'package:fluwx/fluwx.dart' as fluwx;
 
 //支付Dialog/
 @immutable
 class ModalBottomSheetPay extends StatefulWidget {
-  ModalBottomSheetPay(this.payCount,
-      {Key key, this.onPayState})
+  ModalBottomSheetPay(this.payCount, {Key key, this.onPayState})
       : super(key: key);
   final ValueChanged<int> onPayState;
   final String payCount;
@@ -98,7 +95,7 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget._checkIndex = index;
+          widget._checkIndex = obj.type;
         });
         print("item 点击");
       },
@@ -116,7 +113,8 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
               width: ScreenUtil().setWidth(37),
               height: ScreenUtil().setHeight(37),
               fit: BoxFit.fill,
-            ), //item 前置图
+            ),
+            //item 前置图
             Padding(
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(25)),
               child: Text(
@@ -214,5 +212,43 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
         child: Text(pay_tag_title,
             style: TextStyle(
                 color: ColorRes.WHITE, fontSize: ScreenUtil().setSp(13))));
+  }
+}
+
+class PaymentHandle {
+  static const PAY_TYPE_ALIPAY = 1;
+
+  static const PAY_TYPE_WX = 2;
+
+  static const PAY_TYPE_UPPAY_COM = 3;
+
+  static const PAY_TYPE_UPPAY_PER = 4;
+
+  void handlePay(int type) async {
+    switch (type) {
+      case PAY_TYPE_ALIPAY:
+        tobias.pay("");
+        break;
+      case PAY_TYPE_WX:
+        fluwx.pay(
+                appId: '',
+                partnerId: '1900000109',
+                prepayId: '1101000000140415649af9fc314aa427',
+                packageValue: 'Sign=WXPay',
+                nonceStr: '1101000000140429eb40476f8896f4c9',
+                timeStamp: 1398746574,
+                sign: '7FFECB600D7157C5AA49810D2D8F28BC2811827B',
+                signType: '选填',
+                extData: '选填');
+        break;
+      case PAY_TYPE_UPPAY_COM:
+      case PAY_TYPE_UPPAY_PER:
+        var response =
+            await Dio().get('http://101.231.204.84:8091/sim/getacptn');
+        print('response ::: $response');
+        var result = await UnionPayPlugin().pay(response?.data?.toString());
+        print('get native pay result :: $result');
+        break;
+    }
   }
 }
