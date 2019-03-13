@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
 import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class AppComponent extends StatefulWidget {
   @override
@@ -30,12 +33,17 @@ class _AppComponentState extends State<AppComponent> {
 
     Future.delayed(Duration(seconds: 1)).then((value) {
       // todo check login status
-      bool isLogin = false;
-      if (isLogin) {
-        NavigatorUtil.goLogin(context);
-      } else {
-        NavigatorUtil.goHome(context);
-      }
+      UserDao(StoreProvider.of<AppState>(context))
+          .getUserInfo()
+          .then((account) async {
+        if (account == null) {
+          // 未登录
+          NavigatorUtil.goLogin(context);
+        } else {
+          // 已登录
+          NavigatorUtil.goHome(context);
+        }
+      });
     });
   }
 

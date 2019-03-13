@@ -3,7 +3,7 @@ class LoginResponse {
   UserData userData;
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
+    status = json['errorCode'];
     var data = json['data'];
     if (data != null) {
       userData = UserData.fromJson(data);
@@ -16,7 +16,7 @@ class UserData {
   num expireAt;
 
   UserData.fromJson(Map<String, dynamic> json)
-      : token = json['access_token'],
+      : token = json['token'],
         expireAt = json['access_token_expire_at'];
 }
 

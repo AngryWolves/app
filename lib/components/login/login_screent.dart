@@ -80,6 +80,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                       login_check_password_hint,
                       _loginPasswordTextController,
                       isMobile: false,
+                      obscureText: true,
                       maxLength: 18,
                     )),
                 GestureDetector(
