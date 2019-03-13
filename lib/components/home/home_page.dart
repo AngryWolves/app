@@ -6,6 +6,7 @@ import 'package:smart_park/components/home/home_body.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/event/home_action_event.dart';
 import 'package:smart_park/router/navigator_util.dart';
+//import 'package:fluwx/fluwx.dart' as fluwx;
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+//    fluwx.register('')
     _initActionTapListener();
   }
 

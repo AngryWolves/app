@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import fluwx
 
 @UIApplicationMain
 class AppDelegate: FlutterAppDelegate {
@@ -68,6 +69,8 @@ class AppDelegate: FlutterAppDelegate {
             }
             self.secondController?.dismiss(animated: true, completion: nil)
         }
-        return TobiasPlugin.handleOpen(url)
+        TobiasPlugin.handleOpen(url)
+        WXApi.handleOpen(url, delegate: FluwxResponseHandler.defaultManager())
+        return true
     }
 }

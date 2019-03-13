@@ -7,10 +7,12 @@ part of 'local_pay_data.dart';
 // **************************************************************************
 
 LocalPay _$LocalPayFromJson(Map<String, dynamic> json) {
-  return LocalPay(json['payTitle'] as String, json['imagePath'] as String);
+  return LocalPay(json['payTitle'] as String, json['imagePath'] as String,
+      json['type'] as int);
 }
 
 Map<String, dynamic> _$LocalPayToJson(LocalPay instance) => <String, dynamic>{
       'payTitle': instance.payTitle,
-      'imagePath': instance.imagePath
+      'imagePath': instance.imagePath,
+      'type': instance.type
     };

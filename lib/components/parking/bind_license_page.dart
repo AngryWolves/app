@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/parking/enter_license.dart';
 import 'package:smart_park/components/parking/license_code_dialog.dart';
-import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
+import 'package:smart_park/widget/black_top_white_bottom_bg.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
 
@@ -59,7 +59,10 @@ class _BindLicenceState extends BaseState<BindLicensePage> {
           onLeadTop: onBack, elevation: 0.0),
       //    appBar: buildParkingAppBar(),
       body: Stack(
-        children: <Widget>[_buildBackground(), _buildCoverBindLayout()],
+        children: <Widget>[
+          BlackTopWhiteBottomLayer().layerBuilder,
+          _buildCoverBindLayout()
+        ],
       ),
     );
   }
@@ -77,27 +80,6 @@ class _BindLicenceState extends BaseState<BindLicensePage> {
               margin: EdgeInsets.only(
                   top: ScreenUtil().setHeight(30), left: 15.0, right: 15.0),
               child: GradientButton(bind_license_ok, () {}))
-        ],
-      );
-
-  ///
-  /// 上黑下白的背景
-  ///
-  Widget _buildBackground() => Column(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: ColorRes.BLACK_APP_BAR_BACKGROUND,
-              border: Border(
-                  top: BorderSide(color: ColorRes.BLACK_APP_BAR_BACKGROUND)),
-            ),
-            height: ScreenUtil().setHeight(110),
-          ),
-          Expanded(
-            child: Container(
-              color: ColorRes.APP_BACKGROUND,
-            ),
-          )
         ],
       );
 

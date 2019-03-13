@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
+///
+/// 我的车辆
+///
 class MyCar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class MyCar extends StatelessWidget {
                         ),
                     ),
                 ),
-                _buildParkingStatus()
+                _buildParkingStatus(context)
             ],
         ),
     );
@@ -46,7 +50,7 @@ class MyCar extends StatelessWidget {
   ///
   /// 停车状态
   ///
-  Widget _buildParkingStatus() {
+  Widget _buildParkingStatus(BuildContext context) {
       var status = 0;
       return Container(
           decoration: BoxDecoration(
@@ -67,7 +71,7 @@ class MyCar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: _buildStatusAndFee(status),
                   ),
-                  _buildStopParkingBtn(status)
+                  _buildStopParkingBtn(status, context)
               ],
           ),
       );
@@ -104,10 +108,12 @@ class MyCar extends StatelessWidget {
   ///
   /// 结束停车按钮
   ///
-  Widget _buildStopParkingBtn(int status) {
+  Widget _buildStopParkingBtn(int status, BuildContext context) {
       if (status == 0) {
           return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                  NavigatorUtil.goParkingEnd(context);
+              },
               child: Container(
                   alignment: Alignment.center,
                   height: ScreenUtil().setHeight(30),

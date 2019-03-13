@@ -164,7 +164,11 @@ class NavigatorUtil {
   static void goMonitorPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doMonitor);
 
-  /// 加纳费用
+  /// 缴纳费用
   static void goPayment(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doPayment);
+
+  /// 结束停车
+  static void goParkingEnd(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doParkingEnd);
 }
