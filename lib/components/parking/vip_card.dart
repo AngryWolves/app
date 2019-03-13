@@ -70,9 +70,12 @@ class VipCard extends StatelessWidget {
         ],
       );
 
+  ///
+  /// 包月用户月卡
+  ///
   Widget _buildHasVipCar() => Container(
         margin: const EdgeInsets.only(top: 10.0),
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 7.0, 10.0, 15.0),
         height: ScreenUtil().setHeight(79),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -90,16 +93,24 @@ class VipCard extends StatelessWidget {
                   width: ScreenUtil().setWidth(54),
                   height: ScreenUtil().setHeight(18),
                 ),
-                Text(
-                  parking_has_no_vip_card_limit,
-                  style: TextStyle(
-                          fontSize: ScreenUtil().setSp(14), color: ColorRes.GERY_TEXT),
+                Container(
+                  padding: const EdgeInsets.only(left: 11.0),
+                  child: Text(
+                    parking_has_no_vip_card_limit + '2019年5月22日',
+                    style: TextStyle(
+                            fontSize: ScreenUtil().setSp(13),
+                            color: ColorRes.GERY_TEXT),
+                  ),
                 ),
-                Text(
-                  '2019年5月22日',
-                  style: TextStyle(
-                          fontSize: ScreenUtil().setSp(14), color: ColorRes.TEXT_FIELD_BORDER),
-                )
+                Container(
+                  padding: const EdgeInsets.only(left: 11.0),
+                  child: Text(
+                    parking_my_car_code + 'B021',
+                    style: TextStyle(
+                            fontSize: ScreenUtil().setSp(13),
+                            color: ColorRes.GERY_TEXT),
+                  ),
+                ),
               ],
             ),
             buildCommonStrokeButton(parking_has_no_vip_card_renewal_fee)
