@@ -212,6 +212,7 @@ const parking_fee_start_time = '开始时间';
 const parking_fee_end_time = '结束时间';
 const parking_duration = '停车时长';
 const parking_fee_unit = '¥ ';
+const parking_fee_pay_now = '立刻支付';
 
 const repair_action_type = '报修类型';
 const repair_action_reserve_date = '预约日期';
