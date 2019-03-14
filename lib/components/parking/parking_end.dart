@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/parking/pay_finish_dialog.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -59,7 +60,10 @@ class _ParkingEndingState extends BaseState<ParkingEnding> {
               context: context,
               builder: (ctx) => ModalBottomSheetPay(
                     '30',
-                    onPayState: (int type) {},
+                    onPayState: (int type) {
+                      showDialog(
+                          context: context, builder: (_) => PayFinishDialog());
+                    },
                   ));
         }),
       );
@@ -102,7 +106,7 @@ class _ParkingEndingState extends BaseState<ParkingEnding> {
             child: Column(
               children: _feeItemData.map((data) {
                 return ParkingFeeInfoItem(title: data.title, desc: data.desc)
-                        .feeItemBuilder;
+                    .feeItemBuilder;
               }).toList(),
             ),
           )
