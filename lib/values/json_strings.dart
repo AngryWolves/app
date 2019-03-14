@@ -18,7 +18,7 @@ abstract class JsonStrings {
         "imagePath": "images/icon_password@3x.png"
     },
     {
-        "title": "联系客服",
+        "title": "客服电话",
         "imagePath": "images/icon_service@3x.png"
     },
     {
