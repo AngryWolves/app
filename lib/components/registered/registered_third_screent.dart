@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/gender_dialog.dart';
+import 'package:flutter/services.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen({@required this.mobile, this.code});
@@ -18,6 +18,7 @@ class RegisteredThirdScreen extends StatefulWidget {
   final String mobile;
   final String code;
   String _gender = '男';
+  String _company = '';
 
   @override
   State<StatefulWidget> createState() {
@@ -29,7 +30,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
   final _registeredPasswordTextController = TextEditingController();
   final _registeredCheckPasswordTextController = TextEditingController();
   final _registeredUserNameTextController = TextEditingController();
-  final _registeredGenderTextController = TextEditingController();
+  final _registeredMailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,51 +55,48 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   fit: BoxFit.fill,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
-                      left: ScreenUtil().setWidth(15),
-                      right: ScreenUtil().setWidth(15),
-                      top: ScreenUtil().setHeight(31)),
-                  height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(
-                    registered_third_password_hint,
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(30)),
+                ),
+                _buildItemWidget(
+                    registered_third_password_title,
                     _registeredPasswordTextController,
-                    maxLength: 12,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(
-                        left: ScreenUtil().setWidth(15),
-                        right: ScreenUtil().setWidth(15)),
-                    height: ScreenUtil().setHeight(49),
-                    child: TextFieldWidget(
-                      registered_third_check_password_hint,
-                      _registeredCheckPasswordTextController,
-                      maxLength: 12,
-                    )),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
-                  ),
-                  height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(
-                    registered_third_name_hint,
+                    registered_third_password_hint,
+                    18,
+                    true,
+                    TextInputType.text),
+                _buildItemWidget(
+                    registered_third_check_password_title,
+                    _registeredCheckPasswordTextController,
+                    registered_third_check_password_hint,
+                    18,
+                    true,
+                    TextInputType.text),
+                _buildItemWidget(
+                    registered_third_mail_title,
+                    _registeredMailTextController,
+                    registered_third_mail_hint,
+                    50,
+                    false,
+                    TextInputType.emailAddress),
+                _buildItemWidget(
+                    registered_third_name_title,
                     _registeredUserNameTextController,
-                    maxLength: 15,
-                  ),
-                ),
+                    registered_third_name_hint,
+                    8,
+                    false,
+                    TextInputType.text),
                 _buildGenderWidget(),
+                _buildCompanyWidget(),
                 GestureDetector(
                   onTap: () {
                     String password = _registeredPasswordTextController.text;
                     String checkPassword =
                         _registeredCheckPasswordTextController.text;
                     String userName = _registeredUserNameTextController.text;
-                    String gender = _registeredGenderTextController.text;
                     if (ObjectUtil.isEmptyString(password) ||
                         ObjectUtil.isEmptyString(checkPassword) ||
                         ObjectUtil.isEmptyString(userName) ||
-                        ObjectUtil.isEmptyString(gender)) {
+                        ObjectUtil.isEmptyString(widget._gender)) {
                       Fluttertoast.showToast(
                           msg: registered_third_empty_error_text);
                       return;
@@ -111,7 +109,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                   },
                   child: Container(
                     margin: EdgeInsets.only(
-                        top: ScreenUtil().setHeight(53),
+                        top: ScreenUtil().setHeight(30),
                         bottom: ScreenUtil().setHeight(29)),
                     width: ScreenUtil().setWidth(345),
                     height: ScreenUtil().setHeight(45),
@@ -141,6 +139,79 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
             ),
           ),
         ));
+  }
+
+  Widget _buildItemWidget(title, TextEditingController controller, hint,
+      maxLength, obscureText, keyboardType) {
+    return Container(
+      margin: EdgeInsets.only(
+        left: ScreenUtil().setWidth(15),
+        right: ScreenUtil().setWidth(15),
+      ),
+      decoration: BoxDecoration(
+        border:
+            Border(bottom: BorderSide(color: Color.fromRGBO(240, 240, 240, 1))),
+      ),
+      height: ScreenUtil().setHeight(45),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        children: <Widget>[
+          Text(
+            !ObjectUtil.isEmptyString(title) ? title : '',
+            style: TextStyle(
+                color: Color.fromRGBO(46, 49, 56, 1),
+                fontSize: ScreenUtil().setSp(15)),
+          ),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+//                  contentPadding:
+//                      EdgeInsets.only(bottom: ScreenUtil().setHeight(22)),
+                  hintText: !ObjectUtil.isEmptyString(hint) ? hint : '',
+                  hintStyle: TextStyle(
+                      color: ColorRes.COLOR_LOGIN_HINT,
+                      fontSize: ScreenUtil().setSp(15))),
+              onChanged: (text) {
+                controller.text = text;
+                //内容改变的回调
+              },
+              onSubmitted: (text) {
+                //内容提交(按回车)的回调
+//                    print('submit');
+              },
+              controller: TextEditingController.fromValue(TextEditingValue(
+                  text: controller.text,
+                  selection: TextSelection.fromPosition(TextPosition(
+                      affinity: TextAffinity.downstream,
+                      offset: controller.text.length)))),
+              keyboardType:
+                  keyboardType == null ? TextInputType.text : keyboardType,
+              //键盘类型
+              textInputAction: TextInputAction.none,
+              //显示的文字内容为 下一步
+              style: TextStyle(
+                  color: Color.fromRGBO(46, 49, 56, 1),
+                  fontSize: ScreenUtil().setSp(15)),
+//          maxLength: 11,
+              //最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串
+              //这种情况一般是不符合我们设计的要求的，但是有需要限制其输入的位数
+              inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+              maxLines: 1,
+
+              //最大行数
+              autocorrect: false,
+              //是否自动更正
+              autofocus: false,
+              //是否自动对焦
+              obscureText: obscureText,
+              //是否是密码
+              textAlign: TextAlign.end,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildGenderWidget() {
@@ -188,6 +259,70 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                           EdgeInsets.only(right: ScreenUtil().setWidth(10)),
                       child: Text(
                         widget._gender,
+                        style: TextStyle(
+                            color: Color.fromRGBO(46, 49, 56, 1),
+                            fontSize: ScreenUtil().setSp(15)),
+                      )),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Color.fromRGBO(46, 49, 56, 1),
+                    size: 15.0,
+                  )
+                ],
+              ),
+              flex: 1,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCompanyWidget() {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return GenderDialog(
+                onSureState: (String firm) {
+                  this.setState(() {
+                    widget._gender = firm;
+                  });
+                },
+              );
+            });
+        print("我的公司点击");
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: ScreenUtil().setWidth(15),
+          right: ScreenUtil().setWidth(15),
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(color: Color.fromRGBO(240, 240, 240, 1))),
+        ),
+        height: ScreenUtil().setHeight(45),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: <Widget>[
+            Text(
+              registered_third_company_title,
+              style: TextStyle(
+                  color: Color.fromRGBO(46, 49, 56, 1),
+                  fontSize: ScreenUtil().setSp(15)),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Padding(
+                      padding:
+                          EdgeInsets.only(right: ScreenUtil().setWidth(10)),
+                      child: Text(
+                        widget._company,
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),
