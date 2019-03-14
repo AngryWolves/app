@@ -58,6 +58,8 @@ class _GenderDialogState extends State<GenderDialog> {
                             Container(
                               height: ScreenUtil().setHeight(26),
                               alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil().setHeight(20)),
                               child: Row(
                                 children: <Widget>[
                                   Radio(
@@ -80,6 +82,8 @@ class _GenderDialogState extends State<GenderDialog> {
                             Container(
                               height: ScreenUtil().setHeight(26),
                               alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil().setHeight(10)),
                               child: Row(
                                 children: <Widget>[
                                   Radio(
@@ -128,16 +132,10 @@ class _GenderDialogState extends State<GenderDialog> {
                                     if (widget.onSureState != null) {
                                       switch (widget.groupValue) {
                                         case 1:
-                                          widget.onSureState("认证企业");
+                                          widget.onSureState("男");
                                           break;
                                         case 2:
-                                          widget.onSureState("园区十佳优秀企业");
-                                          break;
-                                        case 3:
-                                          widget.onSureState("优秀企业");
-                                          break;
-                                        case 4:
-                                          widget.onSureState("高效企业");
+                                          widget.onSureState("女");
                                           break;
                                       }
                                     }

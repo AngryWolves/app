@@ -10,12 +10,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/widget/gender_dialog.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen({@required this.mobile, this.code});
 
   final String mobile;
   final String code;
+  String _gender = '男';
 
   @override
   State<StatefulWidget> createState() {
@@ -57,34 +59,35 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       right: ScreenUtil().setWidth(15),
                       top: ScreenUtil().setHeight(31)),
                   height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_password_hint,
-                      _registeredPasswordTextController,maxLength: 12,),
+                  child: TextFieldWidget(
+                    registered_third_password_hint,
+                    _registeredPasswordTextController,
+                    maxLength: 12,
+                  ),
                 ),
                 Container(
                     margin: EdgeInsets.only(
                         left: ScreenUtil().setWidth(15),
                         right: ScreenUtil().setWidth(15)),
                     height: ScreenUtil().setHeight(49),
-                    child: TextFieldWidget(registered_third_check_password_hint,
-                        _registeredCheckPasswordTextController,maxLength: 12,)),
+                    child: TextFieldWidget(
+                      registered_third_check_password_hint,
+                      _registeredCheckPasswordTextController,
+                      maxLength: 12,
+                    )),
                 Container(
                   margin: EdgeInsets.only(
                     left: ScreenUtil().setWidth(15),
                     right: ScreenUtil().setWidth(15),
                   ),
                   height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_name_hint,
-                      _registeredUserNameTextController,maxLength: 15,),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(15),
-                    right: ScreenUtil().setWidth(15),
+                  child: TextFieldWidget(
+                    registered_third_name_hint,
+                    _registeredUserNameTextController,
+                    maxLength: 15,
                   ),
-                  height: ScreenUtil().setHeight(50),
-                  child: TextFieldWidget(registered_third_gender_hint,
-                      _registeredGenderTextController,maxLength: 1,),
                 ),
+                _buildGenderWidget(),
                 GestureDetector(
                   onTap: () {
                     String password = _registeredPasswordTextController.text;
@@ -138,5 +141,69 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
             ),
           ),
         ));
+  }
+
+  Widget _buildGenderWidget() {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return GenderDialog(
+                onSureState: (String firm) {
+                  this.setState(() {
+                    widget._gender = firm;
+                  });
+                },
+              );
+            });
+        print("性别选择点击");
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: ScreenUtil().setWidth(15),
+          right: ScreenUtil().setWidth(15),
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(color: Color.fromRGBO(240, 240, 240, 1))),
+        ),
+        height: ScreenUtil().setHeight(45),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: <Widget>[
+            Text(
+              registered_third_gender_title,
+              style: TextStyle(
+                  color: Color.fromRGBO(46, 49, 56, 1),
+                  fontSize: ScreenUtil().setSp(15)),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Padding(
+                      padding:
+                          EdgeInsets.only(right: ScreenUtil().setWidth(10)),
+                      child: Text(
+                        widget._gender,
+                        style: TextStyle(
+                            color: Color.fromRGBO(46, 49, 56, 1),
+                            fontSize: ScreenUtil().setSp(15)),
+                      )),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Color.fromRGBO(46, 49, 56, 1),
+                    size: 15.0,
+                  )
+                ],
+              ),
+              flex: 1,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
