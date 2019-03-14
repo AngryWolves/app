@@ -7,7 +7,7 @@ import 'package:smart_park/widget/common_stroke_button.dart';
 class VipCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return _buildHasVipCar();
+    return _buildNoVipLayout();
   }
 
   ///
