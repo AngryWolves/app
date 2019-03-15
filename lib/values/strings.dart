@@ -222,6 +222,15 @@ const parking_fee_pay_now = '立刻支付';
 const parking_pay_finish_title = '停车提示';
 const parking_pay_finish_desc = '请于15分钟内离开车库';
 const parking_pay_finish_know = '知道了';
+const parking_pay_card_title = '选择购买月卡期限';
+const parking_pay_card_select_limit_time = '购买期限';
+const parking_pay_card_desc = '（购买多月更优惠）';
+const parking_pay_card_select = '请选择';
+const parking_pay_card_select_month = '个月';
+const parking_pay_card_total_amount = '合计金额：';
+const parking_pay_card_next = '下一步';
+const parking_pay_card_has_selected_month = '已选月数：';
+const unit_rmb = '¥';
 
 const repair_action_type = '报修类型';
 const repair_action_reserve_date = '预约日期';
