@@ -256,3 +256,5 @@ const payment_water_fee = '水费';
 const payment_property_fee = '物业费';
 const payment_ele_fee = '电费';
 const payment_payment_history = '历史记录';
+
+const reserve_action_ok = '速定';

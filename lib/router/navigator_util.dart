@@ -171,4 +171,8 @@ class NavigatorUtil {
   /// 结束停车
   static void goParkingEnd(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doParkingEnd);
+
+  /// 结束停车
+  static void goReservePage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReserve);
 }

@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
           NavigatorUtil.goPayment(context);
           break;
         case HOME_ACTION_RESERVE:
+          NavigatorUtil.goReservePage(context);
           break;
         case HOME_ACTION_REPORT_ACTION:
           break;
