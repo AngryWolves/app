@@ -27,6 +27,7 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/reserve/reserve_page.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -157,3 +158,5 @@ var monitorRouteHandle = Handler(handlerFunc: (_, params) => MonitorPage());
 var paymentRouteHandle = Handler(handlerFunc: (_, params) => PaymentPage());
 
 var parkingEndHandle = Handler(handlerFunc: (_, params) => ParkingEnding());
+
+var reserveHandle = Handler(handlerFunc: (_, params) => ReservePage());

@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/values/colors.dart';
 
-Widget buildCommonAppbar(
-  String title, {
-  Color backgroundColor = ColorRes.COLOR_COMMON_APP_BAR_BACKGROUND,
-  Color titleColor = Colors.white,
-  onLeadTop,
-  double elevation = 1.0,
-  Brightness brightness = Brightness.dark,
-}) {
+Widget buildCommonAppbar(String title,
+    {Color backgroundColor = ColorRes.COLOR_COMMON_APP_BAR_BACKGROUND,
+    Color titleColor = Colors.white,
+    onLeadTop,
+    double elevation = 1.0,
+    Brightness brightness = Brightness.dark,
+    List<Widget> actions}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(ScreenUtil().setHeight(48)), //设置AppBar高度
     child: AppBar(
@@ -32,8 +31,7 @@ Widget buildCommonAppbar(
                   color: titleColor,
                   size: 15.0,
                 ),
-              )
-            )
+              ))
           : null,
       title: !ObjectUtil.isEmptyString(title)
           ? Text(
@@ -42,7 +40,9 @@ Widget buildCommonAppbar(
                   color: titleColor, fontSize: ScreenUtil().setSp(18)),
             )
           : null,
-      centerTitle: true, //标题是否居中，默认为false
+      centerTitle: true,
+      //标题是否居中，默认为false
+      actions: actions,
     ),
   );
 //  return AppBar(
