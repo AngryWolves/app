@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
@@ -11,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/gender_dialog.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_park/widget/company_dialog.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen({@required this.mobile, this.code});
@@ -18,10 +16,11 @@ class RegisteredThirdScreen extends StatefulWidget {
   final String mobile;
   final String code;
   String _gender = '男';
-  String _company = '';
+  String _company;
 
   @override
   State<StatefulWidget> createState() {
+    print("==data==="+_gender.toString()+"======="+_company.toString());
     return _RegisteredThirdScreenState();
   }
 }
@@ -40,8 +39,10 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
           InputManageUtil.shutdownInputKeyboard();
           Navigator.pop(context);
         }),
+        resizeToAvoidBottomPadding: false,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          reverse:true,
           child: Container(
             color: ColorRes.WHITE,
             padding: EdgeInsets.only(top: ScreenUtil().setHeight(65)),
@@ -85,7 +86,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                     8,
                     false,
                     TextInputType.text),
-                _buildGenderWidget(),
+                _buildGenderWidget(widget._gender),
                 _buildCompanyWidget(),
                 GestureDetector(
                   onTap: () {
@@ -214,7 +215,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
     );
   }
 
-  Widget _buildGenderWidget() {
+  Widget _buildGenderWidget(_gender) {
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -222,9 +223,9 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
             context: context,
             builder: (context) {
               return GenderDialog(
-                onSureState: (String firm) {
+                onSureState: (String gender) {
                   this.setState(() {
-                    widget._gender = firm;
+                    widget._gender = gender;
                   });
                 },
               );
@@ -258,7 +259,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       padding:
                           EdgeInsets.only(right: ScreenUtil().setWidth(10)),
                       child: Text(
-                        widget._gender,
+                        !ObjectUtil.isEmptyString(_gender)?_gender:'',
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),
@@ -279,16 +280,17 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
   }
 
   Widget _buildCompanyWidget() {
+    print("==data===" + widget._company.toString());
     return GestureDetector(
       onTap: () {
         showDialog(
             barrierDismissible: true,
             context: context,
             builder: (context) {
-              return GenderDialog(
-                onSureState: (String firm) {
+              return CompanyDialog(
+                onSureState: (String company) {
                   this.setState(() {
-                    widget._gender = firm;
+                    widget._company = company;
                   });
                 },
               );
@@ -322,7 +324,9 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       padding:
                           EdgeInsets.only(right: ScreenUtil().setWidth(10)),
                       child: Text(
-                        widget._company,
+                        !ObjectUtil.isEmptyString(widget._company)
+                            ? widget._company
+                            : '',
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),
