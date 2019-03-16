@@ -264,3 +264,5 @@ const reserve_action_ok = '速定';
 const reserve_meeting_room = '会议室';
 const reserve_active_room = '活动室';
 const reserve_gym = '健身房';
+const reserve_equipment = '设备：';
+const reserve_item_now = '去预定';

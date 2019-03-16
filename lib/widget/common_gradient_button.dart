@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/values/colors.dart';
 
 class GradientButton extends StatelessWidget {
-  GradientButton(this.text, this.onTap, {this.radius = 5.0, this.height = 50});
+  GradientButton(this.text, this.onTap,
+      {this.radius = 5.0, this.height = 50, this.fontSize = 17});
 
   final String text;
   final onTap;
   final double radius;
   final int height;
+  final int fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class GradientButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style:
-              TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(17)),
+          style: TextStyle(
+              color: Colors.white, fontSize: ScreenUtil().setSp(fontSize)),
         ),
       ),
     );
