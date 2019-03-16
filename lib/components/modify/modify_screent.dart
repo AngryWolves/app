@@ -174,6 +174,7 @@ class _ModifyScreenState extends State<ModifyScreen> {
             NavigatorUtil.goPermissions(context, "");
             break;
           case 4:
+            NavigatorUtil.goPermissions(context, "");
             break;
         }
         print("头像点击");
