@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
@@ -14,7 +15,7 @@ class RoomItem extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
       child: Column(
-        children: <Widget>[_buildPreviewImage(), _buildRoomInfo()],
+        children: <Widget>[_buildPreviewImage(), _buildRoomInfo(context)],
       ),
     );
   }
@@ -22,7 +23,7 @@ class RoomItem extends StatelessWidget {
   ///
   /// 场地信息
   ///
-  Widget _buildRoomInfo() {
+  Widget _buildRoomInfo(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
@@ -47,7 +48,9 @@ class RoomItem extends StatelessWidget {
             height: ScreenUtil().setHeight(30),
             child: GradientButton(
               reserve_item_now,
-              () {},
+              () {
+                NavigatorUtil.goReserveSelectDatePage(context);
+              },
               radius: 3.0,
               fontSize: 15,
             ),

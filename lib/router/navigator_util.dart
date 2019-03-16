@@ -172,7 +172,11 @@ class NavigatorUtil {
   static void goParkingEnd(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doParkingEnd);
 
-  /// 结束停车
+  /// 场地预定
   static void goReservePage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReserve);
+
+  /// 预约时间
+  static void goReserveSelectDatePage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReserveSelectDate);
 }

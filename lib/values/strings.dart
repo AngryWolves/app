@@ -266,3 +266,5 @@ const reserve_active_room = '活动室';
 const reserve_gym = '健身房';
 const reserve_equipment = '设备：';
 const reserve_item_now = '去预定';
+const reserve_select_date_title = '预约';
+const reserve_select_date_location = '所处位置：xxxxxxxxxxxxxxxxxxxxx';
