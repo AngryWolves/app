@@ -261,3 +261,6 @@ const payment_ele_fee = '电费';
 const payment_payment_history = '历史记录';
 
 const reserve_action_ok = '速定';
+const reserve_meeting_room = '会议室';
+const reserve_active_room = '活动室';
+const reserve_gym = '健身房';
