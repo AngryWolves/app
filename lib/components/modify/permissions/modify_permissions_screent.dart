@@ -23,6 +23,7 @@ import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/widget/personal_dialog.dart';
+import 'package:smart_park/widget/permissions_app_bar.dart';
 
 class ModifyPermissionsScreen extends StatefulWidget {
   ModifyPermissionsScreen({@required this.userId});
@@ -40,15 +41,23 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: buildCommonAppbar(permissions_title_text, onLeadTop: () {
-        InputManageUtil.shutdownInputKeyboard();
-        Navigator.pop(context);
-      }),
+//      appBar: buildCommonAppbar(permissions_title_text, onLeadTop: () {
+//        InputManageUtil.shutdownInputKeyboard();
+//        Navigator.pop(context);
+//      }),
       body: Container(
-        padding: EdgeInsets.only(
-            left: ScreenUtil().setWidth(15), right: ScreenUtil().setWidth(15)),
+//        padding: EdgeInsets.only(
+//            left: ScreenUtil().setWidth(15), right: ScreenUtil().setWidth(15)),
         child: Column(
           children: <Widget>[
+            PermissionsAppBar(
+              onBackState: () {
+                Navigator.pop(context);
+              },
+              onAuditState: () {
+                NavigatorUtil.goAudit(context, '');
+              },
+            ),
             _firmInfoWidget(),
             _buildInfoWidget('总经理'),
             _buildInfoWidget('财务'),
@@ -66,6 +75,8 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
   Widget _firmInfoWidget() {
     return Container(
       height: ScreenUtil().setHeight(70),
+      padding: EdgeInsets.only(
+          left: ScreenUtil().setWidth(15), right: ScreenUtil().setWidth(15)),
       child: Row(
         children: <Widget>[
           Image.asset(
@@ -90,6 +101,8 @@ class _ModifyPermissionsScreen extends State<ModifyPermissionsScreen> {
 
   Widget _buildInfoWidget(title) {
     return Container(
+      padding: EdgeInsets.only(
+          left: ScreenUtil().setWidth(15), right: ScreenUtil().setWidth(15)),
       child: ConfigurableExpansionTile(
         topBorderOn: true,
         bottomBorderOn: false,

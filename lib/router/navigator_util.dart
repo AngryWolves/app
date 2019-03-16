@@ -75,6 +75,13 @@ class NavigatorUtil {
         transition: transitionType);
   }
 
+//人员权限
+  static void goAudit(BuildContext context, String userId) {
+    TransitionType transitionType = TransitionType.nativeModal;
+    Application.router.navigateTo(context, Routes.doAudit + "?userId=$userId",
+        transition: transitionType);
+  }
+
   //修改密码(第一步获取code)
   static void goChangePasswordOne(BuildContext context, String mobile) {
     TransitionType transitionType = TransitionType.nativeModal;
@@ -162,17 +169,17 @@ class NavigatorUtil {
 
   /// 摄像监控
   static void goMonitorPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doMonitor);
+      Application.router.navigateTo(context, Routes.doMonitor);
 
   /// 缴纳费用
   static void goPayment(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doPayment);
+      Application.router.navigateTo(context, Routes.doPayment);
 
   /// 结束停车
   static void goParkingEnd(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doParkingEnd);
+      Application.router.navigateTo(context, Routes.doParkingEnd);
 
   /// 结束停车
   static void goReservePage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReserve);
+      Application.router.navigateTo(context, Routes.doReserve);
 }

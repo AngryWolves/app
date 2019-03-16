@@ -25,6 +25,7 @@ class Routes {
   static String doService = "/personal/service";
   static String doModify = "/modify";
   static String doPermissions = "/modify/permissions";
+  static String doAudit = "/modify/permissions/audit";
   static String doChangePassword = "/modify/changePassword";
   static String doChangeMail = "/modify/changeMail";
   static String doChangePasswordOne = "/modify/changePassword/one";
@@ -87,7 +88,9 @@ class Routes {
     router.define(doChangePassword,
         handler: changePasswordRouteHandler,
         transitionType: TransitionType.nativeModal);
-    router.define(doChangeMail, handler: changeMailRouteHandler,transitionType: TransitionType.nativeModal);
+    router.define(doChangeMail,
+        handler: changeMailRouteHandler,
+        transitionType: TransitionType.nativeModal);
     router.define(doChangePasswordOne,
         handler: changePasswordOneRouteHandler,
         transitionType: TransitionType.nativeModal);
@@ -114,5 +117,7 @@ class Routes {
         handler: parkingEndHandle, transitionType: TransitionType.native);
     router.define(doReserve,
         handler: reserveHandle, transitionType: TransitionType.native);
+    router.define(doAudit,
+        handler: auditRouteHandler, transitionType: TransitionType.native);
   }
 }

@@ -28,6 +28,7 @@ import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
+import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -93,6 +94,12 @@ var permissionsRouteHandler = new Handler(
 //      String code = params["code"]?.first;
   return ModifyPermissionsScreen(userId: null);
 });
+var auditRouteHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+//      String mobile = params["mobile"]?.first;
+//      String code = params["code"]?.first;
+      return ModifyPermissionsAuditScreen(userId: null);
+    });
 var repairsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;

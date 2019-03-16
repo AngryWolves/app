@@ -88,6 +88,9 @@ const permissions_guard_info4_text = '101-4';
 const permissions_cancel_text = '取消';
 const permissions_determine_text = '确定';
 
+const audit_title_text = '人员审核';
+const audit_through_text = '通过';
+
 const repairs_title_text = '我的报修';
 const repairs_state_title = '当前状态：';
 const repairs_revoke_state_text = '已撤销';
