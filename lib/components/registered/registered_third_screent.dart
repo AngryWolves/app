@@ -9,6 +9,7 @@ import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/gender_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_park/widget/company_dialog.dart';
+import 'package:smart_park/widget/company_list_dialog.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen({@required this.mobile, this.code});
@@ -287,7 +288,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
             barrierDismissible: true,
             context: context,
             builder: (context) {
-              return CompanyDialog(
+              return CompanyListDialog(
                 onSureState: (String company) {
                   this.setState(() {
                     widget._company = company;
