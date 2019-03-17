@@ -27,6 +27,7 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
 
@@ -164,3 +165,6 @@ var reserveHandle = Handler(handlerFunc: (_, params) => ReservePage());
 
 var reserveSelectDateHandle =
     Handler(handlerFunc: (_, params) => ReserveSelectDate());
+
+var reserveConfirmHandle =
+    Handler(handlerFunc: (_, params) => ReserveConfirmPage());

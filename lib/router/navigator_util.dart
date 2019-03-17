@@ -179,4 +179,8 @@ class NavigatorUtil {
   /// 预约时间
   static void goReserveSelectDatePage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReserveSelectDate);
+
+  /// 预约确认
+  static void goReserveConfirmPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReserveConfirm);
 }
