@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
-
+//import 'package:sider_bar/sider_bar.dart';
 //公司列表Dialog/
 
 class CompanyListDialog extends StatefulWidget {
@@ -21,6 +21,19 @@ class CompanyListDialog extends StatefulWidget {
 }
 
 class _CompanyListDialogState extends State<CompanyListDialog> {
+  final String content = "ABCDEFGHIGKLMNOPQRSTUVWXYZ";
+  ScrollController _controller = ScrollController();
+  List<String> mDataList;
+  List<String> infos=['aber','阿碧儿','波尔图','贝斯买','曾好地方的人格','才让你赶快回家活动','岑人工湖','单刀赴会的风景画','东莞','而儿童','老梁','是啥','是否','首付'];
+
+  @override
+  void initState() {
+    super.initState();
+    mDataList =
+        List<String>.generate(content.length, (index) => content[index]);
+//    print('====data===' + mDataList.length.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,10 +47,11 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
           onTap: () {},
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(70)),
+            height: ScreenUtil().setHeight(597),
 //            color: Color.fromRGBO(245, 245, 245, 1),
             color: Colors.blue,
             child: Column(
-              children: <Widget>[_buildTopWidget()],
+              children: <Widget>[_buildTopWidget(), _buildListWidget()],
             ),
             //
           ),
@@ -80,6 +94,47 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
             flex: 1,
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildListWidget() {
+//    return Container(
+//      color: Colors.red,
+//      height: ScreenUtil().setHeight(520),
+////      child: ListView.builder(
+////          itemCount: 3,
+////          itemBuilder: (context, index) {
+////            _buildItem(context, index);
+////          }),
+//    );
+    return Expanded(
+      child: Stack(
+        alignment: AlignmentDirectional.centerEnd,
+        children: <Widget>[
+          ListView.builder(
+              controller: _controller,
+              itemCount: infos.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _buildItem(context, index);
+              }),
+//          SideBar(
+//              list: mDataList,
+//              textColor: Colors.amberAccent,
+//              color: Colors.black,
+//              valueChanged: (value) {
+//                _controller.jumpTo(mDataList.indexOf(value) * 44.0);
+//              })
+        ],
+      ),
+      flex: 1,
+    );
+  }
+
+  Widget _buildItem(BuildContext context, int index) {
+    return Card(
+      child: ListTile(
+        title: Text(infos[index]),
       ),
     );
   }
