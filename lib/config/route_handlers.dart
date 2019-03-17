@@ -28,7 +28,7 @@ import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
-import 'package:smart_park/components/reserve/tab/reserve_select_date_page.dart';
+import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
