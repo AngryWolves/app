@@ -25,4 +25,5 @@ class ColorRes {
   static const RESERVE_CONFIRM_REMARKS = const Color(0xFFFAFAFA);
   static const FAST_RESERVE_ITEM_TITLE = const Color(0xFF6D7485);
   static const FAST_RESERVE_ITEM_DESC = const Color(0xFFD6D6D6);
+  static const RESERVE_SUCCESS_DESC = const Color(0xFFBFBFBF);
 }

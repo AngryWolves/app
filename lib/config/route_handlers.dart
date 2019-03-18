@@ -29,6 +29,7 @@ import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
 import 'package:smart_park/components/reserve/fast_reserve_page.dart';
+import 'package:smart_park/components/reserve/reserce_succeed_page.dart';
 import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
@@ -178,3 +179,6 @@ var reserveConfirmHandle =
     Handler(handlerFunc: (_, params) => ReserveConfirmPage());
 
 var fastReserveHandle = Handler(handlerFunc: (_, params) => FastReservePage());
+
+var reserveSuccessHandle =
+    Handler(handlerFunc: (_, params) => ReserveSucceedPage());

@@ -43,6 +43,7 @@ class Routes {
   static String doReserveSelectDate = "/home/reserve/selectDate";
   static String doReserveConfirm = "/home/reserve/confirm";
   static String doFastReserve = "/home/reserve/fast";
+  static String doReserveSuccess = "/home/reserve/success";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -128,5 +129,7 @@ class Routes {
             handler: reserveConfirmHandle, transitionType: TransitionType.native);
     router.define(doFastReserve,
             handler: fastReserveHandle, transitionType: TransitionType.native);
+    router.define(doReserveSuccess,
+            handler: reserveSuccessHandle, transitionType: TransitionType.native);
   }
 }

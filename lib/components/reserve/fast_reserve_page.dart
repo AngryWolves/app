@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -52,7 +53,9 @@ class _FastReservePageState extends BaseState<FastReservePage> {
             .reserveItemBuilder,
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30.0),
-          child: GradientButton(reserve_fast_confirm, () {}, ),
+          child: GradientButton(reserve_fast_confirm, () {
+              NavigatorUtil.goReserveSuccessPage(context);
+          }, ),
         )
       ],
     );
