@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/reserve/tab/active_room_tab.dart';
 import 'package:smart_park/components/reserve/tab/gym_tab.dart';
 import 'package:smart_park/components/reserve/tab/meeting_room_tab.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -103,6 +104,9 @@ class _ReservePageState extends BaseState<ReservePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
+              onTap: () {
+                NavigatorUtil.goFastReservePage(context);
+              },
               child: Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 15.0),

@@ -190,4 +190,8 @@ class NavigatorUtil {
   /// 预约确认
   static void goReserveConfirmPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReserveConfirm);
+
+  /// 快速预约
+  static void goFastReservePage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doFastReserve);
 }

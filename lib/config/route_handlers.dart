@@ -11,6 +11,7 @@ import 'package:smart_park/components/modify/changemail/change_mail_screent.dart
 import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
+import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
@@ -27,10 +28,10 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/reserve/fast_reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
-import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -100,8 +101,8 @@ var auditRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-      return ModifyPermissionsAuditScreen(userId: null);
-    });
+  return ModifyPermissionsAuditScreen(userId: null);
+});
 var repairsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
@@ -175,3 +176,5 @@ var reserveSelectDateHandle =
 
 var reserveConfirmHandle =
     Handler(handlerFunc: (_, params) => ReserveConfirmPage());
+
+var fastReserveHandle = Handler(handlerFunc: (_, params) => FastReservePage());
