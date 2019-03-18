@@ -22,4 +22,5 @@ class ColorRes {
   static const REPAIR_SELECT_TYPE_TITLE = const Color(0xFF8F8F8F);
   static const PARKING_FEE_GERY = const Color(0xFF666666);
   static const PARKING_FEE_TITLE_GERY = const Color(0xFF333333);
+  static const RESERVE_CONFIRM_REMARKS = const Color(0xFFFAFAFA);
 }

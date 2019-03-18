@@ -7,19 +7,19 @@ import 'package:smart_park/components/forget/forget_screent.dart';
 import 'package:smart_park/components/home/home_page.dart';
 import 'package:smart_park/components/home/message_page.dart';
 import 'package:smart_park/components/login/login_screent.dart';
+import 'package:smart_park/components/modify/changemail/change_mail_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
-import 'package:smart_park/components/modify/changemail/change_mail_screent.dart';
-import 'package:smart_park/components/parking/parking_end.dart';
-import 'package:smart_park/components/payment/payment_page.dart';
-import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
+import 'package:smart_park/components/parking/parking_end.dart';
 import 'package:smart_park/components/parking/parking_page.dart';
 import 'package:smart_park/components/parking/upload_license_page.dart';
+import 'package:smart_park/components/payment/payment_page.dart';
 import 'package:smart_park/components/personal/appointment/appointment_screent.dart';
+import 'package:smart_park/components/personal/personal_screent.dart';
 import 'package:smart_park/components/personal/repairs/personal_repairs.dart';
 import 'package:smart_park/components/personal/report/report_screent.dart';
 import 'package:smart_park/components/personal/service/service_screent.dart';
@@ -27,7 +27,9 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
+import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
 import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 
 var rootHandler = new Handler(
@@ -167,3 +169,9 @@ var paymentRouteHandle = Handler(handlerFunc: (_, params) => PaymentPage());
 var parkingEndHandle = Handler(handlerFunc: (_, params) => ParkingEnding());
 
 var reserveHandle = Handler(handlerFunc: (_, params) => ReservePage());
+
+var reserveSelectDateHandle =
+    Handler(handlerFunc: (_, params) => ReserveSelectDate());
+
+var reserveConfirmHandle =
+    Handler(handlerFunc: (_, params) => ReserveConfirmPage());

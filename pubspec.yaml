@@ -68,3 +68,6 @@ flutter:
     - images/icon_item_pay3x.png
     - images/ic_payment_item_head.png
     - images/ic_reserve_lightning.png
+    - images/ic_reserve_meeting_room.png
+    - images/ic_reserve_active_room.png
+    - images/ic_reserve_gym.png

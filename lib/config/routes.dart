@@ -40,6 +40,8 @@ class Routes {
   static String doPayment = "/home/payment";
   static String doParkingEnd = "/home/parking/end";
   static String doReserve = "/home/reserve";
+  static String doReserveSelectDate = "/home/reserve/selectDate";
+  static String doReserveConfirm = "/home/reserve/confirm";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -119,5 +121,9 @@ class Routes {
         handler: reserveHandle, transitionType: TransitionType.native);
     router.define(doAudit,
         handler: auditRouteHandler, transitionType: TransitionType.native);
+    router.define(doReserveSelectDate,
+            handler: reserveSelectDateHandle, transitionType: TransitionType.native);
+    router.define(doReserveConfirm,
+            handler: reserveConfirmHandle, transitionType: TransitionType.native);
   }
 }
