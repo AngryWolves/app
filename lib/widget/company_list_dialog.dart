@@ -5,7 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
-//import 'package:sider_bar/sider_bar.dart';
+import 'dart:convert';
+import 'package:azlistview/azlistview.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:smart_park/widget/contact_model.dart';
+import 'package:smart_park/values/json_strings.dart';
+import 'package:lpinyin/lpinyin.dart';
 //公司列表Dialog/
 
 class CompanyListDialog extends StatefulWidget {
@@ -21,17 +27,41 @@ class CompanyListDialog extends StatefulWidget {
 }
 
 class _CompanyListDialogState extends State<CompanyListDialog> {
-  final String content = "ABCDEFGHIGKLMNOPQRSTUVWXYZ";
-  ScrollController _controller = ScrollController();
-  List<String> mDataList;
-  List<String> infos=['aber','阿碧儿','波尔图','贝斯买','曾好地方的人格','才让你赶快回家活动','岑人工湖','单刀赴会的风景画','东莞','而儿童','老梁','是啥','是否','首付'];
+  List<ContactInfo> _contacts = List();
+  int _suspensionHeight = 40;
+  int _itemHeight = 60;
+  String _hitTag = "";
 
   @override
   void initState() {
     super.initState();
-    mDataList =
-        List<String>.generate(content.length, (index) => content[index]);
-//    print('====data===' + mDataList.length.toString());
+    loadData();
+  }
+
+  void loadData() async {
+    //加载联系人列表
+    List list = json.decode(JsonStrings.localPhone);
+    list.forEach((value) {
+      _contacts.add(ContactInfo(name: value['name']));
+    });
+    _handleList(_contacts);
+    setState(() {});
+  }
+
+  void _handleList(List<ContactInfo> list) {
+    if (list == null || list.isEmpty) return;
+    for (int i = 0, length = list.length; i < length; i++) {
+      String pinyin = PinyinHelper.getPinyinE(list[i].name);
+      String tag = pinyin.substring(0, 1).toUpperCase();
+      list[i].namePinyin = pinyin;
+      if (RegExp("[A-Z]").hasMatch(tag)) {
+        list[i].tagIndex = tag;
+      } else {
+        list[i].tagIndex = "#";
+      }
+    }
+    //根据A-Z排序
+    SuspensionUtil.sortListBySuspensionTag(_contacts);
   }
 
   @override
@@ -48,8 +78,7 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(70)),
             height: ScreenUtil().setHeight(597),
-//            color: Color.fromRGBO(245, 245, 245, 1),
-            color: Colors.blue,
+            color: Color.fromRGBO(245, 245, 245, 1),
             child: Column(
               children: <Widget>[_buildTopWidget(), _buildListWidget()],
             ),
@@ -99,42 +128,103 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
   }
 
   Widget _buildListWidget() {
-//    return Container(
-//      color: Colors.red,
-//      height: ScreenUtil().setHeight(520),
-////      child: ListView.builder(
-////          itemCount: 3,
-////          itemBuilder: (context, index) {
-////            _buildItem(context, index);
-////          }),
-//    );
     return Expanded(
       child: Stack(
         alignment: AlignmentDirectional.centerEnd,
         children: <Widget>[
-          ListView.builder(
-              controller: _controller,
-              itemCount: infos.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _buildItem(context, index);
-              }),
-//          SideBar(
-//              list: mDataList,
-//              textColor: Colors.amberAccent,
-//              color: Colors.black,
-//              valueChanged: (value) {
-//                _controller.jumpTo(mDataList.indexOf(value) * 44.0);
-//              })
+          AzListView(
+            data: _contacts,
+            itemBuilder: (context, model) => _buildListItem(model),
+            isUseRealIndex: true,
+            itemHeight: _itemHeight,
+            suspensionHeight: _suspensionHeight,
+            indexBarBuilder: (BuildContext context, List<String> tags,
+                IndexBarTouchCallback onTouch) {
+              return Container(
+//                margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+//                decoration: BoxDecoration(
+//                    color: Colors.grey[50],
+//                    borderRadius: BorderRadius.circular(20.0),
+//                    border: Border.all(color: Colors.grey[300], width: .5)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: IndexBar(
+                    data: tags,
+                    textStyle: TextStyle(
+                        color: Color.fromRGBO(153, 153, 153, 1),
+                        fontSize: ScreenUtil().setSp(10)),
+                    itemHeight: 20,
+                    onTouch: (details) {
+                      onTouch(details);
+                    },
+                  ),
+                ),
+              );
+            },
+            indexHintBuilder: (context, hint) {
+              return Container(
+                alignment: Alignment.center,
+                width: 60.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+                  color: Colors.blue[700].withAlpha(200),
+                  shape: BoxShape.circle,
+                ),
+                child: Text(hint,
+                    style: TextStyle(color: Colors.white, fontSize: 30.0)),
+              );
+            },
+          )
         ],
       ),
       flex: 1,
     );
   }
 
-  Widget _buildItem(BuildContext context, int index) {
-    return Card(
-      child: ListTile(
-        title: Text(infos[index]),
+  Widget _buildListItem(ContactInfo model) {
+    String susTag = model.getSuspensionTag();
+    return Column(
+      children: <Widget>[
+        Offstage(
+          offstage: model.isShowSuspension != true,
+          child: _buildSusWidget(susTag),
+        ),
+        GestureDetector(
+          onTap: () {
+            print("OnItemClick: $model");
+            Navigator.pop(context, model);
+          },
+          child: Container(
+            height: ScreenUtil().setHeight(45),
+            margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(25)),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: Divider.createBorderSide(context,
+                        color: Color.fromRGBO(230, 230, 230, 1)))),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              model.name,
+              style: TextStyle(
+                  color: Color.fromRGBO(50, 50, 50, 1),
+                  fontSize: ScreenUtil().setSp(15)),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildSusWidget(String susTag) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(15)),
+      height: ScreenUtil().setHeight(21),
+      color: const Color(0xFFE8E8E8),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        '$susTag',
+        style: TextStyle(
+            color: Color.fromRGBO(153, 153, 153, 1),
+            fontSize: ScreenUtil().setSp(12)),
       ),
     );
   }
