@@ -190,4 +190,24 @@ class NavigatorUtil {
   /// 预约确认
   static void goReserveConfirmPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReserveConfirm);
+
+  /// 快速预约
+  static void goFastReservePage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doFastReserve);
+
+  /// 预约成功
+  static void goReserveSuccessPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReserveSuccess);
+
+  /// 项目申报
+  static void goReportActionPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReportAction);
+
+  /// 信息详情
+  static void goReportDetailPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReportDetail);
+
+  ///  申请入口
+  static void goApplyPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doApply);
 }

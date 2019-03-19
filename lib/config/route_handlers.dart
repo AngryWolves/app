@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_park/components/app/app_component.dart';
+import 'package:smart_park/components/apply/apply_page.dart';
 import 'package:smart_park/components/bluetooth/bluetooth_control_page.dart';
 import 'package:smart_park/components/forget/forget_next_screent.dart';
 import 'package:smart_park/components/forget/forget_screent.dart';
@@ -11,6 +12,7 @@ import 'package:smart_park/components/modify/changemail/change_mail_screent.dart
 import 'package:smart_park/components/modify/changepawd/change_password_code_screent.dart';
 import 'package:smart_park/components/modify/changepawd/change_password_screent.dart';
 import 'package:smart_park/components/modify/modify_screent.dart';
+import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
@@ -27,10 +29,13 @@ import 'package:smart_park/components/property_repair/repair_page.dart';
 import 'package:smart_park/components/registered/registered_one_screent.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/components/registered/registered_two_screent.dart';
+import 'package:smart_park/components/report_action/report_action_detail.dart';
+import 'package:smart_park/components/report_action/report_action_page.dart';
+import 'package:smart_park/components/reserve/fast_reserve_page.dart';
+import 'package:smart_park/components/reserve/reserce_succeed_page.dart';
 import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
-import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -100,8 +105,8 @@ var auditRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
 //      String code = params["code"]?.first;
-      return ModifyPermissionsAuditScreen(userId: null);
-    });
+  return ModifyPermissionsAuditScreen(userId: null);
+});
 var repairsRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //      String mobile = params["mobile"]?.first;
@@ -175,3 +180,17 @@ var reserveSelectDateHandle =
 
 var reserveConfirmHandle =
     Handler(handlerFunc: (_, params) => ReserveConfirmPage());
+
+var fastReserveHandle = Handler(handlerFunc: (_, params) => FastReservePage());
+
+var reserveSuccessHandle =
+    Handler(handlerFunc: (_, params) => ReserveSucceedPage());
+
+var reportActionHandle =
+    Handler(handlerFunc: (_, params) => ReportActionPage());
+
+var reportDetailHandle =
+    Handler(handlerFunc: (_, params) => DetailPage());
+
+var applyHandle =
+    Handler(handlerFunc: (_, params) => ApplyPage());

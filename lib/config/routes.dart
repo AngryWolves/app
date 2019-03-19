@@ -42,6 +42,11 @@ class Routes {
   static String doReserve = "/home/reserve";
   static String doReserveSelectDate = "/home/reserve/selectDate";
   static String doReserveConfirm = "/home/reserve/confirm";
+  static String doFastReserve = "/home/reserve/fast";
+  static String doReserveSuccess = "/home/reserve/success";
+  static String doReportAction = "/home/report/action";
+  static String doReportDetail = "/home/report/detail";
+  static String doApply = "/home/apply";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -125,5 +130,15 @@ class Routes {
             handler: reserveSelectDateHandle, transitionType: TransitionType.native);
     router.define(doReserveConfirm,
             handler: reserveConfirmHandle, transitionType: TransitionType.native);
+    router.define(doFastReserve,
+            handler: fastReserveHandle, transitionType: TransitionType.native);
+    router.define(doReserveSuccess,
+            handler: reserveSuccessHandle, transitionType: TransitionType.native);
+    router.define(doReportAction,
+            handler: reportActionHandle, transitionType: TransitionType.native);
+    router.define(doReportDetail,
+            handler: reportDetailHandle, transitionType: TransitionType.native);
+    router.define(doApply,
+            handler: applyHandle, transitionType: TransitionType.native);
   }
 }

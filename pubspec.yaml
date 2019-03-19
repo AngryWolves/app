@@ -73,3 +73,6 @@ flutter:
     - images/ic_reserve_meeting_room.png
     - images/ic_reserve_active_room.png
     - images/ic_reserve_gym.png
+    - images/ic_fast_reserve_type.png
+    - images/ic_fast_reserve_date.png
+    - images/ic_fast_reserve_location.png
