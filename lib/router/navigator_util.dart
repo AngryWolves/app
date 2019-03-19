@@ -198,4 +198,8 @@ class NavigatorUtil {
   /// 预约成功
   static void goReserveSuccessPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReserveSuccess);
+
+  /// 项目申报
+  static void goReportActionPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReportAction);
 }

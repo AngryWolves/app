@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
           NavigatorUtil.goReservePage(context);
           break;
         case HOME_ACTION_REPORT_ACTION:
+          NavigatorUtil.goReportActionPage(context);
           break;
         case HOME_ACTION_DECORATE:
           break;
