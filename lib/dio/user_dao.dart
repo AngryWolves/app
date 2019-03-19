@@ -25,16 +25,17 @@ class UserDao extends BaseDao {
     return userData;
   }
 
-  Future<LoginResponse> login(String username, String password) async {
+  Future<LoginResponse> login(String telephone, String password) async {
     var response = await client.post(Api.SMART_LOGIN, data: {
-      Api.PARAM_USERNAME: username,
+      Api.PARAM_TELEPHONE: telephone,
       Api.PARAM_PASSWORD: password,
     });
     var data = response?.data;
+    print("===data===="+data.toString());
     if (data == null) {
       return null;
     }
-    return await _handleLogin(data, username);
+    return await _handleLogin(data, telephone);
   }
 
   Future<LoginResponse> _handleLogin(dynamic data, String username) async {

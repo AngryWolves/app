@@ -107,7 +107,7 @@ class HttpClient {
 //          contentType: newOptions.contentType,
 //          method: newOptions.method);
 //    }
-    oldOps.data=FormData.from(newOptions.data);
+//    oldOps.data=FormData.from(newOptions.data);
     return oldOps;
   }
 
