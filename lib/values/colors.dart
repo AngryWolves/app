@@ -27,4 +27,5 @@ class ColorRes {
   static const FAST_RESERVE_ITEM_DESC = const Color(0xFFD6D6D6);
   static const RESERVE_SUCCESS_DESC = const Color(0xFFBFBFBF);
   static const REPORT_ACTION_DETAIL_EXCEL_TIME = const Color(0xFFB8B8B8);
+  static const APPLY_ITEM_STATUS_FINISH = const Color(0xFFBABABB);
 }
