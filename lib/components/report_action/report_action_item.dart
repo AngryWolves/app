@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 
 class ReportActionItem extends StatelessWidget {
@@ -17,12 +18,21 @@ class ReportActionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: ScreenUtil().setHeight(129),
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
-      child: image.isEmpty ? _buildBodyWithoutImg() : _buildBodyImg(),
+    return GestureDetector(
+        onTap: () {
+            if (image.isEmpty) {
+
+            } else {
+                NavigatorUtil.goReportDetailPage(context);
+            }
+        },
+        child: Container(
+            height: ScreenUtil().setHeight(129),
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            decoration: BoxDecoration(
+                    border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
+            child: image.isEmpty ? _buildBodyWithoutImg() : _buildBodyImg(),
+        ),
     );
   }
 

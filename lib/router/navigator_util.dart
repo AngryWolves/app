@@ -202,4 +202,8 @@ class NavigatorUtil {
   /// 项目申报
   static void goReportActionPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doReportAction);
+
+  /// 信息详情
+  static void goReportDetailPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doReportDetail);
 }
