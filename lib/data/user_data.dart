@@ -1,13 +1,16 @@
 class LoginResponse {
-  int status;
-  UserData userData;
+  int result;
+  String msg;
+  String data;
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
-    status = json['errorCode'];
-    var data = json['data'];
-    if (data != null) {
-      userData = UserData.fromJson(data);
-    }
+    result = json['errorCode'];
+    msg = json['msg'];
+    data = json['data'];
+//    var data = json['data'];
+//    if (data != null) {
+//      userData = UserData.fromJson(data);
+//    }
   }
 }
 
@@ -31,9 +34,9 @@ class Account {
         username = json['username'];
 
   Map<String, dynamic> toJson() => {
-    'token': token,
-    'username': username,
-  };
+        'token': token,
+        'username': username,
+      };
 
   Account.empty();
 }

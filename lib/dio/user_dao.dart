@@ -10,6 +10,7 @@ import 'package:smart_park/data/user_data.dart';
 import 'package:smart_park/utils/share_preference_util.dart';
 import 'package:smart_park/http/api.dart';
 import 'package:smart_park/redux/account_reducer.dart';
+import 'package:common_utils/common_utils.dart';
 
 class UserDao extends BaseDao {
   UserDao(Store<AppState> store) : super(store);
@@ -68,10 +69,10 @@ class UserDao extends BaseDao {
 
   Future<LoginResponse> _handleLogin(dynamic data, String username) async {
     LoginResponse model = LoginResponse.fromJson(data);
-    var userData = model?.userData;
+    var userData = model?.data;
 
-    if (userData != null) {
-      var account = Account(userData.token, username);
+    if (!ObjectUtil.isEmptyString(userData)) {
+      var account = Account(userData, username);
       var data = account.toJson();
       await SharePreferenceUtil.set(ACCOUNT_INFO, json.encode(data));
       store.dispatch(UpdateAccountAction(account));

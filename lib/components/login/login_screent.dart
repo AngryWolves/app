@@ -162,12 +162,14 @@ class _LoginScreenState extends BaseState<LoginScreen> {
       Fluttertoast.showToast(msg: login_password_error_text);
       return;
     }
+    phone='18788888888';
+    password='2';
     _dao ??= UserDao(StoreProvider.of<AppState>(context));
     showLoading();
     LoginResponse model = await _dao.login(phone, password);
     hideLoading();
-    UserData userData = model?.userData;
-    if (userData == null) {
+    String userData = model?.data;
+    if (ObjectUtil.isEmptyString(userData)) {
       return;
     }
     Navigator.of(context).pushNamedAndRemoveUntil(
