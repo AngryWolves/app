@@ -311,3 +311,5 @@ const apply_has_applying = '申请中';
 const apply_has_pass = '已通过';
 const apply_has_complete = '已完成';
 const apply_has_cancel = '已取消';
+const apply_select_type = '选择申请类型';
+const apply_has_selected_type = '已选申请类型：';

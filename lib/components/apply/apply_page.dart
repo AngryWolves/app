@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/apply/apply_sheet.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -32,8 +33,8 @@ class _ApplyPageState extends BaseState<ApplyPage> {
             Container(
               margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.0)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.0)),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
@@ -51,9 +52,19 @@ class _ApplyPageState extends BaseState<ApplyPage> {
     );
   }
 
+  ///
+  /// appbar 去申请
+  ///
   List<Widget> _buildBarAction() {
     return [
       GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (cxt) {
+                return ApplySheet();
+              });
+        },
         child: Container(
           margin: const EdgeInsets.only(right: 15.0),
           width: ScreenUtil().setWidth(50),

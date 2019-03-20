@@ -36,7 +36,7 @@ class _AppComponentState extends State<AppComponent> {
       UserDao(StoreProvider.of<AppState>(context))
           .getUserInfo()
           .then((account) async {
-        if (account == null) {
+        if (false) {
           // 未登录
           NavigatorUtil.goLogin(context);
         } else {
