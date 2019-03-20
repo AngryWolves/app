@@ -12,16 +12,23 @@ import 'package:smart_park/widget/company_dialog.dart';
 import 'package:smart_park/widget/company_list_dialog.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
-  RegisteredThirdScreen({@required this.mobile, this.code});
+  RegisteredThirdScreen(
+      {@required this.mobile,
+      this.code,
+      this.idCardFrontUrl,
+      this.idCardBackUrl});
 
   final String mobile;
   final String code;
+  final String idCardFrontUrl;
+  final String idCardBackUrl;
+
   String _gender = '男';
   String _company;
 
   @override
   State<StatefulWidget> createState() {
-    print("==data==="+_gender.toString()+"======="+_company.toString());
+    print("==data===" + _gender.toString() + "=======" + _company.toString());
     return _RegisteredThirdScreenState();
   }
 }
@@ -43,7 +50,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
         resizeToAvoidBottomPadding: false,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          reverse:true,
+          reverse: true,
           child: Container(
             color: ColorRes.WHITE,
             padding: EdgeInsets.only(top: ScreenUtil().setHeight(65)),
@@ -258,7 +265,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       padding:
                           EdgeInsets.only(right: ScreenUtil().setWidth(10)),
                       child: Text(
-                        !ObjectUtil.isEmptyString(_gender)?_gender:'',
+                        !ObjectUtil.isEmptyString(_gender) ? _gender : '',
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),

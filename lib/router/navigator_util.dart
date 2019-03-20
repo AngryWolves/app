@@ -45,10 +45,10 @@ class NavigatorUtil {
 
   //注册 第三步
   static void goRegisteredThird(
-      BuildContext context, String mobile, String code) {
+      BuildContext context, String mobile, String code,String idCardFrontUrl,String idCardBackUrl) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(
-        context, Routes.doRegisteredThird + "?message=$mobile&code=$code",
+        context, Routes.doRegisteredThird + "?mobile=$mobile&code=$code&idCardFrontUrl=$idCardFrontUrl&idCardBackUrl=$idCardBackUrl",
         transition: transitionType);
   }
 

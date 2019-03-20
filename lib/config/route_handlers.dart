@@ -79,9 +79,13 @@ var registeredThirdRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   String mobile = params["mobile"]?.first;
   String code = params["code"]?.first;
+  String idCardFrontUrl = params["idCardFrontUrl"]?.first;
+  String idCardBackUrl = params["idCardBackUrl"]?.first;
   return RegisteredThirdScreen(
     mobile: mobile,
     code: code,
+    idCardBackUrl: idCardBackUrl,
+    idCardFrontUrl: idCardFrontUrl,
   );
 });
 var personalRouteHandler = new Handler(
@@ -190,11 +194,8 @@ var reserveSuccessHandle =
 var reportActionHandle =
     Handler(handlerFunc: (_, params) => ReportActionPage());
 
-var reportDetailHandle =
-    Handler(handlerFunc: (_, params) => DetailPage());
+var reportDetailHandle = Handler(handlerFunc: (_, params) => DetailPage());
 
-var applyHandle =
-    Handler(handlerFunc: (_, params) => ApplyPage());
+var applyHandle = Handler(handlerFunc: (_, params) => ApplyPage());
 
-var applyDetailHandle =
-    Handler(handlerFunc: (_, params) => ApplyDetail());
+var applyDetailHandle = Handler(handlerFunc: (_, params) => ApplyDetail());

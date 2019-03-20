@@ -73,9 +73,10 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               color: Color.fromRGBO(102, 102, 102, 1),
                               fontSize: ScreenUtil().setSp(14)),
                         ),
-                        Expanded(child: Padding(
+                        Expanded(
+                            child: Padding(
                           padding:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(8)),
+                              EdgeInsets.only(top: ScreenUtil().setHeight(8)),
                           child: _positiveViewImage(),
                         ))
                       ],
@@ -93,9 +94,10 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               color: Color.fromRGBO(102, 102, 102, 1),
                               fontSize: ScreenUtil().setSp(14)),
                         ),
-                        Expanded(child: Padding(
+                        Expanded(
+                            child: Padding(
                           padding:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(8)),
+                              EdgeInsets.only(top: ScreenUtil().setHeight(8)),
                           child: _backViewImage(),
                         ))
                       ],
@@ -106,12 +108,18 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
             ),
             GestureDetector(
               onTap: () {
+                print("下一步点击");
                 if (_imageFileBack == null || _imageFilePositive == null) {
                   Fluttertoast.showToast(
                       msg: registered_two_check_upload_error_text);
                   return;
                 }
-                NavigatorUtil.goRegisteredThird(context, widget.mobile, widget.code);
+                NavigatorUtil.goRegisteredThird(
+                    context,
+                    widget.mobile,
+                    widget.code,
+                    "http://oss.idCardFrontUrl.png",
+                    "http://oss.idCardBackUrl.png");
               },
               child: Container(
                 margin: EdgeInsets.only(
