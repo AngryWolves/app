@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
@@ -47,7 +48,7 @@ class _ApplySheetState extends State<ApplySheet> {
               child: GradientButton(
                 repair_action_select_ok,
                 () {
-                  Navigator.pop(context);
+                  NavigatorUtil.goApplyDetailPage(context);
                 },
                 radius: 0.0,
               ),

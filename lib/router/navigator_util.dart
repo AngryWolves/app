@@ -210,4 +210,8 @@ class NavigatorUtil {
   ///  申请入口
   static void goApplyPage(BuildContext context) =>
           Application.router.navigateTo(context, Routes.doApply);
+
+  ///  申请详情
+  static void goApplyDetailPage(BuildContext context) =>
+          Application.router.navigateTo(context, Routes.doApplyDetail);
 }

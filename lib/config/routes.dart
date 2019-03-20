@@ -47,6 +47,7 @@ class Routes {
   static String doReportAction = "/home/report/action";
   static String doReportDetail = "/home/report/detail";
   static String doApply = "/home/apply";
+  static String doApplyDetail = "/home/apply/detail";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -140,5 +141,7 @@ class Routes {
             handler: reportDetailHandle, transitionType: TransitionType.native);
     router.define(doApply,
             handler: applyHandle, transitionType: TransitionType.native);
+    router.define(doApplyDetail,
+            handler: applyDetailHandle, transitionType: TransitionType.native);
   }
 }

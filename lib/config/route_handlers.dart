@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_park/components/app/app_component.dart';
+import 'package:smart_park/components/apply/apply_detail_page.dart';
 import 'package:smart_park/components/apply/apply_page.dart';
 import 'package:smart_park/components/bluetooth/bluetooth_control_page.dart';
 import 'package:smart_park/components/forget/forget_next_screent.dart';
@@ -194,3 +195,6 @@ var reportDetailHandle =
 
 var applyHandle =
     Handler(handlerFunc: (_, params) => ApplyPage());
+
+var applyDetailHandle =
+    Handler(handlerFunc: (_, params) => ApplyDetail());
