@@ -39,7 +39,7 @@ class NavigatorUtil {
       BuildContext context, String mobile, String code) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(
-        context, Routes.doRegisteredTwo + "?message=$mobile&code=$code",
+        context, Routes.doRegisteredTwo + "?mobile=$mobile&code=$code",
         transition: transitionType);
   }
 
