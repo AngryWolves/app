@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_park/router/navigator_util.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 
 class RegisteredTwoScreen extends StatefulWidget {
   RegisteredTwoScreen({@required this.mobile, this.code});
@@ -73,11 +73,11 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               color: Color.fromRGBO(102, 102, 102, 1),
                               fontSize: ScreenUtil().setSp(14)),
                         ),
-                        Padding(
+                        Expanded(child: Padding(
                           padding:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(8)),
+                          EdgeInsets.only(top: ScreenUtil().setHeight(8)),
                           child: _positiveViewImage(),
-                        )
+                        ))
                       ],
                     ),
                   ),
@@ -93,11 +93,11 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                               color: Color.fromRGBO(102, 102, 102, 1),
                               fontSize: ScreenUtil().setSp(14)),
                         ),
-                        Padding(
+                        Expanded(child: Padding(
                           padding:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(8)),
+                          EdgeInsets.only(top: ScreenUtil().setHeight(8)),
                           child: _backViewImage(),
-                        )
+                        ))
                       ],
                     ),
                   ),
@@ -239,7 +239,7 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                 Image.asset(
                   'images/icon_id_card_positive@3x.png',
                   width: ScreenUtil().setWidth(167),
-                  height: ScreenUtil().setHeight(107),
+                  height: ScreenUtil().setHeight(100),
                   fit: BoxFit.fill,
                 ),
                 GestureDetector(

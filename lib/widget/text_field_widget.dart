@@ -74,8 +74,6 @@ class _TextFieldState extends State<TextFieldWidget> {
             keyboardType: widget.isMobile
                 ? TextInputType.phone
                 : TextInputType.emailAddress,
-            //键盘类型
-            textInputAction: TextInputAction.none,
             //显示的文字内容为 下一步
             style: TextStyle(
                 color: Color.fromRGBO(46, 49, 56, 1),

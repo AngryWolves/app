@@ -98,8 +98,6 @@ class _ForgetScreenState extends State<ForgetScreen> {
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),
-                        //键盘类型
-                        textInputAction: TextInputAction.none,
                         //显示的文字内容为 下一步
                         inputFormatters: [LengthLimitingTextInputFormatter(6)],
                         //最大长度

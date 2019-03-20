@@ -127,8 +127,6 @@ class _PersonalDialogState extends State<PersonalDialog> {
         },
         controller: TextEditingController(text: nameController.text),
         keyboardType: TextInputType.text,
-        //键盘类型
-        textInputAction: TextInputAction.none,
         //显示的文字内容为 下一步
         style: TextStyle(
             color: Color.fromRGBO(46, 49, 56, 1),

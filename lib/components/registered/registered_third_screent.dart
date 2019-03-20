@@ -189,8 +189,6 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                       offset: controller.text.length)))),
               keyboardType:
                   keyboardType == null ? TextInputType.text : keyboardType,
-              //键盘类型
-              textInputAction: TextInputAction.none,
               //显示的文字内容为 下一步
               style: TextStyle(
                   color: Color.fromRGBO(46, 49, 56, 1),

@@ -274,8 +274,6 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
                 affinity: TextAffinity.downstream,
                 offset: controller.text.length)))),
         keyboardType: TextInputType.phone,
-        //键盘类型
-        textInputAction: TextInputAction.none,
         //显示的文字内容为 下一步
         style: TextStyle(
             color: Color.fromRGBO(46, 49, 56, 1),
