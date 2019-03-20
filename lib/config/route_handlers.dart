@@ -82,11 +82,10 @@ var registeredThirdRouteHandler = new Handler(
   String idCardFrontUrl = params["idCardFrontUrl"]?.first;
   String idCardBackUrl = params["idCardBackUrl"]?.first;
   return RegisteredThirdScreen(
-    mobile: mobile,
-    code: code,
-    idCardBackUrl: idCardBackUrl,
-    idCardFrontUrl: idCardFrontUrl,
-  );
+      mobile: mobile,
+      code: code,
+      idCardFrontUrl: idCardFrontUrl,
+      idCardBackUrl: idCardBackUrl);
 });
 var personalRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {

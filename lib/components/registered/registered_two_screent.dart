@@ -114,12 +114,16 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                       msg: registered_two_check_upload_error_text);
                   return;
                 }
+                print("===register=========params=" +
+                    widget.mobile.toString() +
+                    "==code==" +
+                    widget.code);
                 NavigatorUtil.goRegisteredThird(
                     context,
                     widget.mobile,
                     widget.code,
-                    "http://oss.idCardFrontUrl.png",
-                    "http://oss.idCardBackUrl.png");
+                    "oss.idCardFrontUrl.png",
+                    "oss.idCardBackUrl.png");
               },
               child: Container(
                 margin: EdgeInsets.only(

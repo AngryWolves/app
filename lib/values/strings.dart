@@ -53,6 +53,7 @@ const registered_third_mail_title = '您的邮箱';
 const registered_third_ok_text = "完成";
 const registered_third_instructions_text = '第三步 完善信息（只需三步）';
 const registered_third_empty_error_text = '注册信息不允许为空，请检查你输入的内容';
+const registered_third_mail_error_text = '请输入有效的邮箱';
 
 const personal_title_text = '个人中心';
 const personal_revise_text = '点击修改';

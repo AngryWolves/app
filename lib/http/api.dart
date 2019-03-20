@@ -18,5 +18,6 @@ class Api {
   static const String SMART_PASSWORD = 'password';
   static const String SMART_NAME = 'name';
   static const String SMART_SEX = 'sex';
+  static const String SMART_CODE= 'code';
   static const String SMART_EMAIL = 'email';
 }

@@ -8,8 +8,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/gender_dialog.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_park/widget/company_dialog.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/widget/company_list_dialog.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen(
@@ -28,12 +32,13 @@ class RegisteredThirdScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    print("==data===" + _gender.toString() + "=======" + _company.toString());
+    print("===register=========params="+mobile.toString()+"==code=="+code+"==idCardFrontUrl===="+idCardFrontUrl.toString()+"==="+idCardBackUrl.toString());
     return _RegisteredThirdScreenState();
   }
 }
 
-class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
+class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
+  UserDao _dao;
   final _registeredPasswordTextController = TextEditingController();
   final _registeredCheckPasswordTextController = TextEditingController();
   final _registeredUserNameTextController = TextEditingController();
@@ -98,23 +103,7 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
                 _buildCompanyWidget(),
                 GestureDetector(
                   onTap: () {
-                    String password = _registeredPasswordTextController.text;
-                    String checkPassword =
-                        _registeredCheckPasswordTextController.text;
-                    String userName = _registeredUserNameTextController.text;
-                    if (ObjectUtil.isEmptyString(password) ||
-                        ObjectUtil.isEmptyString(checkPassword) ||
-                        ObjectUtil.isEmptyString(userName) ||
-                        ObjectUtil.isEmptyString(widget._gender)) {
-                      Fluttertoast.showToast(
-                          msg: registered_third_empty_error_text);
-                      return;
-                    }
-                    if (password != checkPassword) {
-                      Fluttertoast.showToast(
-                          msg: forget_password_same_error_text);
-                      return;
-                    }
+                    _register();
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -286,7 +275,6 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
   }
 
   Widget _buildCompanyWidget() {
-    print("==data===" + widget._company.toString());
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -350,5 +338,31 @@ class _RegisteredThirdScreenState extends State<RegisteredThirdScreen> {
         ),
       ),
     );
+  }
+
+  void _register() async {
+    InputManageUtil.shutdownInputKeyboard();
+    String password = _registeredPasswordTextController.text;
+    String checkPassword = _registeredCheckPasswordTextController.text;
+    String userName = _registeredUserNameTextController.text;
+    String mail = _registeredMailTextController.text;
+    if (ObjectUtil.isEmptyString(password) ||
+        ObjectUtil.isEmptyString(checkPassword) ||
+        ObjectUtil.isEmptyString(userName) ||
+        ObjectUtil.isEmptyString(widget._gender) ||
+        ObjectUtil.isEmptyString(mail)) {
+      Fluttertoast.showToast(msg: registered_third_empty_error_text);
+      return;
+    }
+    if (!RegexUtil.isEmail(mail)) {
+      Fluttertoast.showToast(msg: registered_third_mail_error_text);
+    }
+    if (password != checkPassword) {
+      Fluttertoast.showToast(msg: forget_password_same_error_text);
+      return;
+    }
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    await _dao.register(widget.mobile, widget.code, widget.idCardFrontUrl,
+        widget.idCardBackUrl, password, userName, widget._gender, mail);
   }
 }

@@ -25,12 +25,41 @@ class UserDao extends BaseDao {
     return userData;
   }
 
+  //登录请求/
   Future<LoginResponse> login(String telephone, String password) async {
     var response = await client.post(Api.SMART_LOGIN, data: {
       Api.PARAM_TELEPHONE: telephone,
       Api.PARAM_PASSWORD: password,
     });
     var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return await _handleLogin(data, telephone);
+  }
+
+  //注册请求/
+  Future<LoginResponse> register(
+      String telephone,
+      String code,
+      String idCardFrontUrl,
+      String idCardBackUrl,
+      String password,
+      String name,
+      String sex,
+      String email) async {
+    var response = await client.post(Api.SMART_REGISTER, data: {
+      Api.PARAM_TELEPHONE: telephone,
+      Api.SMART_CODE: code,
+      Api.SMART_CARD_FRONT: idCardFrontUrl,
+      Api.SMART_CARD_BACK: idCardBackUrl,
+      Api.PARAM_PASSWORD: password,
+      Api.SMART_NAME: name,
+      Api.SMART_SEX: sex,
+      Api.SMART_EMAIL: email
+    });
+    var data = response?.data;
+    print("===register======" + data.toString());
     if (data == null) {
       return null;
     }
