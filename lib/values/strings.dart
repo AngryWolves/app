@@ -19,7 +19,8 @@ const forget_next_check_code_hint = '验证码';
 const forget_next_get_code_text = '获取验证码';
 const forget_next_again_get_code_text = '重新获取';
 const forget_check_next_text = '下一步';
-const forget_check_error_code_text = '请输入验证码';
+const forget_check_get_code_error_text = '请先获取验证码';
+const forget_check_error_code_text = '请输入有效的验证码';
 
 const registered_title_text = '注册';
 const registered_one_mobile_hint = '手机号';
@@ -313,4 +314,4 @@ const apply_has_complete = '已完成';
 const apply_has_cancel = '已取消';
 const apply_select_type = '选择申请类型';
 const apply_has_selected_type = '已选申请类型：';
-const apply_detail_title= '申请详情';
+const apply_detail_title = '申请详情';

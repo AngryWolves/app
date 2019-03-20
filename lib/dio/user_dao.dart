@@ -31,7 +31,6 @@ class UserDao extends BaseDao {
       Api.PARAM_PASSWORD: password,
     });
     var data = response?.data;
-    print("===data===="+data.toString());
     if (data == null) {
       return null;
     }
@@ -49,5 +48,13 @@ class UserDao extends BaseDao {
       store.dispatch(UpdateAccountAction(account));
     }
     return model;
+  }
+
+  Future getCode(String telephone, int type) async {
+    var response = await client.post(Api.SMART_GET_CODE, data: {
+      Api.SMART_PHONE: telephone,
+      Api.SMART_TYPE: type,
+    });
+    return response?.statusCode;
   }
 }

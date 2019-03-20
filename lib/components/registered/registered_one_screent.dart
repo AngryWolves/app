@@ -12,6 +12,31 @@ import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/data/user_data.dart';
+import 'package:smart_park/config/routes.dart';
 
 class RegisteredOneScreen extends StatefulWidget {
   @override
@@ -20,12 +45,13 @@ class RegisteredOneScreen extends StatefulWidget {
   }
 }
 
-class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
+class _RegisteredOneScreenState extends BaseState<RegisteredOneScreen> {
   final _registeredPhoneController = TextEditingController();
   final _registeredCodeController = TextEditingController();
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
+  UserDao _dao;
 
   @override
   void dispose() {
@@ -94,8 +120,11 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                           //内容提交(按回车)的回调
 //                    print('submit');
                         },
-                        controller: TextEditingController(
-                            text: _registeredCodeController.text),
+                        controller: TextEditingController.fromValue(TextEditingValue(
+                            text: _registeredCodeController.text,
+                            selection: TextSelection.fromPosition(TextPosition(
+                                affinity: TextAffinity.downstream,
+                                offset: _registeredCodeController.text.length)))),
                         keyboardType: TextInputType.number,
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
@@ -137,18 +166,9 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    InputManageUtil.shutdownInputKeyboard();
-                    String phone = _registeredPhoneController.text;
-                    String code = _registeredCodeController.text;
-                    if (!RegexUtil.isMobileExact(phone)) {
-                      Fluttertoast.showToast(msg: login_mobile_error_text);
-                      return;
-                    }
-                    if (ObjectUtil.isEmptyString(code)) {
-                      Fluttertoast.showToast(msg: forget_check_error_code_text);
-                      return;
-                    }
-                    NavigatorUtil.goRegisteredTwo(context, phone, code);
+                    print("下一步点击");
+                    _checkNext(_registeredPhoneController.text,
+                        _registeredCodeController.text);
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -242,5 +262,35 @@ class _RegisteredOneScreenState extends State<RegisteredOneScreen> {
         }
       });
     });
+    _getCode(mobile);
+  }
+
+  void _getCode(phone) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    await _dao.getCode(phone, 1);
+    hideLoading();
+  }
+
+  void _checkNext(phone, String code) {
+    InputManageUtil.shutdownInputKeyboard();
+    if (_isCountdown == false || _countDownTime == 60) {
+      Fluttertoast.showToast(msg: forget_check_get_code_error_text);
+      return;
+    }
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    if (ObjectUtil.isEmptyString(code) || code.length != 6) {
+      Fluttertoast.showToast(msg: forget_check_error_code_text);
+      return;
+    }
+    NavigatorUtil.goRegisteredTwo(context, phone, code);
   }
 }
