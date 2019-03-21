@@ -1,10 +1,17 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
-
+import 'package:smart_park/dio/service_man_dao.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/components/personal/service/data/master_data.dart';
+import 'package:smart_park/values/json_strings.dart';
 //联系客服/
 class PersonalServiceScreen extends StatefulWidget {
   PersonalServiceScreen({@required this.userId});
@@ -18,9 +25,16 @@ class PersonalServiceScreen extends StatefulWidget {
 }
 
 class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
+  ServiceManDao _dao;
+  List<MasterData> _listOfMaster;
   @override
   void initState() {
     super.initState();
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getMasterDataList();
   }
   @override
   Widget build(BuildContext context) {
@@ -136,5 +150,21 @@ class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
         ),
       ),
     );
+  }
+
+  void _getMasterDataList() async {
+    _dao ??= ServiceManDao(StoreProvider.of<AppState>(context));
+    MasterDataBean model = await _dao.getMasterDataList();
+    if(model!=null){
+      _listOfMaster=model.data;
+    }else{
+      final localMasterJson = json.decode(JsonStrings.localMaterData);
+      final localMasterObjects =
+      localMasterJson.map((o) => MasterData.fromJson(o));
+
+      final listOfLocalMasterObjects = localMasterObjects.toList();
+      print("==data===="+listOfLocalMasterObjects.toString());
+    }
+
   }
 }

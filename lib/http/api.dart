@@ -1,6 +1,7 @@
 class Api {
   static const SMART_HOST = 'http://47.101.208.47:8080';
 
+  static const SMART_TOKEN='Authorization';
   //登录接口/
   static const String SMART_LOGIN = SMART_HOST + '/app/user/login';
   static const PARAM_TELEPHONE = 'telephone';
@@ -20,4 +21,7 @@ class Api {
   static const String SMART_SEX = 'sex';
   static const String SMART_CODE= 'code';
   static const String SMART_EMAIL = 'email';
+  //客服列表/
+  static const String SMART_SERVICE_MAN=SMART_HOST +'/app/user/serviceMan';
+
 }

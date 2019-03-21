@@ -141,4 +141,25 @@ abstract class JsonStrings {
     ]
   }
 ]''';
+  static final String localMaterData = '''
+  [
+    {
+        "buildNo": "A栋",
+        "buildMasterName": "王娟1",
+        "masterTel": "15787856767",
+        "floor": "2",
+        "floorMasterName": "望谟",
+        "tel": "18208817655",
+        "createTime": 1552095733000
+    },
+    {
+        "buildNo": "B栋",
+        "buildMasterName": "王美1",
+        "masterTel": "15787856789",
+        "floor": "1",
+        "floorMasterName": "莫甘娜",
+        "tel": "15787856789",
+        "createTime": 1552042862000
+    }
+]''';
 }
