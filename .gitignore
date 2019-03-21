@@ -38,6 +38,7 @@ build/
 **/android/**/GeneratedPluginRegistrant.java
 **/*.jks
 **/key.properties
+**/release/
 
 
 # iOS/XCode related

@@ -10,6 +10,7 @@ class HttpClient {
   static const int CONNECTION_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 10000;
   static const String _ENCODING = 'Accept-Encoding';
+  static const String _CONTENT = 'Content-Type';
   static const String _Accept = 'Accept';
   static const String _HEADER_ACCEPT_TYPE = '*/*';
 
@@ -98,7 +99,7 @@ class HttpClient {
 //        oldOps.headers.addAll(newHeaders);
 //      }
 
-      // merge options
+    // merge options
 //      oldOps = oldOps.merge(
 //          connectTimeout: newOptions.connectTimeout,
 //          receiveTimeout: newOptions.receiveTimeout,
@@ -133,7 +134,8 @@ class HttpClient {
   Future<Map<String, dynamic>> _getDefaultHeaders() async {
     Map<String, dynamic> headers = {
       _ENCODING: 'identity',
-      _Accept: _HEADER_ACCEPT_TYPE
+      _Accept: _HEADER_ACCEPT_TYPE,
+      _CONTENT: 'application/json'
     };
     return headers;
   }

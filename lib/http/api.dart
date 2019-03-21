@@ -24,4 +24,7 @@ class Api {
   //客服列表/
   static const String SMART_SERVICE_MAN=SMART_HOST +'/app/user/serviceMan';
 
+  /// 绑定车牌
+  static const BIND_CAR = SMART_HOST + '/app/user/bingCar';
+  static const PARAM_PLATE = 'plate';
 }
