@@ -97,9 +97,9 @@ class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
   Widget _buildListWidget(List<dynamic> objects) {
     return Expanded(
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: _listOfMaster!=null?_listOfMaster.length:0,
             itemBuilder: (context, index) {
-              return _buildItemWidget(null, index);
+              return _buildItemWidget(_listOfMaster!=null?_listOfMaster[index]:null, index);
             }),
         flex: 1);
   }
@@ -131,7 +131,7 @@ class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
             Padding(
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(58)),
               child: Text(
-                "孙大圣",
+                object?.buildMasterName.toString(),
                 style: TextStyle(
                     color: Color.fromRGBO(46, 49, 56, 1),
                     fontSize: ScreenUtil().setSp(12)),
@@ -140,7 +140,7 @@ class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
             Padding(
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(83)),
               child: Text(
-                "18598109872",
+                object?.tel.toString(),
                 style: TextStyle(
                     color: Color.fromRGBO(46, 49, 56, 1),
                     fontSize: ScreenUtil().setSp(12)),
@@ -156,15 +156,9 @@ class _PersonalServiceScreenState extends BaseState<PersonalServiceScreen> {
     _dao ??= ServiceManDao(StoreProvider.of<AppState>(context));
     MasterDataBean model = await _dao.getMasterDataList();
     if(model!=null){
-      _listOfMaster=model.data;
-    }else{
-      final localMasterJson = json.decode(JsonStrings.localMaterData);
-      final localMasterObjects =
-      localMasterJson.map((o) => MasterData.fromJson(o));
-
-      final listOfLocalMasterObjects = localMasterObjects.toList();
-      print("==data===="+listOfLocalMasterObjects.toString());
+      setState(() {
+        _listOfMaster=model.data;
+      });
     }
-
   }
 }
