@@ -5,16 +5,19 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
 class EnterLicenseView extends StatefulWidget {
-  EnterLicenseView({this.onCodeSelectTap, this.code}) : assert(code != null);
+  EnterLicenseView({Key key, this.onCodeSelectTap, this.code}):super(key: key);
 
   final onCodeSelectTap;
   final String code;
 
   @override
-  _EnterLicenseViewState createState() => _EnterLicenseViewState();
+  EnterLicenseViewState createState() => EnterLicenseViewState();
 }
 
-class _EnterLicenseViewState extends State<EnterLicenseView> {
+class EnterLicenseViewState extends State<EnterLicenseView> {
+
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,6 +46,7 @@ class _EnterLicenseViewState extends State<EnterLicenseView> {
             ),
           ),
           CupertinoTextField(
+            controller: controller,
             padding: const EdgeInsets.all(12.0),
             prefix: _buildPrefix(),
             placeholder: bind_license_enter_number_hint,

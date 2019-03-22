@@ -29,4 +29,8 @@ class Api {
 
   //公司列表/
   static const String SMART_ALL_COMPANY = SMART_HOST + '/app/user/allCompany';
+
+  /// 绑定车牌
+  static const BIND_CAR = SMART_HOST + '/app/user/bingCar';
+  static const PARAM_PLATE = 'plate';
 }

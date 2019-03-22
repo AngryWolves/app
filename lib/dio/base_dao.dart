@@ -8,4 +8,6 @@ abstract class BaseDao {
   final Store<AppState> store;
 
   final HttpClient client = HttpClient();
+
+  String getToken() => store?.state?.account?.token;
 }
