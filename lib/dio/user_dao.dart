@@ -11,6 +11,7 @@ import 'package:smart_park/utils/share_preference_util.dart';
 import 'package:smart_park/http/api.dart';
 import 'package:smart_park/redux/account_reducer.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:smart_park/data/response_successful_data.dart';
 
 class UserDao extends BaseDao {
   UserDao(Store<AppState> store) : super(store);
@@ -40,7 +41,7 @@ class UserDao extends BaseDao {
   }
 
   //注册请求/
-  Future<LoginResponse> register(
+  Future<ResponseSuccessfulData> register(
       String telephone,
       String code,
       String idCardFrontUrl,
@@ -62,11 +63,11 @@ class UserDao extends BaseDao {
       Api.SMART_COMPANY_ID: companyId
     });
     var data = response?.data;
-    print("===register======" + data.toString());
+    print("===register======"+data.toString());
     if (data == null) {
       return null;
     }
-    return await _handleLogin(data, telephone);
+    return ResponseSuccessfulData.fromJson(data);
   }
 
   Future<LoginResponse> _handleLogin(dynamic data, String username) async {

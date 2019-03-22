@@ -27,6 +27,7 @@ const registered_one_mobile_hint = '手机号';
 const registered_one_go_login_text = '已有账号？去登录';
 const registered_one_instructions_text = '第一步 验证手机（只需三步）';
 
+
 const registered_two_id_card_positive_text = '身份证人像面';
 const registered_two_id_card_back_text = '身份证国徽面';
 const registered_two_upload_text = '点击上传';
@@ -54,6 +55,7 @@ const registered_third_ok_text = "完成";
 const registered_third_instructions_text = '第三步 完善信息（只需三步）';
 const registered_third_empty_error_text = '注册信息不允许为空，请检查你输入的内容';
 const registered_third_mail_error_text = '请输入有效的邮箱';
+const registered_third_result_1_text ='该手机号码已被注册,请直接登录';
 
 const personal_title_text = '个人中心';
 const personal_revise_text = '点击修改';

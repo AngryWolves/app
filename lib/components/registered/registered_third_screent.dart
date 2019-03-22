@@ -14,6 +14,8 @@ import 'package:smart_park/widget/company_list_dialog.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/data/response_successful_data.dart';
+import 'package:smart_park/config/routes.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen(
@@ -360,8 +362,24 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
       Fluttertoast.showToast(msg: forget_password_same_error_text);
       return;
     }
+    showLoading();
     _dao ??= UserDao(StoreProvider.of<AppState>(context));
-    await _dao.register(widget.mobile, widget.code, widget.idCardFrontUrl,
-        widget.idCardBackUrl, password, userName, _gender, mail, _companyId);
+    ResponseSuccessfulData responseSuccessfulData = await _dao.register(
+        widget.mobile,
+        widget.code,
+        widget.idCardFrontUrl,
+        widget.idCardBackUrl,
+        password,
+        userName,
+        _gender,
+        mail,
+        _companyId);
+    hideLoading();
+    if (responseSuccessfulData != null && responseSuccessfulData.result == 0) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.doLogin, (Route<dynamic> route) => false);
+    } else if (responseSuccessfulData.result == 1) {
+      Fluttertoast.showToast(msg: registered_third_result_1_text);
+    }
   }
 }
