@@ -48,7 +48,8 @@ class UserDao extends BaseDao {
       String password,
       String name,
       String sex,
-      String email) async {
+      String email,
+      String companyId) async {
     var response = await client.post(Api.SMART_REGISTER, data: {
       Api.PARAM_TELEPHONE: telephone,
       Api.SMART_CODE: code,
@@ -57,7 +58,8 @@ class UserDao extends BaseDao {
       Api.PARAM_PASSWORD: password,
       Api.SMART_NAME: name,
       Api.SMART_SEX: sex,
-      Api.SMART_EMAIL: email
+      Api.SMART_EMAIL: email,
+      Api.SMART_COMPANY_ID: companyId
     });
     var data = response?.data;
     print("===register======" + data.toString());

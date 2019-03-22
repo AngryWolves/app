@@ -1,7 +1,8 @@
 class Api {
   static const SMART_HOST = 'http://47.101.208.47:8080';
 
-  static const SMART_TOKEN='Authorization';
+  static const SMART_TOKEN = 'Authorization';
+
   //登录接口/
   static const String SMART_LOGIN = SMART_HOST + '/app/user/login';
   static const PARAM_TELEPHONE = 'telephone';
@@ -19,10 +20,15 @@ class Api {
   static const String SMART_PASSWORD = 'password';
   static const String SMART_NAME = 'name';
   static const String SMART_SEX = 'sex';
-  static const String SMART_CODE= 'code';
+  static const String SMART_CODE = 'code';
   static const String SMART_EMAIL = 'email';
+  static const String SMART_COMPANY_ID = 'companyId';
+
   //客服列表/
-  static const String SMART_SERVICE_MAN=SMART_HOST +'/app/user/serviceMan';
+  static const String SMART_SERVICE_MAN = SMART_HOST + '/app/user/serviceMan';
+
+  //公司列表/
+  static const String SMART_ALL_COMPANY = SMART_HOST + '/app/user/allCompany';
 
   /// 绑定车牌
   static const BIND_CAR = SMART_HOST + '/app/user/bingCar';

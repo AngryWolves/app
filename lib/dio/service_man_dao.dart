@@ -16,7 +16,7 @@ import 'package:smart_park/components/personal/service/data/master_data.dart';
 class ServiceManDao extends BaseDao{
   ServiceManDao(Store<AppState> store) : super(store);
   Future<MasterDataBean> getMasterDataList() async {
-    Response response = await client.get(Api.SMART_SERVICE_MAN, headers: {
+    Response response = await client.post(Api.SMART_SERVICE_MAN, headers: {
       Api.SMART_TOKEN: store?.state?.account?.token
     });
 

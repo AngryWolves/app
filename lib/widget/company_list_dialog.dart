@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:azlistview/azlistview.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:smart_park/widget/contact_model.dart';
 import 'package:smart_park/values/json_strings.dart';
 import 'package:lpinyin/lpinyin.dart';
+import 'package:smart_park/dio/company_dao.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/data/company_data.dart';
+import 'package:smart_park/config/application.dart';
 //公司列表Dialog/
 
 class CompanyListDialog extends StatefulWidget {
@@ -30,7 +29,7 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
   List<ContactInfo> _contacts = List();
   int _suspensionHeight = 40;
   int _itemHeight = 60;
-  String _hitTag = "";
+  CompanyDao _dao;
 
   @override
   void initState() {
@@ -39,10 +38,15 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
   }
 
   void loadData() async {
+    _dao ??= CompanyDao(StoreProvider.of<AppState>(Application.context));
+    CompanyData companyData = await _dao.getAllCompany();
+    List<Data> listOfCompanyData = companyData?.data;
     //加载联系人列表
-    List list = json.decode(JsonStrings.localPhone);
-    list.forEach((value) {
-      _contacts.add(ContactInfo(name: value['name']));
+//    List list = json.decode(JsonStrings.localPhone);
+    listOfCompanyData?.forEach((obj) {
+      _contacts.add(ContactInfo(
+          name: obj?.companyName.toString(),
+          companyId: obj?.companyId.toString()));
     });
     _handleList(_contacts);
     setState(() {});
@@ -192,6 +196,9 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
         GestureDetector(
           onTap: () {
             print("OnItemClick: $model");
+            if (widget.onSureState != null) {
+              widget.onSureState(model.name, model.companyId);
+            }
             Navigator.pop(context, model);
           },
           child: Container(
