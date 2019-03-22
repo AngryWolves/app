@@ -63,7 +63,21 @@ class UserDao extends BaseDao {
       Api.SMART_COMPANY_ID: companyId
     });
     var data = response?.data;
-    print("===register======"+data.toString());
+    if (data == null) {
+      return null;
+    }
+    return ResponseSuccessfulData.fromJson(data);
+  }
+
+  //忘记密码/
+  Future<ResponseSuccessfulData> forget(
+      String telephone, String code, String password) async {
+    var response = await client.post(Api.SMART_FORGET, data: {
+      Api.PARAM_TELEPHONE: telephone,
+      Api.SMART_CODE: code,
+      Api.PARAM_PASSWORD: password
+    });
+    var data = response?.data;
     if (data == null) {
       return null;
     }

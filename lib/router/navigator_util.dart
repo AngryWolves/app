@@ -23,7 +23,7 @@ class NavigatorUtil {
   static void goForgetNext(BuildContext context, String mobile, String code) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(
-        context, Routes.doNextForget + "?message=$mobile&code=$code",
+        context, Routes.doNextForget + "?mobile=$mobile&code=$code",
         transition: transitionType);
   }
 
