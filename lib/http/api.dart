@@ -23,5 +23,6 @@ class Api {
   static const String SMART_EMAIL = 'email';
   //客服列表/
   static const String SMART_SERVICE_MAN=SMART_HOST +'/app/user/serviceMan';
-
+  //公司列表/
+  static const String SMART_ALL_COMPANY=SMART_HOST+'/app/user/allCompany';
 }

@@ -30,7 +30,7 @@ class _AppComponentState extends State<AppComponent> {
       return;
     }
     _hasInit = true;
-
+    Application.context=context;
     Future.delayed(Duration(seconds: 1)).then((value) {
       // todo check login status
       UserDao(StoreProvider.of<AppState>(context))
