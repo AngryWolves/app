@@ -11,14 +11,15 @@ class ParkingDao extends BaseDao {
   /// 绑定车牌
   ///
   Future<BindCardData> bindLicense({String plate}) async {
-      var response = await client.post(Api.BIND_CAR, data: {
-          Api.PARAM_PLATE : plate
-      });
+    var response = await client
+        .post(Api.BIND_CAR, headers: {
+          Api.SMART_TOKEN: getToken()
+    }, data: {Api.PARAM_PLATE: plate});
 
-      var data = response?.data;
-      if (data == null) {
-        return null;
-      }
-      return BindCardData.fromJson(data);
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return BindCardData.fromJson(data);
   }
 }

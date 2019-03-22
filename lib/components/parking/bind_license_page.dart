@@ -7,6 +7,7 @@ import 'package:smart_park/components/parking/enter_license.dart';
 import 'package:smart_park/components/parking/license_code_dialog.dart';
 import 'package:smart_park/dio/parking_dao.dart';
 import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/black_top_white_bottom_bg.dart';
@@ -98,14 +99,17 @@ class _BindLicenceState extends BaseState<BindLicensePage> {
   void _handleConfirmTap() async {
     var code = _key?.currentState?.controller?.text;
     if (code != null && code.isNotEmpty) {
+      InputManageUtil.shutdownInputKeyboard();
+      showLoading();
       _parkingDao ??= ParkingDao(StoreProvider.of<AppState>(context));
 
       var response = await _parkingDao.bindLicense(plate: code);
-
+      hideLoading();
       var msg = response?.msg;
       if (response?.result == 1 && msg != null) {
         Fluttertoast.showToast(msg: msg);
-        return;
+      } else if (response?.result == 0 && msg != null) {
+        Fluttertoast.showToast(msg: msg);
       }
     }
   }
