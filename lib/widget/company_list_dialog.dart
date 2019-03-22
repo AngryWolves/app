@@ -30,6 +30,7 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
   int _suspensionHeight = 40;
   int _itemHeight = 60;
   CompanyDao _dao;
+
   @override
   void initState() {
     super.initState();
@@ -38,12 +39,14 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
 
   void loadData() async {
     _dao ??= CompanyDao(StoreProvider.of<AppState>(Application.context));
-    CompanyData companyData=await _dao.getAllCompany();
-    List<Data> listOfCompanyData=companyData?.data;
+    CompanyData companyData = await _dao.getAllCompany();
+    List<Data> listOfCompanyData = companyData?.data;
     //加载联系人列表
 //    List list = json.decode(JsonStrings.localPhone);
     listOfCompanyData?.forEach((obj) {
-      _contacts.add(ContactInfo(name: obj?.companyName.toString()));
+      _contacts.add(ContactInfo(
+          name: obj?.companyName.toString(),
+          companyId: obj?.companyId.toString()));
     });
     _handleList(_contacts);
     setState(() {});
@@ -193,6 +196,9 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
         GestureDetector(
           onTap: () {
             print("OnItemClick: $model");
+            if (widget.onSureState != null) {
+              widget.onSureState(model.name, model.companyId);
+            }
             Navigator.pop(context, model);
           },
           child: Container(

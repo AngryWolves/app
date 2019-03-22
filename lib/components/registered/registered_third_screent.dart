@@ -27,18 +27,17 @@ class RegisteredThirdScreen extends StatefulWidget {
   final String idCardFrontUrl;
   final String idCardBackUrl;
 
-  String _gender = '男';
-  String _company;
-
   @override
   State<StatefulWidget> createState() {
-    print("===register=========params="+mobile.toString()+"==code=="+code+"==idCardFrontUrl===="+idCardFrontUrl.toString()+"==="+idCardBackUrl.toString());
     return _RegisteredThirdScreenState();
   }
 }
 
 class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
   UserDao _dao;
+  String _gender = '男';
+  String _company;
+  String _companyId;
   final _registeredPasswordTextController = TextEditingController();
   final _registeredCheckPasswordTextController = TextEditingController();
   final _registeredUserNameTextController = TextEditingController();
@@ -99,7 +98,7 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
                     8,
                     false,
                     TextInputType.text),
-                _buildGenderWidget(widget._gender),
+                _buildGenderWidget(),
                 _buildCompanyWidget(),
                 GestureDetector(
                   onTap: () {
@@ -210,7 +209,7 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
     );
   }
 
-  Widget _buildGenderWidget(_gender) {
+  Widget _buildGenderWidget() {
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -220,7 +219,7 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
               return GenderDialog(
                 onSureState: (String gender) {
                   this.setState(() {
-                    widget._gender = gender;
+                    _gender = gender;
                   });
                 },
               );
@@ -282,9 +281,10 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
             context: context,
             builder: (context) {
               return CompanyListDialog(
-                onSureState: (String company) {
+                onSureState: (String company, String companyId) {
                   this.setState(() {
-                    widget._company = company;
+                    _company = company;
+                    _companyId = companyId;
                   });
                 },
               );
@@ -318,9 +318,7 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
                       padding:
                           EdgeInsets.only(right: ScreenUtil().setWidth(10)),
                       child: Text(
-                        !ObjectUtil.isEmptyString(widget._company)
-                            ? widget._company
-                            : '',
+                        !ObjectUtil.isEmptyString(_company) ? _company : '',
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
                             fontSize: ScreenUtil().setSp(15)),
@@ -349,8 +347,9 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
     if (ObjectUtil.isEmptyString(password) ||
         ObjectUtil.isEmptyString(checkPassword) ||
         ObjectUtil.isEmptyString(userName) ||
-        ObjectUtil.isEmptyString(widget._gender) ||
-        ObjectUtil.isEmptyString(mail)) {
+        ObjectUtil.isEmptyString(_gender) ||
+        ObjectUtil.isEmptyString(mail) ||
+        ObjectUtil.isEmptyString(_companyId)) {
       Fluttertoast.showToast(msg: registered_third_empty_error_text);
       return;
     }
@@ -363,6 +362,6 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
     }
     _dao ??= UserDao(StoreProvider.of<AppState>(context));
     await _dao.register(widget.mobile, widget.code, widget.idCardFrontUrl,
-        widget.idCardBackUrl, password, userName, widget._gender, mail);
+        widget.idCardBackUrl, password, userName, _gender, mail, _companyId);
   }
 }
