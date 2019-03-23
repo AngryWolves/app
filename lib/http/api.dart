@@ -36,4 +36,7 @@ class Api {
 
   //忘记密码/
   static const String SMART_FORGET = SMART_HOST + '/app/user/forget';
+
+  /// 用户信息
+  static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
 }

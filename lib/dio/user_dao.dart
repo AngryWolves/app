@@ -104,4 +104,18 @@ class UserDao extends BaseDao {
     });
     return response?.statusCode;
   }
+
+  ///
+  /// 账号信息
+  ///
+  Future getAccountInfo() async {
+    var response = await client.post(Api.SMART_ACCOUNT_INFO, headers: {
+      Api.SMART_TOKEN: getToken()
+    });
+
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+  }
 }
