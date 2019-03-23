@@ -11,6 +11,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 
 class ForgetScreen extends StatefulWidget {
   @override
@@ -19,12 +24,13 @@ class ForgetScreen extends StatefulWidget {
   }
 }
 
-class _ForgetScreenState extends State<ForgetScreen> {
+class _ForgetScreenState extends BaseState<ForgetScreen> {
   final _forgetPhoneController = TextEditingController();
   final _forgetCodeController = TextEditingController();
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
+  UserDao _dao;
 
   @override
   void dispose() {
@@ -92,8 +98,11 @@ class _ForgetScreenState extends State<ForgetScreen> {
                           //内容提交(按回车)的回调
 //                    print('submit');
                         },
-                        controller: TextEditingController(
-                            text: _forgetCodeController.text),
+                        controller: TextEditingController.fromValue(TextEditingValue(
+                            text: _forgetCodeController.text,
+                            selection: TextSelection.fromPosition(TextPosition(
+                                affinity: TextAffinity.downstream,
+                                offset:_forgetCodeController.text.length)))),
                         keyboardType: TextInputType.number,
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
@@ -135,20 +144,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    InputManageUtil.shutdownInputKeyboard();
-                    String phone = _forgetPhoneController.text;
-                    String code = _forgetCodeController.text;
-                    if (!RegexUtil.isMobileExact(phone)) {
-                      Fluttertoast.showToast(msg: login_mobile_error_text);
-                      return;
-                    }
-                    if (ObjectUtil.isEmptyString(code)) {
-                      Fluttertoast.showToast(msg: forget_check_error_code_text);
-                      return;
-                    }
-                    NavigatorUtil.goForgetNext(
-                        context,
-                        _forgetPhoneController.text,
+                    _checkNext(_forgetPhoneController.text,
                         _forgetCodeController.text);
                   },
                   child: Container(
@@ -221,5 +217,35 @@ class _ForgetScreenState extends State<ForgetScreen> {
         }
       });
     });
+    _getCode(mobile);
+  }
+
+  void _getCode(phone) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    await _dao.getCode(phone, 3);
+    hideLoading();
+  }
+
+  void _checkNext(String phone, String code) {
+    InputManageUtil.shutdownInputKeyboard();
+    if (_isCountdown == false || _countDownTime == 60) {
+      Fluttertoast.showToast(msg: forget_check_get_code_error_text);
+      return;
+    }
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    if (ObjectUtil.isEmptyString(code) || code.length != 6) {
+      Fluttertoast.showToast(msg: forget_check_error_code_text);
+      return;
+    }
+    NavigatorUtil.goForgetNext(context, phone, code);
   }
 }

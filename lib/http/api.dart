@@ -33,4 +33,7 @@ class Api {
   /// 绑定车牌
   static const BIND_CAR = SMART_HOST + '/app/user/bingCar';
   static const PARAM_PLATE = 'plate';
+
+  //忘记密码/
+  static const String SMART_FORGET = SMART_HOST + '/app/user/forget';
 }

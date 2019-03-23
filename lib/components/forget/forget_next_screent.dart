@@ -7,6 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/data/response_successful_data.dart';
+import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/base/base_state.dart';
 
 class ForgetNextScreen extends StatefulWidget {
   ForgetNextScreen({@required this.mobile, this.code});
@@ -20,10 +27,10 @@ class ForgetNextScreen extends StatefulWidget {
   }
 }
 
-class _ForgetNextScreenState extends State<ForgetNextScreen> {
+class _ForgetNextScreenState extends BaseState<ForgetNextScreen> {
   final _forgetPasswordTextController = TextEditingController();
   final _forgetCheckPasswordTextController = TextEditingController();
-
+  UserDao _dao;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +62,8 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
                   child: TextFieldWidget(
                     forget_new_password_hint,
                     _forgetPasswordTextController,
-                    maxLength: 12,
+                    obscureText: true,
+                    maxLength: 18,
                   ),
                 ),
                 Container(
@@ -66,24 +74,12 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
                     child: TextFieldWidget(
                       forget_check_new_password_hint,
                       _forgetCheckPasswordTextController,
-                      maxLength: 12,
+                      maxLength: 18,
+                      obscureText: true,
                     )),
                 GestureDetector(
                   onTap: () {
-                    InputManageUtil.shutdownInputKeyboard();
-                    String password = _forgetPasswordTextController.text;
-                    String checkPassword =
-                        _forgetCheckPasswordTextController.text;
-                    if (ObjectUtil.isEmptyString(password) ||
-                        ObjectUtil.isEmptyString(checkPassword)) {
-                      Fluttertoast.showToast(msg: forget_password_error_text);
-                      return;
-                    }
-                    if (password != checkPassword) {
-                      Fluttertoast.showToast(
-                          msg: forget_password_same_error_text);
-                      return;
-                    }
+                    _forget();
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -111,5 +107,34 @@ class _ForgetNextScreenState extends State<ForgetNextScreen> {
             ),
           ),
         ));
+  }
+  void _forget() async{
+    InputManageUtil.shutdownInputKeyboard();
+    String password = _forgetPasswordTextController.text;
+    String checkPassword =
+        _forgetCheckPasswordTextController.text;
+    if (ObjectUtil.isEmptyString(password) ||
+        ObjectUtil.isEmptyString(checkPassword)) {
+      Fluttertoast.showToast(msg: forget_password_error_text);
+      return;
+    }
+    if (password != checkPassword) {
+      Fluttertoast.showToast(
+          msg: forget_password_same_error_text);
+      return;
+    }
+    if(ObjectUtil.isEmptyString(widget.mobile)||ObjectUtil.isEmptyString(widget.code)){
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    ResponseSuccessfulData responseSuccessfulData=await _dao.forget(widget.mobile, widget.code, password);
+    hideLoading();
+    if (responseSuccessfulData != null && responseSuccessfulData.result == 0) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.doLogin, (Route<dynamic> route) => false);
+    } else if (responseSuccessfulData.result == 1) {
+      Fluttertoast.showToast(msg: registered_third_result_1_text);
+    }
   }
 }
