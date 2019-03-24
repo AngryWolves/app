@@ -41,4 +41,10 @@ class Api {
   static const String SMART_APPOINT = '/app/user/appoint';
   static const String SMART_PAGE='page';
   static const String SMART_SIZE='size';
+
+  /// 用户信息
+  static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
+
+  /// 我的车辆
+  static const String SMART_MY_CAR = SMART_HOST + '/app/user/myCar';
 }

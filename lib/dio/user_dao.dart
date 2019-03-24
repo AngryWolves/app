@@ -1,17 +1,14 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+import 'package:common_utils/common_utils.dart';
 import 'package:redux/redux.dart';
-import 'package:redux/redux.dart';
-import 'package:smart_park/http/http_client.dart';
-import 'package:smart_park/redux/app_state.dart';
-import 'package:smart_park/dio/base_dao.dart';
+import 'package:smart_park/data/response_successful_data.dart';
 import 'package:smart_park/data/user_data.dart';
-import 'package:smart_park/utils/share_preference_util.dart';
+import 'package:smart_park/dio/base_dao.dart';
 import 'package:smart_park/http/api.dart';
 import 'package:smart_park/redux/account_reducer.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:smart_park/data/response_successful_data.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/utils/share_preference_util.dart';
 
 class UserDao extends BaseDao {
   UserDao(Store<AppState> store) : super(store);
@@ -103,5 +100,19 @@ class UserDao extends BaseDao {
       Api.SMART_TYPE: type,
     });
     return response?.statusCode;
+  }
+
+  ///
+  /// 账号信息
+  ///
+  Future getAccountInfo() async {
+    var response = await client.post(Api.SMART_ACCOUNT_INFO, headers: {
+      Api.SMART_TOKEN: getToken()
+    });
+
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
   }
 }
