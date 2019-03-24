@@ -46,7 +46,7 @@ class MasterData extends Object {
   String tel;
 
   @JsonKey(name: 'createTime')
-  int createTime;
+  String createTime;
 
   MasterData(this.buildNo,this.buildMasterName,this.masterTel,this.floor,this.floorMasterName,this.tel,this.createTime,);
 
