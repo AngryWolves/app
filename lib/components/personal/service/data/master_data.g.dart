@@ -31,7 +31,7 @@ MasterData _$MasterDataFromJson(Map<String, dynamic> json) {
       json['floor'] as String,
       json['floorMasterName'] as String,
       json['tel'] as String,
-      json['createTime'] as int);
+      json['createTime'] as String);
 }
 
 Map<String, dynamic> _$MasterDataToJson(MasterData instance) =>
