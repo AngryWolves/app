@@ -39,4 +39,7 @@ class Api {
 
   /// 用户信息
   static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
+
+  /// 我的车辆
+  static const String SMART_MY_CAR = SMART_HOST + '/app/user/myCar';
 }
