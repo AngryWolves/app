@@ -50,4 +50,6 @@ class Api {
   /// 停车历史记录
   static const String SMART_PARKING_HISTORY =
       SMART_HOST + '/app/user/myParkHistory';
+  /// 站内信
+  static const String SMART_TIP_MESSAGE = SMART_HOST + '/app/user/tipMsg';
 }
