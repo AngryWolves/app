@@ -23,7 +23,6 @@ class CarInfo extends Object {
 
 }
 
-
 @JsonSerializable()
 class CarInfoData extends Object {
 
@@ -44,8 +43,8 @@ class CarInfoData extends Object {
 
     CarInfoData(this.userCarBindId,this.userId,this.carNo,this.status,this.createTime,);
 
-    factory CarInfoData.fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
+    factory CarInfoData.fromJson(Map<String, dynamic> srcJson) => _$CarInfoDataFromJson(srcJson);
 
-    Map<String, dynamic> toJson() => _$DataToJson(this);
+    Map<String, dynamic> toJson() => _$CarInfoDataToJson(this);
 
 }

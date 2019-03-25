@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/parking/data/car_info.dart';
 import 'package:smart_park/components/parking/parking_my_car.dart';
 import 'package:smart_park/components/parking/vip_card.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
 class ParkingHead extends StatelessWidget {
+  ParkingHead({this.carInfoData});
+
+  final CarInfoData carInfoData;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +18,9 @@ class ParkingHead extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MyCar(),
+          MyCar(
+            carInfoData: carInfoData,
+          ),
           VipCard(),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 15.0),

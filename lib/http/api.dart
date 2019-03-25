@@ -39,12 +39,15 @@ class Api {
 
   //我的预约
   static const String SMART_APPOINT = '/app/user/appoint';
-  static const String SMART_PAGE='page';
-  static const String SMART_SIZE='size';
+  static const String SMART_PAGE = 'page';
+  static const String SMART_SIZE = 'size';
 
   /// 用户信息
   static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
 
   /// 我的车辆
   static const String SMART_MY_CAR = SMART_HOST + '/app/user/myCar';
+  /// 停车历史记录
+  static const String SMART_PARKING_HISTORY =
+      SMART_HOST + '/app/user/myParkHistory';
 }
