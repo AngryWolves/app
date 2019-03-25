@@ -21,7 +21,7 @@ Map<String, dynamic> _$CarInfoToJson(CarInfo instance) => <String, dynamic>{
       'data': instance.data
     };
 
-CarInfoData _$DataFromJson(Map<String, dynamic> json) {
+CarInfoData _$CarInfoDataFromJson(Map<String, dynamic> json) {
   return CarInfoData(
       json['userCarBindId'] as String,
       json['userId'] as String,
@@ -30,7 +30,8 @@ CarInfoData _$DataFromJson(Map<String, dynamic> json) {
       json['createTime'] as String);
 }
 
-Map<String, dynamic> _$DataToJson(CarInfoData instance) => <String, dynamic>{
+Map<String, dynamic> _$CarInfoDataToJson(CarInfoData instance) =>
+    <String, dynamic>{
       'userCarBindId': instance.userCarBindId,
       'userId': instance.userId,
       'carNo': instance.carNo,

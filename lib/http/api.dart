@@ -42,6 +42,8 @@ class Api {
   static const String SMART_PAGE='page';
   static const String SMART_SIZE='size';
 
+  //我的报修
+  static const String SMART_REPAIR='/app/user/repair';
   /// 用户信息
   static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
 
