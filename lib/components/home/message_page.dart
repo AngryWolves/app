@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/components/home/data/message_data_response.dart';
+import 'package:smart_park/components/home/message_item.dart';
+import 'package:smart_park/dio/home_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
@@ -15,6 +20,7 @@ class MessagePage extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 1.0,
           brightness: Brightness.light),
+      body: MessageList(),
     );
   }
 }
@@ -24,21 +30,20 @@ class MessageList extends StatefulWidget {
   _MessageListState createState() => _MessageListState();
 }
 
-class _MessageListState extends RefreshListView<MessageList, String> {
+class _MessageListState extends RefreshListView<MessageList, MessageData> {
+
+  HomeDao _homeDao;
+  
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget buildItem(MessageData data) {
+    return MessageItemView(data: data,);
   }
 
   @override
-  Widget buildItem(String data) {
-    // TODO: implement buildItem
-    return null;
-  }
+  Future<List<MessageData>> requestData(int page) async {
+    _homeDao ??= HomeDao(StoreProvider.of<AppState>(context));
 
-  @override
-  Future<List<String>> requestData(int page) {
-    // TODO: implement requestData
-    return null;
+    var model = await _homeDao.getTipMessage(page: page);
+    return model?.data;
   }
 }

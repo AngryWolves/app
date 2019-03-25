@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:smart_park/components/parking/data/car_info.dart';
-import 'package:smart_park/components/parking/has_no_bind_license_item.dart';
+import 'package:smart_park/components/parking/data/parking_history_item.dart';
 import 'package:smart_park/components/parking/parking_head.dart';
 import 'package:smart_park/components/parking/parking_history_item.dart';
 import 'package:smart_park/dio/parking_dao.dart';
@@ -73,22 +73,32 @@ class ParkingList extends StatefulWidget {
   _ParkingListState createState() => _ParkingListState();
 }
 
-class _ParkingListState extends RefreshListView<ParkingList, String> {
+class _ParkingListState
+    extends RefreshListView<ParkingList, ParkingHistoryData> {
+  ParkingDao _parkingDao;
+
   @override
-  Widget buildItem(String data) {
-    return ParkingHistoryItem();
+  Widget buildItem(ParkingHistoryData data) {
+    return HistoryItem();
   }
 
   @override
-  Future<List<String>> requestData(int page) async {
-    return ['ssss'];
+  Future<List<ParkingHistoryData>> requestData(int page) async {
+    _parkingDao ??= ParkingDao(StoreProvider.of<AppState>(context));
+
+    var model = await _parkingDao.getParkingHistory(page: page);
+    var data = model?.data;
+
+    return data;
   }
 
   @override
   Widget buildEmptyView() {
-    return HasBindLicenseItem();
+    return Container();
   }
 
   @override
-  Widget buildHead() => ParkingHead();
+  Widget buildHead() => ParkingHead(
+        carInfoData: widget.carInfoData,
+      );
 }

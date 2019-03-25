@@ -23,7 +23,6 @@ class CarInfo extends Object {
 
 }
 
-
 @JsonSerializable()
 class CarInfoData extends Object {
 

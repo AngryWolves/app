@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/home/app_bar.dart';
 import 'package:smart_park/components/home/home_action_grid.dart';
 import 'package:smart_park/components/home/home_body.dart';
-import 'package:smart_park/dio/user_dao.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/event/home_action_event.dart';
-import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/router/navigator_util.dart';
 //import 'package:fluwx/fluwx.dart' as fluwx;
 
@@ -17,9 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  UserDao _userDao;
-
   bool _hasInit = false;
 
   var _actionListener;
@@ -34,8 +28,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _userDao ??= UserDao(StoreProvider.of<AppState>(context));
-    _requestAccountInfo();
   }
 
   @override
@@ -51,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       _hasInit = true;
     }
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: buildHomeAppBar(onTap: () {
         NavigatorUtil.goMessage(context);
       }, onPersonalTap: () {
@@ -96,9 +89,5 @@ class _HomePageState extends State<HomePage> {
           break;
       }
     });
-  }
-
-  void _requestAccountInfo() async {
-    var model = await _userDao.getAccountInfo();
   }
 }

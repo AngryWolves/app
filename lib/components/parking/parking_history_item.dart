@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/parking/data/parking_history_item.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
-class ParkingHistoryItem extends StatelessWidget {
+class HistoryItem extends StatelessWidget {
+  HistoryItem({this.data});
+
+  final ParkingHistoryData data;
+
   @override
   Widget build(BuildContext context) {
     TextStyle style =
@@ -28,30 +33,35 @@ class ParkingHistoryItem extends StatelessWidget {
                   text: parking_start_time,
                   style: style,
                   children: [
-                    TextSpan(text: '2019.01.23  13:30', style: styleGery)
+                    TextSpan(text: data?.beginTime ?? '', style: styleGery)
                   ])),
               Text.rich(TextSpan(
                   text: parking_end_time,
                   style: style,
                   children: [
-                    TextSpan(text: '2019.01.23  15:00', style: styleGery)
+                    TextSpan(text: data?.endTime ?? '', style: styleGery)
                   ])),
               Text.rich(TextSpan(
                   text: parking_all_time,
                   style: style,
-                  children: [TextSpan(text: '1小时30分', style: styleGery)])),
+                  children: [
+                    TextSpan(text: data?.totalHour ?? '', style: styleGery)
+                  ])),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text(
-                parking_fee_amount + '15.00',
+                parking_fee_amount + data?.fee?.toString() ?? '',
                 style: TextStyle(
                     color: ColorRes.GERY_TEXT,
                     fontSize: ScreenUtil().setSp(18)),
               ),
-              Text(parking_fee_text, style: styleGery,)
+              Text(
+                parking_fee_text,
+                style: styleGery,
+              )
             ],
           )
         ],
