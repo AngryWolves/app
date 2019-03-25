@@ -50,7 +50,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
       key: _refreshKey,
       onRefresh: _handleRefresh,
       child: ListView.builder(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           itemCount: _getListCount(),
           controller: _scrollController,
           itemBuilder: (context, index) {

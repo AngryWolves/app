@@ -52,4 +52,6 @@ class Api {
       SMART_HOST + '/app/user/myParkHistory';
   /// 站内信
   static const String SMART_TIP_MESSAGE = SMART_HOST + '/app/user/tipMsg';
+  /// 查询新闻
+  static const String SMART_HOME_NEWS = SMART_HOST + '/app/user/news';
 }

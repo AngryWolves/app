@@ -39,7 +39,6 @@ class _HomeActionGridViewState extends State<HomeActionGridView> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
-      color: Colors.white,
       height: ScreenUtil().setHeight(158),
       child: GridView.count(
         physics: NeverScrollableScrollPhysics(),

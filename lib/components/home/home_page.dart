@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       _hasInit = true;
     }
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: buildHomeAppBar(onTap: () {
         NavigatorUtil.goMessage(context);
       }, onPersonalTap: () {
