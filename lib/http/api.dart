@@ -54,4 +54,6 @@ class Api {
   static const String SMART_TIP_MESSAGE = SMART_HOST + '/app/user/tipMsg';
   /// 查询新闻
   static const String SMART_HOME_NEWS = SMART_HOST + '/app/user/news';
+  /// 查询场地列表
+  static const String SMART_YARD_LIST = SMART_HOST + '/app/user/getYard';
 }
