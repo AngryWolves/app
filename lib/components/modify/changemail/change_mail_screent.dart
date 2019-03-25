@@ -9,6 +9,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/data/response_successful_data.dart';
 
 //修改邮箱/
 class ModifyChangeMailScreen extends StatefulWidget {
@@ -20,9 +45,10 @@ class ModifyChangeMailScreen extends StatefulWidget {
   }
 }
 
-class _modifyChangeMailScreenState extends State<ModifyChangeMailScreen> {
+class _modifyChangeMailScreenState extends BaseState<ModifyChangeMailScreen> {
   final _changePasswordTextController = TextEditingController();
   bool _isCheckMail = false;
+  UserDao _dao;
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +92,7 @@ class _modifyChangeMailScreenState extends State<ModifyChangeMailScreen> {
                 ),
                 GestureDetector(
                     onTap: () {
-                      InputManageUtil.shutdownInputKeyboard();
-                      if (!_isCheckMail) {
-                        return;
-                      }
-                      String mail = _changePasswordTextController.text;
+                      _setEmail(_changePasswordTextController.text);
                       print("修改密码按钮点击");
                     },
                     child: Container(
@@ -105,5 +127,19 @@ class _modifyChangeMailScreenState extends State<ModifyChangeMailScreen> {
             ),
           )),
     );
+  }
+
+  void _setEmail(String email) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!_isCheckMail) {
+      return;
+    }
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    showLoading();
+    ResponseSuccessfulData responseSuccessfulData = await _dao.setEmail(email);
+    hideLoading();
+    if (responseSuccessfulData != null && responseSuccessfulData.result == 0) {
+      Navigator.pop(context);
+    }
   }
 }

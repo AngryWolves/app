@@ -81,6 +81,17 @@ class UserDao extends BaseDao {
     return ResponseSuccessfulData.fromJson(data);
   }
 
+  //设置修改email/
+  Future<ResponseSuccessfulData> setEmail(String email) async {
+    var response =
+        await client.post(Api.SMART_SET_MAIL, data: {Api.SMART_EMAIL: email});
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return ResponseSuccessfulData.fromJson(data);
+  }
+
   Future<LoginResponse> _handleLogin(dynamic data, String username) async {
     LoginResponse model = LoginResponse.fromJson(data);
     var userData = model?.data;
@@ -106,9 +117,8 @@ class UserDao extends BaseDao {
   /// 账号信息
   ///
   Future getAccountInfo() async {
-    var response = await client.post(Api.SMART_ACCOUNT_INFO, headers: {
-      Api.SMART_TOKEN: getToken()
-    });
+    var response = await client
+        .post(Api.SMART_ACCOUNT_INFO, headers: {Api.SMART_TOKEN: getToken()});
 
     var data = response?.data;
     if (data == null) {

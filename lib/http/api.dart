@@ -39,11 +39,15 @@ class Api {
 
   //我的预约
   static const String SMART_APPOINT = '/app/user/appoint';
-  static const String SMART_PAGE='page';
-  static const String SMART_SIZE='size';
+  static const String SMART_PAGE = 'page';
+  static const String SMART_SIZE = 'size';
 
   //我的报修
-  static const String SMART_REPAIR='/app/user/repair';
+  static const String SMART_REPAIR = SMART_HOST +'/app/user/repair';
+
+  //设置修改邮箱
+  static const String SMART_SET_MAIL =SMART_HOST + '/app/user/setEmail';
+
   /// 用户信息
   static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
 
