@@ -193,7 +193,10 @@ var reserveSuccessHandle =
 var reportActionHandle =
     Handler(handlerFunc: (_, params) => ReportActionPage());
 
-var reportDetailHandle = Handler(handlerFunc: (_, params) => DetailPage());
+var reportDetailHandle = Handler(
+    handlerFunc: (_, params) => DetailPage(
+          newsTipId: params['newsTipId']?.first,
+        ));
 
 var applyHandle = Handler(handlerFunc: (_, params) => ApplyPage());
 

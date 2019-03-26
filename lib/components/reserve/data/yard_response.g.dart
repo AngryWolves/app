@@ -30,7 +30,7 @@ YardData _$YardDataFromJson(Map<String, dynamic> json) {
       json['position'] as String,
       json['imageUrl'] as String,
       json['equipment'] as String,
-      json['rentFee'] as int,
+      (json['rentFee'] as num)?.toDouble(),
       json['createTime'] as String);
 }
 

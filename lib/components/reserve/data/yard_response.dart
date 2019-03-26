@@ -43,7 +43,7 @@ class YardData extends Object {
   String equipment;
 
   @JsonKey(name: 'rentFee')
-  int rentFee;
+  double rentFee;
 
   @JsonKey(name: 'createTime')
   String createTime;

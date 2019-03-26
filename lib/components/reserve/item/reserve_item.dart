@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/reserve/data/yard_response.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
 
 class RoomItem extends StatelessWidget {
+  const RoomItem({Key key, this.data}) : super(key: key);
+
+  final YardData data;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,11 +38,11 @@ class RoomItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'xxxx会议室',
+                data?.position ?? '',
                 style: TextStyle(color: ColorRes.GERY_TEXT, fontSize: 15.0),
               ),
               Text(
-                reserve_equipment + '',
+                reserve_equipment + '${data?.equipment ?? ''}',
                 style: TextStyle(
                     fontSize: 11.0, color: ColorRes.REPAIR_SELECT_TYPE_TITLE),
               )
@@ -67,11 +72,13 @@ class RoomItem extends StatelessWidget {
     return Container(
       child: Stack(
         children: <Widget>[
-          CachedNetworkImage(
-            imageUrl: 'http://img8.zol.com.cn/bbs/upload/7676/7675079_0800.jpg',
-            fit: BoxFit.fill,
+          Container(
             height: ScreenUtil().setHeight(200),
-            width: double.infinity,
+            child: CachedNetworkImage(
+              imageUrl: data?.imageUrl ?? '',
+              fit: BoxFit.fill,
+              width: double.infinity,
+            ),
           ),
         ],
       ),

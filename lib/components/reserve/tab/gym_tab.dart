@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:smart_park/components/reserve/data/yard_response.dart';
 import 'package:smart_park/components/reserve/item/reserve_item.dart';
-import 'package:smart_park/widget/base/refresh_list_view.dart';
+import 'package:smart_park/components/reserve/reserve_page.dart';
+import 'package:smart_park/components/reserve/tab/base_yard_list.dart';
 
 class GymTab extends StatefulWidget {
   @override
   _GymTabState createState() => _GymTabState();
 }
 
-class _GymTabState extends State<GymTab>
-        with AutomaticKeepAliveClientMixin {
-  
+class _GymTabState extends State<GymTab> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,16 +27,12 @@ class _GymList extends StatefulWidget {
   _GymListState createState() => _GymListState();
 }
 
-class _GymListState extends RefreshListView<_GymList, String> {
+class _GymListState extends BaseYardList<_GymList> {
+  @override
+  Widget buildItem(YardData data) => RoomItem(
+        data: data,
+      );
 
   @override
-  Widget buildItem(String data) {
-    return RoomItem();
-  }
-
-  @override
-  Future<List<String>> requestData(int page) async {
-    return ['ss'];
-  }
+  int getType() => RESERVE_TAB_TYPE_GYM;
 }
-

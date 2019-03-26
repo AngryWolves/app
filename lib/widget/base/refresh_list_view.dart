@@ -37,7 +37,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         print('list is end');
-        _handleRefresh(page: _curPage);
+        _handleRefresh(page: ++_curPage);
       }
     });
     super.initState();
@@ -104,6 +104,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
       setState(() {
         if (page == 1) {
           _data = data;
+          _curPage = 1;
         } else {
           _data.addAll(data);
         }

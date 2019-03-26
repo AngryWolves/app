@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/material.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
 
@@ -44,11 +44,13 @@ class NavigatorUtil {
   }
 
   //注册 第三步
-  static void goRegisteredThird(
-      BuildContext context, String mobile, String code,String idCardFrontUrl,String idCardBackUrl) {
+  static void goRegisteredThird(BuildContext context, String mobile,
+      String code, String idCardFrontUrl, String idCardBackUrl) {
     TransitionType transitionType = TransitionType.nativeModal;
     Application.router.navigateTo(
-        context, Routes.doRegisteredThird + "?mobile=$mobile&code=$code&idCardFrontUrl=$idCardFrontUrl&idCardBackUrl=$idCardBackUrl",
+        context,
+        Routes.doRegisteredThird +
+            "?mobile=$mobile&code=$code&idCardFrontUrl=$idCardFrontUrl&idCardBackUrl=$idCardBackUrl",
         transition: transitionType);
   }
 
@@ -181,37 +183,38 @@ class NavigatorUtil {
 
   /// 场地预定
   static void goReservePage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReserve);
+      Application.router.navigateTo(context, Routes.doReserve);
 
   /// 预约时间
   static void goReserveSelectDatePage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReserveSelectDate);
+      Application.router.navigateTo(context, Routes.doReserveSelectDate);
 
   /// 预约确认
   static void goReserveConfirmPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReserveConfirm);
+      Application.router.navigateTo(context, Routes.doReserveConfirm);
 
   /// 快速预约
   static void goFastReservePage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doFastReserve);
+      Application.router.navigateTo(context, Routes.doFastReserve);
 
   /// 预约成功
   static void goReserveSuccessPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReserveSuccess);
+      Application.router.navigateTo(context, Routes.doReserveSuccess);
 
   /// 项目申报
   static void goReportActionPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReportAction);
+      Application.router.navigateTo(context, Routes.doReportAction);
 
   /// 信息详情
-  static void goReportDetailPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doReportDetail);
+  static void goReportDetailPage(BuildContext context, String newsTipId) =>
+      Application.router
+          .navigateTo(context, Routes.doReportDetail + '?newsTipId=$newsTipId');
 
   ///  申请入口
   static void goApplyPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doApply);
+      Application.router.navigateTo(context, Routes.doApply);
 
   ///  申请详情
   static void goApplyDetailPage(BuildContext context) =>
-          Application.router.navigateTo(context, Routes.doApplyDetail);
+      Application.router.navigateTo(context, Routes.doApplyDetail);
 }

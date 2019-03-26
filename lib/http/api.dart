@@ -43,23 +43,35 @@ class Api {
   static const String SMART_SIZE = 'size';
 
   //我的报修
-  static const String SMART_REPAIR = SMART_HOST +'/app/user/repair';
+  static const String SMART_REPAIR = SMART_HOST + '/app/user/repair';
 
   //设置修改邮箱
-  static const String SMART_SET_MAIL =SMART_HOST + '/app/user/setEmail';
+  static const String SMART_SET_MAIL = SMART_HOST + '/app/user/setEmail';
 
   /// 用户信息
   static const String SMART_ACCOUNT_INFO = SMART_HOST + '/app/user/info';
 
   /// 我的车辆
   static const String SMART_MY_CAR = SMART_HOST + '/app/user/myCar';
+
   /// 停车历史记录
   static const String SMART_PARKING_HISTORY =
       SMART_HOST + '/app/user/myParkHistory';
+
   /// 站内信
   static const String SMART_TIP_MESSAGE = SMART_HOST + '/app/user/tipMsg';
+
   /// 查询新闻
   static const String SMART_HOME_NEWS = SMART_HOST + '/app/user/news';
+
   /// 查询场地列表
   static const String SMART_YARD_LIST = SMART_HOST + '/app/user/getYard';
+
+  /// 项目申报
+  static const String SMART_DECLARE = SMART_HOST + '/app/user/declare';
+
+  /// 项目申报详情
+  static const String SMART_DECLARE_DETAIL =
+      SMART_HOST + '/app/user/detailsById';
+  static const String SMART_NEW_TIP_ID = 'newstipId';
 }

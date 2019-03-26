@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/report_action/data/declare_response.dart';
+import 'package:smart_park/dio/delcare_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -9,48 +13,55 @@ import 'package:smart_park/widget/common_gradient_button.dart';
 import 'package:smart_park/widget/common_stroke_button.dart';
 
 class DetailPage extends StatefulWidget {
+  DetailPage({this.newsTipId});
+
+  final String newsTipId;
+
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends BaseState<DetailPage> {
+
+  DeclareDao _declareDao;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildCommonAppbar(report_action_detail_title, onLeadTop: onBack),
-      body: Container(
-        margin: const EdgeInsets.all(15.0),
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          children: <Widget>[_buildHeadTitle(), _buildReport()],
-        ),
-      ),
+      body: FutureBuilder(
+              future: _getDeclareDetail(),
+              builder: (_, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Container(
+            margin: const EdgeInsets.all(15.0),
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              children: <Widget>[_buildHeadTitle(snapshot.data), _buildDesc(snapshot.data)],
+            ),
+          );
+        } else {
+          return Container();
+        }
+      }),
     );
   }
 
-  Widget _buildDesc() {
+  Widget _buildDesc(DeclareData data) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(top: 15.0),
-          height: ScreenUtil().setHeight(192),
-          child: CachedNetworkImage(
-            imageUrl: 'http://img8.zol.com.cn/bbs/upload/7676/7675079_0800.jpg',
-            width: double.infinity,
-            fit: BoxFit.fill,
-          ),
-        ),
+//        Container(
+//          margin: const EdgeInsets.only(top: 15.0),
+//          height: ScreenUtil().setHeight(192),
+//          child: CachedNetworkImage(
+//            imageUrl: 'http://img8.zol.com.cn/bbs/upload/7676/7675079_0800.jpg',
+//            width: double.infinity,
+//            fit: BoxFit.fill,
+//          ),
+//        ),
         Padding(padding: const EdgeInsets.all(20.0)),
-        Text(
-          '''
-        很抱歉通知各位园区的小伙伴们，本园区将于2019年2月13日晚9:30至10:30园区将进行断电维护。届时请小伙伴们提前应对，
-
-谢谢。
-
-
-                                                                      ----智慧园区运营团队
-        '''
-              .trim(),
+        Text(data.newsContent ?? '',
           style: TextStyle(color: ColorRes.GERY_TEXT_HINT, fontSize: 13.0),
         )
       ],
@@ -138,13 +149,20 @@ class _DetailPageState extends BaseState<DetailPage> {
   ///
   /// 信息标题
   ///
-  Widget _buildHeadTitle() => Container(
+  Widget _buildHeadTitle(DeclareData data) => Container(
         height: ScreenUtil().setHeight(30),
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
         child: Text(
-          '【重要】园区将于2月13日夜间停电',
+          data.newsTitle ?? '',
           style: TextStyle(color: ColorRes.GERY_TEXT, fontSize: 15.0),
         ),
       );
+
+
+  Future<DeclareData> _getDeclareDetail() async {
+    _declareDao ??= DeclareDao(StoreProvider.of<AppState>(context));
+
+    return (await _declareDao.getDeclareDetail(newsTipId: widget.newsTipId)).data;
+  }
 }

@@ -10,10 +10,9 @@ class ReserveDao extends BaseDao {
   ///
   /// 查询场地列表
   ///
-  Future<YardResponse> getYardList({int page}) async {
+  Future<YardResponse> getYardList({int type}) async {
     var response = await client.post(Api.SMART_YARD_LIST,
-        headers: {Api.SMART_TOKEN: getToken()},
-        data: {Api.SMART_PAGE: page, Api.SMART_SIZE: 10});
+        headers: {Api.SMART_TOKEN: getToken()}, data: {Api.SMART_TYPE: type});
 
     var data = response?.data;
     if (data == null) {

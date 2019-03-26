@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/report_action/data/declare_response.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 
 class ReportActionItem extends StatelessWidget {
-  ReportActionItem({this.image});
+  ReportActionItem({this.data});
 
-  final String image;
+  final DeclareData data;
 
   final TextStyle _titleStyle =
       TextStyle(color: ColorRes.GERY_TEXT, fontSize: 15.0);
@@ -20,18 +21,14 @@ class ReportActionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-            if (image.isEmpty) {
-
-            } else {
-                NavigatorUtil.goReportDetailPage(context);
-            }
+            NavigatorUtil.goReportDetailPage(context, data?.newstipId);
         },
         child: Container(
             height: ScreenUtil().setHeight(129),
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             decoration: BoxDecoration(
                     border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
-            child: image.isEmpty ? _buildBodyWithoutImg() : _buildBodyImg(),
+            child: _buildBodyWithoutImg(),
         ),
     );
   }
@@ -45,13 +42,11 @@ class ReportActionItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
-          '【项目申报】XXXXX可申报',
+          data?.newsTitle ?? '',
           style: _titleStyle,
         ),
         Text(
-          '''
-              由XXXXXXX公司承建的XXXX项目，位于XXXX海域，用海面积约为X公顷，主要建设内容包括XXXX、XXXX（...
-              '''.trim(),
+          data?.newsContent ?? '',
           style: _contentStyle,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -80,7 +75,7 @@ class ReportActionItem extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3.0),
               image: DecorationImage(
-                  image: CachedNetworkImageProvider(image), fit: BoxFit.fill)),
+                  image: CachedNetworkImageProvider(''), fit: BoxFit.fill)),
         )
       ],
     );

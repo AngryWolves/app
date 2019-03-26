@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_park/components/reserve/data/yard_response.dart';
 import 'package:smart_park/components/reserve/item/reserve_item.dart';
-import 'package:smart_park/widget/base/refresh_list_view.dart';
+import 'package:smart_park/components/reserve/reserve_page.dart';
+import 'package:smart_park/components/reserve/tab/base_yard_list.dart';
 
 class MeetingRoomTab extends StatefulWidget {
   @override
@@ -26,14 +28,13 @@ class _MeetingRoomList extends StatefulWidget {
   _MeetingRoomListState createState() => _MeetingRoomListState();
 }
 
-class _MeetingRoomListState extends RefreshListView<_MeetingRoomList, String> {
+class _MeetingRoomListState extends BaseYardList<_MeetingRoomList> {
+
   @override
-  Widget buildItem(String data) {
-    return RoomItem();
+  Widget buildItem(YardData data) {
+    return RoomItem(data: data,);
   }
 
   @override
-  Future<List<String>> requestData(int page) async {
-    return ['sss'];
-  }
+  int getType() => RESERVE_TAB_TYPE_MEETING;
 }
