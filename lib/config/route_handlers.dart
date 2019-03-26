@@ -137,9 +137,9 @@ var serviceRouteHandler = new Handler(
 });
 var changePasswordRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-//      String mobile = params["mobile"]?.first;
-//      String code = params["code"]?.first;
-  return PersonalChangePasswordScreen();
+  String mobile = params["mobile"]?.first;
+  String code = params["code"]?.first;
+  return PersonalChangePasswordScreen(mobile: mobile, code: code);
 });
 var changeMailRouteHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {

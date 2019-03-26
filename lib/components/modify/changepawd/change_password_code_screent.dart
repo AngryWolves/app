@@ -11,18 +11,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
-import 'package:flutter/services.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 
 //手机号修改密码第一步204, 204, 204, 1/
 
@@ -37,7 +30,7 @@ class ModifyChangeCodePassword extends StatefulWidget {
   }
 }
 
-class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
+class _ModifyChangeCodePassword extends BaseState<ModifyChangeCodePassword> {
   final TextEditingController _codeController1 = new TextEditingController();
   final FocusNode _focusNode1 = FocusNode();
   final TextEditingController _codeController2 = new TextEditingController();
@@ -50,7 +43,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
   int _countDownTime = 60;
   bool _isCountdown = false;
   bool _isNextEnable = false;
-
+  UserDao _dao;
   @override
   void initState() {
     super.initState();
@@ -197,8 +190,19 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         }
       });
     });
+    _getCode(mobile);
   }
-
+  void _getCode(phone) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    await _dao.getCode(phone, 3);
+    hideLoading();
+  }
   Widget _buildEdParentWidget() {
     return Container(
       height: ScreenUtil().setHeight(133),
@@ -311,7 +315,7 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
               ObjectUtil.isEmptyString(code4)) {
             return;
           }
-          NavigatorUtil.goChangePassword(context);
+          NavigatorUtil.goChangePassword(context,widget.mobile,"171385");
           print("下一步点击");
         },
         child: Container(
