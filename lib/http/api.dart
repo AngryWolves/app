@@ -74,4 +74,13 @@ class Api {
   static const String SMART_DECLARE_DETAIL =
       SMART_HOST + '/app/user/detailsById';
   static const String SMART_NEW_TIP_ID = 'newstipId';
+
+  /// 创建报修
+  static const SMART_CREATE_REPAIR = SMART_HOST + '/app/user/createRepair';
+  static const SMART_CONTENT = 'content';
+  static const SMART_IMAGE_URL = 'imageUrl';
+
+  /// 上传照片
+  static const SMART_UPLOAD_IMAGE = SMART_HOST + '/app/user/saveFile';
+  static const SMART_FILES = 'files';
 }
