@@ -5,11 +5,19 @@ import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/components/personal/repairs/data/repair_data.dart';
 import 'package:smart_park/values/json_strings.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:smart_park/widget/feedback_dialog_widget.dart';
-
+import 'package:smart_park/dio/personal_dao.dart';
+import 'package:smart_park/components/personal/repairs/data/repair_data_bean.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/config/application.dart';
 //我的报修 注:0备货中1运输中2已撤销3已完成 共4种状态/
 class PersonalRepairsScreen extends StatefulWidget {
   PersonalRepairsScreen({@required this.userId});
@@ -23,20 +31,39 @@ class PersonalRepairsScreen extends StatefulWidget {
 }
 
 class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
+  PersonalDao _dao;
+  List<RepairData> listOfRepairData = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getPersonalData();
+  }
+  void _getPersonalData() async {
+    _dao ??= PersonalDao(StoreProvider.of<AppState>(context));
+    RepairDataBean dataBean = await _dao.getRepairData(1);
+    if (dataBean == null) {
+      return;
+    }
+    setState(() {
+      listOfRepairData.addAll(dataBean.data);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final localRepairJson = json.decode(JsonStrings.localRepair);
-    final localRepairObjects =
-        localRepairJson.map((o) => RepairData.fromJson(o));
-
-    final listOfLocalRepairObjects = localRepairObjects.toList();
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 236, 236, 1),
       appBar: buildCommonAppbar(repairs_title_text, onLeadTop: () {
         InputManageUtil.shutdownInputKeyboard();
         Navigator.pop(context);
       }),
-      body: Center(child: _buildListWidget(listOfLocalRepairObjects)),
+      body: Center(child: _buildListWidget(listOfRepairData)),
     );
   }
 
@@ -94,8 +121,8 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
                           left: ScreenUtil().setWidth(10),
                           top: ScreenUtil().setHeight(13)),
                       child: Text(
-                        !ObjectUtil.isEmptyString(obj.repairTitle)
-                            ? obj.repairTitle
+                        !ObjectUtil.isEmptyString(obj.applyContent)
+                            ? obj.applyContent
                             : "",
                         style: TextStyle(
                             color: Color.fromRGBO(46, 49, 56, 1),
@@ -103,7 +130,7 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
                       ),
                     ),
                     Expanded(
-                      child: _buildStateText(obj.repairState),
+                      child: _buildStateText(obj.applyStatus),
                       flex: 1,
                     )
                   ],
@@ -118,7 +145,7 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
                 alignment: Alignment.centerLeft,
                 child: Row(
                   children: <Widget>[
-                    _buildStateTitleWidget(obj.repairState),
+                    _buildStateTitleWidget(obj.applyStatus),
                     Padding(
                       padding: EdgeInsets.only(
                           left: ScreenUtil().setWidth(15),
@@ -129,17 +156,17 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
                         color: Color.fromRGBO(240, 240, 240, 1),
                       ),
                     ),
-                    _buildNumberWidget(obj.repairNumber)
+                    _buildNumberWidget('20190123')
                   ],
                 ),
               ),
-              obj.repairState == 0
+              obj.applyStatus == 0
                   ? _buildStateStockingGroupWidget(obj)
                   : Container(),
-              obj.repairState == 1
+              obj.applyStatus == 1
                   ? _buildStateMoveGroupWidget(obj)
                   : Container(),
-              obj.repairState == 3
+              obj.applyStatus == 3
                   ? _buildStateProblemGroupWidget(obj)
                   : Container(),
             ],
@@ -149,13 +176,13 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
     );
   }
 
-  Widget _buildStateText(repairState) {
+  Widget _buildStateText(applyStatus) {
     return Container(
       alignment: Alignment.centerRight,
       child: Text(
-        repairState == 2
+        applyStatus == 2
             ? repairs_revoke_state_text
-            : repairState == 3 ? repairs_finish_state_text : "",
+            : applyStatus == 3 ? repairs_finish_state_text : "",
         style: TextStyle(
             color: Color.fromRGBO(177, 177, 179, 1),
             fontSize: ScreenUtil().setSp(12)),
@@ -163,16 +190,16 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
     );
   }
 
-  Widget _buildStateTitleWidget(repairState) {
+  Widget _buildStateTitleWidget(applyStatus) {
     return Text(
       repairs_state_title +
-          (repairState == 0
+          (applyStatus == 0
               ? repairs_stocking_state_text
-              : repairState == 1
+              : applyStatus == 1
                   ? repairs_move_state_text
-                  : repairState == 2
+                  : applyStatus == 2
                       ? repairs_revoke_state_text
-                      : repairState == 3 ? repairs_finish_state_text : ""),
+                      : applyStatus == 3 ? repairs_finish_state_text : ""),
       style: TextStyle(
           color: Color.fromRGBO(46, 49, 56, 1),
           fontSize: ScreenUtil().setSp(12)),
