@@ -3,17 +3,23 @@ import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
+import 'package:smart_park/data/response_successful_data.dart';
+import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 
 //手机号修改密码第二步/
 class PersonalChangePasswordScreen extends StatefulWidget {
-  PersonalChangePasswordScreen();
-
+  PersonalChangePasswordScreen({@required this.mobile,this.code});
+  final String mobile;
+  final String code;
   @override
   State<StatefulWidget> createState() {
     return _PersonalChangePasswordScreenState();
@@ -21,10 +27,10 @@ class PersonalChangePasswordScreen extends StatefulWidget {
 }
 
 class _PersonalChangePasswordScreenState
-    extends State<PersonalChangePasswordScreen> {
+    extends BaseState<PersonalChangePasswordScreen> {
   final _changePasswordTextController = TextEditingController();
   bool checkLegal = false;
-
+  UserDao _dao;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +62,7 @@ class _PersonalChangePasswordScreenState
                     change_password_hint,
                     _changePasswordTextController,
                     isMobile: false,
+                    obscureText: true,
                     maxLength: 18,
                     lineColor: Color.fromRGBO(46, 49, 56, 1),
                     onChanged: (text) {
@@ -79,6 +86,7 @@ class _PersonalChangePasswordScreenState
                       if (!checkLegal) {
                         return;
                       }
+                      _forget();
                       print("修改密码按钮点击");
                     },
                     child: Container(
@@ -112,5 +120,26 @@ class _PersonalChangePasswordScreenState
             ),
           )),
     );
+  }
+  void _forget() async{
+    InputManageUtil.shutdownInputKeyboard();
+    String password = _changePasswordTextController.text;
+    if (ObjectUtil.isEmptyString(password)) {
+      Fluttertoast.showToast(msg: forget_password_error_text);
+      return;
+    }
+    if(ObjectUtil.isEmptyString(widget.mobile)||ObjectUtil.isEmptyString(widget.code)){
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    ResponseSuccessfulData responseSuccessfulData=await _dao.forget(widget.mobile, widget.code, password);
+    hideLoading();
+    if (responseSuccessfulData != null && responseSuccessfulData.result == 0) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.doLogin, (Route<dynamic> route) => false);
+    } else if (responseSuccessfulData.result == 1) {
+      Fluttertoast.showToast(msg: !ObjectUtil.isEmptyString(responseSuccessfulData.msg)?responseSuccessfulData.msg:registered_third_result_1_text);
+    }
   }
 }

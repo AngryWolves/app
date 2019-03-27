@@ -11,18 +11,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
-import 'package:flutter/services.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 
 //手机号修改密码第一步204, 204, 204, 1/
 
@@ -37,7 +30,7 @@ class ModifyChangeCodePassword extends StatefulWidget {
   }
 }
 
-class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
+class _ModifyChangeCodePassword extends BaseState<ModifyChangeCodePassword> {
   final TextEditingController _codeController1 = new TextEditingController();
   final FocusNode _focusNode1 = FocusNode();
   final TextEditingController _codeController2 = new TextEditingController();
@@ -46,10 +39,15 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
   final FocusNode _focusNode3 = FocusNode();
   final TextEditingController _codeController4 = new TextEditingController();
   final FocusNode _focusNode4 = FocusNode();
+  final TextEditingController _codeController5 = new TextEditingController();
+  final FocusNode _focusNode5 = FocusNode();
+  final TextEditingController _codeController6 = new TextEditingController();
+  final FocusNode _focusNode6 = FocusNode();
   Timer _timer;
   int _countDownTime = 60;
   bool _isCountdown = false;
   bool _isNextEnable = false;
+  UserDao _dao;
 
   @override
   void initState() {
@@ -78,6 +76,18 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         setState(() {});
       }
     });
+    _focusNode5.addListener(() {
+      if (!_focusNode5.hasFocus) {
+        // TextField has lost focus
+        setState(() {});
+      }
+    });
+    _focusNode6.addListener(() {
+      if (!_focusNode6.hasFocus) {
+        // TextField has lost focus
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -87,10 +97,14 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
     _codeController2?.dispose();
     _codeController3?.dispose();
     _codeController4?.dispose();
+    _codeController5?.dispose();
+    _codeController6?.dispose();
     _focusNode1?.dispose();
     _focusNode2?.dispose();
     _focusNode3?.dispose();
     _focusNode4?.dispose();
+    _focusNode5?.dispose();
+    _focusNode6?.dispose();
     _timer?.cancel();
   }
 
@@ -197,6 +211,19 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
         }
       });
     });
+    _getCode(mobile);
+  }
+
+  void _getCode(phone) async {
+    InputManageUtil.shutdownInputKeyboard();
+    if (!RegexUtil.isMobileExact(phone)) {
+      Fluttertoast.showToast(msg: login_mobile_error_text);
+      return;
+    }
+    showLoading();
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    await _dao.getCode(phone, 3);
+    hideLoading();
   }
 
   Widget _buildEdParentWidget() {
@@ -209,6 +236,8 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
           _buildEdWidget(_codeController2, _focusNode2, 1),
           _buildEdWidget(_codeController3, _focusNode3, 2),
           _buildEdWidget(_codeController4, _focusNode4, 3),
+          _buildEdWidget(_codeController5, _focusNode5, 4),
+          _buildEdWidget(_codeController6, _focusNode6, 5),
         ],
       ),
     );
@@ -218,8 +247,8 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
       TextEditingController controller, FocusNode _focusNode, index) {
     return Container(
       //46, 49, 56, 1
-      width: ScreenUtil().setWidth(50),
-      height: ScreenUtil().setHeight(50),
+      width: ScreenUtil().setWidth(40),
+      height: ScreenUtil().setHeight(40),
       decoration: BoxDecoration(
         border: Border.all(
             width: 1.0,
@@ -248,13 +277,17 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
               } else if (index == 2) {
                 FocusScope.of(context).requestFocus(_focusNode4);
               } else if (index == 3) {
-//                FocusScope.of(context).requestFocus(_focusNode1);
+                FocusScope.of(context).requestFocus(_focusNode5);
+              } else if (index == 4) {
+                FocusScope.of(context).requestFocus(_focusNode6);
               }
             }
             if (!ObjectUtil.isEmptyString(_codeController1.text) &&
                 !ObjectUtil.isEmptyString(_codeController2.text) &&
                 !ObjectUtil.isEmptyString(_codeController3.text) &&
-                !ObjectUtil.isEmptyString(_codeController4.text)) {
+                !ObjectUtil.isEmptyString(_codeController4.text) &&
+                !ObjectUtil.isEmptyString(_codeController5.text) &&
+                !ObjectUtil.isEmptyString(_codeController6.text)) {
               _isNextEnable = true;
             } else {
               _isNextEnable = false;
@@ -305,13 +338,18 @@ class _ModifyChangeCodePassword extends State<ModifyChangeCodePassword> {
           String code2 = _codeController2.text;
           String code3 = _codeController3.text;
           String code4 = _codeController4.text;
+          String code5 = _codeController5.text;
+          String code6 = _codeController6.text;
           if (ObjectUtil.isEmptyString(code1) ||
               ObjectUtil.isEmptyString(code2) ||
               ObjectUtil.isEmptyString(code3) ||
-              ObjectUtil.isEmptyString(code4)) {
+              ObjectUtil.isEmptyString(code4) ||
+              ObjectUtil.isEmptyString(code5) ||
+              ObjectUtil.isEmptyString(code6)) {
             return;
           }
-          NavigatorUtil.goChangePassword(context);
+          NavigatorUtil.goChangePassword(context, widget.mobile,
+              code1 + code2 + code3 + code4 + code5 + code6);
           print("下一步点击");
         },
         child: Container(
