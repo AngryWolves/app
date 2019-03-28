@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/payment/data/my_payment_response.dart';
 import 'package:smart_park/components/payment/payment_bar_arc.dart';
+import 'package:smart_park/dio/payment_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/utils/object_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
+import 'package:smart_park/widget/base/refresh_list_view.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
 import 'package:smart_park/widget/modal_bottom_sheet_pay.dart';
 
@@ -142,21 +148,9 @@ class _PaymentPageState extends BaseState<PaymentPage> {
   /// 历史记录列表
   ///
   Widget _buildSliverBody() {
-    return SliverList(
-        delegate: SliverChildBuilderDelegate((context, index) {
-      if (index == 0) {
-        return Container(
-          padding: EdgeInsets.only(left: 15.0),
-          alignment: Alignment.centerLeft,
-          height: ScreenUtil().setHeight(35),
-          color: ColorRes.APP_BACKGROUND,
-          child: Text(
-            payment_payment_history,
-          ),
-        );
-      }
-      return PaymentHistoryItem(text: '$index').buildItem;
-    }, childCount: 30));
+    return SliverToBoxAdapter(
+      child: PaymentList(),
+    );
   }
 
   void _handlePayNow() {
@@ -171,10 +165,34 @@ class _PaymentPageState extends BaseState<PaymentPage> {
   }
 }
 
+class PaymentList extends StatefulWidget {
+  @override
+  _PaymentListState createState() => _PaymentListState();
+}
+
+class _PaymentListState extends RefreshListView<PaymentList, MyPaymentData> {
+
+  PaymentDao _paymentDao;
+
+
+
+  @override
+  Widget buildItem(MyPaymentData data) {
+    return PaymentHistoryItem(text: data).buildItem;
+  }
+
+  @override
+  Future<List<MyPaymentData>> requestData(int page) async {
+    _paymentDao ??= PaymentDao(StoreProvider.of<AppState>(context));
+
+    return (await _paymentDao.getPaymentList(page: page))?.data;
+  }
+}
+
 class PaymentHistoryItem {
   PaymentHistoryItem({this.text});
 
-  final String text;
+  final MyPaymentData text;
 
   final TextStyle _titleStyle = TextStyle(color: ColorRes.GERY_TEXT);
   final TextStyle _amountStyle = TextStyle(
@@ -182,6 +200,10 @@ class PaymentHistoryItem {
       fontSize: ScreenUtil().setSp(18));
 
   Widget get buildItem {
+    if (text == null) {
+      return Container();
+    }
+
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -195,11 +217,11 @@ class PaymentHistoryItem {
           height: ScreenUtil().setWidth(13),
         ),
         title: Text(
-          text,
+          ObjectUtil.formatData(text.createTime),
           style: _titleStyle,
         ),
         trailing: Text(
-          '- ¥ 4000.00',
+          '- ¥ ${text.payAmount}',
           style: _amountStyle,
         ),
       ),
