@@ -83,4 +83,7 @@ class Api {
   /// 上传照片
   static const SMART_UPLOAD_IMAGE = SMART_HOST + '/app/user/saveFile';
   static const SMART_FILES = 'files';
+
+  /// 我的缴费
+  static const SMART_PAYMENT = SMART_HOST + '/app/user/payment';
 }
