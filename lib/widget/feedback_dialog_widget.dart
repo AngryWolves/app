@@ -92,7 +92,10 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
         : GestureDetector(
             onTap: () {
               print("确定按钮点击");
-              if (widget.onSureState != null) {}
+              if (widget.onSureState != null) {
+                print("确定按钮点击111");
+                widget.onSureState();
+              }
             },
             child: Container(
               height: ScreenUtil().setHeight(46),
@@ -166,6 +169,7 @@ class _FeedBackDialogState extends State<FeedBackDialog> {
   Widget _buildDetermineWidget(onSureState) {
     return GestureDetector(
       onTap: () {
+        Navigator.pop(context); //关闭对话框
         print("确定按钮点击");
         if (widget.onSureState != null) {}
       },
