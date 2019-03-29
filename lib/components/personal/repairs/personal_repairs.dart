@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/config/application.dart';
+import 'package:smart_park/widget/pull_to_refresh_widget.dart';
+
 //我的报修 注:0备货中1运输中2已撤销3已完成 共4种状态  0:待审核，1:审核成功, 2:驳回/
 class PersonalRepairsScreen extends StatefulWidget {
   PersonalRepairsScreen({@required this.userId});
@@ -75,7 +77,7 @@ class _PersonalRepairsScreenState extends State<PersonalRepairsScreen> {
                 right: ScreenUtil().setWidth(15),
                 top: ScreenUtil().setHeight(15),
                 bottom: ScreenUtil().setHeight(20)),
-            child: ListView.builder(
+            child: PullToRefreshListView(
                 itemCount: objects.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
