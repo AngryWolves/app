@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PullToRefreshListView extends StatefulWidget {
   PullToRefreshListView({
@@ -13,10 +14,14 @@ class PullToRefreshListView extends StatefulWidget {
     this.dividerBuilder,
     this.physics,
     this.headerSliverBuilder,
+    this.onRefresh,
     this.controller,
     this.foregroundWidget,
     this.padding,
     this.isSliverMode = false,
+    this.enableOverScroll: false,
+    this.enablePullDown: true,
+    this.enablePullUp: false,
     // [Not Recommended]
     // Sliver mode will discard a lot of ListView variables (likes physics, controller),
     // and each of items must be sliver.
@@ -35,6 +40,10 @@ class PullToRefreshListView extends StatefulWidget {
   final Widget foregroundWidget;
   final EdgeInsetsGeometry padding;
   final bool isSliverMode;
+  final bool enableOverScroll;
+  final bool enablePullUp;
+  final bool enablePullDown;
+  final OnRefresh onRefresh;
 
   @override
   State<StatefulWidget> createState() {
@@ -44,7 +53,17 @@ class PullToRefreshListView extends StatefulWidget {
 
 enum ItemType { header, footer, data, dividerData }
 
-class PullToRefreshListViewState extends State<PullToRefreshListView> {
+class PullToRefreshListViewState extends State<PullToRefreshListView> with TickerProviderStateMixin{
+  RefreshController _controller;
+  @override
+  void dispose() {
+    super.dispose();
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller=new RefreshController();
+  }
   @override
   Widget build(BuildContext context) => widget.headerSliverBuilder != null
       ? NestedScrollView(
@@ -82,13 +101,30 @@ class PullToRefreshListViewState extends State<PullToRefreshListView> {
               slivers: List.generate(
                   totalItemCount, (index) => _itemBuilder(context, index)),
             )
-          : ListView.builder(
-              physics: widget.physics,
-              padding: widget.padding,
-              controller: widget.controller,
-              itemCount: totalItemCount,
-              itemBuilder: _itemBuilder,
-            )
+          : RefreshIndicator(
+              child: SmartRefresher(
+                enablePullDown: false,
+                enablePullUp: false,
+                enableOverScroll: false,
+                controller: _controller,
+                onRefresh: (up) {
+                  Future.delayed(const Duration(milliseconds: 1000))
+                      .then((val) {
+                    _controller.sendBack(false, RefreshStatus.idle);
+                  });
+                },
+                child: ListView.builder(
+                  physics: widget.physics,
+                  padding: widget.padding,
+                  controller: widget.controller,
+                  itemCount: totalItemCount,
+                  itemBuilder: _itemBuilder,
+                ),
+              ),
+
+              onRefresh: () {
+                 return  Future.delayed(const Duration(milliseconds: 300));
+              })
     ];
     if (widget.foregroundWidget != null) children.add(widget.foregroundWidget);
     return Stack(children: children);
@@ -140,3 +176,5 @@ class PullToRefreshListViewState extends State<PullToRefreshListView> {
 
   final _defaultDivider = const Divider(color: Colors.grey);
 }
+
+typedef void OnRefresh(bool up);
