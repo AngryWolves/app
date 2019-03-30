@@ -95,6 +95,7 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          print('item tap index :: ${obj.type}');
           widget._checkIndex = obj.type;
         });
         print("item 点击");
@@ -216,13 +217,13 @@ class _ModalBottomSheetPayState extends State<ModalBottomSheetPay> {
 }
 
 class PaymentHandle {
-  static const PAY_TYPE_ALIPAY = 1;
+  static const PAY_TYPE_ALIPAY = 0;
 
-  static const PAY_TYPE_WX = 2;
+  static const PAY_TYPE_WX = 1;
 
-  static const PAY_TYPE_UPPAY_COM = 3;
+  static const PAY_TYPE_UPPAY_COM = 2;
 
-  static const PAY_TYPE_UPPAY_PER = 4;
+  static const PAY_TYPE_UPPAY_PER = 3;
 
   void handlePay(int type) async {
     switch (type) {
