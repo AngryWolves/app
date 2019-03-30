@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
 
@@ -46,12 +47,21 @@ class NavigatorUtil {
   //注册 第三步
   static void goRegisteredThird(BuildContext context, String mobile,
       String code, String idCardFrontUrl, String idCardBackUrl) {
-    TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(
+    // 传递图片 url 会发生崩溃
+//    TransitionType transitionType = TransitionType.nativeModal;
+//    Application.router.navigateTo(
+//        context,
+//        Routes.doRegisteredThird +
+//            "?mobile=$mobile&code=$code&idCardFrontUrl=$idCardFrontUrl&idCardBackUrl=$idCardBackUrl",
+//        transition: transitionType);
+    Navigator.push(
         context,
-        Routes.doRegisteredThird +
-            "?mobile=$mobile&code=$code&idCardFrontUrl=$idCardFrontUrl&idCardBackUrl=$idCardBackUrl",
-        transition: transitionType);
+        MaterialPageRoute(
+            builder: (_) => RegisteredThirdScreen(
+                mobile: mobile,
+                code: code,
+                idCardFrontUrl: idCardFrontUrl,
+                idCardBackUrl: idCardBackUrl)));
   }
 
   //个人中心
@@ -93,9 +103,11 @@ class NavigatorUtil {
   }
 
   //修改密码
-  static void goChangePassword(BuildContext context, String mobile,String code) {
+  static void goChangePassword(
+      BuildContext context, String mobile, String code) {
     TransitionType transitionType = TransitionType.nativeModal;
-    Application.router.navigateTo(context, Routes.doChangePassword+"?mobile=$mobile&code=$code",
+    Application.router.navigateTo(
+        context, Routes.doChangePassword + "?mobile=$mobile&code=$code",
         transition: transitionType);
   }
 

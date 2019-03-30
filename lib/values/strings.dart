@@ -36,6 +36,8 @@ const registered_two_upload_camera_text = '拍照';
 const registered_two_upload_photo_text = '从手机相册选择';
 const registered_two_upload_cancel_text = '取消';
 const registered_two_check_upload_error_text = '身份证不能为空,请先上传身份证';
+const registered_two_upload_success = '上传成功';
+const registered_two_upload_error = '上传失败';
 
 const registered_third_password_hint = '输入6-18位数字或字母';
 const registered_third_check_password_hint = '请再次输入密码';
