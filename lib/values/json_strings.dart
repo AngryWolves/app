@@ -30,22 +30,22 @@ abstract class JsonStrings {
   [
     {
         "payTitle": "支付宝支付",
-        "type": 1,
+        "type": 0,
         "imagePath": "images/icon_alipay@3x.png"
     },
     {
         "payTitle": "微信支付",
-        "type": 2,
+        "type": 1,
         "imagePath": "images/icon_weixinpay@3x.png"
     },
     {
         "payTitle": "公司支付",
-        "type": 3,
+        "type": 2,
         "imagePath": "images/icon_unionpay_pay@3x.png"
     },
     {
         "payTitle": "个人支付",
-        "type": 4,
+        "type": 3,
         "imagePath": "images/icon_unionpay_pay@3x.png"
     }
 ]''';

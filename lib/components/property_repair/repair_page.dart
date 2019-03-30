@@ -204,15 +204,17 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            CupertinoTextField(
-              onChanged: (text) {
-                setState(() {});
-              },
-              controller: _controller,
-              placeholder: repair_action_issue_desc,
-              maxLength: 200,
-              maxLines: 5,
-              decoration: BoxDecoration(border: Border()),
+            Expanded(
+              child: CupertinoTextField(
+                onChanged: (text) {
+                  setState(() {});
+                },
+                controller: _controller,
+                placeholder: repair_action_issue_desc,
+                maxLength: 200,
+                maxLines: 5,
+                decoration: BoxDecoration(border: Border()),
+              ),
             ),
             Container(
               alignment: Alignment.centerRight,

@@ -2,13 +2,17 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smart_park/dio/repair_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/base/base_state.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 
 class RegisteredTwoScreen extends StatefulWidget {
@@ -23,14 +27,22 @@ class RegisteredTwoScreen extends StatefulWidget {
   }
 }
 
-class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
+class _RegisteredTwoScreenState extends BaseState<RegisteredTwoScreen> {
   Future<File> _imageFilePositive;
   Future<File> _imageFileBack;
   bool isPositive = false;
 
+  RepairDao _repairDao;
+
   @override
   void dispose() {
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _repairDao ??= RepairDao(StoreProvider.of<AppState>(context));
   }
 
   @override
@@ -114,16 +126,7 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
                       msg: registered_two_check_upload_error_text);
                   return;
                 }
-                print("===register=========params=" +
-                    widget.mobile.toString() +
-                    "==code==" +
-                    widget.code);
-                NavigatorUtil.goRegisteredThird(
-                    context,
-                    widget.mobile,
-                    widget.code,
-                    "oss.idCardFrontUrl.png",
-                    "oss.idCardBackUrl.png");
+                _uploadIdCard();
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -349,5 +352,26 @@ class _RegisteredTwoScreenState extends State<RegisteredTwoScreen> {
             );
           }
         });
+  }
+
+  void _uploadIdCard() async {
+    showLoading();
+    File back = await _imageFileBack;
+    File positive = await _imageFilePositive;
+
+    var files = (await _repairDao.uploadImage(files: [back, positive]))?.data;
+    if (files == null || files.length < 2) {
+      Fluttertoast.showToast(msg: registered_two_upload_error);
+    } else {
+      Fluttertoast.showToast(msg: registered_two_upload_success);
+    }
+    hideLoading();
+
+    print("===register=========params=" +
+        widget.mobile.toString() +
+        "==code==" +
+        widget.code);
+    NavigatorUtil.goRegisteredThird(
+        context, widget.mobile, widget.code, files[0], files[1]);
   }
 }
