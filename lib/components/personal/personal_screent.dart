@@ -1,15 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/components/personal/data/local_personal_data.dart';
+import 'package:smart_park/router/navigator_util.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/json_strings.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 
 class PersonalScreen extends StatefulWidget {
 //  PersonalScreen({@required this.personalId});
@@ -92,72 +90,73 @@ class _PersonalScreenState extends State<PersonalScreen> {
   }
 
   Widget _buildInfoWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          width: ScreenUtil().setWidth(172),
-          padding: EdgeInsets.only(
-              top: ScreenUtil().setHeight(20),
-              right: ScreenUtil().setWidth(10)),
-          child: Text(
-            '林先生',
-            textAlign: TextAlign.left,
-            maxLines: 1,
-            style: TextStyle(
-                color: Color.fromRGBO(46, 49, 56, 1),
-                fontSize: ScreenUtil().setSp(21)),
-          ),
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(
+            top: ScreenUtil().setHeight(20),
+            right: ScreenUtil().setWidth(10),
+            bottom: ScreenUtil().setWidth(10)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: Text(
+                '林先生',
+                textAlign: TextAlign.left,
+                maxLines: 1,
+                style: TextStyle(
+                    color: Color.fromRGBO(46, 49, 56, 1),
+                    fontSize: ScreenUtil().setSp(21)),
+              ),
+            ),
+            Container(
+              child: Text(
+                '部门经理人',
+                textAlign: TextAlign.left,
+                maxLines: 1,
+                style: TextStyle(
+                    color: Color.fromRGBO(143, 143, 143, 1),
+                    fontSize: ScreenUtil().setSp(12)),
+              ),
+            ),
+            Container(
+              child: Text(
+                '上海xxxx股份有限公司',
+                textAlign: TextAlign.left,
+                maxLines: 1,
+                style: TextStyle(
+                    color: Color.fromRGBO(143, 143, 143, 1),
+                    fontSize: ScreenUtil().setSp(12)),
+              ),
+            )
+          ],
         ),
-        Container(
-          width: ScreenUtil().setWidth(172),
-          padding: EdgeInsets.only(
-              top: ScreenUtil().setHeight(10),
-              right: ScreenUtil().setWidth(10)),
-          child: Text(
-            '部门经理人',
-            textAlign: TextAlign.left,
-            maxLines: 1,
-            style: TextStyle(
-                color: Color.fromRGBO(143, 143, 143, 1),
-                fontSize: ScreenUtil().setSp(12)),
-          ),
-        ),
-        Container(
-          width: ScreenUtil().setWidth(172),
-          padding: EdgeInsets.only(
-              top: ScreenUtil().setHeight(5), right: ScreenUtil().setWidth(10)),
-          child: Text(
-            '上海xxxx股份有限公司',
-            textAlign: TextAlign.left,
-            maxLines: 1,
-            style: TextStyle(
-                color: Color.fromRGBO(143, 143, 143, 1),
-                fontSize: ScreenUtil().setSp(12)),
-          ),
-        )
-      ],
+      ),
     );
   }
 
   Widget _buildCcecsWidget() {
-    return Column(
-      children: <Widget>[
-        Padding(padding: EdgeInsets.only(top: ScreenUtil().setHeight(19))),
-        Image.asset(
-          'images/icon_ccecs.png',
-          width: ScreenUtil().setWidth(79),
-          height: ScreenUtil().setHeight(22),
-          fit: BoxFit.fill,
-        ),
-        Padding(padding: EdgeInsets.only(top: ScreenUtil().setHeight(3))),
-        Image.asset(
-          'images/icon_login@3x.png',
-          width: ScreenUtil().setWidth(52),
-          height: ScreenUtil().setHeight(45),
-          fit: BoxFit.fill,
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.only(right: ScreenUtil().setHeight(15)),
+      child: Column(
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: ScreenUtil().setHeight(19))),
+          Image.asset(
+            'images/icon_ccecs.png',
+            width: ScreenUtil().setWidth(79),
+            height: ScreenUtil().setHeight(22),
+            fit: BoxFit.fill,
+          ),
+          Padding(padding: EdgeInsets.only(top: ScreenUtil().setHeight(3))),
+          Image.asset(
+            'images/icon_login@3x.png',
+            width: ScreenUtil().setWidth(52),
+            height: ScreenUtil().setHeight(45),
+            fit: BoxFit.fill,
+          ),
+        ],
+      ),
     );
   }
 
@@ -230,7 +229,8 @@ class _PersonalScreenState extends State<PersonalScreen> {
           width: ScreenUtil().setWidth(15),
           height: ScreenUtil().setHeight(16),
           fit: BoxFit.fill,
-        ), //item 前置图标
+        ),
+        //item 前置图标
         title: Text(
           obj.title,
           maxLines: 1,
