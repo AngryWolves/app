@@ -63,6 +63,8 @@ const personal_revise_text = '点击修改';
 
 const modify_title_text = "信息修改";
 const modify_icon_text = "头像";
+const modify_icon_succeed = "头像修改成功";
+const modify_icon_error = "头像修改失败";
 const modify_firm_tag_text = "企业认证信息";
 const modify_firm_text = "园区十佳优秀企业";
 const modify_change_password_tag_text = "修改密码";

@@ -1,29 +1,21 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/components/personal/data/local_personal_data.dart';
-import 'package:smart_park/values/json_strings.dart';
-import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smart_park/dio/repair_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/router/navigator_util.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/firm_dialog.dart';
 import 'package:smart_park/widget/modal_bottom_sheet_upload.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class ModifyScreen extends StatefulWidget {
   ModifyScreen({@required this.userId});
@@ -36,9 +28,17 @@ class ModifyScreen extends StatefulWidget {
   }
 }
 
-class _ModifyScreenState extends State<ModifyScreen> {
+class _ModifyScreenState extends BaseState<ModifyScreen> {
   Future<File> _imageFile;
   String firmText = modify_firm_text;
+
+  RepairDao _repairDao;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _repairDao ??= RepairDao(StoreProvider.of<AppState>(context));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -245,10 +245,21 @@ class _ModifyScreenState extends State<ModifyScreen> {
         });
   }
 
-  void _onImageButtonPressed(ImageSource source) {
+  void _onImageButtonPressed(ImageSource source) async {
+    showLoading();
+    _imageFile = ImagePicker.pickImage(source: source);
+
+    var file = await _imageFile;
+    var response = await _repairDao.uploadImage(files: [file]);
+    hideLoading();
+    var list = response?.data;
+    if (list != null && list.isNotEmpty) {
+      Fluttertoast.showToast(msg: modify_icon_succeed);
+    } else {
+      Fluttertoast.showToast(msg: modify_icon_error);
+    }
     setState(() {
       Navigator.pop(context);
-      _imageFile = ImagePicker.pickImage(source: source);
     });
   }
 }
