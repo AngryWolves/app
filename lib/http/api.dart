@@ -38,7 +38,7 @@ class Api {
   static const String SMART_FORGET = SMART_HOST + '/app/user/forget';
 
   //我的预约
-  static const String SMART_APPOINT = '/app/user/appoint';
+  static const String SMART_APPOINT = SMART_HOST + '/app/user/appoint';
   static const String SMART_PAGE = 'page';
   static const String SMART_SIZE = 'size';
 

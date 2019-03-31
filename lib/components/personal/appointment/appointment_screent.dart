@@ -1,30 +1,21 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:smart_park/values/colors.dart';
-import 'package:smart_park/values/strings.dart';
-import 'package:smart_park/widget/text_field_widget.dart';
-import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/widget/common_app_bar.dart';
-import 'package:smart_park/router/navigator_util.dart';
-import 'package:smart_park/components/personal/data/local_personal_data.dart';
-import 'package:smart_park/values/json_strings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_park/components/personal/appointment/data/appoint_data.dart';
+import 'package:smart_park/dio/personal_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/widget/base/refresh_list_view.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
 
 //我的预约/
-class PersonalAppointmentScreen extends StatefulWidget {
+class PersonalAppointmentScreen extends StatelessWidget {
   PersonalAppointmentScreen({@required this.userId});
 
   final String userId;
 
-  @override
-  State<StatefulWidget> createState() {
-    return _PersonalAppointmentScreenState();
-  }
-}
-
-class _PersonalAppointmentScreenState extends State<PersonalAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,19 +25,35 @@ class _PersonalAppointmentScreenState extends State<PersonalAppointmentScreen> {
         Navigator.pop(context);
       }),
       body: Center(
-        child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {},
-                child: _buildItemWidget(),
-              );
-            }),
+        child: _MyAppointmentList(),
       ),
     );
   }
+}
 
-  Widget _buildItemWidget() {
+class _MyAppointmentList extends StatefulWidget {
+  @override
+  _MyAppointmentListState createState() => _MyAppointmentListState();
+}
+
+class _MyAppointmentListState
+    extends RefreshListView<_MyAppointmentList, AppointData> {
+  PersonalDao _personalDao;
+
+  @override
+  Widget buildItem(AppointData data) {
+    return _buildItemWidget(data);
+  }
+
+  @override
+  Future<List<AppointData>> requestData(int page) async {
+    _personalDao ??= PersonalDao(StoreProvider.of<AppState>(context));
+    debugPrint("page ::::: $page");
+    var response = await _personalDao.getAppoint(page);
+    return response?.data;
+  }
+
+  Widget _buildItemWidget(AppointData data) {
     return Container(
       margin: EdgeInsets.only(
           left: ScreenUtil().setWidth(15),
@@ -87,7 +94,7 @@ class _PersonalAppointmentScreenState extends State<PersonalAppointmentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'xxxx会议室',
+                          data?.position ?? '',
                           style: TextStyle(
                               color: Color.fromRGBO(46, 49, 56, 1),
                               fontSize: ScreenUtil().setSp(15)),
@@ -97,7 +104,7 @@ class _PersonalAppointmentScreenState extends State<PersonalAppointmentScreen> {
                             padding: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(8))),
                         Text(
-                          '所处位置：xxxxxxxxxxxxxxxxxxxxx',
+                          '所处位置：${data?.note ?? ''}',
                           style: TextStyle(
                               color: Color.fromRGBO(143, 143, 143, 1),
                               fontSize: ScreenUtil().setSp(11)),
@@ -124,7 +131,7 @@ class _PersonalAppointmentScreenState extends State<PersonalAppointmentScreen> {
                   Padding(
                       padding: EdgeInsets.only(left: ScreenUtil().setWidth(8))),
                   Text(
-                    '1月23日 13:00-16:00',
+                    data?.createTime ?? '',
                     style: TextStyle(
                         color: Color.fromRGBO(37, 184, 247, 1),
                         fontSize: ScreenUtil().setSp(12)),
