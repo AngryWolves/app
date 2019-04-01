@@ -180,10 +180,23 @@ var parkingEndHandle = Handler(handlerFunc: (_, params) => ParkingEnding());
 var reserveHandle = Handler(handlerFunc: (_, params) => ReservePage());
 
 var reserveSelectDateHandle =
-    Handler(handlerFunc: (_, params) => ReserveSelectDate());
+    Handler(handlerFunc: (_, params) {
 
-var reserveConfirmHandle =
-    Handler(handlerFunc: (_, params) => ReserveConfirmPage());
+      return ReserveSelectDate(yardId: params['yardId']?.first,);
+    });
+
+var reserveConfirmHandle = Handler(handlerFunc: (_, params) {
+  var dateTime = params['dateTime']?.first;
+  var startTime = params['startTime']?.first;
+  var endTime = params['endTime']?.first;
+  var yardId = params['yardId']?.first;
+  return ReserveConfirmPage(
+    startTime: startTime,
+    dateTime: dateTime,
+    endTime: endTime,
+    yardId: yardId,
+  );
+});
 
 var fastReserveHandle = Handler(handlerFunc: (_, params) => FastReservePage());
 

@@ -254,7 +254,13 @@ class _ModifyScreenState extends BaseState<ModifyScreen> {
     hideLoading();
     var list = response?.data;
     if (list != null && list.isNotEmpty) {
-      Fluttertoast.showToast(msg: modify_icon_succeed);
+      var response = await _repairDao.updateHead(headImage: list[0]);
+      if (response?.result == 0) {
+        Fluttertoast.showToast(msg: modify_icon_succeed);
+      } else {
+        var msg = response?.msg == null ? modify_icon_error : response?.msg;
+        Fluttertoast.showToast(msg: msg);
+      }
     } else {
       Fluttertoast.showToast(msg: modify_icon_error);
     }

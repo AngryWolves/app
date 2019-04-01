@@ -20,4 +20,20 @@ class ReserveDao extends BaseDao {
     }
     return YardResponse.fromJson(data);
   }
+
+  ///
+  /// 创建预约
+  ///
+  Future createAppointment(
+      {String beginTime, String endTime, String note, String yardId}) async {
+    var response = await client.post(Api.SMART_CREATE_APPOINTMENT, headers: {
+      Api.SMART_TOKEN: getToken()
+    }, data: {
+      Api.CREATE_APPOINTMENT_BEGINTIME: beginTime,
+      Api.CREATE_APPOINTMENT_ENDTIME: endTime,
+      Api.CREATE_APPOINTMENT_NOTE: note,
+      Api.CREATE_APPOINTMENT_YARDID: yardId
+    });
+    var data = response?.data;
+  }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/reserve/item/room_info_head.dart';
+import 'package:smart_park/dio/reserve_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -9,6 +12,14 @@ import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/widget/common_gradient_button.dart';
 
 class ReserveConfirmPage extends StatefulWidget {
+  ReserveConfirmPage(
+      {this.dateTime, this.startTime, this.endTime, this.yardId});
+
+  final String dateTime;
+  final String startTime;
+  final String endTime;
+  final String yardId;
+
   @override
   _ReserveConfirmPageState createState() => _ReserveConfirmPageState();
 }
@@ -18,6 +29,10 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
       TextStyle(color: ColorRes.REPAIR_SELECT_TYPE_TITLE, fontSize: 12.0);
   final TextStyle _infoStyle =
       TextStyle(color: ColorRes.GERY_TEXT, fontSize: 14.0);
+
+  final TextEditingController _controller = TextEditingController();
+
+  ReserveDao _reserveDao;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +53,9 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
           ),
           GradientButton(
             reserve_confirm,
-            () {},
+            () {
+              _createAppointment();
+            },
             height: 45,
             radius: 0.0,
           )
@@ -57,12 +74,13 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text.rich(TextSpan(
-              text: reserve_confirm_time,
-              style: _style,
-              children: [
-                TextSpan(text: '019-01-23 13:00-15:30', style: _infoStyle)
-              ])),
+          Text.rich(
+              TextSpan(text: reserve_confirm_time, style: _style, children: [
+            TextSpan(
+                text:
+                    '${widget.dateTime} ${widget.startTime}-${widget.endTime}',
+                style: _infoStyle)
+          ])),
           Padding(
             padding: const EdgeInsets.all(10.0),
           ),
@@ -92,6 +110,7 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
             height: ScreenUtil().setHeight(141),
             margin: const EdgeInsets.only(top: 10.0),
             child: TextField(
+              controller: _controller,
               maxLines: 10,
               decoration: InputDecoration.collapsed(
                   hintText: reserve_confirm_remarks_hint),
@@ -100,5 +119,15 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
         ],
       ),
     );
+  }
+
+  void _createAppointment() async {
+    _reserveDao ??= ReserveDao(StoreProvider.of<AppState>(context));
+    debugPrint('yarId:::::${widget.yardId}');
+   await _reserveDao.createAppointment(
+        beginTime: widget.startTime,
+        endTime: widget.endTime,
+        note: _controller.text,
+        yardId: widget.yardId);
   }
 }

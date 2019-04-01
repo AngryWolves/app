@@ -198,12 +198,17 @@ class NavigatorUtil {
       Application.router.navigateTo(context, Routes.doReserve);
 
   /// 预约时间
-  static void goReserveSelectDatePage(BuildContext context) =>
-      Application.router.navigateTo(context, Routes.doReserveSelectDate);
+  static void goReserveSelectDatePage(BuildContext context, {String yardId}) =>
+      Application.router
+          .navigateTo(context, Routes.doReserveSelectDate + '?yardId=$yardId');
 
   /// 预约确认
-  static void goReserveConfirmPage(BuildContext context) =>
-      Application.router.navigateTo(context, Routes.doReserveConfirm);
+  static void goReserveConfirmPage(BuildContext context,
+          {String startTime, String endTime, String dateTime, String yardId}) =>
+      Application.router.navigateTo(
+          context,
+          Routes.doReserveConfirm +
+              '?startTime=$startTime&endTime=$endTime&dateTime=$dateTime&yardId=$yardId');
 
   /// 快速预约
   static void goFastReservePage(BuildContext context) =>

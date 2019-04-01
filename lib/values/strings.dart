@@ -306,6 +306,8 @@ const reserve_success = '预定成功！';
 const reserve_success_desc = '\n可前往【我的约定】查看约定内容';
 const reserve_success_continue = '继续预定';
 const reserve_success_my_reserve = '我的预定';
+const reserve_empty_start_time = '请选择开始时间';
+const reserve_empty_end_time = '请选择结束时间';
 
 const report_action_detail_title = '信息详情';
 const report_action_detail_share_wx = '转至短信';

@@ -67,6 +67,15 @@ class Api {
   /// 查询场地列表
   static const String SMART_YARD_LIST = SMART_HOST + '/app/user/getYard';
 
+  /// 创建预约
+  static const String SMART_CREATE_APPOINTMENT =
+      SMART_HOST + '/app/user/createAppoint';
+
+  static const String CREATE_APPOINTMENT_BEGINTIME = 'beginTime';
+  static const String CREATE_APPOINTMENT_ENDTIME = 'endTime';
+  static const String CREATE_APPOINTMENT_NOTE = 'note';
+  static const String CREATE_APPOINTMENT_YARDID = 'yardId';
+
   /// 项目申报
   static const String SMART_DECLARE = SMART_HOST + '/app/user/declare';
 
@@ -86,4 +95,8 @@ class Api {
 
   /// 我的缴费
   static const SMART_PAYMENT = SMART_HOST + '/app/user/payment';
+
+  /// 更新头像
+  static const SMART_UPDATE_HEAD = SMART_HOST + '/app/user/updateHeadImage';
+  static const SMART_HEAD_IMAGE = 'headImage';
 }

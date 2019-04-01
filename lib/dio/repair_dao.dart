@@ -12,6 +12,21 @@ class RepairDao extends BaseDao {
   RepairDao(Store<AppState> store) : super(store);
 
   ///
+  /// 更新头像
+  ///
+  Future<CommonResponse> updateHead({String headImage}) async {
+    var response = await client.post(Api.SMART_UPDATE_HEAD,
+        headers: {Api.SMART_TOKEN: getToken()},
+        data: {Api.SMART_HEAD_IMAGE: headImage});
+
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return CommonResponse.fromJson(data);
+  }
+
+  ///
   /// 上传
   ///
   Future<UploadFileResponse> uploadImage({List<File> files}) async {

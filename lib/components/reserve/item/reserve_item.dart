@@ -54,7 +54,7 @@ class RoomItem extends StatelessWidget {
             child: GradientButton(
               reserve_item_now,
               () {
-                NavigatorUtil.goReserveSelectDatePage(context);
+                NavigatorUtil.goReserveSelectDatePage(context, yardId: data.yardId);
               },
               radius: 3.0,
               fontSize: 15,
