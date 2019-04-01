@@ -99,4 +99,7 @@ class Api {
   /// 更新头像
   static const SMART_UPDATE_HEAD = SMART_HOST + '/app/user/updateHeadImage';
   static const SMART_HEAD_IMAGE = 'headImage';
+
+
+  static const SMART_HOME_PICTURE = SMART_HOST + '/app/user/selectPricture';
 }

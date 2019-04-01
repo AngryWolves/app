@@ -1,4 +1,5 @@
 import 'package:redux/src/store.dart';
+import 'package:smart_park/components/home/data/home_ads_image_response.dart';
 import 'package:smart_park/components/home/data/home_new_response.dart';
 import 'package:smart_park/components/home/data/message_data_response.dart';
 import 'package:smart_park/dio/base_dao.dart';
@@ -50,5 +51,18 @@ class HomeDao extends BaseDao {
     }
 
     return HomeNewResponse.fromJson(data);
+  }
+
+  ///
+  /// 首页轮播图
+  ///
+  Future<HomeAdsImageResponse> getHomePictures() async {
+    var response = await client.post(Api.SMART_HOME_PICTURE);
+
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return HomeAdsImageResponse.fromJson(data);
   }
 }
