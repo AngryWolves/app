@@ -19,12 +19,12 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends BaseState<PaymentPage> {
-  final double _toolBarHeight = ScreenUtil().setHeight(310);
+  final double _toolBarHeight = ScreenUtil().setHeight(280);
 
   final TextStyle _style = TextStyle(color: Colors.white, fontSize: 13.0);
 
   final double _arcRingHorMargin = ScreenUtil().setWidth(45);
-  final double _arcRingTopMargin = ScreenUtil().setHeight(75);
+  final double _arcRingTopMargin = ScreenUtil().setHeight(85);
 
   @override
   Widget build(BuildContext context) {
@@ -58,64 +58,47 @@ class _PaymentPageState extends BaseState<PaymentPage> {
             left: _arcRingHorMargin,
             right: _arcRingHorMargin,
             top: _arcRingTopMargin),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          alignment: Alignment.topCenter,
           children: <Widget>[
-            Stack(
-              alignment: Alignment.topCenter,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(39)),
-                  height: ScreenUtil().setHeight(128),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        payment_need_pay,
-                        style: _style,
-                      ),
-                      Text(
-                        '3,000',
-                        style: TextStyle(
+            Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(39)),
+              height: ScreenUtil().setHeight(128),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    payment_need_pay,
+                    style: _style,
+                  ),
+                  Text(
+                    '3,000',
+                    style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenUtil().setSp(30)),
-                      ),
-                      Container(
-                        width: ScreenUtil().setWidth(108),
-                        child: GradientButton(
-                          payment_pay_now,
-                          _handlePayNow,
-                          radius: 18.0,
-                          height: 35,
-                        ),
-                      )
-                    ],
                   ),
-                ),
-                Container(
-                  width: ScreenUtil().setWidth(226),
-                  child: CustomPaint(
-                    painter: GradientArc(),
-                  ),
-                ),
-              ],
+                  Container(
+                    width: ScreenUtil().setWidth(108),
+                    child: GradientButton(
+                      payment_pay_now,
+                      _handlePayNow,
+                      radius: 18.0,
+                      height: 35,
+                    ),
+                  )
+                ],
+              ),
             ),
-            _buildFeeRow()
+            Container(
+              width: ScreenUtil().setWidth(226),
+              child: CustomPaint(
+                painter: GradientArc(),
+              ),
+            ),
           ],
         ),
       );
 
-  Widget _buildFeeRow() => Container(
-        height: ScreenUtil().setHeight(50),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _buildFeeItem(payment_water_fee, '1,000'),
-            _buildFeeItem(payment_property_fee, '111,111,000'),
-            _buildFeeItem(payment_ele_fee, '109'),
-          ],
-        ),
-      );
 
   Widget _buildFeeItem(String title, String fee) => Container(
         margin: const EdgeInsets.only(bottom: 2.0),
