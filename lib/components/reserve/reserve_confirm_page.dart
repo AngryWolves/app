@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/components/reserve/item/room_info_head.dart';
 import 'package:smart_park/dio/reserve_dao.dart';
 import 'package:smart_park/redux/app_state.dart';
@@ -123,11 +124,23 @@ class _ReserveConfirmPageState extends BaseState<ReserveConfirmPage> {
 
   void _createAppointment() async {
     _reserveDao ??= ReserveDao(StoreProvider.of<AppState>(context));
-    debugPrint('yarId:::::${widget.yardId}');
-   await _reserveDao.createAppointment(
-        beginTime: widget.startTime,
-        endTime: widget.endTime,
+    debugPrint('''
+            startTime:::::${widget.startTime}, endTime::${widget.endTime}
+            placeDate:::${widget.dateTime},
+            note:::${_controller.text}
+            '''
+        .trim());
+    showLoading();
+    var response = await _reserveDao.createAppointment(
+        beginTime: '${widget.dateTime} ${widget.startTime}:00',
+        endTime: '${widget.dateTime} ${widget.endTime}:00',
         note: _controller.text,
-        yardId: widget.yardId);
+        yardId: widget.yardId,
+        placeDate: widget.dateTime);
+    hideLoading();
+    var msg = response?.msg;
+    if (msg != null) {
+      Fluttertoast.showToast(msg: msg);
+    }
   }
 }

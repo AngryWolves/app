@@ -38,7 +38,7 @@ class AppointData extends Object{
   String endTime;
 
   @JsonKey(name: 'fee')
-  int fee;
+  double fee;
 
   @JsonKey(name: 'note')
   String note;

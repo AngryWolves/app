@@ -75,6 +75,7 @@ class Api {
   static const String CREATE_APPOINTMENT_ENDTIME = 'endTime';
   static const String CREATE_APPOINTMENT_NOTE = 'note';
   static const String CREATE_APPOINTMENT_YARDID = 'yardId';
+  static const String CREATE_APPOINTMENT_PLACE_DATE = 'placeDate';
 
   /// 项目申报
   static const String SMART_DECLARE = SMART_HOST + '/app/user/declare';
