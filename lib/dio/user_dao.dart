@@ -11,6 +11,7 @@ import 'package:smart_park/redux/account_reducer.dart';
 import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/redux/my_info_reducer.dart';
 import 'package:smart_park/utils/share_preference_util.dart';
+import 'package:smart_park/data/common_response.dart';
 
 class UserDao extends BaseDao {
   UserDao(Store<AppState> store) : super(store);
@@ -37,6 +38,17 @@ class UserDao extends BaseDao {
       return null;
     }
     return await _handleLogin(data, telephone);
+  }
+
+  //创建公司/
+  Future<CommonResponse> createCompany(String name) async {
+    var response = await client
+        .post(Api.SMART_CREATE_COMPANY, data: {Api.SMART_NAME: name});
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+    return CommonResponse.fromJson(data);
   }
 
   //注册请求/

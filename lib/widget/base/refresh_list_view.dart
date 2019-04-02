@@ -33,13 +33,15 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
 
   @override
   void initState() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        print('list is end');
-        _handleRefresh(page: ++_curPage);
-      }
-    });
+//    _scrollController.addListener(() {
+//      if (_scrollController.position.pixels ==
+//          _scrollController.position.maxScrollExtent) {
+//        print('list is end');
+//        print("===state==initState==");
+//        _handleRefresh(page: ++_curPage);
+//
+//      }
+//    });
     super.initState();
   }
 
@@ -95,6 +97,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
   bool _dataIsEmpty() => _data == null || _data.isEmpty;
 
   Future<Null> _handleRefresh({int page = 1}) async {
+    print("===state==Refresh==");
     if (_isLoading) {
       return null;
     }

@@ -14,10 +14,12 @@ import 'package:smart_park/config/application.dart';
 //公司列表Dialog/
 
 class CompanyListDialog extends StatefulWidget {
-  CompanyListDialog({Key key, this.groupValue = 1, this.onSureState})
+  CompanyListDialog(
+      {Key key, this.groupValue = 1, this.onSureState, this.onCreateState})
       : super(key: key);
   final int groupValue;
   final Function onSureState;
+  final Function onCreateState;
 
   @override
   State<StatefulWidget> createState() {
@@ -111,19 +113,27 @@ class _CompanyListDialogState extends State<CompanyListDialog> {
             ),
           ),
           Expanded(
-            child: Container(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      right: ScreenUtil().setWidth(16),
-                      top: ScreenUtil().setHeight(19)),
-                  child: Text(
-                    '没有公司？新建一个',
-                    style: TextStyle(
-                        color: Color.fromRGBO(37, 184, 247, 1),
-                        fontSize: ScreenUtil().setSp(12)),
-                  ),
-                )),
+            child: GestureDetector(
+              onTap: () {
+                if (widget.onCreateState != null) {
+                  widget.onCreateState();
+                }
+                print("没有公司？新建一个");
+              },
+              child: Container(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: ScreenUtil().setWidth(16),
+                        top: ScreenUtil().setHeight(19)),
+                    child: Text(
+                      '没有公司？新建一个',
+                      style: TextStyle(
+                          color: Color.fromRGBO(37, 184, 247, 1),
+                          fontSize: ScreenUtil().setSp(12)),
+                    ),
+                  )),
+            ),
             flex: 1,
           )
         ],

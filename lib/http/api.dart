@@ -24,6 +24,9 @@ class Api {
   static const String SMART_EMAIL = 'email';
   static const String SMART_COMPANY_ID = 'companyId';
 
+  //创建企业
+  static const String SMART_CREATE_COMPANY = SMART_HOST + '/app/user/createCompany';
+
   //客服列表/
   static const String SMART_SERVICE_MAN = SMART_HOST + '/app/user/serviceMan';
 
