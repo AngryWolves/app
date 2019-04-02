@@ -4,18 +4,12 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-import 'package:redux/redux.dart';
-import 'package:smart_park/http/http_client.dart';
-import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/data/user_data.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
+import 'package:smart_park/redux/app_state.dart';
 
 void main() {
   // 固定竖屏
@@ -46,12 +40,13 @@ class _SmartParkAppState extends State<SmartParkApp> {
     Routes.configureRoutes(router);
     Application.router = router;
   }
+
   @override
   Widget build(BuildContext context) => StoreProvider(
-    store: _store,
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: Application.router.generator,
-    ),
-  );
+        store: _store,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: Application.router.generator,
+        ),
+      );
 }

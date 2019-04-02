@@ -165,9 +165,10 @@ class _LoginScreenState extends BaseState<LoginScreen> {
     _dao ??= UserDao(StoreProvider.of<AppState>(context));
     showLoading();
     LoginResponse model = await _dao.login(phone, password);
+    var info = await _dao.getAccountInfo();
     hideLoading();
     String userData = model?.data;
-    if (ObjectUtil.isEmptyString(userData)) {
+    if (ObjectUtil.isEmptyString(userData) && info?.result != 0) {
       return;
     }
     Navigator.of(context).pushNamedAndRemoveUntil(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/home/app_bar.dart';
 import 'package:smart_park/components/home/home_action_grid.dart';
 import 'package:smart_park/components/home/home_body.dart';
+import 'package:smart_park/dio/user_dao.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/event/home_action_event.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/router/navigator_util.dart';
 //import 'package:fluwx/fluwx.dart' as fluwx;
 
@@ -18,6 +21,8 @@ class _HomePageState extends State<HomePage> {
 
   var _actionListener;
 
+  UserDao _userDao;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _getAccountInfo();
   }
 
   @override
@@ -89,5 +95,20 @@ class _HomePageState extends State<HomePage> {
           break;
       }
     });
+  }
+
+  void _getAccountInfo() async {
+    if (_userDao == null) {
+      var store = StoreProvider.of<AppState>(context);
+      if (store.state?.info == null) {
+        _userDao = UserDao(store);
+        var model = await _userDao.getAccountInfo();
+        if (model?.data != null && mounted) {
+          setState(() {
+
+          });
+        }
+      }
+    }
   }
 }

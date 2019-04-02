@@ -100,6 +100,9 @@ class Api {
   static const SMART_UPDATE_HEAD = SMART_HOST + '/app/user/updateHeadImage';
   static const SMART_HEAD_IMAGE = 'headImage';
 
-
+  /// 首页轮播图片
   static const SMART_HOME_PICTURE = SMART_HOST + '/app/user/selectPricture';
+
+  /// 我的信息
+  static const SMART_MY_INFO = SMART_HOST + '/app/user/myInfo';
 }

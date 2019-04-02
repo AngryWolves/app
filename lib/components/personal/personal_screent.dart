@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/personal/data/local_personal_data.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/json_strings.dart';
@@ -28,28 +30,31 @@ class _PersonalScreenState extends State<PersonalScreen> {
         localPersonalJson.map((o) => LocalPersonalData.fromJson(o));
 
     final listOfLocalPersonalObjects = localPersonalObjects.toList();
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(236, 236, 236, 1),
-      appBar: buildCommonAppbar(personal_title_text, onLeadTop: () {
-        InputManageUtil.shutdownInputKeyboard();
-        Navigator.pop(context);
-      }),
-      body: Column(
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            height: ScreenUtil().setHeight(95),
-            child: Row(
+    return StoreBuilder<AppState>(
+      builder: (_, store) => Scaffold(
+            backgroundColor: Color.fromRGBO(236, 236, 236, 1),
+            appBar: buildCommonAppbar(personal_title_text, onLeadTop: () {
+              InputManageUtil.shutdownInputKeyboard();
+              Navigator.pop(context);
+            }),
+            body: Column(
               children: <Widget>[
-                _buildIconWidget(),
-                _buildInfoWidget(),
-                _buildCcecsWidget()
+                Container(
+                  color: Colors.white,
+                  height: ScreenUtil().setHeight(95),
+                  child: Row(
+                    children: <Widget>[
+                      _buildIconWidget(),
+                      _buildInfoWidget(store.state?.info?.name,
+                          store.state?.info?.companyName),
+                      _buildCcecsWidget()
+                    ],
+                  ),
+                ),
+                _buildListWidget(listOfLocalPersonalObjects)
               ],
             ),
           ),
-          _buildListWidget(listOfLocalPersonalObjects)
-        ],
-      ),
     );
   }
 
@@ -89,7 +94,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-  Widget _buildInfoWidget() {
+  Widget _buildInfoWidget(String name, String companyName) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(
@@ -102,7 +107,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
           children: <Widget>[
             Container(
               child: Text(
-                '林先生',
+                name ?? '',
                 textAlign: TextAlign.left,
                 maxLines: 1,
                 style: TextStyle(
@@ -112,7 +117,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
             ),
             Container(
               child: Text(
-                '部门经理人',
+                '',
                 textAlign: TextAlign.left,
                 maxLines: 1,
                 style: TextStyle(
@@ -122,7 +127,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
             ),
             Container(
               child: Text(
-                '上海xxxx股份有限公司',
+                companyName ?? '',
                 textAlign: TextAlign.left,
                 maxLines: 1,
                 style: TextStyle(

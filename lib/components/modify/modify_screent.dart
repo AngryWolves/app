@@ -115,32 +115,35 @@ class _ModifyScreenState extends BaseState<ModifyScreen> {
   }
 
   Widget _positiveViewImage() {
-    return FutureBuilder<File>(
-        future: _imageFile,
-        builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data != null) {
-            return ClipOval(
-                child: Image.file(
-              snapshot.data,
-              width: ScreenUtil().setWidth(57),
-              height: ScreenUtil().setHeight(57),
-              fit: BoxFit.fill,
-            ));
-          } else {
-            return ClipOval(
-              child: CachedNetworkImage(
-                imageUrl:
-                    "http://img4.duitang.com/uploads/item/201512/13/20151213102616_rCiEx.thumb.700_0.jpeg",
-                placeholder: (context, url) => new CircularProgressIndicator(),
-                errorWidget: (context, url, error) => new Icon(Icons.error),
+    return StoreBuilder<AppState>(
+      builder: (_, store) => FutureBuilder<File>(
+          future: _imageFile,
+          builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.data != null
+                    && store.state.info?.headImage?.isNotEmpty == true) {
+              return ClipOval(
+                  child: Image.file(
+                snapshot.data,
                 width: ScreenUtil().setWidth(57),
                 height: ScreenUtil().setHeight(57),
-                fit: BoxFit.cover,
-              ),
-            );
-          }
-        });
+                fit: BoxFit.fill,
+              ));
+            } else {
+              return ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: store.state.info?.headImage ?? '',
+                  placeholder: (context, url) =>
+                      new CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => new Icon(Icons.error),
+                  width: ScreenUtil().setWidth(57),
+                  height: ScreenUtil().setHeight(57),
+                  fit: BoxFit.cover,
+                ),
+              );
+            }
+          }),
+    );
   }
 
   Widget _buildContentWidget(tag, content, index) {
