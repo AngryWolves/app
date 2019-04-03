@@ -10,6 +10,7 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/json_strings.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PersonalScreen extends StatefulWidget {
 //  PersonalScreen({@required this.personalId});
@@ -44,10 +45,10 @@ class _PersonalScreenState extends State<PersonalScreen> {
                   height: ScreenUtil().setHeight(95),
                   child: Row(
                     children: <Widget>[
-                      _buildIconWidget(),
+                      _buildIconWidget(store.state?.info?.headImage),
                       _buildInfoWidget(store.state?.info?.name,
                           store.state?.info?.companyName),
-                      _buildCcecsWidget()
+                      _buildCcecsWidget(store.state?.info?.headImage)
                     ],
                   ),
                 ),
@@ -58,7 +59,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-  Widget _buildIconWidget() {
+  Widget _buildIconWidget(String icon) {
     return GestureDetector(
       onTap: () {
         print("头像点击");
@@ -72,8 +73,8 @@ class _PersonalScreenState extends State<PersonalScreen> {
                 right: ScreenUtil().setHeight(17),
                 top: ScreenUtil().setHeight(17),
                 bottom: ScreenUtil().setHeight(5)),
-            child: Image.asset(
-              'images/icon_login@3x.png',
+            child: CachedNetworkImage(
+              imageUrl: icon?? '',
               width: ScreenUtil().setWidth(57),
               height: ScreenUtil().setHeight(57),
               fit: BoxFit.fill,
@@ -141,7 +142,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-  Widget _buildCcecsWidget() {
+  Widget _buildCcecsWidget(String icon) {
     return Container(
       padding: EdgeInsets.only(right: ScreenUtil().setHeight(15)),
       child: Column(
