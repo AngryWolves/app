@@ -4,7 +4,7 @@ class LoginResponse {
   String data;
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
-    result = json['errorCode'];
+    result = json['result'];
     msg = json['msg'];
     data = json['data'];
 //    var data = json['data'];
