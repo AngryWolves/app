@@ -106,4 +106,7 @@ class Api {
 
   /// 我的信息
   static const SMART_MY_INFO = SMART_HOST + '/app/user/myInfo';
+
+  /// 我的申请
+  static const SMART_MY_APPLY = SMART_HOST + '/app/user/getMyApply';
 }
