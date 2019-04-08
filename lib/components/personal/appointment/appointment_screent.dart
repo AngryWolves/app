@@ -10,7 +10,7 @@ import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 
-//我的预约/
+//我的预约 status 0待审核，1成功，2拒绝==取消/
 class PersonalAppointmentScreen extends StatelessWidget {
   PersonalAppointmentScreen({@required this.userId});
 
@@ -139,12 +139,7 @@ class _MyAppointmentListState
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        '已结束',
-                        style: TextStyle(
-                            color: Color.fromRGBO(194, 194, 194, 1),
-                            fontSize: ScreenUtil().setSp(12)),
-                      ),
+                      child: _buildStatusWidget(data)
                     ),
                     flex: 1,
                   )
@@ -155,6 +150,33 @@ class _MyAppointmentListState
           ],
         ),
       ),
+    );
+  }
+  Widget _buildStatusWidget(AppointData data){
+    int status=data?.status;
+    return status==0?GestureDetector(
+      onTap:(){
+
+      },
+      child: Container(
+        width: ScreenUtil().setWidth(69),
+        height: ScreenUtil().setHeight(25),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(3),
+            border: Border.all(color: const Color(0xFF2E3138))),
+        alignment: Alignment.center,
+        child: Text(appointment_cancel_text),
+      ),
+    ):status==1?Text(
+      '已结束',
+      style: TextStyle(
+          color: Color.fromRGBO(194, 194, 194, 1),
+          fontSize: ScreenUtil().setSp(12)),
+    ):Text(
+      '已取消',
+      style: TextStyle(
+          color: Color.fromRGBO(194, 194, 194, 1),
+          fontSize: ScreenUtil().setSp(12)),
     );
   }
 }
