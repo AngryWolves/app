@@ -138,6 +138,7 @@ const service_name_text = '层长姓名';
 const service_phone_text = '联系电话';
 
 const appointment_title_text = '我的预约';
+const appointment_cancel_text = '取消预约';
 
 const change_password_title_text = '修改密码';
 const change_password_code_text = '输入验证码';
