@@ -2,10 +2,10 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
-import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/dio/user_dao.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppComponent extends StatefulWidget {
   @override
@@ -38,10 +38,12 @@ class _AppComponentState extends State<AppComponent> {
           .then((account) async {
         if (account == null) {
           // 未登录
-          NavigatorUtil.goLogin(context);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              Routes.doLogin, (Route<dynamic> route) => false);
         } else {
           // 已登录
-          NavigatorUtil.goHome(context);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              Routes.doHome, (Route<dynamic> route) => false);
         }
       });
     });

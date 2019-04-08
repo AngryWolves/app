@@ -120,8 +120,8 @@ class _ModifyScreenState extends BaseState<ModifyScreen> {
           future: _imageFile,
           builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
             if (snapshot.connectionState == ConnectionState.done &&
-                snapshot.data != null
-                    && store.state.info?.headImage?.isNotEmpty == true) {
+                snapshot.data != null &&
+                store.state.info?.headImage?.isNotEmpty == true) {
               return ClipOval(
                   child: Image.file(
                 snapshot.data,
@@ -249,10 +249,13 @@ class _ModifyScreenState extends BaseState<ModifyScreen> {
   }
 
   void _onImageButtonPressed(ImageSource source) async {
-    showLoading();
     _imageFile = ImagePicker.pickImage(source: source);
 
     var file = await _imageFile;
+    if (file == null) {
+      return;
+    }
+    showLoading();
     var response = await _repairDao.uploadImage(files: [file]);
     hideLoading();
     var list = response?.data;

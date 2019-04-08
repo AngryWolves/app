@@ -24,7 +24,7 @@ class PersonalAppointmentScreen extends StatelessWidget {
         InputManageUtil.shutdownInputKeyboard();
         Navigator.pop(context);
       }),
-      body: Center(
+      body: Container(
         child: _MyAppointmentList(),
       ),
     );

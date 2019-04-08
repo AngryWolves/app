@@ -16,6 +16,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:smart_park/data/response_successful_data.dart';
 import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/company_dialog.dart';
+import 'package:smart_park/data/common_response.dart';
 
 class RegisteredThirdScreen extends StatefulWidget {
   RegisteredThirdScreen(
@@ -275,22 +277,42 @@ class _RegisteredThirdScreenState extends BaseState<RegisteredThirdScreen> {
     );
   }
 
+  void _showCompanyDialog(){
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return CompanyDialog(
+            onSureState: () {
+              _showCompanyListDialog();
+            },
+          );
+        });
+  }
+
+  void _showCompanyListDialog() {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return CompanyListDialog(
+            onSureState: (String company, String companyId) {
+              this.setState(() {
+                _company = company;
+                _companyId = companyId;
+              });
+            },
+            onCreateState: () {
+              _showCompanyDialog();
+            },
+          );
+        });
+  }
+
   Widget _buildCompanyWidget() {
     return GestureDetector(
       onTap: () {
-        showDialog(
-            barrierDismissible: true,
-            context: context,
-            builder: (context) {
-              return CompanyListDialog(
-                onSureState: (String company, String companyId) {
-                  this.setState(() {
-                    _company = company;
-                    _companyId = companyId;
-                  });
-                },
-              );
-            });
+        _showCompanyListDialog();
         print("我的公司点击");
       },
       child: Container(

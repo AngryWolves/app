@@ -5,7 +5,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter/material.dart';
+import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/strings.dart';
+import 'package:smart_park/utils/input_manage_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/widget/gender_dialog.dart';
+import 'package:flutter/services.dart';
+import 'package:smart_park/dio/user_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/widget/company_list_dialog.dart';
+import 'package:smart_park/widget/base/base_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:smart_park/data/response_successful_data.dart';
+import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/company_dialog.dart';
+import 'package:smart_park/data/common_response.dart';
 //新建公司Dialog/
 
 class CompanyDialog extends StatefulWidget {
@@ -20,9 +39,9 @@ class CompanyDialog extends StatefulWidget {
   }
 }
 
-class _CompanyDialogState extends State<CompanyDialog> {
+class _CompanyDialogState extends BaseState<CompanyDialog> {
   TextEditingController _companyController = TextEditingController();
-
+  UserDao _dao;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -149,10 +168,8 @@ class _CompanyDialogState extends State<CompanyDialog> {
                     Fluttertoast.showToast(msg: '请输入公司名称');
                     return;
                   }
-                  if (widget.onSureState != null) {
-                    widget.onSureState(company);
-                  }
-                  Navigator.pop(context); //关闭对话框
+                  _createCompany(company);
+
                 },
                 child: Text(
                   permissions_company_dialog_determine_text,
@@ -165,5 +182,17 @@ class _CompanyDialogState extends State<CompanyDialog> {
           ),
         ),
         flex: 1);
+  }
+  void _createCompany(String company) async{
+    _dao ??= UserDao(StoreProvider.of<AppState>(context));
+    CommonResponse response= await _dao.createCompany(company);
+    if(response?.result==0){
+      Navigator.pop(context); //关闭对话框
+      if (widget.onSureState != null) {
+        widget.onSureState();
+      }
+    }else{
+      Fluttertoast.showToast(msg: response?.msg);
+    }
   }
 }

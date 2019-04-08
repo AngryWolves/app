@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,12 +11,9 @@ import 'package:smart_park/widget/text_field_widget.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/utils/input_manage_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_park/dio/user_dao.dart';
 import 'package:smart_park/widget/base/base_state.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/data/user_data.dart';
 import 'package:smart_park/config/routes.dart';
@@ -26,7 +21,6 @@ import 'package:smart_park/config/routes.dart';
 class LoginScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _LoginScreenState();
   }
 }
@@ -165,10 +159,11 @@ class _LoginScreenState extends BaseState<LoginScreen> {
     _dao ??= UserDao(StoreProvider.of<AppState>(context));
     showLoading();
     LoginResponse model = await _dao.login(phone, password);
-    var info = await _dao.getAccountInfo();
+//    var info = await _dao.getAccountInfo();
     hideLoading();
     String userData = model?.data;
-    if (ObjectUtil.isEmptyString(userData) && info?.result != 0) {
+    if (ObjectUtil.isEmptyString(userData) || model?.result != 0) {
+      Fluttertoast.showToast(msg: model?.msg);
       return;
     }
     Navigator.of(context).pushNamedAndRemoveUntil(
