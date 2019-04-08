@@ -30,7 +30,7 @@ AppointData _$AppointDataFromJson(Map<String, dynamic> json) {
       json['createTime'] as String,
       json['duration'] as String,
       json['endTime'] as String,
-      json['fee'] as double,
+      json['fee'],
       json['note'] as String,
       json['placeDate'] as String,
       json['placeType'] as int,
