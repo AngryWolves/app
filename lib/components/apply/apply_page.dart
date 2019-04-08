@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/apply/apply_sheet.dart';
+import 'package:smart_park/components/apply/data/my_apply_response.dart';
+import 'package:smart_park/dio/apply_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -13,6 +17,8 @@ class ApplyPage extends StatefulWidget {
 
 class _ApplyPageState extends BaseState<ApplyPage> {
   final _ApplyItem _item = _ApplyItem();
+
+  ApplyDao _applyDao;
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +36,30 @@ class _ApplyPageState extends BaseState<ApplyPage> {
               style: TextStyle(
                   color: ColorRes.FAST_RESERVE_ITEM_TITLE, fontSize: 15),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.0)),
-              child: ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  _item.setAction(_ACTION_TYPE_APPLYING, '室内刷墙').itemBuilder,
-                  _item.setAction(_ACTION_TYPE_PASS, '室内刷墙').itemBuilder,
-                  _item.setAction(_ACTION_TYPE_COMPLETE, '室内刷墙').itemBuilder,
-                  _item.setAction(_ACTION_TYPE_CANCEL, '室内刷墙').itemBuilder,
-                  _item.setAction(_ACTION_TYPE_CANCEL, '室内刷墙').itemBuilder,
-                ],
-              ),
-            )
+            FutureBuilder(
+                future: _getApplyList(),
+                builder: (context, snapShot) {
+                  if (snapShot.connectionState == ConnectionState.done &&
+                      snapShot.data != null) {
+                    List<ApplyData> list = snapShot.data;
+                    return Container(
+                      margin: const EdgeInsets.only(top: 10.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: list.map((data) {
+                          return _item
+                              .setAction(data.status, data.title)
+                              .itemBuilder;
+                        }).toList(),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                })
           ],
         ),
       ),
@@ -77,6 +91,12 @@ class _ApplyPageState extends BaseState<ApplyPage> {
         ),
       )
     ];
+  }
+
+  Future<List<ApplyData>> _getApplyList() async {
+    _applyDao ??= ApplyDao(StoreProvider.of<AppState>(context));
+
+    return (await _applyDao.getMyApply())?.data;
   }
 }
 
