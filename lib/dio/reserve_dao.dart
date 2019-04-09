@@ -1,5 +1,6 @@
 import 'package:redux/src/store.dart';
 import 'package:smart_park/components/reserve/data/yard_response.dart';
+import 'package:smart_park/components/reserve/data/yard_time_response.dart';
 import 'package:smart_park/data/common_response.dart';
 import 'package:smart_park/dio/base_dao.dart';
 import 'package:smart_park/http/api.dart';
@@ -26,8 +27,11 @@ class ReserveDao extends BaseDao {
   /// 创建预约
   ///
   Future<CommonResponse> createAppointment(
-      {String beginTime, String endTime, String note,
-        String yardId, String placeDate}) async {
+      {String beginTime,
+      String endTime,
+      String note,
+      String yardId,
+      String placeDate}) async {
     var response = await client.post(Api.SMART_CREATE_APPOINTMENT, headers: {
       Api.SMART_TOKEN: getToken()
     }, data: {
@@ -35,12 +39,27 @@ class ReserveDao extends BaseDao {
       Api.CREATE_APPOINTMENT_ENDTIME: endTime,
       Api.CREATE_APPOINTMENT_NOTE: note,
       Api.CREATE_APPOINTMENT_YARDID: yardId,
-      Api.CREATE_APPOINTMENT_PLACE_DATE:placeDate
+      Api.CREATE_APPOINTMENT_PLACE_DATE: placeDate
     });
     var data = response?.data;
     if (data == null) {
       return null;
     }
     return CommonResponse.fromJson(data);
+  }
+
+  /// 获取已经预定的时间段
+  Future<YardTimeResponse> getYardTime({String yardId, String time}) async {
+    var response = await client.post(Api.SMART_YARD_TIME, headers: {
+      Api.SMART_TOKEN: getToken()
+    }, data: {
+      Api.CREATE_APPOINTMENT_YARDID: yardId,
+      Api.CREATE_APPOINTMENT_TIME: time
+    });
+    var data = response?.data;
+    if (data == null) {
+      return data;
+    }
+    return YardTimeResponse.fromJson(data);
   }
 }
