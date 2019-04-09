@@ -156,7 +156,7 @@ class _MyAppointmentListState
     int status=data?.status;
     return status==0?GestureDetector(
       onTap:(){
-
+        _appointCancel(data);
       },
       child: Container(
         width: ScreenUtil().setWidth(69),
@@ -178,5 +178,13 @@ class _MyAppointmentListState
           color: Color.fromRGBO(194, 194, 194, 1),
           fontSize: ScreenUtil().setSp(12)),
     );
+  }
+  Future<int> _appointCancel (AppointData data) async{
+    _personalDao ??= PersonalDao(StoreProvider.of<AppState>(context));
+    setState(() {
+      data.status=2;
+    });
+//    var response = await _personalDao.appointCancel(data.yardappointId);
+    return 0;
   }
 }

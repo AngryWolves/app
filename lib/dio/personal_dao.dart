@@ -23,6 +23,20 @@ class PersonalDao extends BaseDao {
     return AppointDataBean.fromJson(data);
   }
 
+  //取消预约
+  Future<AppointDataBean> appointCancel(String decorateId) async {
+    Response response = await client.post(Api.SMART_APPOINT_CANCEL,
+        headers: {Api.SMART_TOKEN: store?.state?.account?.token},
+        data: {Api.SMART_DECORATE_ID: decorateId});
+
+    var data = response?.data;
+    if (data == null) {
+      return null;
+    }
+
+    return AppointDataBean.fromJson(data);
+  }
+
   //我的报修/
   Future<RepairDataBean> getRepairData(int page) async {
     Response response = await client.post(Api.SMART_REPAIR,

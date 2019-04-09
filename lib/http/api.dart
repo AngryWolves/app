@@ -45,6 +45,9 @@ class Api {
   static const String SMART_PAGE = 'page';
   static const String SMART_SIZE = 'size';
 
+  //取消预约
+  static const String SMART_APPOINT_CANCEL=SMART_HOST+'/app/user/abolishApply';
+  static const String SMART_DECORATE_ID='decorateId';
   //我的报修
   static const String SMART_REPAIR = SMART_HOST + '/app/user/repair';
 
