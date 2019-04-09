@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
+import 'package:smart_park/dio/reserve_dao.dart';
+import 'package:smart_park/redux/app_state.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
 typedef OnTimeSelect(String startTime, String endTime, String dateTime);
 
 class DateSelectTabView extends StatefulWidget {
-  DateSelectTabView(this.dateChoice, {this.onTimeSelect});
+  DateSelectTabView(this.dateChoice, {this.onTimeSelect, this.yardId});
 
   final DateChoice dateChoice;
 
   final OnTimeSelect onTimeSelect;
+
+  final String yardId;
 
   @override
   _DateSelectTabViewState createState() => _DateSelectTabViewState();
@@ -55,8 +60,18 @@ class _DateSelectTabViewState extends State<DateSelectTabView> {
 
   final Range _range = Range();
 
+  ReserveDao _reserveDao;
+
+  List<String> _list;
+
   String _selectStartTime = '';
   String _selectEndTime = '';
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getYardTime();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,10 +177,11 @@ class _DateSelectTabViewState extends State<DateSelectTabView> {
                         }
 
                         widget.onTimeSelect(_selectStartTime, _selectEndTime,
-                        widget.dateChoice.dateTime);
+                            widget.dateChoice.dateTime);
                       });
                     },
                     isSelected: _range.isInRange(index + indexOffset),
+                    isEnable: _list != null ? !_list.contains(title) : true,
                   );
                 }),
           )
@@ -199,10 +215,27 @@ class _DateSelectTabViewState extends State<DateSelectTabView> {
       ),
     );
   }
+
+  void _getYardTime() async {
+    if (_reserveDao == null) {
+      _reserveDao = ReserveDao(StoreProvider.of<AppState>(context));
+      var response = await _reserveDao.getYardTime(
+          yardId: widget.yardId, time: widget.dateChoice.dateTime);
+      _list = response?.data;
+      if (_list != null && _list.isNotEmpty && mounted) {
+        setState(() {});
+      }
+    }
+  }
 }
 
 class PeriodItem extends StatefulWidget {
-  PeriodItem({this.title, this.realIndex, this.onSelected, this.isSelected});
+  PeriodItem(
+      {this.title,
+      this.realIndex,
+      this.onSelected,
+      this.isSelected,
+      this.isEnable});
 
   final String title;
 
@@ -212,37 +245,34 @@ class PeriodItem extends StatefulWidget {
 
   final bool isSelected;
 
+  final bool isEnable;
+
   @override
   _PeriodItemState createState() => _PeriodItemState();
 }
 
 class _PeriodItemState extends State<PeriodItem> {
-  bool _isSelect = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onSelected(widget.realIndex);
-//        _range.select(widget.realIndex);
-//        debugPrint('range left::${_range.left} , right ::${_range.right}');
-//        if (_selectStartTime.isEmpty) {
-//
-//        }
-//        setState(() {
-//          sel = !sel;
-//          _isSelect = !_isSelect;
-//        });
+        if (widget.isEnable) {
+          widget.onSelected(widget.realIndex);
+        }
       },
       child: Container(
         alignment: Alignment.center,
-        color: widget.isSelected ? ColorRes.BLUE_TEXT : Colors.white,
+        color: !widget.isEnable
+            ? ColorRes.RESERVE_CONFIRM_REMARKS
+            : (widget.isSelected ? ColorRes.BLUE_TEXT : Colors.white),
         width: ScreenUtil().setWidth(85),
         height: ScreenUtil().setHeight(42),
         child: Text(
           widget.title,
           style: TextStyle(
-              color: widget.isSelected ? Colors.white : ColorRes.GERY_TEXT,
+              color: !widget.isEnable
+                  ? ColorRes.RESERVER_TIME_UNENABLE
+                  : (widget.isSelected ? Colors.white : ColorRes.GERY_TEXT),
               fontSize: 12.0),
         ),
       ),

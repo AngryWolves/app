@@ -8,6 +8,7 @@ import 'package:smart_park/widget/base/refresh_list_view.dart';
 
 abstract class BaseYardList<S extends StatefulWidget>
     extends RefreshListView<S, YardData> {
+
   ReserveDao _reserveDao;
 
   @override
@@ -20,4 +21,5 @@ abstract class BaseYardList<S extends StatefulWidget>
 
   @protected
   int getType();
+
 }

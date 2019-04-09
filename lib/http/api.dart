@@ -76,6 +76,7 @@ class Api {
   static const String CREATE_APPOINTMENT_NOTE = 'note';
   static const String CREATE_APPOINTMENT_YARDID = 'yardId';
   static const String CREATE_APPOINTMENT_PLACE_DATE = 'placeDate';
+  static const String CREATE_APPOINTMENT_TIME = 'time';
 
   /// 项目申报
   static const String SMART_DECLARE = SMART_HOST + '/app/user/declare';
@@ -109,4 +110,7 @@ class Api {
 
   /// 我的申请
   static const SMART_MY_APPLY = SMART_HOST + '/app/user/getMyApply';
+
+  /// 查询场地已被预订掉的时间段
+  static const SMART_YARD_TIME = SMART_HOST + '/app/user/getYardTime';
 }

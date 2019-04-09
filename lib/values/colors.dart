@@ -29,4 +29,5 @@ class ColorRes {
   static const REPORT_ACTION_DETAIL_EXCEL_TIME = const Color(0xFFB8B8B8);
   static const APPLY_ITEM_STATUS_FINISH = const Color(0xFFBABABB);
   static const APPLY_DETAIL_EXCEL_BG = const Color(0xFFE6E6E6);
+  static const RESERVER_TIME_UNENABLE = const Color(0xFFDBDBDB);
 }
