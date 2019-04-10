@@ -9,6 +9,11 @@ import 'package:smart_park/utils/input_manage_util.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
+import 'package:smart_park/widget/loading_dialog.dart';
+import 'package:smart_park/data/common_response.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:smart_park/data/response_successful_data.dart';
 
 //我的预约 status 0待审核，1成功，2拒绝==取消/
 class PersonalAppointmentScreen extends StatelessWidget {
@@ -39,6 +44,7 @@ class _MyAppointmentList extends StatefulWidget {
 class _MyAppointmentListState
     extends RefreshListView<_MyAppointmentList, AppointData> {
   PersonalDao _personalDao;
+  bool _loadingIsShow = false;
 
   @override
   Widget buildItem(AppointData data) {
@@ -138,9 +144,8 @@ class _MyAppointmentListState
                   ),
                   Expanded(
                     child: Container(
-                      alignment: Alignment.centerRight,
-                      child: _buildStatusWidget(data)
-                    ),
+                        alignment: Alignment.centerRight,
+                        child: _buildStatusWidget(data)),
                     flex: 1,
                   )
                 ],
@@ -152,39 +157,74 @@ class _MyAppointmentListState
       ),
     );
   }
-  Widget _buildStatusWidget(AppointData data){
-    int status=data?.status;
-    return status==0?GestureDetector(
-      onTap:(){
-        _appointCancel(data);
-      },
-      child: Container(
-        width: ScreenUtil().setWidth(69),
-        height: ScreenUtil().setHeight(25),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
-            border: Border.all(color: const Color(0xFF2E3138))),
-        alignment: Alignment.center,
-        child: Text(appointment_cancel_text),
-      ),
-    ):status==1?Text(
-      '已结束',
-      style: TextStyle(
-          color: Color.fromRGBO(194, 194, 194, 1),
-          fontSize: ScreenUtil().setSp(12)),
-    ):Text(
-      '已取消',
-      style: TextStyle(
-          color: Color.fromRGBO(194, 194, 194, 1),
-          fontSize: ScreenUtil().setSp(12)),
-    );
+
+  Widget _buildStatusWidget(AppointData data) {
+    int status = data?.status;
+    return status == 0
+        ? GestureDetector(
+            onTap: () {
+              _appointCancel(data);
+            },
+            child: Container(
+              width: ScreenUtil().setWidth(69),
+              height: ScreenUtil().setHeight(25),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(color: const Color(0xFF2E3138))),
+              alignment: Alignment.center,
+              child: Text(appointment_cancel_text),
+            ),
+          )
+        : status == 1
+            ? Text(
+                '已结束',
+                style: TextStyle(
+                    color: Color.fromRGBO(194, 194, 194, 1),
+                    fontSize: ScreenUtil().setSp(12)),
+              )
+            : Text(
+                '已取消',
+                style: TextStyle(
+                    color: Color.fromRGBO(194, 194, 194, 1),
+                    fontSize: ScreenUtil().setSp(12)),
+              );
   }
-  Future<int> _appointCancel (AppointData data) async{
+
+  void _appointCancel(AppointData data) async {
     _personalDao ??= PersonalDao(StoreProvider.of<AppState>(context));
+    showLoading();
+    ResponseSuccessfulData successfulData =
+        await _personalDao.appointCancel(data.yardappointId);
+    hideLoading();
+    if (successfulData == null) {
+      return;
+    }
+    int result = successfulData.result;
+    if (result != 0) {
+      Fluttertoast.showToast(msg: successfulData?.msg);
+      return;
+    }
     setState(() {
-      data.status=2;
+      data.status = 2;
     });
-//    var response = await _personalDao.appointCancel(data.yardappointId);
-    return 0;
+  }
+
+  void hideLoading() {
+    if (_loadingIsShow) {
+      Navigator.pop(context);
+      _loadingIsShow = false;
+    }
+  }
+
+  void showLoading() {
+    if (_loadingIsShow) {
+      return;
+    }
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          _loadingIsShow = true;
+          return LoginDialog();
+        });
   }
 }

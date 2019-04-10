@@ -5,7 +5,7 @@ import 'package:smart_park/dio/base_dao.dart';
 import 'package:smart_park/http/api.dart';
 import 'package:smart_park/components/personal/appointment/data/appoint_data.dart';
 import 'package:smart_park/components/personal/repairs/data/repair_data_bean.dart';
-
+import 'package:smart_park/data/response_successful_data.dart';
 class PersonalDao extends BaseDao {
   PersonalDao(Store<AppState> store) : super(store);
 
@@ -24,7 +24,7 @@ class PersonalDao extends BaseDao {
   }
 
   //取消预约
-  Future<AppointDataBean> appointCancel(String decorateId) async {
+  Future<ResponseSuccessfulData> appointCancel(String decorateId) async {
     Response response = await client.post(Api.SMART_APPOINT_CANCEL,
         headers: {Api.SMART_TOKEN: store?.state?.account?.token},
         data: {Api.SMART_DECORATE_ID: decorateId});
@@ -34,7 +34,7 @@ class PersonalDao extends BaseDao {
       return null;
     }
 
-    return AppointDataBean.fromJson(data);
+    return ResponseSuccessfulData.fromJson(data);
   }
 
   //我的报修/
