@@ -6,6 +6,9 @@ import 'package:smart_park/config/routes.dart';
 
 //页面跳转管理/
 class NavigatorUtil {
+  static void logout(BuildContext context) => Application.router
+      .navigateTo(context, Routes.root, transition: TransitionType.native);
+
   //登录跳转
   static void goLogin(BuildContext context) {
     TransitionType transitionType = TransitionType.nativeModal;

@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
   bool _hasInit = false;
 
   var _actionListener;
-
   UserDao _userDao;
 
   @override
@@ -92,6 +91,10 @@ class _HomePageState extends State<HomePage> {
           break;
         case HOME_ACTION_DECORATE:
           NavigatorUtil.goApplyPage(context);
+          break;
+        case HOME_ACTION_LOGOUT:
+          _userDao.logout();
+          NavigatorUtil.logout(context);
           break;
       }
     });

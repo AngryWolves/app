@@ -27,6 +27,11 @@ class UserDao extends BaseDao {
     return userData;
   }
 
+  void logout() async {
+    await SharePreferenceUtil.remove([ACCOUNT_INFO]);
+    store.dispatch(UpdateAccountAction(null));
+  }
+
   //登录请求/
   Future<LoginResponse> login(String telephone, String password) async {
     var response = await client.post(Api.SMART_LOGIN, data: {
