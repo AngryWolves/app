@@ -51,7 +51,7 @@ class _HomeAutoSlideViewState extends State<HomeAutoSlideView> {
   void _getPictures() async {
     if (_homeDao == null) {
       _homeDao ??= HomeDao(StoreProvider.of<AppState>(context));
-      _list = (await _homeDao.getHomePictures()).data;
+      _list = (await _homeDao.getHomePictures())?.data;
       if (_list != null && mounted) {
         setState(() {});
       }

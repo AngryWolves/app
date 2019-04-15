@@ -16,6 +16,7 @@ import 'package:smart_park/components/modify/modify_screent.dart';
 import 'package:smart_park/components/modify/permissions/audit/modify_permissions_audit_screent.dart';
 import 'package:smart_park/components/modify/permissions/modify_permissions_screent.dart';
 import 'package:smart_park/components/monitor/monitor_page.dart';
+import 'package:smart_park/components/monitor/player_page.dart';
 import 'package:smart_park/components/parking/bind_license_page.dart';
 import 'package:smart_park/components/parking/parking_end.dart';
 import 'package:smart_park/components/parking/parking_page.dart';
@@ -214,3 +215,5 @@ var reportDetailHandle = Handler(
 var applyHandle = Handler(handlerFunc: (_, params) => ApplyPage());
 
 var applyDetailHandle = Handler(handlerFunc: (_, params) => ApplyDetail());
+
+var playerHandle = Handler(handlerFunc: (_, params) => PlayerPage());

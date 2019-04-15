@@ -237,4 +237,7 @@ class NavigatorUtil {
   ///  申请详情
   static void goApplyDetailPage(BuildContext context) =>
       Application.router.navigateTo(context, Routes.doApplyDetail);
+
+  static void goPlayerPage(BuildContext context) =>
+      Application.router.navigateTo(context, Routes.doPlayer);
 }

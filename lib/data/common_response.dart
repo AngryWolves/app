@@ -5,7 +5,7 @@ part 'common_response.g.dart';
 @JsonSerializable()
 class CommonResponse extends Object {
   @JsonKey(name: 'data')
-  CommonData data;
+  String data;
 
   @JsonKey(name: 'msg')
   String msg;
@@ -23,14 +23,4 @@ class CommonResponse extends Object {
       _$CommonResponseFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$CommonResponseToJson(this);
-}
-
-@JsonSerializable()
-class CommonData extends Object {
-  CommonData();
-
-  factory CommonData.fromJson(Map<String, dynamic> srcJson) =>
-      _$CommonDataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$CommonDataToJson(this);
 }
