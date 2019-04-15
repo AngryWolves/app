@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_park/components/home/home_action_grid.dart';
+import 'package:smart_park/data/common_response.dart';
+import 'package:smart_park/event/event.dart';
 import 'package:smart_park/http/api.dart';
 
 const METHOD_GET = 'GET';
@@ -153,6 +157,11 @@ class HttpClient {
     });
     print('params : ${response.request.data}');
     print('data : ${response.data}');
+    var model = CommonResponse.fromJson(response?.data);
+    if (model != null && model.msg == '请登录') {
+      Fluttertoast.showToast(msg: model.msg);
+      Event.fireHomeActionEvent(HOME_ACTION_LOGOUT);
+    }
     return response;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/base_state.dart';
@@ -45,7 +46,14 @@ class _MonitorPageState extends BaseState<MonitorPage>
                     children: _tabs.map((data) {
                       return Container(
                         color: ColorRes.APP_BACKGROUND,
-                        child: Text(data),
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              NavigatorUtil.goPlayerPage(context);
+                            },
+                            child: Text(data),
+                          ),
+                        ),
                       );
                     }).toList()),
           )

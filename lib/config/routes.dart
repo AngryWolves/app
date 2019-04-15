@@ -37,6 +37,7 @@ class Routes {
   static String doParkingUploadLicense = "/home/parking/uploadLicense";
   static String doPropertyRepair = "/home/repair";
   static String doMonitor = "/home/monitor";
+  static String doPlayer = "/home/monitor/player";
   static String doPayment = "/home/payment";
   static String doParkingEnd = "/home/parking/end";
   static String doReserve = "/home/reserve";
@@ -143,5 +144,7 @@ class Routes {
             handler: applyHandle, transitionType: TransitionType.native);
     router.define(doApplyDetail,
             handler: applyDetailHandle, transitionType: TransitionType.native);
+    router.define(doPlayer,
+            handler: playerHandle, transitionType: TransitionType.native);
   }
 }

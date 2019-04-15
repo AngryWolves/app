@@ -4,6 +4,7 @@ import 'package:smart_park/event/event.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
+const int HOME_ACTION_LOGOUT = 0x999;
 const int HOME_ACTION_BLUETOOTH = 0x001;
 const int HOME_ACTION_PARKING = 0x002;
 const int HOME_ACTION_REPAIR = 0x003;
