@@ -157,10 +157,13 @@ class HttpClient {
     });
     print('params : ${response.request.data}');
     print('data : ${response.data}');
-    var model = CommonResponse.fromJson(response?.data);
-    if (model != null && model.msg == '请登录') {
-      Fluttertoast.showToast(msg: model.msg);
-      Event.fireHomeActionEvent(HOME_ACTION_LOGOUT);
+    try {
+      var model = CommonResponse.fromJson(response?.data);
+      if (model != null && model.msg == '请登录') {
+            Fluttertoast.showToast(msg: model.msg);
+            Event.fireHomeActionEvent(HOME_ACTION_LOGOUT);
+          }
+    } catch (e) {
     }
     return response;
   }
