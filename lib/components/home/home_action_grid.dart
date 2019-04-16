@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/event/event.dart';
 import 'package:smart_park/values/colors.dart';
+import 'package:smart_park/values/images.dart';
 import 'package:smart_park/values/strings.dart';
 
 const int HOME_ACTION_LOGOUT = 0x999;
@@ -21,19 +22,19 @@ class HomeActionGridView extends StatefulWidget {
 
 class _HomeActionGridViewState extends State<HomeActionGridView> {
   final List<_ActionChoices> _choices = [
+    _ActionChoices(home_item_bluetooth, home_action_bluetooth_control,
+        HOME_ACTION_BLUETOOTH),
+    _ActionChoices(home_item_parking, home_action_parking, HOME_ACTION_PARKING),
     _ActionChoices(
-        Icons.bluetooth, home_action_bluetooth_control, HOME_ACTION_BLUETOOTH),
+        home_item_repair, home_action_report_repair, HOME_ACTION_REPAIR),
+    _ActionChoices(home_item_monitor, home_action_monitor, HOME_ACTION_MONITOR),
+    _ActionChoices(home_item_payment, home_action_pay, HOME_ACTION_PAY),
     _ActionChoices(
-        Icons.local_parking, home_action_parking, HOME_ACTION_PARKING),
-    _ActionChoices(Icons.build, home_action_report_repair, HOME_ACTION_REPAIR),
-    _ActionChoices(Icons.videocam, home_action_monitor, HOME_ACTION_MONITOR),
-    _ActionChoices(Icons.payment, home_action_pay, HOME_ACTION_PAY),
+        home_item_reserve, home_action_reserve_site, HOME_ACTION_RESERVE),
     _ActionChoices(
-        Icons.rate_review, home_action_reserve_site, HOME_ACTION_RESERVE),
+        home_item_report, home_action_report_active, HOME_ACTION_REPORT_ACTION),
     _ActionChoices(
-        Icons.message, home_action_report_active, HOME_ACTION_REPORT_ACTION),
-    _ActionChoices(
-        Icons.format_paint, home_action_apply_decorate, HOME_ACTION_DECORATE)
+        home_item_apply, home_action_apply_decorate, HOME_ACTION_DECORATE)
   ];
 
   @override
@@ -54,9 +55,10 @@ class _HomeActionGridViewState extends State<HomeActionGridView> {
               color: Colors.transparent,
               child: Column(
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.all(10.0),
-                    child: Icon(choice.icon),
+                  Image.asset(
+                    choice.icon,
+                    width: ScreenUtil().setWidth(20),
+                    height: ScreenUtil().setWidth(20),
                   ),
                   Text(
                     choice.title,
@@ -77,7 +79,7 @@ class _HomeActionGridViewState extends State<HomeActionGridView> {
 class _ActionChoices {
   _ActionChoices(this.icon, this.title, this.type);
 
-  IconData icon;
+  String icon;
   String title;
   int type;
 }
