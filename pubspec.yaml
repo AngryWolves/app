@@ -78,3 +78,11 @@ flutter:
     - images/ic_fast_reserve_type.png
     - images/ic_fast_reserve_date.png
     - images/ic_fast_reserve_location.png
+    - images/ic_home_item_apply.png
+    - images/ic_home_item_bluetooth.png
+    - images/ic_home_item_monitor.png
+    - images/ic_home_item_parking.png
+    - images/ic_home_item_payment.png
+    - images/ic_home_item_repair.png
+    - images/ic_home_item_report.png
+    - images/ic_home_item_reserve.png
