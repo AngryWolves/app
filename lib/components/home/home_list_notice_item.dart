@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/home/data/home_new_response.dart';
 import 'package:smart_park/values/colors.dart';
@@ -36,22 +37,13 @@ class HomeNoticeItem extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 15.0),
-      child: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        children: <Widget>[
-          Text(
-            data?.newsContent ?? '',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: ColorRes.GERY_TEXT_HINT,
-                fontSize: ScreenUtil().setSp(13)),
-          )
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Html(data: data?.newsContent ?? ''),
+        )
+      ],
     );
   }
 

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 /// [D] type of list data
 ///
 abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
-
   final GlobalKey<RefreshIndicatorState> _refreshKey =
       GlobalKey<RefreshIndicatorState>();
 
@@ -52,7 +51,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
       key: _refreshKey,
       onRefresh: _handleRefresh,
       child: ListView.builder(
-              shrinkWrap: true,
+          shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           itemCount: _getListCount(),
           controller: _scrollController,
