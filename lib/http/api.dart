@@ -119,4 +119,14 @@ class Api {
 
   /// 查询场地已被预订掉的时间段
   static const SMART_YARD_TIME = SMART_HOST + '/app/user/getYardTime';
+
+  /// 查询全部楼栋
+  static const SMART_GET_BUILD = SMART_HOST + '/app/user/getBuild';
+
+  /// 根据楼层号查询楼层
+  static const SMART_GET_FLOOR = SMART_HOST + '/app/user/getFloor';
+  static const SMART_BUILD_NAME = 'name';
+  static const SMART_FLOOR_ID = 'id';
+
+  static const SMART_GET_ROOM = SMART_HOST + '/app/user/getRoom';
 }

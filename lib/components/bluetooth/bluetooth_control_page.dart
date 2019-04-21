@@ -6,6 +6,8 @@ import 'package:smart_park/values/strings.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
 import 'package:smart_park/widget/common_app_bar.dart';
 
+import 'bluetooth_control_key_item.dart';
+
 class BluetoothControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,21 @@ class _BluetoothControlListState
     extends RefreshListView<BluetoothControlList, String> {
   @override
   Widget buildItem(String data) {
-    return ExpandTitleItem();
+    return ExpandTitleItem(
+      title: '一号楼',
+      child: Column(
+        children: <Widget>[
+          Divider(
+            color: ColorRes.APP_BACKGROUND,
+            height: 2.0,
+          ),
+          BluetoothKeyItem(),
+          BluetoothKeyItem(),
+          BluetoothKeyItem(),
+          BluetoothKeyItem(),
+        ],
+      ),
+    );
   }
 
   @override

@@ -23,7 +23,7 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
       print('list is didChangeDependencies');
       // autoRefresh when first enter
       Future.delayed(Duration(seconds: 0), () {
-        _refreshKey.currentState.show();
+        _refreshKey?.currentState?.show();
         return true;
       });
     }
@@ -32,15 +32,15 @@ abstract class RefreshListView<T extends StatefulWidget, D> extends State<T> {
 
   @override
   void initState() {
-//    _scrollController.addListener(() {
-//      if (_scrollController.position.pixels ==
-//          _scrollController.position.maxScrollExtent) {
-//        print('list is end');
-//        print("===state==initState==");
-//        _handleRefresh(page: ++_curPage);
-//
-//      }
-//    });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('list is end');
+        print("===state==initState==");
+        _handleRefresh(page: ++_curPage);
+
+      }
+    });
     super.initState();
   }
 

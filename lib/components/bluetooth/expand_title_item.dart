@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_park/components/bluetooth/bluetooth_control_key_item.dart';
 import 'package:smart_park/values/colors.dart';
 import 'package:smart_park/values/strings.dart';
 
 class ExpandTitleItem extends StatefulWidget {
+  ExpandTitleItem({this.title, this.child, this.callback})
+      : assert(child != null),
+        assert(title != null);
+
+  final String title;
+
+  final Widget child;
+
+  final callback;
+
   @override
   _ExpandTitleItemState createState() => _ExpandTitleItemState();
 }
@@ -16,17 +25,9 @@ class _ExpandTitleItemState extends State<ExpandTitleItem> {
   void initState() {
     super.initState();
     panelItem = ExpansionPanelItem(
-        title: '一号楼',
+        title: widget.title,
         builder: (item) {
-          return Column(
-            children: <Widget>[
-              Divider(color: ColorRes.APP_BACKGROUND, height: 2.0,),
-              BluetoothKeyItem(),
-              BluetoothKeyItem(),
-              BluetoothKeyItem(),
-              BluetoothKeyItem(),
-            ],
-          );
+          return widget.child;
         });
   }
 
@@ -35,7 +36,10 @@ class _ExpandTitleItemState extends State<ExpandTitleItem> {
     return Container(
       child: ExpansionPanelList(
         expansionCallback: (index, isExpand) {
-          print('expansionCallback     index :: $index isExpand : $isExpand');
+          print('expansionCallback index :: $index isExpand : $isExpand');
+          if (widget.callback != null) {
+            widget.callback();
+          }
           setState(() {
             panelItem.isExpanded = !isExpand;
           });
@@ -70,7 +74,10 @@ class ExpansionPanelItem {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Icon(Icons.account_balance, size: 18.0,),
+                Icon(
+                  Icons.account_balance,
+                  size: 18.0,
+                ),
                 Container(
                   margin: const EdgeInsets.only(left: 15.0),
                   child: Text(
