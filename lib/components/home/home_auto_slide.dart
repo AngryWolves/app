@@ -44,7 +44,12 @@ class _HomeAutoSlideViewState extends State<HomeAutoSlideView> {
       return [Container()];
     }
     return _list.map((value) {
-      CachedNetworkImage(imageUrl: value.path ?? '');
+      return CachedNetworkImage(
+        imageUrl: value.path ?? '',
+        width: ScreenUtil().setWidth(340),
+        height: ScreenUtil().setHeight(160),
+        fit: BoxFit.fill,
+      );
     }).toList();
   }
 
