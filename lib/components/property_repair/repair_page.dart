@@ -118,13 +118,14 @@ class _PropertyRepairPageState extends BaseState<PropertyRepairPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildSelectPhotoList(),
-            Container(
+            Expanded(
+                child: Container(
               alignment: Alignment.centerRight,
               child: Text('$repair_action_photo_hint (${_imageFile.length}/5)',
                   style: TextStyle(
                       color: ColorRes.REPAIR_ISSUE_DETAIL_LIMIT,
                       fontSize: ScreenUtil().setSp(12))),
-            )
+            ))
           ],
         ),
       );
