@@ -69,6 +69,10 @@ class RoomItem extends StatelessWidget {
   /// 预览图
   ///
   Widget _buildPreviewImage() {
+    var imageUrl = data?.imageUrl;
+    if (imageUrl == null || imageUrl.isEmpty) {
+      return Container();
+    }
     return Container(
       child: Stack(
         children: <Widget>[
@@ -78,6 +82,7 @@ class RoomItem extends StatelessWidget {
               imageUrl: data?.imageUrl ?? '',
               fit: BoxFit.fill,
               width: double.infinity,
+              height: ScreenUtil().setHeight(200),
             ),
           ),
         ],

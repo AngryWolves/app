@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/report_action/data/declare_response.dart';
 import 'package:smart_park/router/navigator_util.dart';
@@ -20,16 +21,15 @@ class ReportActionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-            NavigatorUtil.goReportDetailPage(context, data?.newstipId);
-        },
-        child: Container(
-            height: ScreenUtil().setHeight(129),
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
-            decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
-            child: _buildBodyWithoutImg(),
-        ),
+      onTap: () {
+        NavigatorUtil.goReportDetailPage(context, data?.newstipId);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: ColorRes.DIALOG_DIVIDER))),
+        child: _buildBodyWithoutImg(),
+      ),
     );
   }
 
@@ -45,14 +45,11 @@ class ReportActionItem extends StatelessWidget {
           data?.newsTitle ?? '',
           style: _titleStyle,
         ),
-        Text(
-          data?.newsContent ?? '',
-          style: _contentStyle,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+        Html(
+          data: data?.newsContent ?? '',
         ),
         Text(
-          '2019年2月11日',
+          data?.createTime ?? '',
           style: _timeStyle,
         ),
       ],

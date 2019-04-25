@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_park/components/report_action/data/declare_response.dart';
@@ -22,7 +22,6 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends BaseState<DetailPage> {
-
   DeclareDao _declareDao;
 
   @override
@@ -30,20 +29,23 @@ class _DetailPageState extends BaseState<DetailPage> {
     return Scaffold(
       appBar: buildCommonAppbar(report_action_detail_title, onLeadTop: onBack),
       body: FutureBuilder(
-              future: _getDeclareDetail(),
-              builder: (_, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Container(
-            margin: const EdgeInsets.all(15.0),
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: <Widget>[_buildHeadTitle(snapshot.data), _buildDesc(snapshot.data)],
-            ),
-          );
-        } else {
-          return Container();
-        }
-      }),
+          future: _getDeclareDetail(),
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Container(
+                margin: const EdgeInsets.all(15.0),
+                child: ListView(
+                  physics: BouncingScrollPhysics(),
+                  children: <Widget>[
+                    _buildHeadTitle(snapshot.data),
+                    _buildDesc(snapshot.data)
+                  ],
+                ),
+              );
+            } else {
+              return Container();
+            }
+          }),
     );
   }
 
@@ -61,8 +63,8 @@ class _DetailPageState extends BaseState<DetailPage> {
 //          ),
 //        ),
         Padding(padding: const EdgeInsets.all(20.0)),
-        Text(data.newsContent ?? '',
-          style: TextStyle(color: ColorRes.GERY_TEXT_HINT, fontSize: 13.0),
+        Html(
+          data: data?.newsContent ?? '',
         )
       ],
     );
@@ -159,10 +161,10 @@ class _DetailPageState extends BaseState<DetailPage> {
         ),
       );
 
-
   Future<DeclareData> _getDeclareDetail() async {
     _declareDao ??= DeclareDao(StoreProvider.of<AppState>(context));
 
-    return (await _declareDao.getDeclareDetail(newsTipId: widget.newsTipId)).data;
+    return (await _declareDao.getDeclareDetail(newsTipId: widget.newsTipId))
+        .data;
   }
 }
