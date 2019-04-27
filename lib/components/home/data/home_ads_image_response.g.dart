@@ -26,8 +26,12 @@ Map<String, dynamic> _$HomeAdsImageResponseToJson(
     };
 
 AdsImagesData _$AdsImagesDataFromJson(Map<String, dynamic> json) {
-  return AdsImagesData(json['picturesId'] as String, json['title'] as String,
-      json['path'] as String, json['createTime'] as int);
+  return AdsImagesData(
+      json['picturesId'] as String,
+      json['title'] as String,
+      json['path'] as String,
+      json['createTime'] as int,
+      json['link'] as String);
 }
 
 Map<String, dynamic> _$AdsImagesDataToJson(AdsImagesData instance) =>
@@ -35,5 +39,6 @@ Map<String, dynamic> _$AdsImagesDataToJson(AdsImagesData instance) =>
       'picturesId': instance.picturesId,
       'title': instance.title,
       'path': instance.path,
-      'createTime': instance.createTime
+      'createTime': instance.createTime,
+      'link': instance.link
     };

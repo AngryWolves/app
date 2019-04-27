@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_park/components/registered/registered_third_screent.dart';
 import 'package:smart_park/config/application.dart';
 import 'package:smart_park/config/routes.dart';
+import 'package:smart_park/widget/web_view.dart';
 
 //页面跳转管理/
 class NavigatorUtil {
@@ -240,4 +241,11 @@ class NavigatorUtil {
 
   static void goPlayerPage(BuildContext context) =>
       Application.router.navigateTo(context, Routes.doPlayer);
+
+  static void goWebPage(BuildContext context, String url) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => WebViewPage(
+                url: url,
+              )));
 }

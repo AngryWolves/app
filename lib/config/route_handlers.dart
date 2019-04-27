@@ -38,6 +38,7 @@ import 'package:smart_park/components/reserve/reserce_succeed_page.dart';
 import 'package:smart_park/components/reserve/reserve_confirm_page.dart';
 import 'package:smart_park/components/reserve/reserve_page.dart';
 import 'package:smart_park/components/reserve/reserve_select_date_page.dart';
+import 'package:smart_park/widget/web_view.dart';
 
 var rootHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -180,11 +181,11 @@ var parkingEndHandle = Handler(handlerFunc: (_, params) => ParkingEnding());
 
 var reserveHandle = Handler(handlerFunc: (_, params) => ReservePage());
 
-var reserveSelectDateHandle =
-    Handler(handlerFunc: (_, params) {
-
-      return ReserveSelectDate(yardId: params['yardId']?.first,);
-    });
+var reserveSelectDateHandle = Handler(handlerFunc: (_, params) {
+  return ReserveSelectDate(
+    yardId: params['yardId']?.first,
+  );
+});
 
 var reserveConfirmHandle = Handler(handlerFunc: (_, params) {
   var dateTime = params['dateTime']?.first;

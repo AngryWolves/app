@@ -39,7 +39,10 @@ class AdsImagesData extends Object {
     @JsonKey(name: 'createTime')
     int createTime;
 
-    AdsImagesData(this.picturesId,this.title,this.path,this.createTime,);
+    @JsonKey(name: 'link')
+    String link;
+
+    AdsImagesData(this.picturesId,this.title,this.path,this.createTime,this.link);
 
     factory AdsImagesData.fromJson(Map<String, dynamic> srcJson) =>
             _$AdsImagesDataFromJson
