@@ -5,6 +5,7 @@ import 'package:smart_park/components/home/home_body_list_head.dart';
 import 'package:smart_park/components/home/home_list_notice_item.dart';
 import 'package:smart_park/dio/home_dao.dart';
 import 'package:smart_park/redux/app_state.dart';
+import 'package:smart_park/router/navigator_util.dart';
 import 'package:smart_park/widget/base/refresh_list_view.dart';
 
 class HomeBodyView extends StatefulWidget {
@@ -17,8 +18,13 @@ class _HomeBodyViewState extends RefreshListView<HomeBodyView, HomeNewData> {
 
   @override
   Widget buildItem(HomeNewData data) {
-    return HomeNoticeItem(
-      data: data,
+    return GestureDetector(
+      onTap: () {
+        NavigatorUtil.goReportDetailPage(context, data.newstipId);
+      },
+      child: HomeNoticeItem(
+        data: data,
+      ),
     );
   }
 
